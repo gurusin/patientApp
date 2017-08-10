@@ -38,7 +38,7 @@ public class Patient {
     private String postalCode;
     private String remarks;
     private String profession;
-
+private String tter;
     public String getFirstname() {
         return firstname;
     }
@@ -48,6 +48,7 @@ public class Patient {
     }
 
     public String getLastname() {
+    
         return lastname;
     }
 
