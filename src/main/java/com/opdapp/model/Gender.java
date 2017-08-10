@@ -1,8 +1,7 @@
 package com.opdapp.model;
 
-/**
- * Created by sudarshana on 07/08/2017.
- */
+import javax.persistence.Entity;
+
 public enum Gender
 {
     MALE,FEMALE,UNDEFINED

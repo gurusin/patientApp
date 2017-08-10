@@ -8,15 +8,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
-/**
- * Created by sudarshana on 07/08/2017.
- */
 @Entity
 public class Patient {
 
+    public long getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(long patientId) {
+        this.patientId = patientId;
+    }
+
     @Id
     @GeneratedValue
-    private long id;
+    private long patientId;
 
     private String nic;
     private String phone;
@@ -33,14 +38,6 @@ public class Patient {
     private String postalCode;
     private String remarks;
     private String profession;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getFirstname() {
         return firstname;
