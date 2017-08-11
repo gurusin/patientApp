@@ -1,0 +1,79 @@
+<div class="container">
+  <h1>Please enter new patient details</h1>
+  <hr/>
+  <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="patient">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="firstname">First Name : </label>
+          <input type="text" id="firstname" name="firstname" required  [(ngModel)]="patient.firstname"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="middlename">Middle names : </label>
+          <input type="text" id="middlename" name="middlename" required  [(ngModel)]="patient.middlename"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="lastname">Last name : </label>
+          <input type="text" id="lastname" name="lastname" required  [(ngModel)]="patient.lastname"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="nic">NIC : </label>
+          <input type="text" id="nic" name="nic" required  [(ngModel)]="patient.nic"/>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="address">Address : </label>
+          <input type="text" id="address" name="address" required  [(ngModel)]="patient.address"/>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label >Gender : </label>
+          <select name="gender" [(ngModel)]="patient.gender">
+            <option value="MALE" >MALE</option>
+            <option value="FEMALE" >FEMALE</option>
+            <option value="UNDEFINED" >UNDEFINED</option>
+          </select>
+          <!--<input type="text" id="gender" name="gender"  [(ngModel)]="patient.gender"/>-->
+        </div>
+      </div>
+    </div>
+    <!--<div class="row">-->
+    <!--<div class="col-md-4">-->
+    <!--<div class="form-group">-->
+    <!--<label for="dateOfBirth">DOB : </label>-->
+    <!--<input type="text" id="dateOfBirth" name="dateOfBirth"  [(ngModel)]="patient.dateOfBirth"/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <div class="form-group">
+      <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
+    </div>
+  </form>
+</div>

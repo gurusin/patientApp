@@ -1,25 +1,20 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {PatientServiceService} from "../patient-service.service";
-
-
+import {Patient} from "../patient";
 
 @Component({
-  selector: 'app-patient-search',
-  templateUrl: './patient-search.component.html',
-  styleUrls: ['./patient-search.component.css']
+  selector: 'app-treatment',
+  templateUrl: './treatment.component.html'
 })
-export class PatientSearchComponent {
-
+export class TreatmentComponent  {
   nic:string;
   patientList=[];
 
   constructor(private patientService:PatientServiceService) {
-
   }
 
   onKey(event:any)
   {
-    alert("sdsd" + this.nic);
     if (this.nic.length >1)
     {
       this.doSearch();
@@ -38,5 +33,4 @@ export class PatientSearchComponent {
       }
     );
   }
-
 }

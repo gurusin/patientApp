@@ -21,9 +21,9 @@ public class PatientController
     private PatientService patientService;
 
     @RequestMapping(path="/savePatient", method = RequestMethod.POST)
-    public void savePatient(@RequestBody final Patient pat)
+    public @ResponseBody Patient savePatient(@RequestBody final Patient pat)
     {
-        patientService.save(pat);
+        return patientService.save(pat);
     }
 
     @RequestMapping(path="/searchPat", method = RequestMethod.POST)

@@ -1,0 +1,16 @@
+import {PatientComponentComponent} from "./patient-component/patient-component.component";
+import {provideRoutes, RouterModule, Routes} from "@angular/router";
+import {PatientsaveComponent} from "./patientsave/patientsave.component";
+import {NavbarComponent} from "./navbar.component";
+import {AppComponent} from "app/app.component";
+import {TreatmentComponent} from "./treatment/treatment.component";
+import {PatientVisitComponent} from "./treatment/patient-visit.component";
+
+const APP_ROUTES: Routes = [
+  {path:'patient-component', component: PatientComponentComponent },
+  {path: 'patientsave', component: PatientsaveComponent },
+  {path: 'treatment', component: TreatmentComponent},
+  {path: 'patientvisit/:patient', component: PatientVisitComponent},
+]
+
+export const routing = RouterModule.forRoot(APP_ROUTES)

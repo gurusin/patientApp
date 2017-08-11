@@ -1,0 +1,38 @@
+<div class="container">
+  <h1>Patient Visit </h1>
+  <hr/>
+  <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="patientVisit">
+
+    <div> {{selectedPatient.firstname}}</div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="firstname">Sysmtoms : </label>
+          <input type="text" id="firstname" name="firstname" required  [(ngModel)]="patientVisit.symptoms"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="middlename">Daignosys : </label>
+          <input type="text" id="middlename" name="middlename" required  [(ngModel)]="patientVisit.diagnosys"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="lastname">Note : </label>
+          <input type="text" id="lastname" name="lastname" required  [(ngModel)]="patientVisit.note"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
+    </div>
+  </form>
+</div>
