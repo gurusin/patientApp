@@ -6,10 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-public class Patient {
+public class Patient implements Serializable {
 
     public long getPatientId() {
         return patientId;
@@ -31,14 +32,15 @@ public class Patient {
     private String middlename;
     private Gender gender;
 
-    @Column(columnDefinition = "DATETIME")
-    private LocalDate dateOfBirth;
+//    @Column(columnDefinition = "DATETIME")
+//    private LocalDate dateOfBirth;
     private String address;
     private String city;
     private String postalCode;
     private String remarks;
     private String profession;
-private String tter;
+
+
     public String getFirstname() {
         return firstname;
     }
@@ -72,13 +74,13 @@ private String tter;
         this.gender = gender;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+//    public LocalDate getDateOfBirth() {
+//        return dateOfBirth;
+//    }
+//
+//    public void setDateOfBirth(LocalDate dateOfBirth) {
+//        this.dateOfBirth = dateOfBirth;
+//    }
 
     public String getAddress() {
         return address;

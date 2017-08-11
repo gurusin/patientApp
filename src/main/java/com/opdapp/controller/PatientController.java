@@ -29,6 +29,11 @@ public class PatientController
     @RequestMapping(path="/searchPat", method = RequestMethod.POST)
     public @ResponseBody List<Patient> findByNICLike(@RequestBody String NIC)
     {
-        return patientService.findByNIC(NIC+"%");
+        final List<Patient> list = patientService.findByNIC(NIC+"%");
+        for (final Patient o : list )
+        {
+            System.out.println(o.getFirstname());
+        }
+        return list;
     }
 }
