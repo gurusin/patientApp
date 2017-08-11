@@ -3,7 +3,10 @@
     <div class="col-md-8">
       <div class="form-group">
         <label for="nic">NIC :</label>
-        <input type="text" id="nic" name="nic"  [(ngModel)]="nic" (keyup)="onKey($event)"/>
+        <input type="text" list='xyz' [(ngModel)]="nic"  (keyup)="onKey($event)" placeholder="nic" id="nic">
+        <datalist id='xyz'>
+            <option *ngFor="let pat of patientList" value="{{pat.id}}">{{pat.nic}},{{pat.firstname}}</option>
+        </datalist>
       </div>
     </div>
   </div>
