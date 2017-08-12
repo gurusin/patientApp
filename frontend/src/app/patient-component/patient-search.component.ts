@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {PatientServiceService} from "../patient-service.service";
-
+import {Data, Router} from "@angular/router";
+import {Patient} from "../patient";
 
 
 @Component({
@@ -10,31 +11,71 @@ import {PatientServiceService} from "../patient-service.service";
 })
 export class PatientSearchComponent {
 
-  nic:string;
-  patientList=[];
+  nic: string;
+  phone:string;
+  patNo:string;
 
-  constructor(private patientService:PatientServiceService) {
+  patientList = [];
+
+  constructor(private patientService: PatientServiceService,private router:Router) {
 
   }
 
-  onKey(event:any)
+  onKeyPatNo(event:any)
   {
-    alert("sdsd" + this.nic);
-    if (this.nic.length >1)
-    {
-      this.doSearch();
-    }else {
-      this.patientList=[];
+    if (event.keyCode == 13) {
+      this.patientService.getByPatNo(this.patNo);
+      this.router.navigate(["patientvisit"]);
     }
   }
 
-  doSearch()
+  onChange()
   {
+    alert('Changed');
+  }
+
+  newPatient()
+  {
+    this.patientService.clearPatient();
+    this.router.navigate(["patientsave"]);
+  }
+
+  onKeyPhoneNumber(event:any)
+  {
+    if (event.keyCode == 13) {
+      this.patientService.getByPhoneNo(this.phone);
+      this.router.navigate(["patientvisit"]);
+    }
+    else if (this.phone.length == 2) {
+      this.searchByPhone();
+    } else if (this.phone.length < 2) {
+      this.patientList = [];
+    }
+  }
+  onKey(event: any) {
+    if (event.keyCode == 13) {
+      this.patientService.getByNIC(this.nic);
+      this.router.navigate(["patientvisit"]);
+    }
+    else if (this.nic.length == 2) {
+      this.doSearch();
+    } else if (this.nic.length < 2) {
+      this.patientList = [];
+    }
+  }
+
+  doSearch() {
     this.patientService.searchByNIC(this.nic).subscribe(
-      data =>{
-        console.log(data);
+      data => {
         this.patientList = data;
-        console.log(this.patientList);
+      }
+    );
+  }
+
+  searchByPhone() {
+    this.patientService.searchByPhone(this.phone).subscribe(
+      data => {
+        this.patientList = data;
       }
     );
   }

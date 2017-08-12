@@ -1,5 +1,8 @@
 <div class="container">
-  <h1>Please enter new patient details</h1>
+  <div *ngIf="newPatient">
+    New patient
+  </div>
+  <h1>Please enter patient details</h1>
   <hr/>
   <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="patient">
     <div class="row">

@@ -1,34 +1,44 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
-        <label>NIC :</label>
-        <input list='xyz' [(ngModel)]="nic" (keyup)="onKey($event)">
-        <datalist id='xyz'>
-            <option *ngFor="let pat of patientList" value="{{pat.nic}}">{{pat.nic}},{{pat.firstname}}</option>
-        </datalist>
+    <div class="col-md-2">
+      <label>NIC :</label>
+    </div>
+    <div class="col-md-3">
+      <input list='xyz' [(ngModel)]="nic" (keyup)="onKey($event)">
+      <datalist id='xyz'>
+        <option *ngFor="let pat of patientList" value="{{pat.nic}}">{{pat.nic}},{{pat.firstname}}</option>
+      </datalist>
     </div>
   </div>
-
+  <br/>
   <div class="row">
-    <div class="col-md-8">
-      <div class="form-group">
-        <label for="patNo">Pat No 123: </label>
-        <input type="text" id="patNo" name="patNo"/>
-      </div>
+    <div class="col-md-2">
+      <label>Pat No: </label>
+    </div>
+    <div class="col-md-3">
+      <input type="text" id="patNo" name="patNo" [(ngModel)]="patNo" (keyup)="onKeyPatNo($event)"/>
     </div>
   </div>
-
+  <br/>
   <div class="row">
-    <div class="col-md-8">
-      <div class="form-group">
-        <label for="patNo">Phone: </label>
-        <input type="text" id="phone" name="phone"/>
-      </div>
+    <div class="col-md-2">
+      <label>Phone No :</label>
+    </div>
+    <div class="col-md-3">
+      <input list='phoneNumber' [(ngModel)]="phone" (keyup)="onKeyPhoneNumber($event)" >
+      <datalist id='phoneNumber' (select)="onChange()">
+        <option *ngFor="let pat of patientList" value="{{pat.phone}}">{{pat.nic}},{{pat.firstname}}</option>
+      </datalist>
     </div>
   </div>
 
+  <br/>
   <div class="form-group">
-    <button class="btn-primary" (click)="doSearch()" >New Patient</button>
+    <button class="btn-primary" (click)="newPatient()">New Patient</button>
   </div>
-
 </div>
+
+
+
+
+

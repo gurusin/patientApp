@@ -14,4 +14,12 @@ import java.util.List;
 public interface PatientRepository extends CrudRepository<Patient,Long>
 {
     List<Patient> findByNicLike(final String nic);
+
+    Patient getPatientByNic(final String nic);
+
+    List<Patient> findByPhoneLike(final String nic);
+
+    List<Patient> findByPhone(final String phone);
+
+
 }

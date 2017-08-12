@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PatientServiceService} from "./patient-service.service";
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent  {
 
-  constructor() { }
+  constructor(private patService:PatientServiceService) { }
+
+  newPat()
+  {
+    this.patService.clearPatient();
+  }
 
 }

@@ -20,6 +20,18 @@ public class PatientController
     @Autowired
     private PatientService patientService;
 
+    @RequestMapping(path="/getByNIC", method = RequestMethod.POST)
+    public @ResponseBody Patient getByNIC(@RequestBody final String nic)
+    {
+        return patientService.getByNIC(nic);
+    }
+
+    @RequestMapping(path="/getByPatientId", method = RequestMethod.POST)
+    public @ResponseBody Patient getByPatId(@RequestBody final String patId)
+    {
+        return patientService.getByPatientId(Long.parseLong(patId));
+    }
+
     @RequestMapping(path="/savePatient", method = RequestMethod.POST)
     public @ResponseBody Patient savePatient(@RequestBody final Patient pat)
     {
@@ -30,10 +42,20 @@ public class PatientController
     public @ResponseBody List<Patient> findByNICLike(@RequestBody String NIC)
     {
         final List<Patient> list = patientService.findByNIC(NIC+"%");
-        for (final Patient o : list )
-        {
-            System.out.println(o.getFirstname());
-        }
         return list;
+    }
+
+    @RequestMapping(path="/searchPatByPhoneNo", method = RequestMethod.POST)
+    public @ResponseBody List<Patient> findByPhoneNumberLike(@RequestBody String phoneNo)
+    {
+        final List<Patient> list = patientService.findByPhoneNoLike(phoneNo+"%");
+        return list;
+    }
+
+
+    @RequestMapping(path="/getByPhoneNo", method = RequestMethod.POST)
+    public @ResponseBody Patient getByPhoneNo(@RequestBody final String phoneNo)
+    {
+        return patientService.getByPhoneNo(phoneNo);
     }
 }

@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PatientServiceService} from "../patient-service.service";
 import {Observable} from "rxjs/Observable";
 import {Patient} from "../patient";
 import {Router} from "@angular/router";
+import {Subject} from "rxjs/Subject";
 
 
 @Component({
@@ -11,21 +12,27 @@ import {Router} from "@angular/router";
   styleUrls: ['./patientsave.component.css']
 })
 
-export class PatientsaveComponent {
+export class PatientsaveComponent implements OnInit{
 
-  patient: Patient;
+  patient: Patient = null;
+  newPatient=true;
+  @Input() selectedPatient: Patient;
 
-  constructor(private patientService: PatientServiceService, private router: Router) {
-    this.patient = new Patient();
+  ngOnInit(): void {
+    this.patient =  this.patientService.patientObject;
+    if (this.patient.patientId > 0)
+    {
+      this.newPatient = false;
+    }
+
+  }
+
+  constructor(private patientService: PatientServiceService, private router: Router)
+  {
   }
 
   onSubmit() {
-    this.patientService.savePatient(this.patient).subscribe(
-      data => {
-        console.log(data);
-        this.patient = data;
-      }
-    );
+    this.patientService.savePatient(this.patient)
     this.router.navigate(['patientvisit'])
   }
 }

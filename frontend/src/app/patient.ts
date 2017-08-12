@@ -1,11 +1,15 @@
 export class Patient {
-  firstname: ""
-  nic: ""
-  phone: ""
-  lastname: ""
-  middlename: ""
-  gender: ""
-  // dateOfBirth: ,
-  address: ''
+  patientId:number;
+  firstname:string;
+  nic: string;
+  phone: string;
+  lastname: string;
+  middlename: string;
+  gender: string;
+  dateOfBirth:string;
+  address: string;
 
+  constructor() {
+
+  }
 }

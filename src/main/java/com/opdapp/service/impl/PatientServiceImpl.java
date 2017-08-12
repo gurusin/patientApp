@@ -28,4 +28,30 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> findByNIC(String nic) {
         return patientRepository.findByNicLike(nic);
     }
+
+    @Override
+    public Patient getByNIC(String nic) {
+        return patientRepository.getPatientByNic(nic);
+    }
+
+    @Override
+    public Patient getByPatientId(long patId) {
+        return patientRepository.findOne(patId);
+    }
+
+    @Override
+    public List<Patient> findByPhoneNoLike(String phoneNo) {
+        return patientRepository.findByPhoneLike(phoneNo);
+
+    }
+
+    @Override
+    public Patient getByPhoneNo(String phoneNo) {
+        final List<Patient> list = patientRepository.findByPhone(phoneNo);
+        if (list.size()>0)
+        {
+            return list.get(0);
+        }
+        return null;
+    }
 }

@@ -1,17 +1,26 @@
-<form action="/saveVisit">
-<div class="container-fluid">
-  <app-patientnavbar></app-patientnavbar>
-</div>
-<div class="row">
-  <div class="row col-md-8">
-<app-basicvisit></app-basicvisit>
+
+  <div *ngIf="patient !==null" class="patientBar">
+   Selected Patient :
+    <a (click)="onEditPatient()">{{patient.firstname}},{{patient.lastname}}</a>
   </div>
-  <div class="col-md-4">
-<app-drugcomponent></app-drugcomponent>
+  <div class="container">
+    <form action="/saveVisit">
+    <div class="container-fluid">
+      <app-patientnavbar></app-patientnavbar>
+    </div>
+    <div class="row">
+      <div class="row col-md-8">
+        <app-basicvisit></app-basicvisit>
+      </div>
+      <div class="col-md-4">
+        <app-drugcomponent></app-drugcomponent>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"></div>
+      <input type="submit" value="Submit">
+    </div>
+    </form>
+
   </div>
-</div>
-<div class="row">
-  <div class="col-md-4"></div>
-  <input type="submit" value="Submit">
-</div>
-</form>
+
