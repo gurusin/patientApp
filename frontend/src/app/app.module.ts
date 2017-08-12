@@ -12,6 +12,13 @@ import { TreatmentComponent } from './treatment/treatment.component';
 import { NavbarComponent } from './navbar.component'
 import {routing} from "./app.routing";
 import { PatientVisitComponent } from './treatment/patient-visit.component';
+import { PatientnavbarComponent } from './treatment/patientnavbar.component';
+import { BasicvisitComponent } from './treatment/basicvisit.component';
+import { DrugcomponentComponent } from './drugcomponent/drugcomponent.component';
+import { DrugdosageComponent } from './drugcomponent/drugdosage.component';
+import { DrugsearchComponent } from './drugcomponent/drugsearch.component';
+import { DrugdosagelistComponent } from './drugcomponent/drugdosagelist.component';
+import { PatienthistoryComponent } from './patienthistory/patienthistory.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +28,14 @@ import { PatientVisitComponent } from './treatment/patient-visit.component';
     PatientsaveComponent,
     TreatmentComponent,
     NavbarComponent,
-    PatientVisitComponent
+    PatientVisitComponent,
+    PatientnavbarComponent,
+    BasicvisitComponent,
+    DrugcomponentComponent,
+    DrugdosageComponent,
+    DrugsearchComponent,
+    DrugdosagelistComponent,
+    PatienthistoryComponent
   ],
   imports: [
     BrowserModule,

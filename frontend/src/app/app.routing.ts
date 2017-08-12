@@ -10,7 +10,7 @@ const APP_ROUTES: Routes = [
   {path:'patient-component', component: PatientComponentComponent },
   {path: 'patientsave', component: PatientsaveComponent },
   {path: 'treatment', component: TreatmentComponent},
-  {path: 'patientvisit/:patient', component: PatientVisitComponent},
+  {path: 'patientvisit', component: PatientVisitComponent},
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)
