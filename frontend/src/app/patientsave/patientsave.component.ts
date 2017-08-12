@@ -26,6 +26,6 @@ export class PatientsaveComponent {
         this.patient = data;
       }
     );
-    this.router.navigate(['../patientvisit'])
+    this.router.navigate(['patientvisit'])
   }
 }
