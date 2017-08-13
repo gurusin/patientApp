@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DrugRepository extends CrudRepository<Drug,Long> {
+public interface DrugRepository extends CrudRepository<Drug, Integer> {
     Drug getDrugByDrugId(final long drugId);
 
     List<Drug> findByBrandNameLike(final String brandName);
