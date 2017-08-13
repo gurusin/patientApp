@@ -7,72 +7,73 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="patient">
     <div class="row">
       <div class="col-md-2">
-      <label for="firstname">First Name : </label>
+        <label for="firstname">First Name : </label>
       </div>
       <div class="col-md-8">
-      <input type="text" id="firstname" name="firstname" required  [(ngModel)]="patient.firstname"/>
+        <input type="text" id="firstname" name="firstname" required [(ngModel)]="patient.firstname"/>
       </div>
     </div>
-<br/>
+    <br/>
     <div class="row">
       <div class="col-md-2">
         <label for="middlename">Middle names : </label>
       </div>
       <div class="col-md-8">
-        <input type="text" id="middlename" name="middlename" required  [(ngModel)]="patient.middlename"/>
+        <input type="text" id="middlename" name="middlename" required [(ngModel)]="patient.middlename"/>
       </div>
     </div>
-<br/>
+    <br/>
     <div class="row">
       <div class="col-md-2">
-          <label for="lastname">Last name : </label>
+        <label for="lastname">Last name : </label>
       </div>
       <div class="col-md-8">
-          <input type="text" id="lastname" name="lastname" required  [(ngModel)]="patient.lastname"/>
+        <input type="text" id="lastname" name="lastname" required [(ngModel)]="patient.lastname"/>
       </div>
     </div>
 
     <br/>
     <div class="row">
       <div class="col-md-2">
-          <label for="nic">NIC : </label>
+        <label for="nic">NIC : </label>
       </div>
       <div class="col-md-8">
-          <input type="text" id="nic" name="nic" required  [(ngModel)]="patient.nic"/>
+        <input type="text" id="nic" name="nic" required [(ngModel)]="patient.nic"/>
       </div>
     </div>
 
     <br/>
     <div class="row">
       <div class="col-md-2">
-          <label for="address">Address : </label>
+        <label for="address">Address : </label>
       </div>
       <div class="col-md-8">
-          <input type="text" id="address" name="address" required  [(ngModel)]="patient.address"/>
+        <input type="text" id="address" name="address" required [(ngModel)]="patient.address"/>
       </div>
     </div>
 
     <br/>
     <div class="row">
       <div class="col-md-2">
-          <label >Gender : </label>
+        <label>Gender : </label>
       </div>
       <div class="col-md-8">
-          <select name="gender" [(ngModel)]="patient.gender">
-            <option value="MALE" >MALE</option>
-            <option value="FEMALE" >FEMALE</option>
-            <option value="UNDEFINED" >UNDEFINED</option>
-          </select>
+        <select name="gender" [(ngModel)]="patient.gender">
+          <option value="MALE">MALE</option>
+          <option value="FEMALE">FEMALE</option>
+          <option value="UNDEFINED">UNDEFINED</option>
+        </select>
       </div>
     </div>
-    <!--<div class="row">-->
-    <!--<div class="col-md-4">-->
-    <!--<div class="form-group">-->
-    <!--<label for="dateOfBirth">DOB : </label>-->
-    <!--<input type="text" id="dateOfBirth" name="dateOfBirth"  [(ngModel)]="patient.dateOfBirth"/>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
+    <br/>
+    <div class="row">
+      <div class="col-md-2">
+        <label>Date of Birth : </label>
+      </div>
+      <div class="col-md-8">
+          <input type="date" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="patient.dateOfBirth"/>
+      </div>
+    </div>
 
     <br/>
     <div class="form-group">

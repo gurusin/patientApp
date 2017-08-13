@@ -1,13 +1,14 @@
 package com.opdapp.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.opdapp.util.MyDateDeserializer;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class Patient implements Serializable {
@@ -24,20 +25,42 @@ public class Patient implements Serializable {
     @GeneratedValue
     private long patientId;
 
+    @Column
     private String nic;
+
+    @Column
     private String phone;
 
+    @Column
     private String firstname;
+
+    @Column
     private String lastname;
+
+    @Column
     private String middlename;
+
+    @Column
     private Gender gender;
 
-//    @Column(columnDefinition = "DATETIME")
-//    private LocalDate dateOfBirth;
+
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-mm-dd")
+    private Date dateOfBirth;
+
+    @Column
     private String address;
+
+    @Column
     private String city;
+
+    @Column
     private String postalCode;
+
+    @Column
     private String remarks;
+
+    @Column
     private String profession;
 
 
@@ -74,13 +97,13 @@ public class Patient implements Serializable {
         this.gender = gender;
     }
 
-//    public LocalDate getDateOfBirth() {
-//        return dateOfBirth;
-//    }
-//
-//    public void setDateOfBirth(LocalDate dateOfBirth) {
-//        this.dateOfBirth = dateOfBirth;
-//    }
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public String getAddress() {
         return address;
