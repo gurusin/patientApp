@@ -22,13 +22,13 @@ public class DrugController
     private DrugService drugService;
 
     @RequestMapping(path="/getDrugByName", method = RequestMethod.POST)
-    public @ResponseBody List<SearchedDrug> getByDrug(@RequestBody final String drugName)
+    public @ResponseBody List<SearchedDrug> getByDrugName(@RequestBody final String drugName)
     {
         return drugService.getByBrandName(drugName);
     }
 
     @RequestMapping(path="/getPrescribable", method = RequestMethod.POST)
-    public @ResponseBody   PrescribableDrug getByDrug(@RequestBody final long drugId)
+    public @ResponseBody   PrescribableDrug getByDrugId(@RequestBody final long drugId)
     {
         return drugService.getByDrugId(drugId);
     }
