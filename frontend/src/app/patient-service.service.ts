@@ -43,9 +43,11 @@ export class PatientServiceService {
 
   savePatient(patient : any)
   {
+
     return this.http.post(this.patientSaveURL, patient).map((res:Response) => res.json()).subscribe(
       data => {
         this.patient.next(data);
+        this.patientObject = data;
       }
     );
   }
