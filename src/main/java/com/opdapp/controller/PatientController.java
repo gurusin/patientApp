@@ -1,6 +1,8 @@
 package com.opdapp.controller;
 
 import com.opdapp.model.Patient;
+import com.opdapp.model.PrescribableDrug;
+import com.opdapp.service.DrugService;
 import com.opdapp.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,9 @@ public class PatientController
 {
     @Autowired
     private PatientService patientService;
+
+    @Autowired
+    private DrugService drugService;
 
     @RequestMapping(path="/getByNIC", method = RequestMethod.POST)
     public @ResponseBody Patient getByNIC(@RequestBody final String nic)
@@ -57,5 +62,11 @@ public class PatientController
     public @ResponseBody Patient getByPhoneNo(@RequestBody final String phoneNo)
     {
         return patientService.getByPhoneNo(phoneNo);
+    }
+
+    @RequestMapping(path="/getPrescribable", method = RequestMethod.POST)
+    public @ResponseBody   PrescribableDrug getByDrug(@RequestBody final long drugId)
+    {
+        return drugService.getByDrugId(drugId);
     }
 }
