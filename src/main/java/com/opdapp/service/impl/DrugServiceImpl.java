@@ -56,7 +56,7 @@ public class DrugServiceImpl implements DrugService {
             StringBuilder strStr = new StringBuilder();
             strStr.append(strength.getStrength().getStrengthAmount());
             strStr.append(" ");
-            strStr.append(strength.getStrength().getStrengthUnit());
+            strStr.append(strength.getStrength().getStrengthUnit().getUnitName());
             strenghts.add(strStr.toString());
         }
 
