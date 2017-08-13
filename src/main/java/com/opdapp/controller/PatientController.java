@@ -63,10 +63,4 @@ public class PatientController
     {
         return patientService.getByPhoneNo(phoneNo);
     }
-
-    @RequestMapping(path="/getPrescribable", method = RequestMethod.POST)
-    public @ResponseBody   PrescribableDrug getByDrug(@RequestBody final long drugId)
-    {
-        return drugService.getByDrugId(drugId);
-    }
 }

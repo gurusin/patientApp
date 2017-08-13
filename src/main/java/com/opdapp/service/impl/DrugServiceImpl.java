@@ -2,13 +2,16 @@ package com.opdapp.service.impl;
 
 import com.opdapp.model.Drug;
 import com.opdapp.model.PrescribableDrug;
+import com.opdapp.model.SearchedDrug;
 import com.opdapp.repository.DrugRepository;
 import com.opdapp.service.DrugService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class DrugServiceImpl implements DrugService {
 
     @Autowired
@@ -57,5 +60,22 @@ public class DrugServiceImpl implements DrugService {
         prescribableDrug.setStrengths(strenghts);
 
         return prescribableDrug;
+    }
+
+    public List<SearchedDrug> getByBrandName(String brandName){
+        List<Drug> searchedDrug = drugRepository.findByBrandNameLike(brandName);
+        //todo search in bse drug and add
+        return getSearchedDrug(searchedDrug);
+    }
+
+    private List<SearchedDrug> getSearchedDrug(List<Drug> drugs){
+        List<SearchedDrug> searchedDrugList = new ArrayList<SearchedDrug>();
+        for (Drug drug:drugs){
+            SearchedDrug searchedDrug = new SearchedDrug();
+            searchedDrug.setBrandName(drug.getBrandName());
+            searchedDrug.setDrugId(drug.getDrugId());
+            searchedDrugList.add(searchedDrug);
+        }
+        return searchedDrugList;
     }
 }

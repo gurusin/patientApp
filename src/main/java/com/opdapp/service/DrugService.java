@@ -1,7 +1,12 @@
 package com.opdapp.service;
 
 import com.opdapp.model.PrescribableDrug;
+import com.opdapp.model.SearchedDrug;
+
+import java.util.List;
 
 public interface DrugService {
-    public PrescribableDrug getByDrugId(long patId);
+    PrescribableDrug getByDrugId(long patId);
+
+    List<SearchedDrug> getByBrandName(String brandName);
 }
