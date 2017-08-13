@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Patientvisit} from "./patientvisit";
 
 @Component({
   selector: 'app-basicvisit',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasicvisitComponent implements OnInit {
 
-  constructor() { }
+  patientVisit:Patientvisit;
+  constructor() {
+    this.patientVisit = new Patientvisit();
+  }
 
   ngOnInit() {
   }

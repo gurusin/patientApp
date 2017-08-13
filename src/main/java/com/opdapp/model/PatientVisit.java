@@ -19,6 +19,7 @@ public class PatientVisit {
     private String note;
     @Column(name = "visitDate")
     private Date date;
+
     @ManyToOne(targetEntity = Patient.class)
     @JoinColumn(name = "patientId" , nullable = false, updatable = false, insertable = false)
     private Patient patient;

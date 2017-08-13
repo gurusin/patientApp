@@ -19,6 +19,7 @@ import { DrugdosageComponent } from './drugcomponent/drugdosage.component';
 import { DrugsearchComponent } from './drugcomponent/drugsearch.component';
 import { DrugdosagelistComponent } from './drugcomponent/drugdosagelist.component';
 import { PatienthistoryComponent } from './patienthistory/patienthistory.component';
+import { PrescriptionComponentComponent } from './prescription-component/prescription-component.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PatienthistoryComponent } from './patienthistory/patienthistory.compone
     DrugdosageComponent,
     DrugsearchComponent,
     DrugdosagelistComponent,
-    PatienthistoryComponent
+    PatienthistoryComponent,
+    PrescriptionComponentComponent
   ],
   imports: [
     BrowserModule,

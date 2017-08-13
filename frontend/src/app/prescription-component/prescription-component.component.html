@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-1">
+    <label for="drug">Drug</label>
+  </div>
+  <div class="col-md-2">
+    <input type="text" list='drugList' id="drug" name="drug" placeholder="Drug to search"
+           onKey="searchDrug($event)">
+    <datalist id="drugList">
+      <option *ngFor="let drug of drugList" value="{{drug.name}}"></option>
+    </datalist>
+  </div>
+</div>
+
+
