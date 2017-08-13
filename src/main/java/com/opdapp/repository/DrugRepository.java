@@ -10,5 +10,5 @@ import java.util.List;
 public interface DrugRepository extends CrudRepository<Drug,Long> {
     Drug getDrugByDrugId(final long drugId);
 
-    List<Drug> findByBrandNameLike(final String brandName);
+    List<Drug> findDrugsByBrandNameLike(final String brandName);
 }

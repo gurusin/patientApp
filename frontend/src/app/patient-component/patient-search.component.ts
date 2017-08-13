@@ -55,7 +55,7 @@ export class PatientSearchComponent {
   onKey(event: any) {
     if (event.keyCode == 13) {
       this.patientService.getByNIC(this.nic);
-      this.router.navigate(["patientvisit"]);
+      this.router.navigate(["patientvisit/treatment"]);
     }
     else if (this.nic.length == 2) {
       this.doSearch();

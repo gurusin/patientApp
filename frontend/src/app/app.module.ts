@@ -20,6 +20,8 @@ import { DrugsearchComponent } from './drugcomponent/drugsearch.component';
 import { DrugdosagelistComponent } from './drugcomponent/drugdosagelist.component';
 import { PatienthistoryComponent } from './patienthistory/patienthistory.component';
 import { PrescriptionComponentComponent } from './prescription-component/prescription-component.component';
+import {DrugServiceService} from "app/drug-service.service";
+import { PrescriptionHistoryComponent } from './prescription-component/prescription-history.component';
 
 @NgModule({
   declarations: [
@@ -37,14 +39,15 @@ import { PrescriptionComponentComponent } from './prescription-component/prescri
     DrugsearchComponent,
     DrugdosagelistComponent,
     PatienthistoryComponent,
-    PrescriptionComponentComponent
+    PrescriptionComponentComponent,
+    PrescriptionHistoryComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule, routing
   ],
-  providers: [PatientServiceService],
+  providers: [PatientServiceService,DrugServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

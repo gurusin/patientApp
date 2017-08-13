@@ -4,11 +4,50 @@
   </div>
   <div class="col-md-2">
     <input type="text" list='drugList' id="drug" name="drug" placeholder="Drug to search"
-           onKey="searchDrug($event)">
+           (keyup)="searchDrug($event)" [(ngModel)]="drugName">
     <datalist id="drugList">
-      <option *ngFor="let drug of drugList" value="{{drug.name}}"></option>
+      <option *ngFor="let drug of drugList" value="{{drug.brandName}}">{{drug.brandName}}</option>
     </datalist>
   </div>
 </div>
+
+<h2> Drug Details (Prescribed) </h2>
+<br/>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Drug</th>
+    <th>Strength</th>
+    <th>Frequency</th>
+    <th>Amount</th>
+    <th>Duration</th>
+    <th>Interval Unit</th>
+    <th>Remove</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of prescribableDrug">
+    <td>{{row.drug.brandName}}</td>
+    <td><select [(ngModel)]="row.selectedStrength">
+        <option *ngFor="let x of row.strengths" value="{{x}}">{{x}}</option>
+    </select>
+    </td>
+
+    <td><select [(ngModel)]="row.selectedFrequency">
+      <option *ngFor="let x of row.doseFrequency" value="{{x}}">{{x}}</option>
+    </select>
+    </td>
+    <td><input type='text' [(ngModel)]="row.doseAmount"></td>
+    <td><input type='text' [(ngModel)]="row.doseDuration"></td>
+    <td><select [(ngModel)]="row.selectedDuration">
+      <option *ngFor="let x of row.durationUnit" value="{{x}}">{{x}}</option>
+    </select>
+    <td><button (click)="remove($index)">Remove</button></td>
+  </tr>
+  </tbody>
+  <br/>
+  <button class="btn-primary" (click)="onSave()">Save Prescription</button>
+</table>
+
 
 

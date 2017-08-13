@@ -48,7 +48,7 @@ public class DrugServiceImpl implements DrugService {
 
         prescribableDrug.setDurationUnit(durationunit);
 
-        Drug drug = drugRepository.getDrugByDrugId(drugId);
+        Drug drug = drugRepository.findOne(drugId);
         prescribableDrug.setDrug(drug);
 
         List<String> strenghts = new ArrayList<String>();
@@ -63,7 +63,7 @@ public class DrugServiceImpl implements DrugService {
     }
 
     public List<SearchedDrug> getByBrandName(String brandName){
-        List<Drug> searchedDrug = drugRepository.findByBrandNameLike(brandName);
+        List<Drug> searchedDrug = drugRepository.findDrugsByBrandNameLike(brandName+"%");
         //todo search in bse drug and add
         return getSearchedDrug(searchedDrug);
     }

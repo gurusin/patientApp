@@ -7,7 +7,7 @@ public class Drug {
 
     @Id
     @GeneratedValue
-    private int drugId;
+    private long drugId;
 
     @ManyToOne
     @JoinColumn(name = "baseDrugId")
@@ -23,11 +23,11 @@ public class Drug {
         this.brandName = brandName;
     }
 
-    public int getDrugId() {
+    public long getDrugId() {
         return drugId;
     }
 
-    public void setDrugId(int drugId) {
+    public void setDrugId(long drugId) {
         this.drugId = drugId;
     }
 
