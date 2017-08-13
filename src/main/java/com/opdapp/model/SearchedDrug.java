@@ -2,15 +2,15 @@ package com.opdapp.model;
 
 public class SearchedDrug {
 
-    private int drugId;
+    private long drugId;
 
     private String brandName;
 
-    public int getDrugId() {
+    public long getDrugId() {
         return drugId;
     }
 
-    public void setDrugId(int drugId) {
+    public void setDrugId(long drugId) {
         this.drugId = drugId;
     }
 

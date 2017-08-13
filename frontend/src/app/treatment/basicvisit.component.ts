@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Patientvisit} from "./patientvisit";
+import {Patient} from "../patient";
 
 @Component({
   selector: 'app-basicvisit',
@@ -9,8 +10,12 @@ import {Patientvisit} from "./patientvisit";
 export class BasicvisitComponent implements OnInit {
 
   patientVisit:Patientvisit;
+  @Input() patient:Patient;
+
   constructor() {
     this.patientVisit = new Patientvisit();
+    this.patientVisit.diagnoseData='';
+
   }
 
   ngOnInit() {

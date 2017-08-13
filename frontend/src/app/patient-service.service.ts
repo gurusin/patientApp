@@ -56,6 +56,7 @@ export class PatientServiceService {
     this.http.post(this.rootUrl+"getByPatientId",patNo).map((res:Response) =>res.json()).subscribe(
       data => {
         this.patient.next(data);
+        this.patientObject = data;
       }
     );
   }

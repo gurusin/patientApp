@@ -28,8 +28,8 @@ public class DrugController
     }
 
     @RequestMapping(path="/getPrescribable", method = RequestMethod.POST)
-    public @ResponseBody   PrescribableDrug getByDrugId(@RequestBody final long drugId)
+    public @ResponseBody   PrescribableDrug getByDrugId(@RequestBody final String drugId)
     {
-        return drugService.getByDrugId(drugId);
+        return drugService.getByDrugId(Long.parseLong(drugId));
     }
 }
