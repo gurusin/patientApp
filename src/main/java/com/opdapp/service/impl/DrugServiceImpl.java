@@ -1,8 +1,7 @@
 package com.opdapp.service.impl;
 
-import com.opdapp.model.Drug;
-import com.opdapp.model.PrescribableDrug;
-import com.opdapp.model.SearchedDrug;
+import com.opdapp.model.*;
+import com.opdapp.repository.DrugPackageRepository;
 import com.opdapp.repository.DrugRepository;
 import com.opdapp.repository.FrequencyRepository;
 import com.opdapp.service.DrugService;
@@ -48,7 +47,6 @@ public class DrugServiceImpl implements DrugService {
 
         prescribableDrug.setDurationUnit(durationunit);
 
-        Drug drug = drugRepository.findOne((int)drugId);
         Drug drug = drugRepository.findOne(drugId);
         prescribableDrug.setDrug(drug);
 
@@ -68,8 +66,6 @@ public class DrugServiceImpl implements DrugService {
     }
 
     public List<SearchedDrug> getByBrandName(String brandName) {
-        List<Drug> searchedDrug = drugRepository.findByBrandNameLike(brandName);
-    public List<SearchedDrug> getByBrandName(String brandName){
         List<Drug> searchedDrug = drugRepository.findDrugsByBrandNameLike(brandName+"%");
         //todo search in bse drug and add
         return getSearchedDrug(searchedDrug);
