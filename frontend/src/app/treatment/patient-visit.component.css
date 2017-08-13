@@ -14,11 +14,6 @@ div.tab button {
   transition: 0.3s;
 }
 
-.patientBar{
-  background-color: #59c847;
-  font-size: 25px;
-  font-family: "Bookman Old Style";
-}
 
 /* Change background color of buttons on hover */
 div.tab button:hover {

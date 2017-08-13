@@ -6,13 +6,16 @@ import {AppComponent} from "app/app.component";
 import {TreatmentComponent} from "./treatment/treatment.component";
 import {PatientVisitComponent} from "./treatment/patient-visit.component";
 import {PatientSearchComponent} from "./patient-component/patient-search.component";
+import {BasicvisitComponent} from "./treatment/basicvisit.component";
 
 const APP_ROUTES: Routes = [
   {path:'',component:PatientSearchComponent},
   {path:'patient-component', component: PatientComponentComponent },
   {path: 'patientsave', component: PatientsaveComponent },
   {path: 'treatment', component: TreatmentComponent},
-  {path: 'patientvisit', component: PatientVisitComponent}
+  {path: 'patientvisit', component: PatientVisitComponent, children:[
+    {path:'treatment', component:BasicvisitComponent}
+  ]}
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)
