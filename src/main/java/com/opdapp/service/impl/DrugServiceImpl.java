@@ -26,7 +26,6 @@ public class DrugServiceImpl implements DrugService {
     public PrescribableDrug getByDrugId(long drugId) {
         PrescribableDrug prescribableDrug = new PrescribableDrug();
         List<DoseFrequency> doseFrequencies = frequencyRepository.findAll();
-        System.out.println(doseFrequencies.size());
         List<String> doseFrequency = new ArrayList<String>();
 
         for (DoseFrequency doseFrequencyObj : doseFrequencies) {
@@ -48,12 +47,10 @@ public class DrugServiceImpl implements DrugService {
 
         prescribableDrug.setDurationUnit(durationunit);
 
-        Drug drug = drugRepository.findOne(1);
-        System.out.println(drug.getBrandName());
+        Drug drug = drugRepository.findOne((int)drugId);
         prescribableDrug.setDrug(drug);
 
         List<DrugPackage> strengthList = drugPackageRepository.getDrugPackageByDrug(drug);
-        System.out.println(strengthList.size());
         List<String> strenghts = new ArrayList<String>();
         for (DrugPackage strength : strengthList) {
             StringBuilder strStr = new StringBuilder();
