@@ -85,12 +85,12 @@ export class PrescriptionComponentComponent implements OnInit {
     presc.diagnosis = this.patientVisit.diagnoseData;
     presc.notes = this.patientVisit.note;
     presc.symptoms = this.patientVisit.symptoms;
-    console.log(this.patientVisit);
 
     var details =[];
     this.prescribableDrug.forEach((obj: PrescribableDrug) => {
         var detail = new PrescriptionDetail();
         detail.drugId =obj.drug.drugId;
+        detail.drug.drugId =obj.drug.drugId;
         detail.amount =obj.doseAmount;
         detail.duration =obj.doseDuration;
         detail.strength =obj.selectedStrength;
@@ -117,11 +117,18 @@ export class Prescription
 }
 export class PrescriptionDetail
 {
+  drug:Drug;
   drugId:string;
   strength:string;
   frequency:string;
   amount:number;
   duration:number;
   intervalUnit:string;
+
+
+  constructor() {
+    this.drug = new Drug();
+
+  }
 }
 

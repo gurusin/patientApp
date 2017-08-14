@@ -1,10 +1,11 @@
 <div class="container">
   <h1>History</h1>
   <table border="2" width="100%">
-    <tr><th>Date</th><th>Symptoms</th><th>Notes</th><th>Diagnosys</th></tr>
+
     <tr *ngFor="let obj of prescriptionList">
-      <td>{{obj.prescriptionDate}}</td><td>{{obj.symptoms}}</td><td>{{obj.notes}}</td><td>{{obj.diagnosis}}</td>
+      <td>
+        <app-prescriptiondetail  [prescription]="obj"></app-prescriptiondetail>
+      </td>
     </tr>
   </table>
 </div>
-

@@ -22,6 +22,7 @@ import { PatienthistoryComponent } from './patienthistory/patienthistory.compone
 import { PrescriptionComponentComponent } from './prescription-component/prescription-component.component';
 import {DrugServiceService} from "app/drug-service.service";
 import { PrescriptionHistoryComponent } from './prescription-component/prescription-history.component';
+import { PrescriptiondetailComponent } from './prescription-component/prescriptiondetail.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PrescriptionHistoryComponent } from './prescription-component/prescript
     DrugdosagelistComponent,
     PatienthistoryComponent,
     PrescriptionComponentComponent,
-    PrescriptionHistoryComponent
+    PrescriptionHistoryComponent,
+    PrescriptiondetailComponent
   ],
   imports: [
     BrowserModule,

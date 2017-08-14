@@ -15,6 +15,8 @@ public class PrescriptionDTO {
     private String symptoms;
     private Date prescriptionDate;
 
+    private List<PrescriptionDetailDTO> prescriptionDetailDTOS;
+
     private List<PrescriptionDetail> prescriptionDetails;
 
     public Date getPrescriptionDate() {
@@ -25,10 +27,18 @@ public class PrescriptionDTO {
         this.prescriptionDate = prescriptionDate;
     }
 
+    public List<PrescriptionDetailDTO> getPrescriptionDetailDTOS() {
+        return prescriptionDetailDTOS;
+    }
+
+    public void setPrescriptionDetailDTOS(List<PrescriptionDetailDTO> prescriptionDetailDTOS) {
+        this.prescriptionDetailDTOS = prescriptionDetailDTOS;
+    }
 
     public List<PrescriptionDetail> getPrescriptionDetails() {
         return prescriptionDetails;
     }
+
 
     public void setPrescriptionDetails(List<PrescriptionDetail> prescriptionDetails) {
         this.prescriptionDetails = prescriptionDetails;

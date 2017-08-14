@@ -9,7 +9,6 @@ import java.util.Set;
  */
 
 @Entity
-@Table
 public class Prescription {
 
     @Id
