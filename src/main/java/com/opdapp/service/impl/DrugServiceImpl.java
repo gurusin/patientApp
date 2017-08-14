@@ -30,7 +30,7 @@ public class DrugServiceImpl implements DrugService {
 
         for (DoseFrequency doseFrequencyObj : doseFrequencies) {
             StringBuilder freStr = new StringBuilder();
-            freStr.append(doseFrequencyObj.getTimeUnit());
+            freStr.append(doseFrequencyObj.getNoofDoses());
             freStr.append(" times ");
             freStr.append(doseFrequencyObj.getTimeUnit());
             doseFrequency.add(freStr.toString());
