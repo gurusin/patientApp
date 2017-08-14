@@ -39,6 +39,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             dto.setNotes(obj.getNotes());
             dto.setSymptoms(obj.getSymptoms());
             dto.setDiagnosis(obj.getDiagnosis());
+            dto.setPrescriptionDate(obj.getDate());
             dtoList.add(dto);
         }
         return dtoList;
