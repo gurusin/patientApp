@@ -2,6 +2,7 @@ package com.opdapp.dto;
 
 import com.opdapp.model.PrescriptionDetail;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,7 +13,18 @@ public class PrescriptionDTO {
     private String diagnosis;
     private String notes;
     private String symptoms;
+    private Date prescriptionDate;
+
     private List<PrescriptionDetail> prescriptionDetails;
+
+    public Date getPrescriptionDate() {
+        return prescriptionDate;
+    }
+
+    public void setPrescriptionDate(Date prescriptionDate) {
+        this.prescriptionDate = prescriptionDate;
+    }
+
 
     public List<PrescriptionDetail> getPrescriptionDetails() {
         return prescriptionDetails;
