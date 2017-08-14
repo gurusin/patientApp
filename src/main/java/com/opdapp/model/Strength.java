@@ -12,6 +12,7 @@ public class Strength {
     @ManyToOne
     @JoinColumn(name = "unitId")
     private StrengthUnit strengthUnit;
+
     private int strengthAmount;
 
     public StrengthUnit getStrengthUnit() {
