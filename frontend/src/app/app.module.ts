@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { PatientComponentComponent } from './patient-component/patient-component.component';
 import { PatientSearchComponent } from './patient-component/patient-search.component';
 import {PatientServiceService} from "./patient-service.service";
 import { PatientsaveComponent } from './patientsave/patientsave.component';
@@ -18,7 +17,6 @@ import { DrugcomponentComponent } from './drugcomponent/drugcomponent.component'
 import { DrugdosageComponent } from './drugcomponent/drugdosage.component';
 import { DrugsearchComponent } from './drugcomponent/drugsearch.component';
 import { DrugdosagelistComponent } from './drugcomponent/drugdosagelist.component';
-import { PatienthistoryComponent } from './patienthistory/patienthistory.component';
 import { PrescriptionComponentComponent } from './prescription-component/prescription-component.component';
 import {DrugServiceService} from "app/drug-service.service";
 import { PrescriptionHistoryComponent } from './prescription-component/prescription-history.component';
@@ -27,7 +25,6 @@ import { PrescriptiondetailComponent } from './prescription-component/prescripti
 @NgModule({
   declarations: [
     AppComponent,
-    PatientComponentComponent,
     PatientSearchComponent,
     PatientsaveComponent,
     TreatmentComponent,
@@ -39,10 +36,10 @@ import { PrescriptiondetailComponent } from './prescription-component/prescripti
     DrugdosageComponent,
     DrugsearchComponent,
     DrugdosagelistComponent,
-    PatienthistoryComponent,
     PrescriptionComponentComponent,
     PrescriptionHistoryComponent,
-    PrescriptiondetailComponent
+    PrescriptiondetailComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
