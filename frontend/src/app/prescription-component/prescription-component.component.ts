@@ -96,6 +96,7 @@ export class PrescriptionComponentComponent implements OnInit {
         detail.strength =obj.selectedStrength;
         detail.frequency=obj.selectedFrequency;
         detail.intervalUnit = obj.selectedDuration;
+        detail.meal = obj.meal;
        details.push(detail);
       }
     );
@@ -124,6 +125,7 @@ export class PrescriptionDetail
   amount:number;
   duration:number;
   intervalUnit:string;
+  meal:string;
 
 
   constructor() {

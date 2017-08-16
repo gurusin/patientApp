@@ -1,6 +1,7 @@
 package com.opdapp.dto;
 
 import com.opdapp.model.Drug;
+import com.opdapp.model.Meal;
 
 /**
  * Created by sudarshana on 13/08/2017.
@@ -11,6 +12,7 @@ public class PrescriptionDetailDTO {
     private double duration;
     private String strength;
     private String frequency;
+    private Meal meal;
 
     public Drug getDrug() {
         return drug;
@@ -50,5 +52,13 @@ public class PrescriptionDetailDTO {
 
     public void setFrequency(String frequency) {
         this.frequency = frequency;
+    }
+
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public void setMeal(Meal meal) {
+        this.meal = meal;
     }
 }

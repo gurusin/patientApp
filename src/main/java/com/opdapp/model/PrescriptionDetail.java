@@ -30,6 +30,8 @@ public class PrescriptionDetail {
     @JoinColumn(name = "prescriptionId", nullable = false)
     private Prescription prescription;
 
+    private Meal meal;
+
     public Prescription getPrescription() {
         return prescription;
     }
@@ -92,5 +94,13 @@ public class PrescriptionDetail {
 
     public void setDrug(Drug drug) {
         this.drug = drug;
+    }
+
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public void setMeal(Meal meal) {
+        this.meal = meal;
     }
 }

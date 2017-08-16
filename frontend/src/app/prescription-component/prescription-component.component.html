@@ -22,6 +22,7 @@
     <th>Amount</th>
     <th>Duration</th>
     <th>Interval Unit</th>
+    <th> B/A Meal</th>
     <th>Remove</th>
   </tr>
   </thead>
@@ -41,6 +42,11 @@
     <td><input type='text' [(ngModel)]="row.doseDuration"></td>
     <td><select [(ngModel)]="row.selectedDuration">
       <option *ngFor="let x of row.durationUnit" value="{{x}}">{{x}}</option>
+    </select>
+    <td><select [(ngModel)]="row.meal" value="AFTER">
+    <option value="AFTER">After</option>
+    <option value="BEFORE">Before</option>
+    <option value="NA">NA</option>
     </select>
     <td><button (click)="remove($index)">Remove</button></td>
   </tr>
