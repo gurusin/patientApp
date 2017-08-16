@@ -39,9 +39,17 @@ public class Patient implements Serializable {
     @Column
     private Gender gender;
 
+    @Column
+    private String allergies;
+
+    @Column
+    private String familyHistory;
+
+    @Column
+    private String socialHistory;
 
     @Temporal(TemporalType.DATE)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-mm-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private Date dateOfBirth;
 
     @Column
@@ -69,7 +77,7 @@ public class Patient implements Serializable {
     }
 
     public String getLastname() {
-    
+
         return lastname;
     }
 
@@ -155,5 +163,29 @@ public class Patient implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
+    }
+
+    public String getFamilyHistory() {
+        return familyHistory;
+    }
+
+    public void setFamilyHistory(String familyHistory) {
+        this.familyHistory = familyHistory;
+    }
+
+    public String getSocialHistory() {
+        return socialHistory;
+    }
+
+    public void setSocialHistory(String socialHistory) {
+        this.socialHistory = socialHistory;
     }
 }

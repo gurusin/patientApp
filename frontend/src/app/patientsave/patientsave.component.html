@@ -4,80 +4,125 @@
   </div>
   <h1>Please enter patient details</h1>
   <hr/>
-  <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="patient">
-    <div class="row">
-      <div class="col-md-2">
-        <label for="firstname">First Name : </label>
-      </div>
-      <div class="col-md-8">
-        <input type="text" id="firstname" name="firstname" required [(ngModel)]="patient.firstname"/>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="col-md-2">
-        <label for="middlename">Middle names : </label>
-      </div>
-      <div class="col-md-8">
-        <input type="text" id="middlename" name="middlename" required [(ngModel)]="patient.middlename"/>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="col-md-2">
-        <label for="lastname">Last name : </label>
-      </div>
-      <div class="col-md-8">
-        <input type="text" id="lastname" name="lastname" required [(ngModel)]="patient.lastname"/>
-      </div>
-    </div>
 
-    <br/>
+    <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="patient">
     <div class="row">
-      <div class="col-md-2">
-        <label for="nic">NIC : </label>
-      </div>
-      <div class="col-md-8">
-        <input type="text" id="nic" name="nic" required [(ngModel)]="patient.nic"/>
-      </div>
-    </div>
+      <div class="col-md-5">
 
-    <br/>
-    <div class="row">
-      <div class="col-md-2">
-        <label for="address">Address : </label>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="firstname">First names : </label>
+          </div>
+          <div class="col-md-6">
+            <input type="text" id="firstname" name="firstname" required [(ngModel)]="patient.firstname"/>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="middlename">Middle names : </label>
+          </div>
+          <div class="col-md-6">
+            <input type="text" id="middlename" name="middlename" [(ngModel)]="patient.middlename"/>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+        <div class="col-md-4">
+          <label for="lastname">Last name : </label>
+        </div>
+        <div class="col-md-6">
+          <input type="text" id="lastname" name="middlename" required [(ngModel)]="patient.lastname"/>
+        </div>
       </div>
-      <div class="col-md-8">
-        <input type="text" id="address" name="address" required [(ngModel)]="patient.address"/>
-      </div>
-    </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="lastname">NIC : </label>
+          </div>
+          <div class="col-md-6">
+            <input type="text" id="nic" name="nic"  [(ngModel)]="patient.nic"/>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="address">Address </label>
+          </div>
+          <div class="col-md-6">
+            <input type="text" id="address" name="address"  [(ngModel)]="patient.address"/>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-4">
+            <label >Gender </label>
+          </div>
+          <div class="col-md-6">
+            <select name="gender" [(ngModel)]="patient.gender">
+              <option value="MALE">MALE</option>
+              <option value="FEMALE">FEMALE</option>
+              <option value="UNDEFINED">UNDEFINED</option>
+            </select>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="dateOfBirth">DOB </label>
+          </div>
+          <div class="col-md-6">
+            <input type="date" id="dateOfBirth" name="dateOfBirth" required [(ngModel)]="patient.dateOfBirth"/>
+          </div>
+        </div>
 
-    <br/>
-    <div class="row">
-      <div class="col-md-2">
-        <label>Gender : </label>
       </div>
-      <div class="col-md-8">
-        <select name="gender" [(ngModel)]="patient.gender">
-          <option value="MALE">MALE</option>
-          <option value="FEMALE">FEMALE</option>
-          <option value="UNDEFINED">UNDEFINED</option>
-        </select>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="col-md-2">
-        <label>Date of Birth : </label>
-      </div>
-      <div class="col-md-8">
-          <input type="date" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="patient.dateOfBirth"/>
-      </div>
-    </div>
 
-    <br/>
-    <div class="form-group">
-      <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
+
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+          <label for="socialHistory">Family History : </label>
+        </div>
+        <div class="col-md-8">
+          <textarea class="input" id="familyHistory" name="familyHistory" [(ngModel)]="patient.familyHistory"></textarea>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <label for="socialHistory">Social History : </label>
+          </div>
+          <div class="col-md-8">
+            <textarea class="input" id="socialHistory" name="socialHistory" [(ngModel)]="patient.socialHistory"></textarea>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="allergies">Allergies : </label>
+          </div>
+          <div class="col-md-8">
+            <textarea class="input" id="allergies" name="allergies" [(ngModel)]="patient.allergies"></textarea>
+          </div>
+        </div>
+
+      </div>
+
     </div>
+      <br/>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
+          </div>
+        </div>
+      </div>
+
   </form>
-</div>
+  </div>
+    <div class="cell">
+      <div>
+        <app-prescription-history></app-prescription-history>
+      </div>
+    </div>
