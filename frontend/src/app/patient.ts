@@ -8,7 +8,9 @@ export class Patient {
   gender: string;
   dateOfBirth:string;
   address: string;
-
+  allergies: string;
+  familyHistory: string;
+  socialHistory: string;
   constructor() {
 
   }

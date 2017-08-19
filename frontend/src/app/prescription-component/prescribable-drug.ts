@@ -12,4 +12,5 @@ export class PrescribableDrug {
   selectedStrength:string;
   selectedFrequency:string;
   selectedDuration:string;
+  meal:string;
 }

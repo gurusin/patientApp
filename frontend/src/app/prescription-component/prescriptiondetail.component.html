@@ -1,0 +1,6 @@
+<div>
+{{prescription.symptoms}} , {{prescription.diagnosis}}, {{prescription.notes}}
+</div>
+  <div *ngFor="let obj of prescription.prescriptionDetailDTOS">
+ {{obj.drug.brandName}}{{ obj.strength }} ,{{obj.frequency}}, {{obj.duration}}
+  </div>

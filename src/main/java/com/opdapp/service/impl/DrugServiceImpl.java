@@ -30,8 +30,10 @@ public class DrugServiceImpl implements DrugService {
 
         for (DoseFrequency doseFrequencyObj : doseFrequencies) {
             StringBuilder freStr = new StringBuilder();
-            freStr.append(doseFrequencyObj.getTimeUnit());
-            freStr.append(" times ");
+            if (doseFrequencyObj.getNoofDoses() > 1) {
+                freStr.append(doseFrequencyObj.getNoofDoses());
+                freStr.append(" times ");
+            }
             freStr.append(doseFrequencyObj.getTimeUnit());
             doseFrequency.add(freStr.toString());
         }
@@ -54,8 +56,10 @@ public class DrugServiceImpl implements DrugService {
         List<String> strenghts = new ArrayList<String>();
         for (DrugPackage strength : strengthList) {
             StringBuilder strStr = new StringBuilder();
-            strStr.append(strength.getStrength().getStrengthAmount());
-            strStr.append(" ");
+            if (strength.getStrength().getStrengthAmount() != 0) {
+                strStr.append(strength.getStrength().getStrengthAmount());
+                strStr.append(" ");
+            }
             strStr.append(strength.getStrength().getStrengthUnit().getUnitName());
             strenghts.add(strStr.toString());
         }
@@ -66,7 +70,7 @@ public class DrugServiceImpl implements DrugService {
     }
 
     public List<SearchedDrug> getByBrandName(String brandName) {
-        List<Drug> searchedDrug = drugRepository.findDrugsByBrandNameLike(brandName+"%");
+        List<Drug> searchedDrug = drugRepository.findDrugsByBrandNameLike(brandName + "%");
         //todo search in bse drug and add
         return getSearchedDrug(searchedDrug);
     }

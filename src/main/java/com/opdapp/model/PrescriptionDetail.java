@@ -1,16 +1,14 @@
 package com.opdapp.model;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 /**
  * Created by sudarshana on 13/08/2017.
  */
 @Entity
-@Table
 public class PrescriptionDetail {
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue
     private long Id;
 
@@ -24,9 +22,15 @@ public class PrescriptionDetail {
 
     private String intervalUnit;
 
+    @ManyToOne()
+    @JoinColumn(name = "drugId")
+    private Drug drug;
+
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "prescriptionId", nullable = false)
     private Prescription prescription;
+
+    private Meal meal;
 
     public Prescription getPrescription() {
         return prescription;
@@ -82,5 +86,21 @@ public class PrescriptionDetail {
 
     public void setIntervalUnit(String intervalUnit) {
         this.intervalUnit = intervalUnit;
+    }
+
+    public Drug getDrug() {
+        return drug;
+    }
+
+    public void setDrug(Drug drug) {
+        this.drug = drug;
+    }
+
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public void setMeal(Meal meal) {
+        this.meal = meal;
     }
 }

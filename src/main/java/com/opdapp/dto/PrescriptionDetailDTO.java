@@ -1,21 +1,25 @@
 package com.opdapp.dto;
 
+import com.opdapp.model.Drug;
+import com.opdapp.model.Meal;
+
 /**
  * Created by sudarshana on 13/08/2017.
  */
 public class PrescriptionDetailDTO {
-    private long drugId;
+    private Drug drug;
     private double amount;
     private double duration;
-    private double strength;
-    private double frequency;
+    private String strength;
+    private String frequency;
+    private Meal meal;
 
-    public long getDrugId() {
-        return drugId;
+    public Drug getDrug() {
+        return drug;
     }
 
-    public void setDrugId(long drugId) {
-        this.drugId = drugId;
+    public void setDrug(Drug drug) {
+        this.drug = drug;
     }
 
     public double getAmount() {
@@ -34,19 +38,27 @@ public class PrescriptionDetailDTO {
         this.duration = duration;
     }
 
-    public double getStrength() {
+    public String getStrength() {
         return strength;
     }
 
-    public void setStrength(double strength) {
+    public void setStrength(String strength) {
         this.strength = strength;
     }
 
-    public double getFrequency() {
+    public String getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(double frequency) {
+    public void setFrequency(String frequency) {
         this.frequency = frequency;
+    }
+
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public void setMeal(Meal meal) {
+        this.meal = meal;
     }
 }

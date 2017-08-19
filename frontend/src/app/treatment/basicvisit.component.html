@@ -1,18 +1,29 @@
-<div class="container">
-  <label for="symptoms">Symptoms</label>
-  <input type="text" id="symptoms" [(ngModel)]='patientVisit.symptoms' name="symptoms"
-         placeholder="Symstomes Fever, toothache..">
+<div class="row">
+  <div class="col-md-8">
 
-  <label for="diagnosys">Diagnosys</label>
-  <input type="text" id="diagnosys" [(ngModel)]='patientVisit.diagnoseData' name="diagnosys"
-         placeholder="Suspect Dengue, Viral fever..">
+    <!--The component for DPrescriptionDTOtion -->
+    <app-prescription-component [patientVisit]="patientVisit"></app-prescription-component>
 
-  <label for="notes">Notes</label>
-  <input type="text" id="notes" [(ngModel)]='patientVisit.note' name="notes"
-         placeholder="Dengue antigen Negative..">
 
-  <!--The component for DPrescriptionDTOtion -->
-  <app-prescription-component [patientVisit]="patientVisit"></app-prescription-component>
+      <label for="symptoms">Symptoms</label>
+      <input type="text" id="symptoms" [(ngModel)]='patientVisit.symptoms' name="symptoms"
+             placeholder="Symstomes Fever, toothache..">
+
+      <label for="diagnosys">Diagnosys</label>
+      <input type="text" id="diagnosys" [(ngModel)]='patientVisit.diagnoseData' name="diagnosys"
+             placeholder="Suspect Dengue, Viral fever..">
+
+      <label for="notes">Notes</label>
+      <input type="text" id="notes" [(ngModel)]='patientVisit.note' name="notes"
+             placeholder="Dengue antigen Negative..">
+
+    <br/>
+
+  </div>
+  <div class="col-md-4">
+<!--<app-prescription-history  [patient]="patient"></app-prescription-history>-->
+  </div>
 </div>
+
 
 

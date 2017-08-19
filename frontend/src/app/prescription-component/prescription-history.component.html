@@ -1,7 +1,11 @@
 <div class="container">
   <h1>History</h1>
-  <li *ngFor="let obj of prescriptionList">
-    {{obj.notes}},{{ obj.symptoms }} ,{{obj.diagnosis}}
-  </li>
-</div>
+  <table border="2" width="100%">
 
+    <tr *ngFor="let obj of prescriptionList">
+      <td>
+        <app-prescriptiondetail  [prescription]="obj"></app-prescriptiondetail>
+      </td>
+    </tr>
+  </table>
+</div>

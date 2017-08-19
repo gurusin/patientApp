@@ -25,7 +25,7 @@ export class PatientSearchComponent {
   {
     if (event.keyCode == 13) {
       this.patientService.getByPatNo(this.patNo);
-      this.router.navigate(["patientvisit"]);
+      this.router.navigate(["patientvisit/treatment"]);
     }
   }
 
@@ -44,7 +44,7 @@ export class PatientSearchComponent {
   {
     if (event.keyCode == 13) {
       this.patientService.getByPhoneNo(this.phone);
-      this.router.navigate(["patientvisit"]);
+      this.router.navigate(["patientvisit/treatment"]);
     }
     else if (this.phone.length == 2) {
       this.searchByPhone();

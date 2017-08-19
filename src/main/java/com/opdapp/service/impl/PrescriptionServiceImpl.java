@@ -39,7 +39,21 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             dto.setNotes(obj.getNotes());
             dto.setSymptoms(obj.getSymptoms());
             dto.setDiagnosis(obj.getDiagnosis());
+            dto.setPrescriptionDate(obj.getDate());
+
+            final List<PrescriptionDetailDTO> prescriptionDetailDTOS = new ArrayList<PrescriptionDetailDTO>();
+            for (PrescriptionDetail prescriptionDetail : obj.getPrescriptionDetails()) {
+                final PrescriptionDetailDTO prescriptionDetailDTO = new PrescriptionDetailDTO();
+                prescriptionDetailDTO.setAmount(prescriptionDetail.getAmount());
+                prescriptionDetailDTO.setDrug(prescriptionDetail.getDrug());
+                prescriptionDetailDTO.setDuration(prescriptionDetail.getDuration());
+                prescriptionDetailDTO.setFrequency(prescriptionDetail.getFrequency());
+                prescriptionDetailDTO.setStrength(prescriptionDetail.getStrength());
+                prescriptionDetailDTOS.add(prescriptionDetailDTO);
+            }
+            dto.setPrescriptionDetailDTOS(prescriptionDetailDTOS);
             dtoList.add(dto);
+
         }
         return dtoList;
     }

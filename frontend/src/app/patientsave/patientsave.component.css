@@ -1,0 +1,23 @@
+.input{
+  width:500px;
+  height:50px;
+}
+
+.inputsmall{
+  width:200px;
+  height:30px;
+}
+
+.table {
+  display:table;
+  width:100%;
+  border: dotted;
+  border-color: #2b669a;
+}
+
+.cell {
+  display:table-cell;
+  width:30%;
+  height:50px;
+  vertical-align:middle;
+}
