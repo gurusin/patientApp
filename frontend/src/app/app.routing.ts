@@ -7,6 +7,7 @@ import {PatientVisitComponent} from "./treatment/patient-visit.component";
 import {PatientSearchComponent} from "./patient-component/patient-search.component";
 import {BasicvisitComponent} from "./treatment/basicvisit.component";
 import {PrescriptionHistoryComponent} from "./prescription-component/prescription-history.component";
+import {PrintreceiptComponent} from "./prescription-component/printreceipt.component";
 
 const APP_ROUTES: Routes = [
   {path:'',component:PatientSearchComponent},
@@ -15,7 +16,8 @@ const APP_ROUTES: Routes = [
   {path: 'patientvisit', component: PatientVisitComponent, children:[
     {path:'treatment', component:BasicvisitComponent},
     {path:'treatmentHistory',component:PrescriptionHistoryComponent}
-  ]}
+  ]},
+  {path:'printReceipt',component:PrintreceiptComponent}
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)
