@@ -40,6 +40,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             dto.setSymptoms(obj.getSymptoms());
             dto.setDiagnosis(obj.getDiagnosis());
             dto.setPrescriptionDate(obj.getDate());
+            dto.setPrescriptionDate(obj.getDate());
 
             final List<PrescriptionDetailDTO> prescriptionDetailDTOS = new ArrayList<PrescriptionDetailDTO>();
             for (PrescriptionDetail prescriptionDetail : obj.getPrescriptionDetails()) {
@@ -49,6 +50,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 prescriptionDetailDTO.setDuration(prescriptionDetail.getDuration());
                 prescriptionDetailDTO.setFrequency(prescriptionDetail.getFrequency());
                 prescriptionDetailDTO.setStrength(prescriptionDetail.getStrength());
+                prescriptionDetailDTO.setIntervalUnit(prescriptionDetail.getIntervalUnit());
+                prescriptionDetailDTO.setMeal(prescriptionDetail.getMeal());
                 prescriptionDetailDTOS.add(prescriptionDetailDTO);
             }
             dto.setPrescriptionDetailDTOS(prescriptionDetailDTOS);
