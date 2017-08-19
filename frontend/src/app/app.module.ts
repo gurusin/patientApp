@@ -21,6 +21,7 @@ import { PrescriptionComponentComponent } from './prescription-component/prescri
 import {DrugServiceService} from "app/drug-service.service";
 import { PrescriptionHistoryComponent } from './prescription-component/prescription-history.component';
 import { PrescriptiondetailComponent } from './prescription-component/prescriptiondetail.component';
+import { PrintreceiptComponent } from './prescription-component/printreceipt.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { PrescriptiondetailComponent } from './prescription-component/prescripti
     PrescriptionComponentComponent,
     PrescriptionHistoryComponent,
     PrescriptiondetailComponent,
-    NavbarComponent
+    NavbarComponent,
+    PrintreceiptComponent
   ],
   imports: [
     BrowserModule,
