@@ -1,6 +1,6 @@
 <div>
-{{prescription.symptoms}} , {{prescription.diagnosis}}, {{prescription.notes}}
+{{prescription.symptoms}} , {{prescription.diagnosis}}, {{prescription.notes}}, {{prescription.date   }}
 </div>
   <div *ngFor="let obj of prescription.prescriptionDetailDTOS">
- {{obj.drug.brandName}}{{ obj.strength }} ,{{obj.frequency}}, {{obj.duration}}
+ {{obj.drug.brandName}}   {{ obj.strength }} ,{{obj.frequency}} for , {{obj.duration}} {{obj.intervalUnit}},  {{obj.meal}} meals
   </div>

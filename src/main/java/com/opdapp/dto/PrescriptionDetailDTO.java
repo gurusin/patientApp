@@ -13,6 +13,7 @@ public class PrescriptionDetailDTO {
     private String strength;
     private String frequency;
     private Meal meal;
+    private String intervalUnit;
 
     public Drug getDrug() {
         return drug;
@@ -60,5 +61,13 @@ public class PrescriptionDetailDTO {
 
     public void setMeal(Meal meal) {
         this.meal = meal;
+    }
+
+    public String getIntervalUnit() {
+        return intervalUnit;
+    }
+
+    public void setIntervalUnit(String intervalUnit) {
+        this.intervalUnit = intervalUnit;
     }
 }
