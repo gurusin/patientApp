@@ -22,6 +22,7 @@ import {DrugServiceService} from "app/drug-service.service";
 import { PrescriptionHistoryComponent } from './prescription-component/prescription-history.component';
 import { PrescriptiondetailComponent } from './prescription-component/prescriptiondetail.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
