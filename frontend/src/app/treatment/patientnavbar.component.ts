@@ -18,6 +18,7 @@ export class PatientnavbarComponent implements OnInit
   }
 
   ngOnInit(): void {
+
   }
 
   onEditPatient()
