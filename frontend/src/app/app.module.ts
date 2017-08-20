@@ -24,6 +24,7 @@ import { PrescriptiondetailComponent } from './prescription-component/prescripti
 import { PrintreceiptComponent } from './prescription-component/printreceipt.component';
 import { PatientadminComponent } from './patient-component/patientadmin.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

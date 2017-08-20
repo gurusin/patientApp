@@ -11,6 +11,8 @@ import {Observable} from "rxjs/Observable";
 import {Patient} from "../patient";
 import {PatientServiceService} from "../patient-service.service";
 import {Router} from "@angular/router";
+import {concatStatic} from "rxjs/operator/concat";
+import {PrescriptionDrugRowComponent} from "./prescription-drug-row.component";
 
 @Component({
   selector: 'app-prescription-component',
@@ -20,90 +22,61 @@ import {Router} from "@angular/router";
 export class PrescriptionComponentComponent implements OnInit {
 
   @Input() patientVisit: Patientvisit;
-  drugList: DrugSearchResult[];
-  drugName: '';
-  selectedId: number;
-  prescribableDrug=[];
+  selectedId:any;
 
   constructor(private drugService: DrugServiceService,
               private patientService:PatientServiceService,
               private router:Router) {
-    this.prescribableDrug = [];
   }
 
   ngOnInit() {
+    var obj = new PrescribableDrug();
+    this.patientVisit.prescribableDrug.push(obj);
   }
 
-  setDrugId() {
-    this.drugList.forEach((obj: DrugSearchResult) => {
-        if (obj.brandName === this.drugName) {
+  doSearch(drugName:string,row:PrescribableDrug) {
+    this.drugService.searchDrug(drugName).subscribe(
+      data => {
+        row.drugList = data;
+      }
+    );
+  }
+
+  addDrug()
+  {
+    this.patientVisit.prescribableDrug.push(new PrescribableDrug());
+  }
+
+  private searchPrescribable(row:PrescribableDrug,i:number) {
+    this.drugService.searchPrescribable(this.selectedId).subscribe(
+      data => {
+        this.patientVisit.prescribableDrug.splice(i,1,data);
+      });
+  }
+
+  setDrugId(pres:PrescribableDrug) {
+    pres.drugList.forEach((obj: DrugSearchResult) => {
+        if (obj.brandName === pres.drug.brandName) {
           this.selectedId = obj.drugId;
+          return;
         }
       }
     );
   }
 
-  searchDrug(event: any) {
+  searchDrug(event: any, row:PrescribableDrug,i:number) {
+    var drugName = row.drug.brandName;
     if (event.keyCode == 13) {
       // Search for prescibable
-      this.setDrugId();
-      this.searchPrescribable();
-    } else if (this.drugName.length == 2) {
+      this.setDrugId(row);
+      this.searchPrescribable(row,i);
+    } else if (drugName.length == 2) {
       // Search for drug
-      this.doSearch();
-    } else if (this.drugName.length == 1) {
+      this.doSearch(drugName,row);
+    } else if (drugName.length == 1) {
       //clear search
-      this.drugList = [];
+      row.drugList = [];
     }
-  }
-
-  doSearch() {
-    this.drugService.searchDrug(this.drugName).subscribe(
-      data => {
-        this.drugList = data;
-      }
-    );
-  }
-
-  private searchPrescribable() {
-    this.drugService.searchPrescribable(this.selectedId).subscribe(
-      data => {
-        this.prescribableDrug.push(data);
-        console.log(this.prescribableDrug);
-      });
-  }
-
-  remove(index)
-  {
-    this.prescribableDrug.splice(index,1);
-  }
-  onSave()
-  {
-    var presc = new Prescription();
-    presc.prescriptionDetails=[];
-    presc.patientId = this.patientService.patientObject.patientId;
-    presc.diagnosis = this.patientVisit.diagnoseData;
-    presc.notes = this.patientVisit.note;
-    presc.symptoms = this.patientVisit.symptoms;
-
-    var details =[];
-    this.prescribableDrug.forEach((obj: PrescribableDrug) => {
-        var detail = new PrescriptionDetail();
-        detail.drugId =obj.drug.drugId;
-        detail.drug.drugId =obj.drug.drugId;
-        detail.amount =obj.doseAmount;
-        detail.duration =obj.doseDuration;
-        detail.strength =obj.selectedStrength;
-        detail.frequency=obj.selectedFrequency;
-        detail.intervalUnit = obj.selectedDuration;
-        detail.meal = obj.meal;
-       details.push(detail);
-      }
-    );
-    presc.prescriptionDetails =details;
-    this.drugService.savePrescription(presc);
-    this.router.navigate(['patientvisit/treatmentHistory']);
-
   }
 }
 
@@ -130,7 +103,6 @@ export class PrescriptionDetail
 
   constructor() {
     this.drug = new Drug();
-
   }
 }
 

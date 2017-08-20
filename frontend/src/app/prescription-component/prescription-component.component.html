@@ -1,20 +1,6 @@
-<div class="row">
-  <div class="col-md-1">
-    <label for="drug">Drug</label>
-  </div>
-  <div class="col-md-2">
-    <input type="text" list='drugList' id="drug" name="drug" placeholder="Drug to search"
-           (keyup)="searchDrug($event)" [(ngModel)]="drugName">
-    <datalist id="drugList">
-      <option *ngFor="let drug of drugList" value="{{drug.brandName}}">{{drug.brandName}}</option>
-    </datalist>
-  </div>
-</div>
-
 <h2> Drug Details (Prescribed) </h2>
 <br/>
 <table class="table table-striped">
-  <thead>
   <tr>
     <th>Drug</th>
     <th>Strength</th>
@@ -23,14 +9,19 @@
     <th>Duration</th>
     <th>Interval Unit</th>
     <th> B/A Meal</th>
+    <th> Add</th>
     <th>Remove</th>
   </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let row of prescribableDrug">
-    <td>{{row.drug.brandName}}</td>
+  <tr *ngFor="let row of patientVisit.prescribableDrug;let i=index">
+    <td>
+      <input type="text" [attr.list]='i' id="drug" name="drug" placeholder="Drug to search"
+             (keyup)="searchDrug($event,row,i)" [(ngModel)]="row.drug.brandName" size="6">
+      <datalist [id]="i">
+        <option *ngFor="let drug of row.drugList" value="{{drug.brandName}}">{{drug.brandName}}</option>
+      </datalist>
+    </td>
     <td><select [(ngModel)]="row.selectedStrength">
-        <option *ngFor="let x of row.strengths" value="{{x}}">{{x}}</option>
+      <option *ngFor="let x of row.strengths" value="{{x}}">{{x}}</option>
     </select>
     </td>
 
@@ -38,22 +29,28 @@
       <option *ngFor="let x of row.doseFrequency" value="{{x}}">{{x}}</option>
     </select>
     </td>
-    <td><input type='text' [(ngModel)]="row.doseAmount"></td>
-    <td><input type='text' [(ngModel)]="row.doseDuration"></td>
+    <td><input type='text' [(ngModel)]="row.doseAmount" size="3"></td>
+    <td><input type='text' [(ngModel)]="row.doseDuration" size="3"></td>
     <td><select [(ngModel)]="row.selectedDuration">
       <option *ngFor="let x of row.durationUnit" value="{{x}}">{{x}}</option>
     </select>
+    </td>
     <td><select [(ngModel)]="row.meal" value="AFTER">
-    <option value="AFTER">After</option>
-    <option value="BEFORE">Before</option>
-    <option value="NA">NA</option>
+      <option value="AFTER">After</option>
+      <option value="BEFORE">Before</option>
+      <option value="NA">NA</option>
     </select>
-    <td><button (click)="remove($index)">Remove</button></td>
+    </td>
+    <td>
+      <button (click)="addDrug()" class="btn btn-primary">Add</button>
+    </td>
+    <td>
+      <button class="btn btn-danger">Remove</button>
+    </td>
   </tr>
-  </tbody>
-  <br/>
-  <button class="btn-primary" (click)="onSave()">Save Prescription</button>
 </table>
+
+
 
 
 
