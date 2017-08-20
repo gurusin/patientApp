@@ -12,7 +12,6 @@ import {Patient} from "../patient";
 import {PatientServiceService} from "../patient-service.service";
 import {Router} from "@angular/router";
 import {concatStatic} from "rxjs/operator/concat";
-import {PrescriptionDrugRowComponent} from "./prescription-drug-row.component";
 
 @Component({
   selector: 'app-prescription-component',
