@@ -79,4 +79,9 @@ export class PatientServiceService {
     this.patientObject.patientId=0;
     this.patient = new Subject<Patient>();
   }
+
+  loadPatients():Observable<any[]>
+  {
+    return this.http.get(this.rootUrl+"loadPatients").map((res:Response) =>res.json())
+  }
 }

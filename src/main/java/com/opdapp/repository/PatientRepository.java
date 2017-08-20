@@ -21,5 +21,5 @@ public interface PatientRepository extends CrudRepository<Patient,Long>
 
     List<Patient> findByPhone(final String phone);
 
-
+    List<Patient> findAll();
 }

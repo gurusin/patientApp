@@ -73,6 +73,11 @@ Insert into medsys.patient (date_of_birth,firstname,lastname,gender,nic,phone) v
 Insert into medsys.patient (date_of_birth,firstname,lastname,gender,nic,phone) values('1980-01-28','Sudath','Silva',2,'786525865V','0715863854');
 Insert into medsys.patient (date_of_birth,firstname,lastname,gender,nic,phone) values('2001-05-26','Kumara','Jayasiri',2,'015874563V','0769845762');
 
+Insert into medsys.patient (date_of_birth,firstname,lastname,gender,nic,phone) values('1978-05-26','Ishan','Ranawaka',1,'788962531V','0777239473');
+Insert into medsys.patient (date_of_birth,firstname,lastname,gender,nic,phone) values('1975-08-20','Senal','Dikkumbura',1,'7504856V','0776234738');
+Insert into medsys.patient (date_of_birth,firstname,lastname,gender,nic,phone) values('1980-10-28','Imal','Gajaba',2,'80837456V','0716345234');
+Insert into medsys.patient (date_of_birth,firstname,lastname,gender,nic,phone) values('2000-05-26','Susil','Kumar',2,'0023945V','0721834567');
+
 Insert into medsys.strength (unit_id,strength_amount) values(1,100);
 Insert into medsys.strength (unit_id,strength_amount) values(1,200);
 Insert into medsys.strength (unit_id,strength_amount) values(1,300);
