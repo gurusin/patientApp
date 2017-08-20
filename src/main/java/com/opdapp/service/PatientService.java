@@ -20,4 +20,6 @@ public interface PatientService
     List<Patient> findByPhoneNoLike(String s);
 
     Patient getByPhoneNo(String phoneNo);
+
+    List<Patient> loadPatients();
 }

@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Patient Details </h1>
+  <div >
+
+  </div>
+  <div class="scrollit">
+  <table border="2" width="100%" class="table table-hover">
+    <tr><th>Id</th><th>Name</th><th>Address</th><th>DOB</th><th>DOB</th><th>Phone</th><th>NIC</th><th>Family history</th><th>Social history</th><th>Allergies</th><th>Remarks</th><th></th><th></th></tr>
+
+    <tr *ngFor="let obj of patientList; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+      <td>{{obj.patientId}}</td>
+      <td>
+        {{obj.firstname}} {{obj.middlename}} {{obj.lastname}}
+      </td>
+      <td>{{obj.address}}</td>
+      <td>{{obj.gender}}</td>
+      <td>{{obj.dateOfBirth}}</td>
+      <td>{{obj.phone}}</td>
+      <td>{{obj.nic}}</td>
+      <td>{{obj.familyHistory}}</td>
+      <td>{{obj.socialHistory}}</td>
+      <td>{{obj.allergies}}</td>
+      <td>{{obj.remarks}}</td>
+      <td>Edit Button</td>
+      <td>Delete Button</td>
+    </tr>
+  </table>
+  </div>
+</div>
+
+<div class="well well-lg">
+  Selected Row : <strong>{{selectedRow}}</strong>
+</div>

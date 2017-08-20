@@ -54,4 +54,9 @@ public class PatientServiceImpl implements PatientService {
         }
         return null;
     }
+
+    @Override
+    public List<Patient> loadPatients() {
+        return patientRepository.findAll();
+    }
 }
