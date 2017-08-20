@@ -14,12 +14,13 @@ export class PatientadminComponent implements OnInit {
 
   patientList = [];
 
-  constructor(private patientService: PatientServiceService, private router: Router) {
-    this.setClickedRow = function (index) {
-      this.selectedRow = index;
-      this.patientService.patientObject = this.patientList[index];
-    }
+  constructor(private patientService: PatientServiceService, private router: Router){
+  }
 
+  goToEditView(index)
+  {
+    this.patientService.patientObject = this.patientList[index];
+    this.router.navigate(["/patientsave"]);
   }
 
   ngOnInit() {

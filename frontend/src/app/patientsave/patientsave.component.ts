@@ -33,6 +33,6 @@ export class PatientsaveComponent implements OnInit{
 
   onSubmit() {
     this.patientService.savePatient(this.patient)
-    this.router.navigate(['patientvisit'])
+    this.router.navigate(['patientvisit/treatment'])
   }
 }
