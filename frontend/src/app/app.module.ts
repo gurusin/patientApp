@@ -23,7 +23,8 @@ import { PrescriptionHistoryComponent } from './prescription-component/prescript
 import { PrescriptiondetailComponent } from './prescription-component/prescriptiondetail.component';
 import { PrintreceiptComponent } from './prescription-component/printreceipt.component';
 import { PatientadminComponent } from './patient-component/patientadmin.component';
-
+import {PopupModule} from "ng2-opd-popup";
+import { PrintpopComponent } from './treatment/printpop.component';
 
 @NgModule({
   declarations: [
@@ -45,12 +46,13 @@ import { PatientadminComponent } from './patient-component/patientadmin.componen
     NavbarComponent,
     PrintreceiptComponent,
     PatientadminComponent,
-    PatientadminComponent
+    PatientadminComponent,
+    PrintpopComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule, routing
+    HttpModule, routing, PopupModule.forRoot(),
   ],
   providers: [PatientServiceService,DrugServiceService],
   bootstrap: [AppComponent]

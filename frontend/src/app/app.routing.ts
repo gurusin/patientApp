@@ -9,6 +9,7 @@ import {BasicvisitComponent} from "./treatment/basicvisit.component";
 import {PrescriptionHistoryComponent} from "./prescription-component/prescription-history.component";
 import {PrintreceiptComponent} from "./prescription-component/printreceipt.component";
 import {PatientadminComponent} from "./patient-component/patientadmin.component";
+import {PrintpopComponent} from "./treatment/printpop.component";
 
 const APP_ROUTES: Routes = [
   {path:'',component:PatientSearchComponent},
@@ -19,7 +20,8 @@ const APP_ROUTES: Routes = [
     {path:'treatmentHistory',component:PrescriptionHistoryComponent}
   ]},
   {path:'printReceipt',component:PrintreceiptComponent},
-  {path:'patientAdmin',component:PatientadminComponent}
+  {path:'patientAdmin',component:PatientadminComponent},
+  {path: 'printpop', component: PrintpopComponent}
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)
