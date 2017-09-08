@@ -7,9 +7,11 @@
         <tr>
           <th width="10">Drug package Id</th>
           <th width="50%">Base Drug Name</th>
-          <th width="40%">Drug Name</th>
+          <th width="35%">Drug Name</th>
           <th width="10%"> Strength</th>
-          <th width="10%"> Quantity</th>
+          <th width="5%"> Quantity</th>
+          <th width="5%"> Min Order Level</th>
+          <th width="5%"> Unit Price</th>
         </tr>
 
         <tr *ngFor="let obj of drugPackageList; let i = index" (click)="setClickedDrugPackageRow(i)"
@@ -26,6 +28,12 @@
           </td>
           <td>
             {{obj.quantity}}
+          </td>
+          <td>
+            {{obj.minOrderLevel}}
+          </td>
+          <td>
+            {{obj.unitPrice}}
           </td>
         </tr>
 
@@ -72,6 +80,26 @@
           </td>
           <td>
             <input type="text" id="quanitity" name="quanitity" required [(ngModel)]="drugPackage.quantity"/>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label> Min Order Level : </label>
+          </td>
+          <td>
+            <input type="text" id="minOrderLevel" name="minOrderLevel" required [(ngModel)]="drugPackage.minOrderLevel"/>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label> Unit Price : </label>
+          </td>
+          <td>
+            <input type="text" id="unitPrice" name="unitPrice" required [(ngModel)]="drugPackage.unitPrice"/>
           </td>
           <td></td>
         </tr>

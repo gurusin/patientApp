@@ -14,4 +14,8 @@ export class DrugPackage {
   strength: Strength;
 
   quantity: number;
+
+  minOrderLevel: number;
+
+  unitPrice: number;
 }

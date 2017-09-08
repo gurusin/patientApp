@@ -31,22 +31,28 @@ public class DrugServiceImpl implements DrugService {
     @Autowired
     private BaseDrugRepository baseDrugRepository;
 
+    @Autowired
+    private UnitOfMeasureRepository unitOfMeasureRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
+
     public PrescribableDrug getByDrugId(long drugId) {
         PrescribableDrug prescribableDrug = new PrescribableDrug();
         List<DoseFrequency> doseFrequencies = frequencyRepository.findAll();
-        List<String> doseFrequency = new ArrayList<String>();
+//        List<String> doseFrequency = new ArrayList<String>();
 
-        for (DoseFrequency doseFrequencyObj : doseFrequencies) {
-            StringBuilder freStr = new StringBuilder();
-            if (doseFrequencyObj.getNoofDoses() > 1) {
-                freStr.append(doseFrequencyObj.getNoofDoses());
-                freStr.append(" times ");
-            }
-            freStr.append(doseFrequencyObj.getTimeUnit());
-            doseFrequency.add(freStr.toString());
-        }
+//        for (DoseFrequency doseFrequencyObj : doseFrequencies) {
+//            StringBuilder freStr = new StringBuilder();
+//            if (doseFrequencyObj.getNoofDoses() > 1) {
+//                freStr.append(doseFrequencyObj.getNoofDoses());
+//                freStr.append(" times ");
+//            }
+//            freStr.append(doseFrequencyObj.getTimeUnit());
+//            doseFrequency.add(freStr.toString());
+//        }
 
-        prescribableDrug.setDoseFrequency(doseFrequency);
+        prescribableDrug.setDoseFrequency(doseFrequencies);
 
         List<String> durationunit = new ArrayList<String>();
         durationunit.add("Days");
@@ -179,6 +185,8 @@ public class DrugServiceImpl implements DrugService {
         drugPackageDTO.setStrength(getStrengthDTO(drugPackage.getStrength()));
         drugPackageDTO.setDrugPackageId(drugPackage.getDrugPackageId());
         drugPackageDTO.setQuantity(drugPackage.getQuantity());
+        drugPackageDTO.setMinOrderLevel(drugPackage.getMinOrderLevel());
+        drugPackageDTO.setUnitPrice(drugPackage.getUnitPrice());
         return drugPackageDTO;
     }
 
@@ -213,6 +221,7 @@ public class DrugServiceImpl implements DrugService {
     public DrugPackageDTO saveDrugPackage(final DrugPackageDTO drugPackageDTO) {
         DrugPackage drugPackage = getDrugPackage(drugPackageDTO);
         DrugPackage savedDrugPackage = drugPackageRepository.save(drugPackage);
+        saveItem(savedDrugPackage);
         return getDrugPackageDTO(savedDrugPackage);
     }
 
@@ -222,6 +231,8 @@ public class DrugServiceImpl implements DrugService {
         drugPackage.setDrugPackageId(drugPackageDTO.getDrugPackageId());
         drugPackage.setQuantity(drugPackageDTO.getQuantity());
         drugPackage.setStrength(getStrength(drugPackageDTO.getStrength()));
+        drugPackage.setMinOrderLevel(drugPackageDTO.getMinOrderLevel());
+        drugPackage.setUnitPrice(drugPackageDTO.getUnitPrice());
         return drugPackage;
     }
 
@@ -233,5 +244,39 @@ public class DrugServiceImpl implements DrugService {
         strengthUnit.setUnitId(strengthDTO.getStrengthId());
         strengthUnit.setUnitName(strengthDTO.getUnitName());
         return strength;
+    }
+
+    private void saveItem(final DrugPackage drugPackage) {
+        Item item = new Item();
+
+        item.setItemDescription(getItemDescription(drugPackage));
+        item.setMinOrderLevel(drugPackage.getMinOrderLevel());
+        ProductType productType = new ProductType();
+        productType.setItemTypeId(1);
+        item.setProductType(productType);
+        item.setQuantity(drugPackage.getQuantity());
+        item.setUnitPrice(drugPackage.getUnitPrice());
+        String strength = getUOM(drugPackage);
+        UnitOfMeasure uom = unitOfMeasureRepository.getUnitOfMeasuresByUnitOfMeasureLike(strength);
+        if (uom == null) {
+            uom = new UnitOfMeasure();
+            uom.setUnitOfMeasure(strength);
+            uom = unitOfMeasureRepository.save(uom);
+        }
+        item.setUnitOfMeasure(uom);
+        itemRepository.save(item);
+    }
+
+    private String getItemDescription(DrugPackage drugPackage) {
+        Drug drug = drugRepository.findOne(drugPackage.getDrug().getDrugId());
+        BaseDrug basedrug = baseDrugRepository.findOne(drug.getBaseDrug().getBaseDrugId());
+        String itemDescription = drug.getBrandName() + "(" + basedrug.getBaseDrugName() + ")";
+        return itemDescription;
+    }
+
+    private String getUOM(DrugPackage drugPackage) {
+        Strength strengtho = strengthRepository.findOne(drugPackage.getStrength().getStrengthId());
+        String uom = strengtho.getStrengthUnit().getUnitName() + " " + strengtho.getStrengthAmount();
+        return uom;
     }
 }

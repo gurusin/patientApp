@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Goods Receiving</h1>
+  <div class="row">
+    <div class="col-lg-2">
+      <label>PO Number</label>
+    </div>
+    <div class="col-lg-2">
+      <input type="text" (keyup)="loadPo($event,po.value)" #po/>
+    </div>
+  </div>
+  <table class="table table-responsive">
+    <thead>
+       <tr>
+         <td>Item</td>
+         <td>Ordered Qty.</td>
+         <td>Balance Qty.</td>
+         <td>Received Qty.</td>
+       </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let x of poDetail.details" >
+      <td>{{x.itemName}}</td>
+      <td>{{x.orderedQty}}</td>
+      <td>{{x.balanceQty}}</td>
+      <td><input type="text" [(ngModel)]='x.receivedQty'></td>
+    </tr>
+    </tbody>
+  </table>
+  <div>
+    <button type="button" class="button btn-primary" (click)="onSave()">Save</button>
+    <button type="button" class="button btn-primary" (click)="onCancel()">Cancel</button>
+  </div>
+</div>

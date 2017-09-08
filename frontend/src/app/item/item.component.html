@@ -1,0 +1,103 @@
+<div class="container">
+  <header>
+    <h2>Product details</h2>
+  </header>
+  <nav>
+    <table border="2" width="100%" class="table table-hover">
+      <tr>
+        <th width="10%">Id</th>
+        <th width="20%">Description</th>
+        <th width="20%">Type</th>
+        <th width="10%">Unit Of measure</th>
+        <th width="10%">Minimum order level</th>
+        <th width="20%">Quantity</th>
+        <th width="10%">Unit price</th>
+      </tr>
+
+      <tr *ngFor="let obj of itemproductList; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+        <td>{{obj.itemId}}</td>
+        <td>
+          {{obj.itemDescription}}
+        </td>
+        <td>{{obj.productType.itemtype}}</td>
+        <td>{{obj.unitOfMeasure.unitOfMeasure}}</td>
+        <td>{{obj.minOrderLevel}}</td>
+        <td>{{obj.quantity}}</td>
+        <td>{{obj.unitPrice}}</td>
+      </tr>
+    </table>
+  </nav>
+
+  <article>
+    <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="itemproduct">
+      <h3> Edit Item details </h3>
+      <table width="100%">
+        <tr>
+          <th width="30%"></th>
+          <th width="100%"></th>
+          <th width="1%"> </th>
+        </tr>
+        <tr>
+          <td>
+            <label for="itemDescription">Description : </label>
+          </td>
+          <td><input type="text" id="itemDescription" name="itemDescription" required [(ngModel)]="itemproduct.itemDescription"/>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label>Item Type : </label>
+          </td>
+          <td>
+            <select name="productType" [(ngModel)]="itemproduct.productType.itemTypeId">
+              <option *ngFor="let productType of itemTypeList" [value]="productType.itemTypeId">{{productType.itemtype}}</option>
+            </select>
+            </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            <label>Unit of Measure : </label>
+          </td>
+          <td>
+            <select name="unitOfMeasure" [(ngModel)]="itemproduct.unitOfMeasure.unitOfMeasureId">
+              <option *ngFor="let unitOfMeasure of unitOfMeasureList" [value]="unitOfMeasure.unitOfMeasureId">{{unitOfMeasure.unitOfMeasure}}</option>
+            </select>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="minOrderLevel">Minimum Order level : </label>
+          </td>
+          <td><input type="text" id="minOrderLevel" name="minOrderLevel"  [(ngModel)]="itemproduct.minOrderLevel"/>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="minOrderLevel">Item Price : </label>
+          </td>
+          <td><input type="text" id="unitPrice" name="unitPrice"  [(ngModel)]="itemproduct.unitPrice"/>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
+          </td>
+          <td><button class="btn-primary" (click)="cancelEdit()">Cancel</button>
+          </td>
+          <td></td>
+        </tr>
+
+      </table>
+    </form>
+
+  </article>
+
+</div>

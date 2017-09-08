@@ -1,0 +1,101 @@
+<div class="container">
+  <header>
+    <h2>Supplier details</h2>
+  </header>
+  <nav>
+    <table border="2" width="100%" class="table table-hover">
+      <tr>
+        <th width="10%">Id</th>
+        <th width="20%">Name</th>
+        <th width="30%">Address</th>
+        <th width="10%">Phone</th>
+        <th width="10%">Fax</th>
+        <th width="20%">Notes</th>
+      </tr>
+
+      <tr *ngFor="let obj of supplierList; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+        <td>{{obj.supplierId}}</td>
+        <td>
+          {{obj.supplierName}}
+        </td>
+        <td>{{obj.supplierAddress}}</td>
+        <td>{{obj.supplierPhone}}</td>
+        <td>{{obj.supplierFax}}</td>
+        <td>{{obj.notes}}</td>
+      </tr>
+    </table>
+  </nav>
+
+  <article>
+    {{selectedSupplierName}}
+    <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="itemSupplier">
+      <h3> Edit supplier details </h3>
+      <table width="100%">
+        <tr>
+          <th width="30%"></th>
+          <th width="100%"></th>
+          <th width="1%"> </th>
+        </tr>
+        <tr>
+          <td>
+            <label for="supplierName">Names : </label>
+          </td>
+          <td><input type="text" id="supplierName" name="supplierName" required [(ngModel)]="itemSupplier.supplierName"/>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="supplierAddress">Address : </label>
+          </td>
+          <td><input type="text" id="supplierAddress" name="supplierAddress" [(ngModel)]="itemSupplier.supplierAddress"/>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="supplierPhone">Phone : </label>
+          </td>
+          <td><input type="text" id="supplierPhone" name="supplierPhone" required [(ngModel)]="itemSupplier.supplierPhone"/>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="supplierFax">Fax : </label>
+          </td>
+          <td><input type="text" id="supplierFax" name="supplierFax"  [(ngModel)]="itemSupplier.supplierFax"/>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="notes">Note : </label>
+          </td>
+          <td><input type="text" id="notes" name="notes"  [(ngModel)]="itemSupplier.notes"/>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
+          </td>
+          <td><button class="btn-primary" (click)="cancelEdit()">Cancel</button>
+          </td>
+          <td></td>
+        </tr>
+
+
+      </table>
+    </form>
+
+  </article>
+
+
+
+</div>

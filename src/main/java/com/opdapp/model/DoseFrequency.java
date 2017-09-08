@@ -14,7 +14,6 @@ public class DoseFrequency {
     private String timeUnit;
     private int noofDoses;
 
-
     public int getDoseFrequencyId() {
         return doseFrequencyId;
     }

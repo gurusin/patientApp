@@ -13,6 +13,13 @@ import {PrintpopComponent} from "./treatment/printpop.component";
 import {DrugAdminComponent} from "./drugcomponent/drug-admin/drug-admin.component";
 import {BasedrugadminComponent} from "./drugcomponent/drug-admin/basedrugadmin.component";
 import {DrugpackageadminComponent} from "./drugcomponent/drug-admin/drugpackageadmin.component";
+import {PurchseorderComponent} from "./purchseorder/purchseorder.component";
+import {ItemComponent} from "./item/item.component";
+import {ReportComponent} from "./report/report.component";
+import {IssueComponent} from "./issue/issue.component";
+import {SupplierComponent} from "./supplier/supplier.component";
+import {ItemtypeComponent} from "./item/itemtype.component";
+import {GrnComponent} from "./grn/grn.component";
 
 const APP_ROUTES: Routes = [
   {path: '', component: PatientSearchComponent},
@@ -29,7 +36,15 @@ const APP_ROUTES: Routes = [
   {path: 'printpop', component: PrintpopComponent},
   {path: 'drugAdmin', component: DrugAdminComponent},
   {path: 'baseDrugAdmin', component: BasedrugadminComponent},
-  {path: 'drugPackageAdmin', component: DrugpackageadminComponent}
+  {path: 'drugPackageAdmin', component: DrugpackageadminComponent},
+  {path:'po',component:PurchseorderComponent},
+  {path: 'item', component: ItemComponent },
+  {path: 'issue', component: IssueComponent},
+  {path: 'report', component: ReportComponent},
+  {path: 'supplier', component: SupplierComponent},
+  {path: 'itemtype', component: ItemtypeComponent},
+  {path:'grn',component:GrnComponent},
+  {path:'po',component:PurchseorderComponent}
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)

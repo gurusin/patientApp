@@ -29,6 +29,19 @@ import { DrugAdminComponent } from './drugcomponent/drug-admin/drug-admin.compon
 import { BasedrugadminComponent } from './drugcomponent/drug-admin/basedrugadmin.component';
 import { DrugpackageadminComponent } from './drugcomponent/drug-admin/drugpackageadmin.component';
 import {DropdownModule} from "ngx-dropdown";
+import {AdminService} from "./admin.service";
+import {ItemServiceService} from "./services/item-service.service";
+import {POServiceService} from "./services/poservice.service";
+import {ItemSupplierService} from "./itemsupplier.service";
+import {ItemProductService} from "./itemProduct.service";
+import {ReportComponent} from "./report/report.component";
+import {IssueComponent} from "./issue/issue.component";
+import {PurchseorderComponent} from "./purchseorder/purchseorder.component";
+import {ItemComponent} from "./item/item.component";
+import {MenubarComponent} from "./menubar.component";
+import {GrnComponent} from "./grn/grn.component";
+import {ItemtypeComponent} from "./item/itemtype.component";
+import {SupplierComponent} from "./supplier/supplier.component";
 
 @NgModule({
   declarations: [
@@ -55,6 +68,14 @@ import {DropdownModule} from "ngx-dropdown";
     DrugAdminComponent,
     BasedrugadminComponent,
     DrugpackageadminComponent,
+    ItemComponent,
+    PurchseorderComponent,
+    IssueComponent,
+    ReportComponent,
+    MenubarComponent,
+    SupplierComponent,
+    ItemtypeComponent,
+    GrnComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +83,7 @@ import {DropdownModule} from "ngx-dropdown";
     DropdownModule,
     HttpModule, routing, PopupModule.forRoot(),
   ],
-  providers: [PatientServiceService,DrugServiceService],
+  providers: [PatientServiceService,DrugServiceService, AdminService, ItemSupplierService, ItemProductService, ItemServiceService, POServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

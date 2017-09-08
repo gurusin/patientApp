@@ -44,7 +44,7 @@ export class BasicvisitComponent implements OnInit {
         detail.amount = obj.doseAmount;
         detail.duration = obj.doseDuration;
         detail.strength = obj.selectedStrength;
-        detail.frequency = obj.selectedFrequency;
+        detail.frequency.doseFrequencyId = obj.selectedFrequency;
         detail.intervalUnit = obj.selectedDuration;
         detail.meal = obj.meal;
         details.push(detail);

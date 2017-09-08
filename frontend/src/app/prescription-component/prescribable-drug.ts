@@ -10,7 +10,7 @@ export class PrescribableDrug {
   doseDuration:number;
   durationUnit:string[];
   selectedStrength:string;
-  selectedFrequency:string;
+  selectedFrequency:number;
   selectedDuration:string;
   meal:string;
   drugList:any[];

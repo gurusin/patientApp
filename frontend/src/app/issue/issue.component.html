@@ -1,0 +1,63 @@
+<div class="container">
+  <h1> Issue Goods</h1>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <label>Date Of Issue</label>
+    <input type="date" [(ngModel)]='issueObject.issueDate'/>
+    </div>
+    <div class="col-lg-4">
+      <label>Payment method</label>
+      <select name="paymentMethod" [(ngModel)]="issueObject.paymentMethod">
+        <option value="CASH">Cash</option>
+        <option value="CREDIT">Credit</option>
+        <option value="CHEQUE">Cheque</option>
+        <option value="VOUCHER">Voucher</option>
+      </select>
+    </div>
+    <div class="col-lg-4">
+      <label>Status</label>
+      <select name="issueStatus" [(ngModel)]="issueObject.issueStatus">
+        <option value="CREATED">Created</option>
+        <option value="PAID">Paid</option>
+        <option value="CREDIT">Credit</option>
+      </select>
+    </div>
+  </div>
+  <br/>
+  <table class="table table-responsive">
+    <thead>
+     <tr>
+       <td>Item</td>
+       <td>Unit Price</td>
+       <td>Available Qty</td>
+       <td>Issued Qty</td>
+       <td>Price</td>
+       <td>Add</td>
+       <td>Remove</td>
+     </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of issueObject.details;let i = index">
+          <td>
+            <select [(ngModel)]='row.selectedIndex' (change)="onSelectItem(row.selectedIndex,i)">
+              <option *ngFor="let x of items; let c = index"
+                      [ngValue]="c">
+                {{x.itemDescription}}</option>
+            </select>
+          </td>
+          <td>{{row.unitPrice}}</td>
+          <td>{{row.avQuantity}}</td>
+          <td><input type="number"  [(ngModel)]='row.quantity' (change)="calculateTotal()"></td>
+          <td>{{row.unitPrice * row.quantity}}</td>
+          <td><button type="button"  class="button btn-primary" (click)="doAdd()">Add</button></td>
+          <td><button type="button"  class="button btn-danger" (click)="doDelete(i)">Remove</button></td>
+        </tr>
+    </tbody>
+  </table>
+  <hr/>
+  <label>Total : </label> {{total}}
+   <br/>
+  <button type="button" class="btn-primary" (click)="onSave()">Save </button>
+  <button type="button" class="btn-primary" (click)="onCancel()">Cancel </button>
+</div>

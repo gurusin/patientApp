@@ -17,6 +17,8 @@ public class DrugPackage {
     @JoinColumn(name = "strengthId")
     private Strength strength;
     private int quantity;
+    private double minOrderLevel;
+    private double unitPrice;
 
     public int getDrugPackageId() {
         return drugPackageId;
@@ -48,5 +50,21 @@ public class DrugPackage {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public double getMinOrderLevel() {
+        return minOrderLevel;
+    }
+
+    public void setMinOrderLevel(double minOrderLevel) {
+        this.minOrderLevel = minOrderLevel;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 }

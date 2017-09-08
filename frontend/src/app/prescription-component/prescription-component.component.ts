@@ -12,6 +12,7 @@ import {Patient} from "../patient";
 import {PatientServiceService} from "../patient-service.service";
 import {Router} from "@angular/router";
 import {concatStatic} from "rxjs/operator/concat";
+import {Dosefrequency} from "../drugcomponent/dosefrequency";
 
 @Component({
   selector: 'app-prescription-component',
@@ -99,7 +100,7 @@ export class PrescriptionDetail
   drug:Drug;
   drugId:string;
   strength:string;
-  frequency:string;
+  frequency:Dosefrequency;
   amount:number;
   duration:number;
   intervalUnit:string;
@@ -108,6 +109,7 @@ export class PrescriptionDetail
 
   constructor() {
     this.drug = new Drug();
+    this.frequency = new Dosefrequency();
   }
 }
 

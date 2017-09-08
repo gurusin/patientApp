@@ -1,0 +1,71 @@
+<div class="dropdown">
+  <button class="dropbtn">Admin</button>
+  <div class="dropdown-content">
+    <a routerLink="item">Item</a>
+    <a routerLink="supplier">Suppliers</a>
+    <a href="#">Customers</a>
+    <a routerLink="itemtype">Item type</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="dropbtn">Order</button>
+  <div class="dropdown-content">
+    <a routerLink="po">Create PO</a>
+    <a routerLink="grn">Goods Receiving</a>
+    <a href="issue">Issues</a>
+    <a href="#">Make payment</a>
+    <a href="#">Return In</a>
+    <a href="#">Return out</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="dropbtn">Report</button>
+  <div class="dropdown-content">
+    <a href="#">Daily Income</a>
+    <a href="#">Current Stock status</a>
+    <a href="#">Pending PO</a>
+    <a href="#">Return In</a>
+    <a href="#">Return out</a>
+  </div>
+</div>
+
+
+<div class="dropdown">
+  <button class="dropbtn">Patient Search</button>
+  <div class="dropdown-content">
+    <a routerLink="">Patient Search</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="dropbtn">Treatment</button>
+  <div class="dropdown-content">
+    <a [routerLink]='["patientvisit"]'>Treatment</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="dropbtn">Print Receipt</button>
+  <div class="dropdown-content">
+    <a [routerLink]='["printReceipt"]'>Print Receipt</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="dropbtn">Patient Administration</button>
+  <div class="dropdown-content">
+    <a [routerLink]='["patientAdmin"]'>Patient Administration</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="dropbtn">Drug Administration</button>
+  <div class="dropdown-content">
+    <a [routerLink]='["drugAdmin"]'>Drug Admin</a>
+    <a [routerLink]='["baseDrugAdmin"]'>Base Drug Admin</a>
+    <a [routerLink]='["drugPackageAdmin"]'>Drug Package Admin</a>
+  </div>
+</div>
+

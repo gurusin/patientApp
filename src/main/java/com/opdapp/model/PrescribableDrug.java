@@ -3,10 +3,10 @@ package com.opdapp.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class PrescribableDrug implements Serializable{
+public class PrescribableDrug implements Serializable {
     private Drug drug;
     private List<String> strengths;
-    private List<String> doseFrequency;
+    private List<DoseFrequency> doseFrequency;
     private double doseAmount;
     private double doseDuration;
     private List<String> durationUnit;
@@ -25,14 +25,6 @@ public class PrescribableDrug implements Serializable{
 
     public void setStrengths(List<String> strengths) {
         this.strengths = strengths;
-    }
-
-    public List<String> getDoseFrequency() {
-        return doseFrequency;
-    }
-
-    public void setDoseFrequency(List<String> doseFrequency) {
-        this.doseFrequency = doseFrequency;
     }
 
     public double getDoseAmount() {
@@ -57,5 +49,13 @@ public class PrescribableDrug implements Serializable{
 
     public void setDurationUnit(List<String> durationUnit) {
         this.durationUnit = durationUnit;
+    }
+
+    public List<DoseFrequency> getDoseFrequency() {
+        return doseFrequency;
+    }
+
+    public void setDoseFrequency(List<DoseFrequency> doseFrequency) {
+        this.doseFrequency = doseFrequency;
     }
 }

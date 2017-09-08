@@ -125,20 +125,38 @@ Insert into medsys.drug_package (drug_id,strength_id,quantity) values (2,2,100);
 Insert into medsys.drug_package (drug_id,strength_id,quantity) values (3,1,30);
 Insert into medsys.drug_package (drug_id,strength_id,quantity) values (4,6,40);
 Insert into medsys.drug_package (drug_id,strength_id,quantity) values (4,5,25);
-Insert into medsys.drug_package (drug_id,strength_id,quantity) values (4,4,300);
-Insert into medsys.drug_package (drug_id,strength_id,quantity) values (5,7,100);
-Insert into medsys.drug_package (drug_id,strength_id,quantity) values (6,8,20);
-Insert into medsys.drug_package (drug_id,strength_id,quantity) values (13,5,10);
-Insert into medsys.drug_package (drug_id,strength_id,quantity) values (6,5,100);
-Insert into medsys.drug_package (drug_id,strength_id,quantity) values (26,27,100);
+Insert into medsys.drug_package (drug_id,strength_id,quantity, min_order_level, unit_price) values (4,4,300, 30, 13);
+Insert into medsys.drug_package (drug_id,strength_id,quantity, min_order_level, unit_price) values (5,7,100, 100, 5);
+Insert into medsys.drug_package (drug_id,strength_id,quantity, min_order_level, unit_price) values (6,8,2020, 10, 3);
+Insert into medsys.drug_package (drug_id,strength_id,quantity, min_order_level, unit_price) values (13,5,10, 10, 5);
+Insert into medsys.drug_package (drug_id,strength_id,quantity, min_order_level, unit_price) values (6,5,100, 50, 12);
+Insert into medsys.drug_package (drug_id,strength_id,quantity, min_order_level, unit_price) values (26,27,100,25, 5);
 
 insert into medsys.supplier (supplier_address,supplier_name,supplier_phone) values ('colombo 07', 'Supplier ABC', '077258963542');
 insert into medsys.supplier (supplier_address,supplier_name,supplier_phone) values ('colombo 05', 'Supplier Pharma', '0112587456');
 insert into medsys.supplier (supplier_address,supplier_name,supplier_phone) values ('colombo 03', 'Supplier Tech', '0112587459');
 insert into medsys.supplier (supplier_address,supplier_name,supplier_phone) values ('Borella', 'Supplier Meds', '077258963254');
-insert into medsys.drug_package_batch (quantity,drug_package_id,supplier_id) values (100,10,1);
-insert into medsys.drug_package_batch (quantity,drug_package_id,supplier_id) values (100,12,1);
-insert into medsys.drug_package_batch (quantity,drug_package_id,supplier_id) values (100,1,2);
-insert into medsys.drug_package_batch (quantity,drug_package_id,supplier_id) values (100,20,1);
-insert into medsys.drug_package_batch (quantity,drug_package_id,supplier_id) values (100,21,4);
-insert into medsys.drug_package_batch (quantity,drug_package_id,supplier_id) values (100,11,2);
+
+
+insert into medsys.item_supplier (notes,supplier_address,supplier_fax,supplier_name,supplier_phone) values('Main supplier', 'Union Chemist, Union place','0112456745', 'Union chemist', '0112456345') ;
+insert into medsys.item_supplier (notes,supplier_address,supplier_fax,supplier_name,supplier_phone) values('Main guase supplier', 'Borella Pharmacy, Colombo 08','0112748563', 'Borella Pharmacy', '0716234857');
+insert into medsys.item_supplier (notes,supplier_address,supplier_fax,supplier_name,supplier_phone) values('Secondary suppier', 'Medco , Slave Island','0117283538', 'Medco Oharma', '0777384596');
+insert into medsys.item_supplier (notes,supplier_address,supplier_fax,supplier_name,supplier_phone) values('Urgent delivery', 'Med pharma','0112444987', 'Med pharma, Nugegoda', '0112776598');
+
+insert into medsys.product_type (itemtype) values('Medicine');
+insert into medsys.product_type (itemtype) values('Services');
+insert into medsys.product_type (itemtype) values('Other');
+
+Insert into medsys.unit_of_measure (unit_of_measure) values('mg');
+Insert into medsys.unit_of_measure (unit_of_measure) values('g');
+Insert into medsys.unit_of_measure (unit_of_measure) values('ml');
+Insert into medsys.unit_of_measure (unit_of_measure) values('micrograms');
+Insert into medsys.unit_of_measure (unit_of_measure) values('Packets');
+Insert into medsys.unit_of_measure (unit_of_measure) values('Boxes');
+
+
+Insert into medsys.item (item_description,min_order_level,quantity,item_type_id,unit_of_measure_id, unit_price) values('Sugar',100,500,1,2, 120);
+Insert into medsys.item (item_description,min_order_level,quantity,item_type_id,unit_of_measure_id, unit_price) values('Dhal',20,100,1,2, 150);
+Insert into medsys.item (item_description,min_order_level,quantity,item_type_id,unit_of_measure_id, unit_price) values('Sunlight',30,75,1,5, 35);
+Insert into medsys.item (item_description,min_order_level,quantity,item_type_id,unit_of_measure_id, unit_price) values('Soya',40,120,1,5, 55);
+Insert into medsys.item (item_description,min_order_level,quantity,item_type_id,unit_of_measure_id, unit_price) values('Panadol',50,200,1,4, 2);

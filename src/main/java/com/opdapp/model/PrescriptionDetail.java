@@ -14,7 +14,9 @@ public class PrescriptionDetail {
 
     private String strength;
 
-    private String frequency;
+    @ManyToOne()
+    @JoinColumn(name = "doseFrequencyId")
+    private DoseFrequency frequency;
 
     private double amount;
 
@@ -26,7 +28,7 @@ public class PrescriptionDetail {
     @JoinColumn(name = "drugId")
     private Drug drug;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "prescriptionId", nullable = false)
     private Prescription prescription;
 
@@ -54,14 +56,6 @@ public class PrescriptionDetail {
 
     public void setStrength(String strength) {
         this.strength = strength;
-    }
-
-    public String getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(String frequency) {
-        this.frequency = frequency;
     }
 
     public double getAmount() {
@@ -102,5 +96,13 @@ public class PrescriptionDetail {
 
     public void setMeal(Meal meal) {
         this.meal = meal;
+    }
+
+    public DoseFrequency getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(DoseFrequency frequency) {
+        this.frequency = frequency;
     }
 }

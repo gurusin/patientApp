@@ -2,9 +2,7 @@ package com.opdapp.service.impl;
 
 import com.opdapp.dto.PrescriptionDTO;
 import com.opdapp.dto.PrescriptionDetailDTO;
-import com.opdapp.model.Patient;
-import com.opdapp.model.Prescription;
-import com.opdapp.model.PrescriptionDetail;
+import com.opdapp.model.*;
 import com.opdapp.repository.PatientRepository;
 import com.opdapp.repository.PrescriptionRepository;
 import com.opdapp.service.PrescriptionService;
@@ -17,9 +15,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by sudarshana on 13/08/2017.
- */
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService {
 
@@ -33,8 +28,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     public List<PrescriptionDTO> loadPrescriptions(long l) {
         final Patient p = patientRepository.findOne(l);
         final List<PrescriptionDTO> dtoList = new ArrayList<>();
-        for(final Prescription obj :prescriptionRepository.findPrescriptionByPatient(p))
-        {
+        for (final Prescription obj : prescriptionRepository.findPrescriptionByPatient(p)) {
             final PrescriptionDTO dto = new PrescriptionDTO();
             dto.setNotes(obj.getNotes());
             dto.setSymptoms(obj.getSymptoms());
@@ -65,23 +59,40 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     public void savePrescription(PrescriptionDTO dto) {
 
         final Prescription prescription = createPrescription(dto);
-        prescription.setPrescriptionDetails(createDetails(dto,prescription));
-        prescriptionRepository.save(prescription);
+        prescription.setPrescriptionDetails(createDetails(dto, prescription));
+        Prescription savedPrescription = prescriptionRepository.save(prescription);
+        //TODO : Untill amount can be derived from prescription Details
+//        saveIssueNote(savedPrescription);
     }
 
-    private Set<PrescriptionDetail> createDetails(final PrescriptionDTO dto, final Prescription p)
-    {
+//    private void saveIssueNote(Prescription prescription) {
+//        IssueNote issueNote = new IssueNote();
+//        issueNote.setIssueDate(prescription.getDate());
+//        issueNote.setIssueStatus(IssueStatus.CREATED);
+//        issueNote.setPaymentMethod(PaymentMethod.CASH);
+//        issueNote.setIssueNoteDetails(createIssueDetails(prescription));
+//    }
+//
+//    private Set<IssueNoteDetails> createIssueDetails(Prescription prescription){
+//        Set<IssueNoteDetails> issueNoteDetails = new HashSet<IssueNoteDetails>();
+//        for (PrescriptionDetail prescDet : prescription.getPrescriptionDetails()){
+//            IssueNoteDetails issueNoteDetail = new IssueNoteDetails();
+//            issueNoteDetail.setBuyingQuantity(prescDet.get);
+//        }
+//        return issueNoteDetails;
+//    }
+
+    private Set<PrescriptionDetail> createDetails(final PrescriptionDTO dto, final Prescription p) {
         final Set<PrescriptionDetail> set = new HashSet<>();
-        for (final PrescriptionDetail obj:dto.getPrescriptionDetails())
-        {
+        for (final PrescriptionDetail obj : dto.getPrescriptionDetails()) {
             obj.setPrescription(p);
             set.add(obj);
         }
         return set;
 
     }
-    private Prescription createPrescription(final PrescriptionDTO dto)
-    {
+
+    private Prescription createPrescription(final PrescriptionDTO dto) {
         final Prescription prescription = new Prescription();
         prescription.setPatient(patientRepository.findOne(dto.getPatientId()));
         prescription.setDiagnosis(dto.getDiagnosis());

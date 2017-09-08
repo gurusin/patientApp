@@ -1,5 +1,6 @@
 package com.opdapp.dto;
 
+import com.opdapp.model.DoseFrequency;
 import com.opdapp.model.Drug;
 import com.opdapp.model.Meal;
 
@@ -11,7 +12,7 @@ public class PrescriptionDetailDTO {
     private double amount;
     private double duration;
     private String strength;
-    private String frequency;
+    private DoseFrequency frequency;
     private Meal meal;
     private String intervalUnit;
 
@@ -47,14 +48,6 @@ public class PrescriptionDetailDTO {
         this.strength = strength;
     }
 
-    public String getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(String frequency) {
-        this.frequency = frequency;
-    }
-
     public Meal getMeal() {
         return meal;
     }
@@ -69,5 +62,13 @@ public class PrescriptionDetailDTO {
 
     public void setIntervalUnit(String intervalUnit) {
         this.intervalUnit = intervalUnit;
+    }
+
+    public DoseFrequency getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(DoseFrequency frequency) {
+        this.frequency = frequency;
     }
 }

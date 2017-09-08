@@ -1,0 +1,71 @@
+<table width="100%">
+  <tr><td width="80%">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8"><h2>Purchase Order</h2></div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <label for="supp">Supplier</label>
+      <select id="supp" [(ngModel)]='po.supplierId' required name="supplierId">
+        <option *ngFor="let row of suppliers"
+                [ngValue]="row.supplierId">
+        {{row.supplierName}}</option>
+      </select>
+    </div>
+
+    <div class="col-lg-4">
+      <label for="orderDate">Ordering Date</label>
+      <input type="date"  [(ngModel)]='po.orderDate' required id="orderDate" name="orderDate">
+    </div>
+    <div class="col-lg-4">
+      <label for="expectedRecieveDate">Expected Date</label>
+      <input type="date"  [(ngModel)]='po.expectedRecieveDate' required id="expectedRecieveDate" name="expectedRecieveDate">
+    </div>
+  </div>
+
+  <div class="row">
+        <div class="col-lg-8"> <h3>Purchase Order Details</h3>  </div>
+        <div class="col-lg-4"> <h3></h3>
+        <label>Status</label>
+          <select name="poStatus" [(ngModel)]="po.poStatus" required name="poStatus">
+            <option value="0">INITIAL</option>
+            <option value="1">SENT</option>
+            <option value="2">COMPLETED</option>
+          </select>
+        </div>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+        <tr>
+          <td>Item</td>
+          <td>Quantity</td>
+          <td>Add</td>
+        </tr>
+    </thead>
+    <tbody>
+       <tr *ngFor="let detail of po.poDetails">
+         <td>
+           <select [(ngModel)]='detail.itemId' name="itemId">
+             <option *ngFor="let x of items; let i = index"
+                     [ngValue]="x.itemId">
+               {{x.itemDescription}}</option>
+           </select>
+         </td>
+         <td>
+           <input type="number" required [(ngModel)]='detail.qty' name="qty"/>
+         </td>
+         <td><button type="button"  class="button btn-primary" (click)="doAdd()">Add</button>
+           <button type="button"  class="button btn-danger" (click)="doDelete(i)">Remove</button></td>
+       </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn-primary" (click)="onSave()">Save </button>
+  <button type="button" class="btn-primary" (click)="onCancel()">Cancel </button>
+</div>
+  </td><td width="20%">
+    pendingPos
+    All pending Purchase Orders
+  </td></tr></table>
