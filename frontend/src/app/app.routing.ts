@@ -10,18 +10,26 @@ import {PrescriptionHistoryComponent} from "./prescription-component/prescriptio
 import {PrintreceiptComponent} from "./prescription-component/printreceipt.component";
 import {PatientadminComponent} from "./patient-component/patientadmin.component";
 import {PrintpopComponent} from "./treatment/printpop.component";
+import {DrugAdminComponent} from "./drugcomponent/drug-admin/drug-admin.component";
+import {BasedrugadminComponent} from "./drugcomponent/drug-admin/basedrugadmin.component";
+import {DrugpackageadminComponent} from "./drugcomponent/drug-admin/drugpackageadmin.component";
 
 const APP_ROUTES: Routes = [
-  {path:'',component:PatientSearchComponent},
-  {path: 'patientsave', component: PatientsaveComponent },
+  {path: '', component: PatientSearchComponent},
+  {path: 'patientsave', component: PatientsaveComponent},
   {path: 'treatment', component: TreatmentComponent},
-  {path: 'patientvisit', component: PatientVisitComponent, children:[
-    {path:'treatment', component:BasicvisitComponent},
-    {path:'treatmentHistory',component:PrescriptionHistoryComponent}
-  ]},
-  {path:'printReceipt',component:PrintreceiptComponent},
-  {path:'patientAdmin',component:PatientadminComponent},
-  {path: 'printpop', component: PrintpopComponent}
+  {
+    path: 'patientvisit', component: PatientVisitComponent, children: [
+    {path: 'treatment', component: BasicvisitComponent},
+    {path: 'treatmentHistory', component: PrescriptionHistoryComponent}
+  ]
+  },
+  {path: 'printReceipt', component: PrintreceiptComponent},
+  {path: 'patientAdmin', component: PatientadminComponent},
+  {path: 'printpop', component: PrintpopComponent},
+  {path: 'drugAdmin', component: DrugAdminComponent},
+  {path: 'baseDrugAdmin', component: BasedrugadminComponent},
+  {path: 'drugPackageAdmin', component: DrugpackageadminComponent}
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)

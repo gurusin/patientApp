@@ -24,6 +24,7 @@ export class PrintpopComponent implements OnInit{
     popupWin.document.close();
 
     this.router.navigate(['patientvisit/treatmentHistory']);
+    window.location.reload();
   }
 
   ngOnInit() {

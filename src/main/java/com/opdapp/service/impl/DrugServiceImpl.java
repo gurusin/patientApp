@@ -1,9 +1,11 @@
 package com.opdapp.service.impl;
 
+import com.opdapp.dto.BaseDrugDTO;
+import com.opdapp.dto.DrugDTO;
+import com.opdapp.dto.DrugPackageDTO;
+import com.opdapp.dto.StrengthDTO;
 import com.opdapp.model.*;
-import com.opdapp.repository.DrugPackageRepository;
-import com.opdapp.repository.DrugRepository;
-import com.opdapp.repository.FrequencyRepository;
+import com.opdapp.repository.*;
 import com.opdapp.service.DrugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +20,16 @@ public class DrugServiceImpl implements DrugService {
     private DrugRepository drugRepository;
 
     @Autowired
+    private StrengthRepository strengthRepository;
+
+    @Autowired
     private FrequencyRepository frequencyRepository;
 
     @Autowired
     private DrugPackageRepository drugPackageRepository;
+
+    @Autowired
+    private BaseDrugRepository baseDrugRepository;
 
     public PrescribableDrug getByDrugId(long drugId) {
         PrescribableDrug prescribableDrug = new PrescribableDrug();
@@ -84,5 +92,146 @@ public class DrugServiceImpl implements DrugService {
             searchedDrugList.add(searchedDrug);
         }
         return searchedDrugList;
+    }
+
+    public List<BaseDrugDTO> findAllBaseDrugs() {
+        List<BaseDrug> baseDrugList = baseDrugRepository.findAll();
+        return getBaseDrugDTOList(baseDrugList);
+    }
+
+    public List<DrugDTO> findAllDrugs() {
+        List<Drug> drugList = drugRepository.findAll();
+        return getDrugDTOList(drugList);
+    }
+
+    public List<StrengthDTO> findAllStrengths() {
+        List<Strength> strengthList = strengthRepository.findAll();
+        return getStrengthDTOList(strengthList);
+    }
+
+    private List<StrengthDTO> getStrengthDTOList(List<Strength> strengthList) {
+        List<StrengthDTO> strengthDTOList = new ArrayList<StrengthDTO>();
+        for (Strength strength : strengthList) {
+            StrengthDTO strengthDTO = getStrengthDTO(strength);
+            strengthDTOList.add(strengthDTO);
+        }
+        return strengthDTOList;
+    }
+
+    public List<DrugPackageDTO> findAllDrugPackages() {
+        List<DrugPackage> drugPackage = drugPackageRepository.findAll();
+        return getDrugPackageDTOList(drugPackage);
+    }
+
+    private List<BaseDrugDTO> getBaseDrugDTOList(List<BaseDrug> baseDrugList) {
+        List<BaseDrugDTO> baseDrugDTOList = new ArrayList<BaseDrugDTO>();
+        for (BaseDrug baseDrug : baseDrugList) {
+            BaseDrugDTO baseDrugDTO = getBaseDrugDTO(baseDrug);
+            baseDrugDTOList.add(baseDrugDTO);
+        }
+        return baseDrugDTOList;
+    }
+
+    private BaseDrugDTO getBaseDrugDTO(BaseDrug baseDrug) {
+        BaseDrugDTO baseDrugDTO = new BaseDrugDTO();
+        baseDrugDTO.setBaseDrugId(baseDrug.getBaseDrugId());
+        baseDrugDTO.setBaseDrugName(baseDrug.getBaseDrugName());
+        return baseDrugDTO;
+    }
+
+    private List<DrugDTO> getDrugDTOList(List<Drug> drugList) {
+        List<DrugDTO> drugDTOList = new ArrayList<DrugDTO>();
+        for (Drug drug : drugList) {
+            DrugDTO drugDTO = getDrugDTO(drug);
+            drugDTOList.add(drugDTO);
+        }
+        return drugDTOList;
+    }
+
+    private DrugDTO getDrugDTO(Drug drug) {
+        DrugDTO drugDTO = new DrugDTO();
+        drugDTO.setBrandName(drug.getBrandName());
+        drugDTO.setDrugId(drug.getDrugId());
+        drugDTO.setBaseDrug(getBaseDrugDTO(drug.getBaseDrug()));
+        return drugDTO;
+    }
+
+    private List<DrugPackageDTO> getDrugPackageDTOList(List<DrugPackage> durgPackagelist) {
+        List<DrugPackageDTO> packageDTOList = new ArrayList<DrugPackageDTO>();
+        for (DrugPackage drugPackage : durgPackagelist) {
+            DrugPackageDTO drugPackageDTO = getDrugPackageDTO(drugPackage);
+            packageDTOList.add(drugPackageDTO);
+        }
+        return packageDTOList;
+    }
+
+    private StrengthDTO getStrengthDTO(Strength strength) {
+        StrengthDTO strengthDTO = new StrengthDTO();
+        strengthDTO.setStrengthAmount(strength.getStrengthAmount());
+        strengthDTO.setStrengthId(strength.getStrengthId());
+        strengthDTO.setUnitName(strength.getStrengthUnit().getUnitName());
+        return strengthDTO;
+    }
+
+    private DrugPackageDTO getDrugPackageDTO(DrugPackage drugPackage) {
+        DrugPackageDTO drugPackageDTO = new DrugPackageDTO();
+        drugPackageDTO.setDrug(getDrugDTO(drugPackage.getDrug()));
+        drugPackageDTO.setStrength(getStrengthDTO(drugPackage.getStrength()));
+        drugPackageDTO.setDrugPackageId(drugPackage.getDrugPackageId());
+        drugPackageDTO.setQuantity(drugPackage.getQuantity());
+        return drugPackageDTO;
+    }
+
+
+    public DrugDTO saveDrug(final DrugDTO drugDTO) {
+        Drug drug = createDrug(drugDTO);
+        Drug savedDrug = drugRepository.save(drug);
+        return getDrugDTO(savedDrug);
+    }
+
+    private Drug createDrug(DrugDTO drugDTO) {
+        Drug drug = new Drug();
+        drug.setBaseDrug(createBaseDrug(drugDTO.getBaseDrug()));
+        drug.setBrandName(drugDTO.getBrandName());
+        drug.setDrugId(drugDTO.getDrugId());
+        return drug;
+    }
+
+    private BaseDrug createBaseDrug(BaseDrugDTO baseDrugDTO) {
+        BaseDrug basedrug = new BaseDrug();
+        basedrug.setBaseDrugId(baseDrugDTO.getBaseDrugId());
+        basedrug.setBaseDrugName(baseDrugDTO.getBaseDrugName());
+        return basedrug;
+    }
+
+    public BaseDrugDTO saveBaseDrug(final BaseDrugDTO baseDrugDTO) {
+        BaseDrug baseDrug = createBaseDrug(baseDrugDTO);
+        BaseDrug savedBaseDrug = baseDrugRepository.save(baseDrug);
+        return getBaseDrugDTO(savedBaseDrug);
+    }
+
+    public DrugPackageDTO saveDrugPackage(final DrugPackageDTO drugPackageDTO) {
+        DrugPackage drugPackage = getDrugPackage(drugPackageDTO);
+        DrugPackage savedDrugPackage = drugPackageRepository.save(drugPackage);
+        return getDrugPackageDTO(savedDrugPackage);
+    }
+
+    private DrugPackage getDrugPackage(DrugPackageDTO drugPackageDTO) {
+        DrugPackage drugPackage = new DrugPackage();
+        drugPackage.setDrug(createDrug(drugPackageDTO.getDrug()));
+        drugPackage.setDrugPackageId(drugPackageDTO.getDrugPackageId());
+        drugPackage.setQuantity(drugPackageDTO.getQuantity());
+        drugPackage.setStrength(getStrength(drugPackageDTO.getStrength()));
+        return drugPackage;
+    }
+
+    private Strength getStrength(StrengthDTO strengthDTO) {
+        Strength strength = new Strength();
+        strength.setStrengthId(strengthDTO.getStrengthId());
+        strength.setStrengthAmount(strengthDTO.getStrengthAmount());
+        StrengthUnit strengthUnit = new StrengthUnit();
+        strengthUnit.setUnitId(strengthDTO.getStrengthId());
+        strengthUnit.setUnitName(strengthDTO.getUnitName());
+        return strength;
     }
 }

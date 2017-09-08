@@ -1,0 +1,93 @@
+<div class="container">
+  <h2>Drug package details</h2>
+  <div class="row">
+    <div class="col-lg-7">
+
+      <table border="2" width="100%" class="table table-hover">
+        <tr>
+          <th width="10">Drug package Id</th>
+          <th width="50%">Base Drug Name</th>
+          <th width="40%">Drug Name</th>
+          <th width="10%"> Strength</th>
+          <th width="10%"> Quantity</th>
+        </tr>
+
+        <tr *ngFor="let obj of drugPackageList; let i = index" (click)="setClickedDrugPackageRow(i)"
+            [class.active]="i == selectedDrugPackageRow">
+          <td>{{obj.drugPackageId}}</td>
+          <td>
+            {{obj.drug.baseDrug.baseDrugName}}
+          </td>
+          <td>
+            {{obj.drug.brandName}}
+          </td>
+          <td>
+            {{obj.strength.strengthAmount}} {{obj.strength.unitName}}
+          </td>
+          <td>
+            {{obj.quantity}}
+          </td>
+        </tr>
+
+      </table>
+
+    </div>
+    <div class="col-lg-5">
+    <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="drugPackage">
+      <h3> Edit Drug Package details </h3>
+      <table width="100%">
+        <tr>
+          <th width="40%"></th>
+          <th width="40%"></th>
+        </tr>
+        <tr>
+          <td>
+            <label> Drug : </label>
+          </td>
+          <td>
+            <select name="drug" [(ngModel)]="drugPackage.drug.drugId">
+              <option *ngFor="let drug of drugList" [value]="drug.drugId">{{drug.brandName}}</option>
+            </select>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label> Strength : </label>
+          </td>
+          <td>
+            <select name="strength" [(ngModel)]="drugPackage.strength.strengthId">
+              <option *ngFor="let strength of strengthList" [value]="strength.strengthId">
+                {{strength.strengthAmount}} {{strength.unitName}}
+              </option>
+            </select>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label> Quantity : </label>
+          </td>
+          <td>
+            <input type="text" id="quanitity" name="quanitity" required [(ngModel)]="drugPackage.quantity"/>
+          </td>
+          <td></td>
+        </tr>
+
+      </table>
+
+      <table width="100%">
+        <tr><td>
+          <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
+          </td>
+          <td><button class="btn-primary" (click)="cancelEdit()">Cancel</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+</div>
+  </div>
+</div>
+

@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface DrugPackageRepository extends CrudRepository<DrugPackage, Integer> {
     List<DrugPackage> getDrugPackageByDrug(Drug drug);
+
+    List<DrugPackage> findAll();
 }

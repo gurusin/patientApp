@@ -25,6 +25,10 @@ import { PrintreceiptComponent } from './prescription-component/printreceipt.com
 import { PatientadminComponent } from './patient-component/patientadmin.component';
 import {PopupModule} from "ng2-opd-popup";
 import { PrintpopComponent } from './treatment/printpop.component';
+import { DrugAdminComponent } from './drugcomponent/drug-admin/drug-admin.component';
+import { BasedrugadminComponent } from './drugcomponent/drug-admin/basedrugadmin.component';
+import { DrugpackageadminComponent } from './drugcomponent/drug-admin/drugpackageadmin.component';
+import {DropdownModule} from "ngx-dropdown";
 
 @NgModule({
   declarations: [
@@ -47,11 +51,15 @@ import { PrintpopComponent } from './treatment/printpop.component';
     PrintreceiptComponent,
     PatientadminComponent,
     PatientadminComponent,
-    PrintpopComponent
+    PrintpopComponent,
+    DrugAdminComponent,
+    BasedrugadminComponent,
+    DrugpackageadminComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    DropdownModule,
     HttpModule, routing, PopupModule.forRoot(),
   ],
   providers: [PatientServiceService,DrugServiceService],
