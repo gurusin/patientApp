@@ -23,7 +23,7 @@ import { PrescriptionHistoryComponent } from './prescription-component/prescript
 import { PrescriptiondetailComponent } from './prescription-component/prescriptiondetail.component';
 import { PrintreceiptComponent } from './prescription-component/printreceipt.component';
 import { PatientadminComponent } from './patient-component/patientadmin.component';
-import {PopupModule} from "ng2-opd-popup";
+// import {PopupModule} from "ng2-opd-popup";
 import { PrintpopComponent } from './treatment/printpop.component';
 import { DrugAdminComponent } from './drugcomponent/drug-admin/drug-admin.component';
 import { BasedrugadminComponent } from './drugcomponent/drug-admin/basedrugadmin.component';
@@ -81,7 +81,7 @@ import {SupplierComponent} from "./supplier/supplier.component";
     BrowserModule,
     FormsModule,
     DropdownModule,
-    HttpModule, routing, PopupModule.forRoot(),
+    HttpModule, routing, //PopupModule.forRoot(),
   ],
   providers: [PatientServiceService,DrugServiceService, AdminService, ItemSupplierService, ItemProductService, ItemServiceService, POServiceService],
   bootstrap: [AppComponent]

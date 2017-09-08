@@ -6,7 +6,7 @@ import {PatientServiceService} from "../patient-service.service";
 import {PrescribableDrug} from "../prescription-component/prescribable-drug";
 import {DrugServiceService} from "../drug-service.service";
 import {Router} from "@angular/router";
-import {Popup} from "ng2-opd-popup";
+// import {Popup} from "ng2-opd-popup";
 
 @Component({
   selector: 'app-basicvisit',
@@ -19,7 +19,7 @@ export class BasicvisitComponent implements OnInit {
   @Input() patient: Patient;
 
   constructor(private patientService: PatientServiceService,
-              private drugService: DrugServiceService, private router: Router, private popup:Popup) {
+              private drugService: DrugServiceService, private router: Router){//}, private popup:Popup) {
     this.patientVisit = new Patientvisit();
     this.patientVisit.diagnoseData = '';
     this.patientVisit.prescribableDrug = []
@@ -53,22 +53,25 @@ export class BasicvisitComponent implements OnInit {
     presc.prescriptionDetails = details;
     this.drugService.savePrescription(presc);
 
-    this.popup.options = {
-      header: "Print Prescription ",
-      color: "#5cb85c", // red, blue....
-      widthProsentage: 40, // The with of the popou measured by browser width
-      animationDuration: 0, // in seconds, 0 = no animation
-      // showButtons: true, // You can hide this in case you want to use custom buttons
-      // confirmBtnContent: "OK", // The text on your confirm button
-      // cancleBtnContent: "Cancel", // the text on your cancel button
-      confirmBtnClass: "btn btn-default", // your class for styling the confirm button
-      cancleBtnClass: "btn btn-default", // you class for styling the cancel button
-      animation: "fadeInDown", // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
+    //TODO Remove this once pop up is done
+    window.location.reload();
 
-    };
+    // this.popup.options = {
+    //   header: "Print Prescription ",
+    //   color: "#5cb85c", // red, blue....
+    //   widthProsentage: 40, // The with of the popou measured by browser width
+    //   animationDuration: 0, // in seconds, 0 = no animation
+    //   // showButtons: true, // You can hide this in case you want to use custom buttons
+    //   // confirmBtnContent: "OK", // The text on your confirm button
+    //   // cancleBtnContent: "Cancel", // the text on your cancel button
+    //   confirmBtnClass: "btn btn-default", // your class for styling the confirm button
+    //   cancleBtnClass: "btn btn-default", // you class for styling the cancel button
+    //   animation: "fadeInDown", // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
+    //
+    // };
 
 
-    this.popup.show(this.popup.options);
+    // this.popup.show(this.popup.options);
   }
 
 
