@@ -12,7 +12,7 @@ public class DrugPackageBatch {
 
     @ManyToOne
     @JoinColumn(name = "supplierId")
-    private Supplier supplier;
+    private ItemSupplier supplier;
 
     @ManyToOne
     @JoinColumn(name = "drugPackageId")
@@ -27,11 +27,11 @@ public class DrugPackageBatch {
         this.batchId = batchId;
     }
 
-    public Supplier getSupplier() {
+    public ItemSupplier getSupplier() {
         return supplier;
     }
 
-    public void setSupplier(Supplier supplier) {
+    public void setSupplier(ItemSupplier supplier) {
         this.supplier = supplier;
     }
 
