@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PrescribableDrug implements Serializable {
     private Drug drug;
-    private List<String> strengths;
+    private List<Strength> strengths;
     private List<DoseFrequency> doseFrequency;
     private double doseAmount;
     private double doseDuration;
@@ -19,11 +19,11 @@ public class PrescribableDrug implements Serializable {
         this.drug = drug;
     }
 
-    public List<String> getStrengths() {
+    public List<Strength> getStrengths() {
         return strengths;
     }
 
-    public void setStrengths(List<String> strengths) {
+    public void setStrengths(List<Strength> strengths) {
         this.strengths = strengths;
     }
 

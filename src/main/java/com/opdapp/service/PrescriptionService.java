@@ -1,12 +1,13 @@
 package com.opdapp.service;
 
 import com.opdapp.dto.PrescriptionDTO;
+import com.opdapp.dto.SavedPrescriptionDTO;
 import com.opdapp.model.Prescription;
 
 import java.util.List;
 
 public interface PrescriptionService {
-    void savePrescription(final PrescriptionDTO dto);
+    SavedPrescriptionDTO savePrescription(final PrescriptionDTO dto);
 
     List<PrescriptionDTO> loadPrescriptions(long l);
 }

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 // import {Popup} from "ng2-opd-popup";
 import {Patientvisit} from "./patientvisit";
+import { MdDialogRef, MD_DIALOG_DATA } from "@angular/material";
 
 @Component({
   selector: 'app-printpop',
@@ -9,7 +10,7 @@ import {Patientvisit} from "./patientvisit";
   styleUrls: ['./printpop.component.css']
 })
 export class PrintpopComponent implements OnInit{
-  constructor(private router:Router){  }
+  constructor(private router:Router,public dialogRef: MdDialogRef<PrintpopComponent>){  }
 
   @Input() patientVisit: Patientvisit;
   print(): void {

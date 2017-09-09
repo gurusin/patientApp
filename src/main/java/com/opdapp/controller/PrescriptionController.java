@@ -1,6 +1,7 @@
 package com.opdapp.controller;
 
 import com.opdapp.dto.PrescriptionDTO;
+import com.opdapp.dto.SavedPrescriptionDTO;
 import com.opdapp.model.Prescription;
 import com.opdapp.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,10 @@ public class PrescriptionController {
     private PrescriptionService prescriptionService;
 
     @RequestMapping(path = "savePrescription",method = RequestMethod.POST)
-    public @ResponseBody String savePrescription(@RequestBody PrescriptionDTO prescriptionDTO)
+    public @ResponseBody
+    SavedPrescriptionDTO savePrescription(@RequestBody PrescriptionDTO prescriptionDTO)
     {
-        prescriptionService.savePrescription(prescriptionDTO);
-        return "yes";
+        return prescriptionService.savePrescription(prescriptionDTO);
     }
 
     @RequestMapping(path = "loadPrescriptions",method = RequestMethod.POST)

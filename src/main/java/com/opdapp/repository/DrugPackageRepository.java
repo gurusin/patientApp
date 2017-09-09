@@ -13,4 +13,6 @@ public interface DrugPackageRepository extends CrudRepository<DrugPackage, Integ
     List<DrugPackage> getDrugPackageByDrug(Drug drug);
 
     List<DrugPackage> findAll();
+
+    DrugPackage findByDrugAndStrength(final Drug drug, final Strength strength);
 }

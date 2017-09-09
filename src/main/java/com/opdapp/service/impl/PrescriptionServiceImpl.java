@@ -2,9 +2,9 @@ package com.opdapp.service.impl;
 
 import com.opdapp.dto.PrescriptionDTO;
 import com.opdapp.dto.PrescriptionDetailDTO;
+import com.opdapp.dto.SavedPrescriptionDTO;
 import com.opdapp.model.*;
-import com.opdapp.repository.PatientRepository;
-import com.opdapp.repository.PrescriptionRepository;
+import com.opdapp.repository.*;
 import com.opdapp.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +24,15 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Autowired
     private PrescriptionRepository prescriptionRepository;
 
+    @Autowired
+    private IssueNoteRepository issueNoteRepository;
+
+    @Autowired
+    private DrugPackageRepository drugPackageRepository;
+
+    @Autowired
+    private FrequencyRepository frequencyRepository;
+
     @Override
     public List<PrescriptionDTO> loadPrescriptions(long l) {
         final Patient p = patientRepository.findOne(l);
@@ -34,7 +43,6 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             dto.setSymptoms(obj.getSymptoms());
             dto.setDiagnosis(obj.getDiagnosis());
             dto.setPrescriptionDate(obj.getDate());
-            dto.setPrescriptionDate(obj.getDate());
 
             final List<PrescriptionDetailDTO> prescriptionDetailDTOS = new ArrayList<PrescriptionDetailDTO>();
             for (PrescriptionDetail prescriptionDetail : obj.getPrescriptionDetails()) {
@@ -43,7 +51,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 prescriptionDetailDTO.setDrug(prescriptionDetail.getDrug());
                 prescriptionDetailDTO.setDuration(prescriptionDetail.getDuration());
                 prescriptionDetailDTO.setFrequency(prescriptionDetail.getFrequency());
-                prescriptionDetailDTO.setStrength(prescriptionDetail.getStrength());
+                prescriptionDetailDTO.setStrength(prescriptionDetail.getStrength().toString());
                 prescriptionDetailDTO.setIntervalUnit(prescriptionDetail.getIntervalUnit());
                 prescriptionDetailDTO.setMeal(prescriptionDetail.getMeal());
                 prescriptionDetailDTOS.add(prescriptionDetailDTO);
@@ -56,31 +64,97 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public void savePrescription(PrescriptionDTO dto) {
+    public SavedPrescriptionDTO savePrescription(PrescriptionDTO dto) {
 
         final Prescription prescription = createPrescription(dto);
         prescription.setPrescriptionDetails(createDetails(dto, prescription));
         Prescription savedPrescription = prescriptionRepository.save(prescription);
-        //TODO : Untill amount can be derived from prescription Details
-//        saveIssueNote(savedPrescription);
+
+        final SavedPrescriptionDTO savedPrescriptionDTO = new SavedPrescriptionDTO();
+
+        // Saving the auto created issue note
+        final IssueNote note = saveIssueNote(savedPrescription);
+        savedPrescriptionDTO.setIssueNo(note.getIssueNote());
+        populateDTo(savedPrescriptionDTO, prescription);
+        return savedPrescriptionDTO;
     }
 
-//    private void saveIssueNote(Prescription prescription) {
-//        IssueNote issueNote = new IssueNote();
-//        issueNote.setIssueDate(prescription.getDate());
-//        issueNote.setIssueStatus(IssueStatus.CREATED);
-//        issueNote.setPaymentMethod(PaymentMethod.CASH);
-//        issueNote.setIssueNoteDetails(createIssueDetails(prescription));
-//    }
-//
-//    private Set<IssueNoteDetails> createIssueDetails(Prescription prescription){
-//        Set<IssueNoteDetails> issueNoteDetails = new HashSet<IssueNoteDetails>();
-//        for (PrescriptionDetail prescDet : prescription.getPrescriptionDetails()){
-//            IssueNoteDetails issueNoteDetail = new IssueNoteDetails();
-//            issueNoteDetail.setBuyingQuantity(prescDet.get);
-//        }
-//        return issueNoteDetails;
-//    }
+    private void populateDTo(final SavedPrescriptionDTO dto, final Prescription prescription)
+    {
+        final PrescriptionDTO prescriptionDTO = new PrescriptionDTO();
+        prescriptionDTO.setDiagnosis(prescription.getDiagnosis());
+        prescriptionDTO.setPrescriptionDetailDTOS(convertToDetailDTO(prescription));
+        prescriptionDTO.setPrescriptionDate(prescription.getDate());
+        dto.setPrescriptionDTO(prescriptionDTO);
+    }
+
+    private List<PrescriptionDetailDTO> convertToDetailDTO(Prescription prescription) {
+        final List<PrescriptionDetailDTO> dtoSet = new ArrayList<>();
+        for (final PrescriptionDetail detail : prescription.getPrescriptionDetails())
+        {
+            final PrescriptionDetailDTO dto = new PrescriptionDetailDTO();
+            // TODO: Create detached objects to avoid the stack overflow
+            dto.setDrug(detail.getDrug());
+            dto.setAmount(detail.getAmount());
+            dto.setStrength(detail.getStrength().getStrengthAmount()+"," + detail.getStrength().getStrengthUnit());
+            dtoSet.add(dto);
+        }
+        return  dtoSet;
+    }
+
+    private IssueNote saveIssueNote(Prescription prescription) {
+        IssueNote issueNote = new IssueNote();
+        issueNote.setIssueDate(prescription.getDate());
+        issueNote.setIssueStatus(IssueStatus.CREATED);
+        issueNote.setPaymentMethod(PaymentMethod.CASH);
+        issueNote.setIssueNoteDetails(createIssueDetails(prescription, issueNote));
+        return issueNoteRepository.save(issueNote);
+    }
+
+    private Set<IssueNoteDetails> createIssueDetails(Prescription prescription, final IssueNote issueNote) {
+        Set<IssueNoteDetails> detailsSet = new HashSet<IssueNoteDetails>();
+        for (final PrescriptionDetail prescDet : prescription.getPrescriptionDetails()) {
+            IssueNoteDetails issueNoteDetail = new IssueNoteDetails();
+            issueNoteDetail.setIssueNote(issueNote);
+            issueNoteDetail.setBuyingQuantity(getBuyingQty(prescDet));
+            issueNoteDetail.setDrugPackage(findDrugPackage(prescDet));
+            detailsSet.add(issueNoteDetail);
+        }
+        return detailsSet;
+    }
+
+    private DrugPackage findDrugPackage(final PrescriptionDetail prescriptionDetail) {
+        return drugPackageRepository.findByDrugAndStrength(prescriptionDetail.getDrug(),
+                prescriptionDetail.getStrength());
+    }
+
+    private double getBuyingQty(final PrescriptionDetail prescDet) {
+        double returnQty = 0;
+        // Like 2 pills, 3 pills  etc.
+        final DoseFrequency freq = frequencyRepository.findOne(prescDet.getFrequency().getDoseFrequencyId());
+        final double noOfTimes = freq.getNoofDoses();
+        final double noOfItemsPerOneTake = prescDet.getAmount();
+        final double duration = prescDet.getDuration();
+        double durationInDays = 0;
+        switch (prescDet.getIntervalUnit().toUpperCase()) {
+            case "DAYS": {
+                durationInDays = duration;
+                break;
+            }
+            case "WEEKS": {
+                durationInDays = duration * 7;
+                break;
+            }
+            case "MONTHS": {
+                durationInDays = duration * 30;
+                break;
+            }
+            default: {
+            }
+        }
+        returnQty = noOfTimes * durationInDays * noOfItemsPerOneTake;
+        return returnQty;
+    }
 
     private Set<PrescriptionDetail> createDetails(final PrescriptionDTO dto, final Prescription p) {
         final Set<PrescriptionDetail> set = new HashSet<>();

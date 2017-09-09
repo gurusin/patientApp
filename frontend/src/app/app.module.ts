@@ -23,6 +23,8 @@ import { PrescriptionHistoryComponent } from './prescription-component/prescript
 import { PrescriptiondetailComponent } from './prescription-component/prescriptiondetail.component';
 import { PrintreceiptComponent } from './prescription-component/printreceipt.component';
 import { PatientadminComponent } from './patient-component/patientadmin.component';
+import { MdDialog,MaterialModule ,MdIconRegistry} from "@angular/material";
+import {OVERLAY_PROVIDERS, MdDialogModule} from "@angular/material";
 // import {PopupModule} from "ng2-opd-popup";
 import { PrintpopComponent } from './treatment/printpop.component';
 import { DrugAdminComponent } from './drugcomponent/drug-admin/drug-admin.component';
@@ -42,6 +44,7 @@ import {MenubarComponent} from "./menubar.component";
 import {GrnComponent} from "./grn/grn.component";
 import {ItemtypeComponent} from "./item/itemtype.component";
 import {SupplierComponent} from "./supplier/supplier.component";
+import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -75,15 +78,18 @@ import {SupplierComponent} from "./supplier/supplier.component";
     MenubarComponent,
     SupplierComponent,
     ItemtypeComponent,
-    GrnComponent
+    GrnComponent,
+
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, BrowserAnimationsModule,
     FormsModule,
-    DropdownModule,
-    HttpModule, routing, //PopupModule.forRoot(),
+    DropdownModule,NoopAnimationsModule,
+    HttpModule, routing,MdDialogModule//PopupModule.forRoot(),
   ],
-  providers: [PatientServiceService,DrugServiceService, AdminService, ItemSupplierService, ItemProductService, ItemServiceService, POServiceService],
+    entryComponents: [ PrintpopComponent],
+  providers: [PatientServiceService,DrugServiceService, AdminService, ItemSupplierService,
+      ItemProductService, ItemServiceService, POServiceService,MdDialog,OVERLAY_PROVIDERS],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,16 +9,16 @@ public class DoseFrequency {
 
     @Id
     @GeneratedValue
-    private int doseFrequencyId;
+    private long doseFrequencyId;
 
     private String timeUnit;
     private int noofDoses;
 
-    public int getDoseFrequencyId() {
+    public long getDoseFrequencyId() {
         return doseFrequencyId;
     }
 
-    public void setDoseFrequencyId(int doseFrequencyId) {
+    public void setDoseFrequencyId(long doseFrequencyId) {
         this.doseFrequencyId = doseFrequencyId;
     }
 

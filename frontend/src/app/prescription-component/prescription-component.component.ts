@@ -13,6 +13,7 @@ import {PatientServiceService} from "../patient-service.service";
 import {Router} from "@angular/router";
 import {concatStatic} from "rxjs/operator/concat";
 import {Dosefrequency} from "../drugcomponent/dosefrequency";
+import {Strength} from "../drugcomponent/strength";
 
 @Component({
   selector: 'app-prescription-component',
@@ -32,6 +33,7 @@ export class PrescriptionComponentComponent implements OnInit {
   ngOnInit() {
     var obj = new PrescribableDrug();
     this.patientVisit.prescribableDrug.push(obj);
+    console.log(obj);
   }
 
   doSearch(drugName:string,row:PrescribableDrug) {
@@ -44,12 +46,16 @@ export class PrescriptionComponentComponent implements OnInit {
 
   addDrug()
   {
+      this.patientVisit.prescribableDrug.forEach((obj: PrescribableDrug) => {
+        console.log(obj);
+      });
     this.patientVisit.prescribableDrug.push(new PrescribableDrug());
   }
 
   private searchPrescribable(row:PrescribableDrug,i:number) {
     this.drugService.searchPrescribable(this.selectedId).subscribe(
       data => {
+        console.log(data);
         this.patientVisit.prescribableDrug.splice(i,1,data);
       });
   }
@@ -99,7 +105,7 @@ export class PrescriptionDetail
 {
   drug:Drug;
   drugId:string;
-  strength:string;
+  strength:Strength;
   frequency:Dosefrequency;
   amount:number;
   duration:number;
@@ -110,6 +116,8 @@ export class PrescriptionDetail
   constructor() {
     this.drug = new Drug();
     this.frequency = new Dosefrequency();
+    this.strength = new Strength();
   }
 }
+
 

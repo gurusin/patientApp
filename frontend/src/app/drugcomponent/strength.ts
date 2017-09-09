@@ -1,4 +1,4 @@
-import {Strengthunit} from "./strengthunit";
+
 
 export class Strength {
   strengthId: number;

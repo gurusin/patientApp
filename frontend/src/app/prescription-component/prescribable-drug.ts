@@ -6,10 +6,11 @@ export class PrescribableDrug {
   public drug:Drug;
   strengths:Strength[];
   doseFrequency:Dosefrequency[];
+  selectedStrengthIndex :0;
   doseAmount:number;
   doseDuration:number;
   durationUnit:string[];
-  selectedStrength:string;
+  selectedStrength:Strength;
   selectedFrequency:number;
   selectedDuration:string;
   meal:string;
@@ -20,5 +21,6 @@ export class PrescribableDrug {
   {
     this.drug=new Drug();
     this.rowId = new Date().getMilliseconds();
+    this.selectedStrength = new Strength();
   }
 }

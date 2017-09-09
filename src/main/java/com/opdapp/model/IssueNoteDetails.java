@@ -15,7 +15,7 @@ public class IssueNoteDetails {
 
     @ManyToOne
     @JoinColumn(name = "itemId")
-    private Item item;
+    private DrugPackage drugPackage;
 
     private double buyingQuantity;
 
@@ -27,12 +27,12 @@ public class IssueNoteDetails {
         this.issueNoteId = issueNoteId;
     }
 
-    public Item getItem() {
-        return item;
+    public DrugPackage getDrugPackage() {
+        return drugPackage;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setDrugPackage(DrugPackage drugPackage) {
+        this.drugPackage = drugPackage;
     }
 
     public double getBuyingQuantity() {

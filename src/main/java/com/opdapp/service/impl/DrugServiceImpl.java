@@ -40,17 +40,6 @@ public class DrugServiceImpl implements DrugService {
     public PrescribableDrug getByDrugId(long drugId) {
         PrescribableDrug prescribableDrug = new PrescribableDrug();
         List<DoseFrequency> doseFrequencies = frequencyRepository.findAll();
-//        List<String> doseFrequency = new ArrayList<String>();
-
-//        for (DoseFrequency doseFrequencyObj : doseFrequencies) {
-//            StringBuilder freStr = new StringBuilder();
-//            if (doseFrequencyObj.getNoofDoses() > 1) {
-//                freStr.append(doseFrequencyObj.getNoofDoses());
-//                freStr.append(" times ");
-//            }
-//            freStr.append(doseFrequencyObj.getTimeUnit());
-//            doseFrequency.add(freStr.toString());
-//        }
 
         prescribableDrug.setDoseFrequency(doseFrequencies);
 
@@ -67,17 +56,10 @@ public class DrugServiceImpl implements DrugService {
         prescribableDrug.setDrug(drug);
 
         List<DrugPackage> strengthList = drugPackageRepository.getDrugPackageByDrug(drug);
-        List<String> strenghts = new ArrayList<String>();
-        for (DrugPackage strength : strengthList) {
-            StringBuilder strStr = new StringBuilder();
-            if (strength.getStrength().getStrengthAmount() != 0) {
-                strStr.append(strength.getStrength().getStrengthAmount());
-                strStr.append(" ");
-            }
-            strStr.append(strength.getStrength().getStrengthUnit().getUnitName());
-            strenghts.add(strStr.toString());
+        List<Strength> strenghts = new ArrayList<Strength>();
+        for (DrugPackage obj : strengthList) {
+            strenghts.add(obj.getStrength());
         }
-
         prescribableDrug.setStrengths(strenghts);
 
         return prescribableDrug;

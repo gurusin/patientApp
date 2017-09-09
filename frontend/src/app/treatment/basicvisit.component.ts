@@ -6,6 +6,11 @@ import {PatientServiceService} from "../patient-service.service";
 import {PrescribableDrug} from "../prescription-component/prescribable-drug";
 import {DrugServiceService} from "../drug-service.service";
 import {Router} from "@angular/router";
+import { MdDialog } from "@angular/material";
+import {PrintreceiptComponent} from "../prescription-component/printreceipt.component";
+import { MdDialogRef, MD_DIALOG_DATA } from "@angular/material";
+import {PrintpopComponent} from "./printpop.component";
+
 // import {Popup} from "ng2-opd-popup";
 
 @Component({
@@ -18,8 +23,11 @@ export class BasicvisitComponent implements OnInit {
   patientVisit: Patientvisit;
   @Input() patient: Patient;
 
+  dialogRef: MdDialogRef<PrintpopComponent>;
+
   constructor(private patientService: PatientServiceService,
-              private drugService: DrugServiceService, private router: Router){//}, private popup:Popup) {
+              private drugService: DrugServiceService, private router: Router,
+              public mdDialog: MdDialog){//}, private popup:Popup) {
     this.patientVisit = new Patientvisit();
     this.patientVisit.diagnoseData = '';
     this.patientVisit.prescribableDrug = []
@@ -39,11 +47,13 @@ export class BasicvisitComponent implements OnInit {
     var details = [];
     this.patientVisit.prescribableDrug.forEach((obj: PrescribableDrug) => {
         var detail = new PrescriptionDetail();
+        alert(obj);
+        console.log(obj);
         detail.drugId = obj.drug.drugId;
         detail.drug.drugId = obj.drug.drugId;
         detail.amount = obj.doseAmount;
         detail.duration = obj.doseDuration;
-        detail.strength = obj.selectedStrength;
+        detail.strength = obj.strengths[obj.selectedStrengthIndex];
         detail.frequency.doseFrequencyId = obj.selectedFrequency;
         detail.intervalUnit = obj.selectedDuration;
         detail.meal = obj.meal;
@@ -51,10 +61,16 @@ export class BasicvisitComponent implements OnInit {
       }
     );
     presc.prescriptionDetails = details;
-    this.drugService.savePrescription(presc);
+    this.drugService.savePrescription(presc).subscribe(
+        data =>{
+            alert('Prescription Saved');
+            console.log(data)
+            this.mdDialog.open(PrintreceiptComponent);
+        }
+    );
 
     //TODO Remove this once pop up is done
-    window.location.reload();
+    //window.location.reload();
 
     // this.popup.options = {
     //   header: "Print Prescription ",
@@ -73,6 +89,11 @@ export class BasicvisitComponent implements OnInit {
 
     // this.popup.show(this.popup.options);
   }
+
+    showPopup()
+    {
+        this.dialogRef = this.mdDialog.open(PrintpopComponent);
+    }
 
 
 }

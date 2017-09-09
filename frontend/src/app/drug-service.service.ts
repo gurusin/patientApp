@@ -28,12 +28,8 @@ export class DrugServiceService {
     return this.http.post(this.rootUrl + "getPrescribable", drugId).map((res: Response) => res.json());
   }
 
-  savePrescription(obj: any) {
-    this.http.post(this.rootUrl + "savePrescription", obj).map((res: Response) => res.json()).subscribe(
-      data => {
-        console.log("successful");
-      }
-    );
+  savePrescription(obj: any):Observable<any> {
+     return this.http.post(this.rootUrl + "savePrescription", obj).map((res: Response) => res.json());
   }
 
   loadPrescriptions(patientId: any): Observable<any[]> {

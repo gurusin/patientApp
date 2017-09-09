@@ -166,7 +166,8 @@ public class PoServiceImpl implements POService {
             final Item item = itemRepository.findOne(detail.getItemId());
             updateItemStock(item,detail.getQuantity() * -1);
             final IssueNoteDetails detEntity = new IssueNoteDetails();
-            detEntity.setItem(item);
+            // TODO : Item should be mapped to Drug Package
+            //detEntity.setItem(item);
             detEntity.setIssueNote(note);
             detEntity.setBuyingQuantity(detail.getQuantity());
             children.add(detEntity);

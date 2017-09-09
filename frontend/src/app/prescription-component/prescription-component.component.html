@@ -20,8 +20,8 @@
         <option *ngFor="let drug of row.drugList" value="{{drug.brandName}}">{{drug.brandName}}</option>
       </datalist>
     </td>
-    <td><select [(ngModel)]="row.selectedStrength">
-      <option *ngFor="let x of row.strengths" value="{{x}}">{{x}}</option>
+    <td><select [(ngModel)]="row.selectedStrengthIndex">
+      <option *ngFor="let x of row.strengths;let j=index" value="{{j}}">{{x.strengthAmount +","+x.strengthUnit.unitName}}</option>
     </select>
     </td>
 

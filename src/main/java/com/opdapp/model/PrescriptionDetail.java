@@ -12,7 +12,9 @@ public class PrescriptionDetail {
     @GeneratedValue
     private long Id;
 
-    private String strength;
+    @ManyToOne()
+    @JoinColumn(name = "strengthId")
+    private Strength strength;
 
     @ManyToOne()
     @JoinColumn(name = "doseFrequencyId")
@@ -50,11 +52,11 @@ public class PrescriptionDetail {
         Id = id;
     }
 
-    public String getStrength() {
+    public Strength getStrength() {
         return strength;
     }
 
-    public void setStrength(String strength) {
+    public void setStrength(Strength strength) {
         this.strength = strength;
     }
 
