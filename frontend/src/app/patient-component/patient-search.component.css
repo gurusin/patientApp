@@ -6,3 +6,8 @@
   color: #aaa;
   z-index: -1;
 }
+
+div.container {
+  width: 100%;
+  border: 1px solid gray;
+}
