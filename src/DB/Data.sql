@@ -132,12 +132,6 @@ Insert into medsys.drug_package (drug_id,strength_id,quantity, min_order_level, 
 Insert into medsys.drug_package (drug_id,strength_id,quantity, min_order_level, unit_price) values (6,5,100, 50, 12);
 Insert into medsys.drug_package (drug_id,strength_id,quantity, min_order_level, unit_price) values (26,27,100,25, 5);
 
-insert into medsys.supplier (supplier_address,supplier_name,supplier_phone) values ('colombo 07', 'Supplier ABC', '077258963542');
-insert into medsys.supplier (supplier_address,supplier_name,supplier_phone) values ('colombo 05', 'Supplier Pharma', '0112587456');
-insert into medsys.supplier (supplier_address,supplier_name,supplier_phone) values ('colombo 03', 'Supplier Tech', '0112587459');
-insert into medsys.supplier (supplier_address,supplier_name,supplier_phone) values ('Borella', 'Supplier Meds', '077258963254');
-
-
 insert into medsys.item_supplier (notes,supplier_address,supplier_fax,supplier_name,supplier_phone) values('Main supplier', 'Union Chemist, Union place','0112456745', 'Union chemist', '0112456345') ;
 insert into medsys.item_supplier (notes,supplier_address,supplier_fax,supplier_name,supplier_phone) values('Main guase supplier', 'Borella Pharmacy, Colombo 08','0112748563', 'Borella Pharmacy', '0716234857');
 insert into medsys.item_supplier (notes,supplier_address,supplier_fax,supplier_name,supplier_phone) values('Secondary suppier', 'Medco , Slave Island','0117283538', 'Medco Oharma', '0777384596');
