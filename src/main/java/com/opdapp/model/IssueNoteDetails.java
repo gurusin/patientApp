@@ -1,5 +1,7 @@
 package com.opdapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class IssueNoteDetails {
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "issueId", nullable = false)
+    @JsonBackReference
     private IssueNote issueNote;
 
     @ManyToOne

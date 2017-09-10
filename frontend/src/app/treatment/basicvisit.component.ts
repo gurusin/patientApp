@@ -33,6 +33,11 @@ export class BasicvisitComponent implements OnInit {
     this.patientVisit.prescribableDrug = []
   }
 
+    onCancel()
+    {
+        // Navigate to any page
+    }
+
   ngOnInit() {
   }
 
@@ -63,9 +68,8 @@ export class BasicvisitComponent implements OnInit {
     presc.prescriptionDetails = details;
     this.drugService.savePrescription(presc).subscribe(
         data =>{
-            alert('Prescription Saved');
-            console.log(data)
-            this.mdDialog.open(PrintreceiptComponent);
+            this.drugService.setSavedPrescription(data);
+            this.router.navigate(['printPo']);
         }
     );
 

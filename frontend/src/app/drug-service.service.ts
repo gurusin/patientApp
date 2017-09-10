@@ -17,6 +17,8 @@ export class DrugServiceService {
   public drugPackage: DrugPackage;
   public strength: Strength;
 
+  public savedPrescription:any;
+
   constructor(private http: Http) {
   }
 
@@ -75,5 +77,9 @@ export class DrugServiceService {
       }
     );
   }
+
+    setSavedPrescription(data: any) {
+        this.savedPrescription = data;
+    }
 }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DrugServiceService} from "../drug-service.service";
 // import {Popup} from "ng2-opd-popup";
 
 @Component({
@@ -8,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrintreceiptComponent implements OnInit {
 
-  // constructor(private popup:Popup) { }
+  prescription : any;
+  constructor(private drugService:DrugServiceService)
+  {
+    this.prescription = this.drugService.savedPrescription;
+  }
 
   ngOnInit() {
   }

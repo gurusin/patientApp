@@ -104,6 +104,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     private IssueNote saveIssueNote(Prescription prescription) {
         IssueNote issueNote = new IssueNote();
+        issueNote.setPatient(prescription.getPatient());
         issueNote.setIssueDate(prescription.getDate());
         issueNote.setIssueStatus(IssueStatus.CREATED);
         issueNote.setPaymentMethod(PaymentMethod.CASH);
