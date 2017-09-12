@@ -70,13 +70,9 @@ export class DrugServiceService {
     );
   }
 
-  saveBaseDrug(baseDrug: any) {
+  saveBaseDrug(baseDrug: any):Observable<any> {
     var url = localStorage.getItem("rootURL") +"saveBaseDrug";
-    return this.http.post(url, baseDrug).map((res: Response) => res.json()).subscribe(
-      data => {
-        this.baseDrug = data;
-      }
-    );
+    return this.http.post(url, baseDrug).map((res: Response) => res.json());
   }
 
   saveDrug(drug: any):Observable<any>

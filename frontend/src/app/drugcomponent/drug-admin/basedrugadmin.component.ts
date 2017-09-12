@@ -40,15 +40,10 @@ export class BasedrugadminComponent implements OnInit {
   }
 
   onSubmit() {
-    this.drugServiceService.saveBaseDrug(this.baseDrug);
-    this.drugServiceService.baseDrug = new Basedrug();
-    this.drugServiceService.loadBaseDrugs(
-    ).subscribe(
-      data => {
-        this.baseDrugList = data;
-      }
+    this.drugServiceService.saveBaseDrug(this.baseDrug).subscribe(
+        data =>{ this.baseDrugList.push(data);
+        this.cancelEdit();}
     );
-    // window.location.reload();
   }
 
   cancelEdit() {
