@@ -56,15 +56,12 @@ export class DrugpackageadminComponent implements OnInit {
   }
 
   onSubmit() {
-    this.drugServiceService.saveDrugPackage(this.drugPackage);
-    this.drugServiceService.drugPackage = new DrugPackage();
-    this.drugServiceService.loadDrugPacakges(
-    ).subscribe(
-      data => {
-        this.drugPackageList = data;
-      }
+    this.drugServiceService.saveDrugPackage(this.drugPackage).subscribe(
+        data =>{
+            this.drugPackageList = data;
+            this.cancelEdit();
+        }
     );
-    window.location.reload();
   }
 
   cancelEdit() {

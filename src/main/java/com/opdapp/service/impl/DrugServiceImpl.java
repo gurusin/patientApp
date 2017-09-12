@@ -209,9 +209,17 @@ public class DrugServiceImpl implements DrugService {
     }
 
     private DrugPackage getDrugPackage(DrugPackageDTO drugPackageDTO) {
-        DrugPackage drugPackage = new DrugPackage();
-        drugPackage.setDrug(createDrug(drugPackageDTO.getDrug()));
-        drugPackage.setDrugPackageId(drugPackageDTO.getDrugPackageId());
+
+        DrugPackage drugPackage =  null;
+        if (drugPackageDTO.getDrugPackageId() >0)
+        {
+            drugPackage = drugPackageRepository.findOne(drugPackageDTO.getDrugPackageId());
+        }
+        else
+        {
+            drugPackage = new DrugPackage();
+        }
+        drugPackage.setDrug(drugRepository.findOne(drugPackageDTO.getDrug().getDrugId()));
         drugPackage.setQuantity(drugPackageDTO.getQuantity());
         drugPackage.setStrength(getStrength(drugPackageDTO.getStrength()));
         drugPackage.setMinOrderLevel(drugPackageDTO.getMinOrderLevel());
@@ -220,13 +228,7 @@ public class DrugServiceImpl implements DrugService {
     }
 
     private Strength getStrength(StrengthDTO strengthDTO) {
-        Strength strength = new Strength();
-        strength.setStrengthId(strengthDTO.getStrengthId());
-        strength.setStrengthAmount(strengthDTO.getStrengthAmount());
-        StrengthUnit strengthUnit = new StrengthUnit();
-        strengthUnit.setUnitId(strengthDTO.getStrengthId());
-        strengthUnit.setUnitName(strengthDTO.getUnitName());
-        return strength;
+        return strengthRepository.findOne(strengthDTO.getStrengthId());
     }
 
     private void saveItem(final DrugPackage drugPackage) {

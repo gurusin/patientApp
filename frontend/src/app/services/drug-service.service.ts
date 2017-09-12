@@ -61,13 +61,9 @@ export class DrugServiceService {
     return this.http.get(url).map((res: Response) => res.json());
   }
 
-  saveDrugPackage(drugPackage: any) {
+  saveDrugPackage(drugPackage: any):Observable<any> {
     var url = localStorage.getItem("rootURL") +"saveDrugPackage";
-    return this.http.post(url, drugPackage).map((res: Response) => res.json()).subscribe(
-      data => {
-        this.drugPackage = data;
-      }
-    );
+    return this.http.post(url, drugPackage).map((res: Response) => res.json());
   }
 
   saveBaseDrug(baseDrug: any):Observable<any> {

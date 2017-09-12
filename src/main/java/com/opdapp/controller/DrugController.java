@@ -71,7 +71,8 @@ public class DrugController {
 
     @RequestMapping(path = "/saveDrugPackage", method = RequestMethod.POST)
     public @ResponseBody
-    DrugPackageDTO saveDrugPackage(@RequestBody final DrugPackageDTO drugPackageDTO) {
-        return drugService.saveDrugPackage(drugPackageDTO);
+    List<DrugPackageDTO> saveDrugPackage(@RequestBody final DrugPackageDTO drugPackageDTO) {
+         drugService.saveDrugPackage(drugPackageDTO);
+         return drugService.findAllDrugPackages();
     }
 }
