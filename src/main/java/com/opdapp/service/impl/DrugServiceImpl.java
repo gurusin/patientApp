@@ -175,6 +175,7 @@ public class DrugServiceImpl implements DrugService {
 
     public DrugDTO saveDrug(final DrugDTO drugDTO) {
         Drug drug = createDrug(drugDTO);
+        drug.setBaseDrug(baseDrugRepository.findOne(drug.getBaseDrug().getBaseDrugId()));
         Drug savedDrug = drugRepository.save(drug);
         return getDrugDTO(savedDrug);
     }
