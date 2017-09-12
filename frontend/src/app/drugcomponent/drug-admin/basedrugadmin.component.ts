@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DrugPackage} from "../drug-package";
 import {Basedrug} from "../basedrug";
-import {DrugServiceService} from "../../drug-service.service";
+import {DrugServiceService} from "../../services/drug-service.service";
 
 @Component({
   selector: 'app-basedrugadmin',
@@ -48,7 +48,7 @@ export class BasedrugadminComponent implements OnInit {
         this.baseDrugList = data;
       }
     );
-    window.location.reload();
+    // window.location.reload();
   }
 
   cancelEdit() {

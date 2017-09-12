@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Itemtype} from "./itemtype";
 import {Router} from "@angular/router";
-import {AdminService} from "../admin.service";
+import {AdminService} from "../services/admin.service";
 
 @Component({
   selector: 'app-itemtype',

@@ -1,9 +1,11 @@
 package com.opdapp.dto;
 
+import com.opdapp.model.IssueNote;
+
 public class SavedPrescriptionDTO {
 
     private PrescriptionDTO prescriptionDTO;
-    private long issueNo;
+    private IssueNote issueNote;
 
     public PrescriptionDTO getPrescriptionDTO() {
         return prescriptionDTO;
@@ -13,11 +15,11 @@ public class SavedPrescriptionDTO {
         this.prescriptionDTO = prescriptionDTO;
     }
 
-    public long getIssueNo() {
-        return issueNo;
+    public IssueNote getIssueNote() {
+        return issueNote;
     }
 
-    public void setIssueNo(long issueNo) {
-        this.issueNo = issueNo;
+    public void setIssueNote(IssueNote issueNote) {
+        this.issueNote = issueNote;
     }
 }

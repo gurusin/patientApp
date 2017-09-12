@@ -4,3 +4,8 @@
   font-size: 25px;
   font-family: "Bookman Old Style";
 }
+
+div.container {
+  width: 100%;
+  border: 1px solid gray;
+}

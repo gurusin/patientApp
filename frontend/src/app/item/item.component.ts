@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Itemproduct} from "./itemproduct";
-import {ItemProductService} from "../itemProduct.service";
+import {ItemProductService} from "../services/itemProduct.service";
 import {Router} from "@angular/router";
-import {AdminService} from "../admin.service";
+import {AdminService} from "../services/admin.service";
 
 @Component({
   selector: 'app-item',

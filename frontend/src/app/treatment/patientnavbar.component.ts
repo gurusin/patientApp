@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Patient} from "../patient";
-import {PatientServiceService} from "../patient-service.service";
+import {PatientServiceService} from "../services/patient-service.service";
 import {Subject} from "rxjs/Subject";
 import {Router} from "@angular/router";
 

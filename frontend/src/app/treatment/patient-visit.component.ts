@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Patientvisit} from "./patientvisit";
 import {Patient} from "../patient";
 import {ActivatedRoute, Data, Params, Router} from "@angular/router";
-import {PatientServiceService} from "../patient-service.service";
+import {PatientServiceService} from "../services/patient-service.service";
 import {Subject} from "rxjs/Subject";
 
 @Component({

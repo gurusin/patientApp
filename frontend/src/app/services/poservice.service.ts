@@ -7,34 +7,37 @@ import 'rxjs/Rx';
 @Injectable()
 export class POServiceService {
 
-  rootUrl ="http://localhost:8080/";
-
   constructor(private http:Http) {}
 
 
   savePO(po: PurchaseOrderDTO)
   {
-    this.http.post(this.rootUrl+"savePO",po).map((res:Response) =>res.json()).subscribe(
+    var url = localStorage.getItem("rootURL") +"savePO";
+    this.http.post(url,po).map((res:Response) =>res.json()).subscribe(
       data =>{}
     );
   }
 
   saveGRN(obj):Observable<any>
   {
-    return this.http.post(this.rootUrl+"registerGRN",obj).map((res:Response) =>res.json())
+    var url = localStorage.getItem("rootURL")+"registerGRN";
+    return this.http.post(url,obj).map((res:Response) =>res.json())
   }
 
   loadPO(poId) :Observable<any>
   {
-    return this.http.post(this.rootUrl+"loadPOForInput",poId).map((res:Response) =>res.json());
+    var url = localStorage.getItem("rootURL")+"loadPOForInput";
+    return this.http.post(url,poId).map((res:Response) =>res.json());
   }
 
   loadPendingPOs():Observable<any[]>
   {
-    return this.http.get(this.rootUrl+"loadPendingPOs").map((res:Response) =>res.json())
+    var url = localStorage.getItem("rootURL")+"loadPendingPOs";
+    return this.http.get(url).map((res:Response) =>res.json())
   }
 
   saveIssue(issueObject: any) {
-    return this.http.post(this.rootUrl+"saveIssue",issueObject).map((res:Response) =>res.json());
+    var url = localStorage.getItem("rootURL")+"saveIssue";
+    return this.http.post(url,issueObject).map((res:Response) =>res.json());
   }
 }

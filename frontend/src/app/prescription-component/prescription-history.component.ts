@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {PatientServiceService} from "../patient-service.service";
-import {DrugServiceService} from "../drug-service.service";
+import {PatientServiceService} from "../services/patient-service.service";
+import {DrugServiceService} from "../services/drug-service.service";
 
 @Component({
   selector: 'app-prescription-history',

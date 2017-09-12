@@ -7,6 +7,9 @@ import java.sql.Date;
 import java.util.List;
 
 public class IssueDTO {
+
+    private long issueNo;
+
     private Date issueDate;
 
     private IssueStatus issueStatus;
@@ -45,5 +48,13 @@ public class IssueDTO {
 
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public long getIssueNo() {
+        return issueNo;
+    }
+
+    public void setIssueNo(long issueNo) {
+        this.issueNo = issueNo;
     }
 }

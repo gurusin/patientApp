@@ -1,14 +1,45 @@
 <!--<popup>-->
-<!--<div id="print-section">-->
-<!--<h1 align="center">OPD Name : ABS Medical Center</h1>-->
-<!--<h4 align="center">Nugegoda, Gansabha handiya, </h4>-->
-<!--<h4 align="center">0718345345</h4>-->
-<!--<br/>-->
-<!--<div> Doctor : Eshan Gamage</div>-->
-<!--<div> Time : 2017/08/19 : 12.15 </div>-->
-<h1>Prescription is saved </h1>
-<label>Issue Id :</label>
-<label>{{prescription.issueNo}}</label>
+<div id="print-section">
+<h1 align="center">OPD Name : ABS Medical Center</h1>
+<h4 align="center">Nugegoda, Gansabha handiya, </h4>
+<h4 align="center">0718345345</h4>
+<br/>
+<div> Doctor : Janaka </div>
+<div> Time : 2017/08/19 : 12.15 </div>
+
+  <div *ngIf="prescription.issueNote.issueNote > 0">
+    <label> Issue No : {{prescription.issueNote.issueNote}}</label><br/>
+    <label>Patient :</label>
+    <label>{{prescription.issueNote.patient.firstname}},{{prescription.issueNote.patient.lastname}}</label>
+    <br/>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <td>Drug</td>
+        <td>Base Drug</td>
+        <td>Unit Price</td>
+        <td>Prescribed Qty</td>
+        <td>Price</td>
+        <!--<td>Issued Qty</td>-->
+        <!--<td>Price</td>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of prescription.issueNote.issueNoteDetails">
+        <td>{{row.drugPackage.drug.brandName}}</td>
+        <td>{{row.drugPackage.drug.baseDrug.baseDrugName}}</td>
+        <td>{{row.drugPackage.unitPrice}}</td>
+        <td>{{row.buyingQuantity}}</td>
+        <td>{{row.drugPackage.unitPrice * row.buyingQuantity }}</td>
+        <!--<td><input type="number" [(ngModel)]="row.issuedQty"></td>-->
+        <!--<td>{{row.issuedQty * row.drugPackage.buyingQuantity}}</td>-->
+      </tr>
+      </tbody>
+    </table>
+    <br/>
+
+  </div>
+  <!--<button type="button" class="button btn-primary" (click)="makeIssue()">Make Issue</button>-->
 <!--<h2 align="center">Reciept : No 12323</h2>-->
 <!--<table width="100%">-->
   <!--<tr >-->
@@ -59,7 +90,7 @@
     <!--<td>660</td>-->
   <!--</tr>-->
 <!--</table>-->
-<!--</div>-->
-<!--<button (click)="print()"> Print Prescription</button>-->
+</div>
+<button (click)="print()"> Print Prescription</button>
 <!--</popup>-->
 <!--<button (click)="clickButton()" > Click here </button>-->

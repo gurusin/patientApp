@@ -5,7 +5,7 @@ import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
 import {PatientSearchComponent} from './patient-component/patient-search.component';
-import {PatientServiceService} from "./patient-service.service";
+import {PatientServiceService} from "./services/patient-service.service";
 import {PatientsaveComponent} from './patientsave/patientsave.component';
 import {TreatmentComponent} from './treatment/treatment.component';
 import {NavbarComponent} from './navbar.component'
@@ -18,24 +18,24 @@ import {DrugdosageComponent} from './drugcomponent/drugdosage.component';
 import {DrugsearchComponent} from './drugcomponent/drugsearch.component';
 import {DrugdosagelistComponent} from './drugcomponent/drugdosagelist.component';
 import {PrescriptionComponentComponent} from './prescription-component/prescription-component.component';
-import {DrugServiceService} from "app/drug-service.service";
+import {DrugServiceService} from "app/services/drug-service.service";
 import {PrescriptionHistoryComponent} from './prescription-component/prescription-history.component';
 import {PrescriptiondetailComponent} from './prescription-component/prescriptiondetail.component';
 import {PrintreceiptComponent} from './prescription-component/printreceipt.component';
 import {PatientadminComponent} from './patient-component/patientadmin.component';
-import {MdDialog, MaterialModule, MdIconRegistry} from "@angular/material";
-import {OVERLAY_PROVIDERS, MdDialogModule} from "@angular/material";
+// import {MdDialog, MaterialModule, MdIconRegistry} from "@angular/material";
+// import {OVERLAY_PROVIDERS, MdDialogModule} from "@angular/material";
 // import {PopupModule} from "ng2-opd-popup";
 import {PrintpopComponent} from './treatment/printpop.component';
 import {DrugAdminComponent} from './drugcomponent/drug-admin/drug-admin.component';
 import {BasedrugadminComponent} from './drugcomponent/drug-admin/basedrugadmin.component';
 import {DrugpackageadminComponent} from './drugcomponent/drug-admin/drugpackageadmin.component';
 import {DropdownModule} from "ngx-dropdown";
-import {AdminService} from "./admin.service";
+import {AdminService} from "./services/admin.service";
 import {ItemServiceService} from "./services/item-service.service";
 import {POServiceService} from "./services/poservice.service";
-import {ItemSupplierService} from "./itemsupplier.service";
-import {ItemProductService} from "./itemProduct.service";
+import {ItemSupplierService} from "./services/itemsupplier.service";
+import {ItemProductService} from "./services/itemProduct.service";
 import {ReportComponent} from "./report/report.component";
 import {IssueComponent} from "./issue/issue.component";
 import {PurchseorderComponent} from "./purchseorder/purchseorder.component";
@@ -44,9 +44,11 @@ import {MenubarComponent} from "./menubar.component";
 import {GrnComponent} from "./grn/grn.component";
 import {ItemtypeComponent} from "./item/itemtype.component";
 import {SupplierComponent} from "./supplier/supplier.component";
-import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
+// import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {IssueFinderComponent} from './issue/issue-finder.component';
 import {IssueServiceService} from "./services/issue-service.service";
+import { MedserviceComponent } from './medservice/medservice.component';
+import {MedicalServiceItemService} from "./services/medical-service-item.service";
 
 @NgModule({
     declarations: [
@@ -82,18 +84,19 @@ import {IssueServiceService} from "./services/issue-service.service";
         ItemtypeComponent,
         GrnComponent,
         IssueFinderComponent,
+        MedserviceComponent,
 
     ],
     imports: [
-        BrowserModule, BrowserAnimationsModule,
+        BrowserModule, //BrowserAnimationsModule,
         FormsModule,
-        DropdownModule, NoopAnimationsModule,
-        HttpModule, routing, MdDialogModule//PopupModule.forRoot(),
+        DropdownModule, //NoopAnimationsModule,
+        HttpModule, routing//, MdDialogModule//PopupModule.forRoot(),
     ],
     entryComponents: [PrintpopComponent],
     providers: [PatientServiceService, DrugServiceService, AdminService, ItemSupplierService,
-        ItemProductService, ItemServiceService, POServiceService, IssueServiceService,
-        MdDialog, OVERLAY_PROVIDERS],
+        ItemProductService, ItemServiceService, POServiceService, IssueServiceService, MedicalServiceItemService],
+        // MdDialog, OVERLAY_PROVIDERS],
     bootstrap: [AppComponent]
 })
 export class AppModule {

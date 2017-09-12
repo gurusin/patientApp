@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PatientServiceService} from "../patient-service.service";
+import {PatientServiceService} from "../services/patient-service.service";
 import {Observable} from "rxjs/Observable";
 import {Patient} from "../patient";
 import {Router} from "@angular/router";

@@ -1,8 +1,6 @@
 package com.opdapp.service.impl;
 
-import com.opdapp.dto.PrescriptionDTO;
-import com.opdapp.dto.PrescriptionDetailDTO;
-import com.opdapp.dto.SavedPrescriptionDTO;
+import com.opdapp.dto.*;
 import com.opdapp.model.*;
 import com.opdapp.repository.*;
 import com.opdapp.service.PrescriptionService;
@@ -74,32 +72,54 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
         // Saving the auto created issue note
         final IssueNote note = saveIssueNote(savedPrescription);
-        savedPrescriptionDTO.setIssueNo(note.getIssueNote());
+        savedPrescriptionDTO.setIssueNote(note);
         populateDTo(savedPrescriptionDTO, prescription);
         return savedPrescriptionDTO;
     }
 
-    private void populateDTo(final SavedPrescriptionDTO dto, final Prescription prescription)
-    {
+    private IssueDTO getIssueDTO(IssueNote issueNote) {
+        IssueDTO issueNoteDTO = new IssueDTO();
+        issueNoteDTO.setIssueDate(issueNote.getIssueDate());
+        issueNoteDTO.setIssueStatus(issueNote.getIssueStatus());
+        issueNoteDTO.setPaymentMethod(issueNote.getPaymentMethod());
+        issueNoteDTO.setIssueNo(issueNote.getIssueNote());
+        issueNoteDTO.setDetails(getIssueDetailsDTO(issueNote.getIssueNoteDetails()));
+        return issueNoteDTO;
+    }
+
+    private List<IssueDetailDTO> getIssueDetailsDTO(Set<IssueNoteDetails> issueNoteDetails) {
+        List<IssueDetailDTO> issueDetailDTOS = new ArrayList<IssueDetailDTO>();
+        for (IssueNoteDetails issueNoteDetail : issueNoteDetails) {
+            IssueDetailDTO issueDetailDTO = new IssueDetailDTO();
+            issueDetailDTO.setItemId(issueNoteDetail.getDrugPackage().getDrugPackageId());
+            issueDetailDTO.setQuantity(issueNoteDetail.getBuyingQuantity());
+            issueDetailDTO.setItemPrice(issueNoteDetail.getDrugPackage().getUnitPrice());
+            issueDetailDTO.setDescription(issueNoteDetail.getDrugPackage().getDrug().getBrandName() + ", " + issueNoteDetail.getDrugPackage().getStrength().getStrengthAmount() + issueNoteDetail.getDrugPackage().getStrength().getStrengthAmount());
+            issueDetailDTOS.add(issueDetailDTO);
+        }
+        return issueDetailDTOS;
+    }
+
+    private void populateDTo(final SavedPrescriptionDTO dto, final Prescription prescription) {
         final PrescriptionDTO prescriptionDTO = new PrescriptionDTO();
         prescriptionDTO.setDiagnosis(prescription.getDiagnosis());
         prescriptionDTO.setPrescriptionDetailDTOS(convertToDetailDTO(prescription));
         prescriptionDTO.setPrescriptionDate(prescription.getDate());
+        prescriptionDTO.setPatientName(prescription.getPatient().getFirstname() + prescription.getPatient().getLastname());
         dto.setPrescriptionDTO(prescriptionDTO);
     }
 
     private List<PrescriptionDetailDTO> convertToDetailDTO(Prescription prescription) {
         final List<PrescriptionDetailDTO> dtoSet = new ArrayList<>();
-        for (final PrescriptionDetail detail : prescription.getPrescriptionDetails())
-        {
+        for (final PrescriptionDetail detail : prescription.getPrescriptionDetails()) {
             final PrescriptionDetailDTO dto = new PrescriptionDetailDTO();
             // TODO: Create detached objects to avoid the stack overflow
             dto.setDrug(detail.getDrug());
             dto.setAmount(detail.getAmount());
-            dto.setStrength(detail.getStrength().getStrengthAmount()+"," + detail.getStrength().getStrengthUnit());
+            dto.setStrength(detail.getStrength().getStrengthAmount() + "," + detail.getStrength().getStrengthUnit());
             dtoSet.add(dto);
         }
-        return  dtoSet;
+        return dtoSet;
     }
 
     private IssueNote saveIssueNote(Prescription prescription) {
@@ -108,6 +128,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         issueNote.setIssueDate(prescription.getDate());
         issueNote.setIssueStatus(IssueStatus.CREATED);
         issueNote.setPaymentMethod(PaymentMethod.CASH);
+        issueNote.setExternalId(prescription.getId());
         issueNote.setIssueNoteDetails(createIssueDetails(prescription, issueNote));
         return issueNoteRepository.save(issueNote);
     }

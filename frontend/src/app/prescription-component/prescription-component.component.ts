@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Patientvisit} from "../treatment/patientvisit";
 import {Drug} from "../drugcomponent/drug";
-import {DrugServiceService} from "../drug-service.service";
+import {DrugServiceService} from "../services/drug-service.service";
 import {DrugSearchResult} from "app/prescription-component/drug-search-result";
 import {forEach} from "@angular/router/src/utils/collection";
 import {PrescribableDrug} from "./prescribable-drug";
@@ -9,7 +9,7 @@ import 'rxjs/Rx';
 import {Http, RequestMethod, RequestOptions,Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {Patient} from "../patient";
-import {PatientServiceService} from "../patient-service.service";
+import {PatientServiceService} from "../services/patient-service.service";
 import {Router} from "@angular/router";
 import {concatStatic} from "rxjs/operator/concat";
 import {Dosefrequency} from "../drugcomponent/dosefrequency";

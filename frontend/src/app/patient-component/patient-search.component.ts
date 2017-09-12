@@ -1,5 +1,5 @@
 import {Component, HostListener} from '@angular/core';
-import {PatientServiceService} from "../patient-service.service";
+import {PatientServiceService} from "../services/patient-service.service";
 import {Data, Router} from "@angular/router";
 import {Patient} from "../patient";
 

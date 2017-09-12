@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DrugServiceService} from "../../drug-service.service";
+import {DrugServiceService} from "../../services/drug-service.service";
 import {Basedrug} from "../basedrug";
 import {Drug} from "../drug";
 import {DrugPackage} from "../drug-package";

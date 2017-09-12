@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AdminService} from "../admin.service";
+import {AdminService} from "../services/admin.service";
 import {Router} from "@angular/router";
 import {ItemSupplier} from "./ItemSupplier";
 

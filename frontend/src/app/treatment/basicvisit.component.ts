@@ -2,13 +2,13 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Patientvisit} from "./patientvisit";
 import {Patient} from "../patient";
 import {Prescription, PrescriptionDetail} from "../prescription-component/prescription-component.component";
-import {PatientServiceService} from "../patient-service.service";
+import {PatientServiceService} from "../services/patient-service.service";
 import {PrescribableDrug} from "../prescription-component/prescribable-drug";
-import {DrugServiceService} from "../drug-service.service";
+import {DrugServiceService} from "../services/drug-service.service";
 import {Router} from "@angular/router";
-import { MdDialog } from "@angular/material";
+// import { MdDialog } from "@angular/material";
 import {PrintreceiptComponent} from "../prescription-component/printreceipt.component";
-import { MdDialogRef, MD_DIALOG_DATA } from "@angular/material";
+// import { MdDialogRef, MD_DIALOG_DATA } from "@angular/material";
 import {PrintpopComponent} from "./printpop.component";
 
 // import {Popup} from "ng2-opd-popup";
@@ -23,11 +23,11 @@ export class BasicvisitComponent implements OnInit {
   patientVisit: Patientvisit;
   @Input() patient: Patient;
 
-  dialogRef: MdDialogRef<PrintpopComponent>;
+  // dialogRef: MdDialogRef<PrintpopComponent>;
 
   constructor(private patientService: PatientServiceService,
-              private drugService: DrugServiceService, private router: Router,
-              public mdDialog: MdDialog){//}, private popup:Popup) {
+              private drugService: DrugServiceService, private router: Router){
+              // public mdDialog: MdDialog){//}, private popup:Popup) {
     this.patientVisit = new Patientvisit();
     this.patientVisit.diagnoseData = '';
     this.patientVisit.prescribableDrug = []
@@ -52,7 +52,6 @@ export class BasicvisitComponent implements OnInit {
     var details = [];
     this.patientVisit.prescribableDrug.forEach((obj: PrescribableDrug) => {
         var detail = new PrescriptionDetail();
-        alert(obj);
         console.log(obj);
         detail.drugId = obj.drug.drugId;
         detail.drug.drugId = obj.drug.drugId;
@@ -96,7 +95,7 @@ export class BasicvisitComponent implements OnInit {
 
     showPopup()
     {
-        this.dialogRef = this.mdDialog.open(PrintpopComponent);
+        // this.dialogRef = this.mdDialog.open(PrintpopComponent);
     }
 
 

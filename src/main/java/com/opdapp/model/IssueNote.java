@@ -26,6 +26,8 @@ public class IssueNote {
 
     private IssueStatus issueStatus;
 
+    private long externalId;
+
     public long getIssueNote() {
         return issueNote;
     }
@@ -72,5 +74,13 @@ public class IssueNote {
 
     public void setIssueStatus(IssueStatus issueStatus) {
         this.issueStatus = issueStatus;
+    }
+
+    public long getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(long externalId) {
+        this.externalId = externalId;
     }
 }

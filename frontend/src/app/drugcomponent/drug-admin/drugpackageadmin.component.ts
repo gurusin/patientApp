@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DrugPackage} from "../drug-package";
-import {DrugServiceService} from "../../drug-service.service";
+import {DrugServiceService} from "../../services/drug-service.service";
 
 @Component({
   selector: 'app-drugpackageadmin',

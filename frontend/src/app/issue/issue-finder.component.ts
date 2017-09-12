@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {IssueServiceService} from "../services/issue-service.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-issue-finder',
@@ -10,7 +11,7 @@ export class IssueFinderComponent implements OnInit {
 
     issue: any;
 
-    constructor(private issueService: IssueServiceService) {
+    constructor(private issueService: IssueServiceService, private router:Router,) {
         this.issue = new Object();
     }
 
@@ -46,6 +47,8 @@ export class IssueFinderComponent implements OnInit {
         );
 
         this.issueService.makeIssue(obj).subscribe();
+
+      this.router.navigate(['']);
     }
 
 }

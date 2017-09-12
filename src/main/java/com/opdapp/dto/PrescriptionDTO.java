@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class PrescriptionDTO {
     private long patientId;
+    private String patientName;
     private String diagnosis;
     private String notes;
     private String symptoms;
@@ -74,5 +75,13 @@ public class PrescriptionDTO {
 
     public void setSymptoms(String symptoms) {
         this.symptoms = symptoms;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 }
