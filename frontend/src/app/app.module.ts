@@ -47,8 +47,7 @@ import {SupplierComponent} from "./supplier/supplier.component";
 // import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {IssueFinderComponent} from './issue/issue-finder.component';
 import {IssueServiceService} from "./services/issue-service.service";
-import { MedserviceComponent } from './medservice/medservice.component';
-import {MedicalServiceItemService} from "./services/medical-service-item.service";
+import { PharmacyComponent } from './pharmacy/pharmacy.component';
 
 @NgModule({
     declarations: [
@@ -84,8 +83,7 @@ import {MedicalServiceItemService} from "./services/medical-service-item.service
         ItemtypeComponent,
         GrnComponent,
         IssueFinderComponent,
-        MedserviceComponent,
-
+        PharmacyComponent,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,
@@ -95,7 +93,7 @@ import {MedicalServiceItemService} from "./services/medical-service-item.service
     ],
     entryComponents: [PrintpopComponent],
     providers: [PatientServiceService, DrugServiceService, AdminService, ItemSupplierService,
-        ItemProductService, ItemServiceService, POServiceService, IssueServiceService, MedicalServiceItemService],
+        ItemProductService, ItemServiceService, POServiceService, IssueServiceService],
         // MdDialog, OVERLAY_PROVIDERS],
     bootstrap: [AppComponent]
 })

@@ -91,5 +91,10 @@ export class DrugServiceService {
     setSavedPrescription(data: any) {
         this.savedPrescription = data;
     }
+
+  loadPrescriptionByDate(date: any) {
+    var url = localStorage.getItem("rootURL") +"loadPrescriptionByDate";
+    return this.http.post(url, date).map((res: Response) => res.json());
+  }
 }
 

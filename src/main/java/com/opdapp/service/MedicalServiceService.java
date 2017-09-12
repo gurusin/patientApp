@@ -1,11 +1,11 @@
 package com.opdapp.service;
 
-import com.opdapp.model.MedicalServiceItem;
+import com.opdapp.model.MedicalServItem;
 
 import java.util.List;
 
 public interface MedicalServiceService {
-    List<MedicalServiceItem> loadAllMedicalService();
+    List<MedicalServItem> loadAllMedicalService();
 
-    MedicalServiceItem save(MedicalServiceItem medicalServiceItem);
+    MedicalServItem save(MedicalServItem medicalServiceItem);
 }

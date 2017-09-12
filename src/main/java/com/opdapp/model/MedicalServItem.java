@@ -3,8 +3,8 @@ package com.opdapp.model;
 
 import javax.persistence.*;
 
-@Entity
-public class MedicalServiceItem {
+@Entity(name="MedicalServiceItem")
+public class MedicalServItem {
     @Id
     @GeneratedValue
     private long itemId;

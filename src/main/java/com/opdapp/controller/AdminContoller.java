@@ -1,7 +1,7 @@
 package com.opdapp.controller;
 
 import com.opdapp.model.ItemSupplier;
-import com.opdapp.model.MedicalServiceItem;
+import com.opdapp.model.MedicalServItem;
 import com.opdapp.model.ProductType;
 import com.opdapp.model.UnitOfMeasure;
 import com.opdapp.service.ItemSupplierService;
@@ -63,16 +63,16 @@ public class AdminContoller {
     }
 
 
-    @RequestMapping(path = "/loadMedicalServiceItems", method = RequestMethod.GET)
+    @RequestMapping(path = "/loadMedicalItems", method = RequestMethod.GET)
     public @ResponseBody
-    List<MedicalServiceItem> loadMedicalService() {
-        return medicalServiceService.loadAllMedicalService();
+    List<MedicalServItem> loadMedicalService() {
+        List<MedicalServItem> ll = medicalServiceService.loadAllMedicalService();
+        return ll;
     }
-
 
     @RequestMapping(path = "/saveMedicalServiceItem", method = RequestMethod.POST)
     public @ResponseBody
-        MedicalServiceItem saveMedicalServiceItem(@RequestBody final MedicalServiceItem medicalServiceItem) {
+    MedicalServItem saveMedicalServiceItem(@RequestBody final MedicalServItem medicalServiceItem) {
         return medicalServiceService.save(medicalServiceItem);
     }
 }

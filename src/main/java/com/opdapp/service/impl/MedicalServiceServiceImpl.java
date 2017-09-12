@@ -1,6 +1,6 @@
 package com.opdapp.service.impl;
 
-import com.opdapp.model.MedicalServiceItem;
+import com.opdapp.model.MedicalServItem;
 import com.opdapp.repository.MedicalServiceRepository;
 import com.opdapp.service.MedicalServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +15,13 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
     MedicalServiceRepository medicalServiceRepository;
 
     @Override
-    public List<MedicalServiceItem> loadAllMedicalService() {
+    public List<MedicalServItem> loadAllMedicalService() {
         List list =  medicalServiceRepository.findAll();
         return list;
     }
 
     @Override
-    public MedicalServiceItem save(MedicalServiceItem medicalServiceItem) {
+    public MedicalServItem save(MedicalServItem medicalServiceItem) {
         return medicalServiceRepository.save(medicalServiceItem);
     }
 }

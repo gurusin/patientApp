@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService {
@@ -62,16 +59,60 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
+    public List<SavedPrescriptionDTO> loadPrescriptionsByDate(final java.util.Date date){
+        java.sql.Date sqlDate = new java.sql.Date( date.getTime() );
+        List<Prescription> loadedPrecs = prescriptionRepository.findPrescriptionByDate(sqlDate);
+        List<Long> prescriptionIds = new ArrayList<Long>();
+
+        for (Prescription presc: loadedPrecs){
+            prescriptionIds.add(presc.getId());
+        }
+        List<IssueNote> issueNotes = issueNoteRepository.findIssueNoteByExternalIdIn(prescriptionIds);
+        Map<Long,List<IssueNote>> issueNoteMap = new HashMap<Long, List<IssueNote>>();
+        for (IssueNote issueNote: issueNotes) {
+            List<IssueNote> issueNotesList = null;
+            if (issueNoteMap.containsKey(issueNote.getExternalId())) {
+                issueNotesList = issueNoteMap.get(issueNote.getExternalId());
+            }else {
+                issueNotesList = new ArrayList<IssueNote>();
+            }
+            issueNotesList.add(issueNote);
+            issueNoteMap.put(issueNote.getExternalId(), issueNotesList);
+        }
+        List<SavedPrescriptionDTO> savedPrescriptionDTOS = new ArrayList<SavedPrescriptionDTO>();
+
+        for (Prescription presc: loadedPrecs){
+            if (issueNoteMap.containsKey(presc.getId())) {
+                List<IssueNote> issueNoteperPrec = issueNoteMap.get(presc.getId());
+                for (IssueNote in : issueNoteperPrec) {
+                    SavedPrescriptionDTO savedPrescriptionDTO = getSavedPrescriptionDTO(in, presc);
+                    savedPrescriptionDTOS.add(savedPrescriptionDTO);
+                }
+            } else {
+                SavedPrescriptionDTO savedPrescriptionDTO = getSavedPrescriptionDTO(null, presc);
+                savedPrescriptionDTOS.add(savedPrescriptionDTO);
+            }
+        }
+        return  savedPrescriptionDTOS;
+
+    }
+
+    @Override
     public SavedPrescriptionDTO savePrescription(PrescriptionDTO dto) {
 
         final Prescription prescription = createPrescription(dto);
         prescription.setPrescriptionDetails(createDetails(dto, prescription));
         Prescription savedPrescription = prescriptionRepository.save(prescription);
 
-        final SavedPrescriptionDTO savedPrescriptionDTO = new SavedPrescriptionDTO();
-
         // Saving the auto created issue note
         final IssueNote note = saveIssueNote(savedPrescription);
+        SavedPrescriptionDTO savedPrescriptionDTO = getSavedPrescriptionDTO(note, savedPrescription);
+        return savedPrescriptionDTO;
+
+    }
+
+    private SavedPrescriptionDTO getSavedPrescriptionDTO(IssueNote note, Prescription prescription){
+        final SavedPrescriptionDTO savedPrescriptionDTO = new SavedPrescriptionDTO();
         savedPrescriptionDTO.setIssueNote(note);
         populateDTo(savedPrescriptionDTO, prescription);
         return savedPrescriptionDTO;
