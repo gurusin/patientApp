@@ -53,7 +53,6 @@ export class SupplierComponent implements OnInit {
         this.supplierList = data;
       }
     );
-    window.location.reload();
   }
 
   cancelEdit(){

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DrugServiceService} from "../services/drug-service.service";
+import {IssueServiceService} from "../services/issue-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-pharmacy',
@@ -10,7 +12,7 @@ export class PharmacyComponent implements OnInit {
 
   prescriptionDTOList  = [];
   date: Date;
-  constructor(private drugService: DrugServiceService) {
+  constructor(private issueService: IssueServiceService, private drugService: DrugServiceService, private router:Router) {
     this.date = new Date();
   }
 
@@ -21,6 +23,11 @@ export class PharmacyComponent implements OnInit {
         this.prescriptionDTOList = data;
       }
     );
+  }
+
+  issueDrugs(index){
+    this.issueService.issue = this.prescriptionDTOList[index].issueNote;
+    this.router.navigate(["/findIssue"]);
   }
 
 }

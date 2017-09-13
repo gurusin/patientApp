@@ -7,6 +7,8 @@ import {MakeIssue} from "../issue/issue-finder.component";
 @Injectable()
 export class IssueServiceService {
 
+  issue: any;
+
   constructor(private http:Http) {}
 
   findIssue(issueId):Observable<any>

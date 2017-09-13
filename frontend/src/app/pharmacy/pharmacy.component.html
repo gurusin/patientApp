@@ -1,11 +1,27 @@
-<p>
-  pharmacy works!
-  TODO Complete this
-</p>
-<table>
-  <tr *ngFor="let obj of prescriptionDTOList">
-    <td>{{obj.issueNote.issueNote}}</td>
-    <td>{{obj.prescriptionDTO.patientName}}
-    </td>
-  </tr>
-</table>
+<div class="container">
+  <header>
+    <h2>Todays Prescriptions</h2>
+  </header>
+  <nav>
+    <table border="2" width="100%" class="table table-hover">
+      <tr>
+        <th width="10%">Patient name</th>
+        <th witdh="10"> Issue no</th>
+        <th width="70%">Drug details</th>
+      </tr>
+      <tr *ngFor="let obj of prescriptionDTOList ; let i = index">
+        <td>{{obj.prescriptionDTO.patientName}}</td>
+        <td><a (click)='issueDrugs(i)'>{{obj.issueNote.issueNote}}</a></td>
+        <td>
+
+          <ul>
+      <li *ngFor="let row of obj.issueNote.issueNoteDetails">
+       {{row.drugPackage.drug.brandName}}  <td>{{row.drugPackage.drug.baseDrug.baseDrugName}}
+      </li>
+      </ul>
+
+        </td>
+      </tr>
+    </table>
+  </nav>
+</div>

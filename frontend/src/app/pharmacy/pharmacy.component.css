@@ -1,0 +1,21 @@
+div.container {
+  width: 100%;
+  border: 1px solid gray;
+}
+
+header, footer {
+  padding: .05em;
+  color: white;
+  background-color: lightseagreen;
+  clear: left;
+  text-align: center;
+}
+
+nav {
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: 1em;
+  background-color: lightcyan;
+  height: 100%;
+}

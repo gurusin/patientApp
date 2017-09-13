@@ -13,6 +13,12 @@ export class IssueFinderComponent implements OnInit {
 
     constructor(private issueService: IssueServiceService, private router:Router,) {
         this.issue = new Object();
+        if (issueService.issue != null){
+          this.issue = issueService.issue;
+          this.issue.issueNoteDetails.forEach(
+            item => {item.issuedQty = item.buyingQuantity}
+          );
+        }
     }
 
     ngOnInit() {
@@ -48,7 +54,7 @@ export class IssueFinderComponent implements OnInit {
 
         this.issueService.makeIssue(obj).subscribe();
 
-      this.router.navigate(['']);
+      this.router.navigate(['/pharmacyList']);
     }
 
 }

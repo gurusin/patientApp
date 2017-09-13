@@ -50,7 +50,6 @@ export class ItemtypeComponent implements OnInit {
         this.itemTypeList = data;
       }
     );
-    window.location.reload();
   }
 
   cancelEdit(){

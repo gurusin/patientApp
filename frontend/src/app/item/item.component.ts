@@ -67,7 +67,6 @@ export class ItemComponent implements OnInit {
         this.itemproductList = data;
       }
     );
-    window.location.reload();
   }
 
   cancelEdit() {
