@@ -6,21 +6,23 @@
     <table border="2" width="100%" class="table table-hover">
       <tr>
         <th width="10%">Patient name</th>
-        <th witdh="10"> Issue no</th>
-        <th width="70%">Drug details</th>
+        <th witdh="5"> Issue no</th>
+        <th width="60%">Drug details</th>
+        <th width="20%"></th>
       </tr>
       <tr *ngFor="let obj of prescriptionDTOList ; let i = index">
         <td>{{obj.prescriptionDTO.patientName}}</td>
         <td><a (click)='issueDrugs(i)'>{{obj.issueNote.issueNote}}</a></td>
         <td>
-
           <ul>
       <li *ngFor="let row of obj.issueNote.issueNoteDetails">
        {{row.drugPackage.drug.brandName}}  <td>{{row.drugPackage.drug.baseDrug.baseDrugName}}
       </li>
       </ul>
-
         </td>
+        <td> {{obj.issueNote.issueStatus}}
+        </td>
+
       </tr>
     </table>
   </nav>
