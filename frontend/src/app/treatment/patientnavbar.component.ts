@@ -11,10 +11,9 @@ import {Router} from "@angular/router";
 })
 export class PatientnavbarComponent implements OnInit
 {
-  @Input() patient: Patient;
-
+  patient : any;
   constructor(private patientService:PatientServiceService, private router:Router){
-
+     this.patient = patientService.patientObject;
   }
 
   ngOnInit(): void {

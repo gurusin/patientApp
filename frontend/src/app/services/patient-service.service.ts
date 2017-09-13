@@ -41,14 +41,9 @@ export class PatientServiceService {
     return this.http.post(url , patientVisit).map((res: Response) => res.json());
   }
 
-  savePatient(patient: any) {
+  savePatient(patient: any):Observable<any> {
     var url = localStorage.getItem("rootURL") + this.patientSaveURL;
-    return this.http.post(url , patient).map((res: Response) => res.json()).subscribe(
-      data => {
-        this.patient.next(data);
-        this.patientObject = data;
-      }
-    );
+    return this.http.post(url , patient).map((res: Response) => res.json());
   }
 
   getByPatNo(patNo: string) {
