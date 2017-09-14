@@ -15,10 +15,12 @@ public class GoodReceivingNote {
     @JoinColumn(name = "purchaseOrderNo")
     private PurchaseOrder purchaseOrder;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "goodReceivingNote",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "goodReceivingNote", cascade = CascadeType.ALL)
     private Set<GRNDetails> gRNDetails;
 
     private Date grnDate;
+
+    private GRNStatus grnStatus;
 
     public long getDrnid() {
         return drnid;
@@ -50,5 +52,13 @@ public class GoodReceivingNote {
 
     public void setGrnDate(Date grnDate) {
         this.grnDate = grnDate;
+    }
+
+    public GRNStatus getGrnStatus() {
+        return grnStatus;
+    }
+
+    public void setGrnStatus(GRNStatus grnStatus) {
+        this.grnStatus = grnStatus;
     }
 }

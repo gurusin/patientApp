@@ -1,30 +1,13 @@
 package com.opdapp.dto;
 
-public class PoForGrnDetailDTO
-{
-    private long poItemId;
-    private long itemId;
+public class PoForGrnDetailDTO {
+    private int drugPacakgeId;
     private String itemName;
     private double orderedQty;
     private double balanceQty;
     private double receivedQty;
     private long poDetailId;
-
-    public long getPoItemId() {
-        return poItemId;
-    }
-
-    public void setPoItemId(long poItemId) {
-        this.poItemId = poItemId;
-    }
-
-    public long getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(long itemId) {
-        this.itemId = itemId;
-    }
+    private double itemBoughtPrice;
 
     public String getItemName() {
         return itemName;
@@ -64,5 +47,21 @@ public class PoForGrnDetailDTO
 
     public void setPoDetailId(long poDetailId) {
         this.poDetailId = poDetailId;
+    }
+
+    public int getDrugPacakgeId() {
+        return drugPacakgeId;
+    }
+
+    public void setDrugPacakgeId(int drugPacakgeId) {
+        this.drugPacakgeId = drugPacakgeId;
+    }
+
+    public double getItemBoughtPrice() {
+        return itemBoughtPrice;
+    }
+
+    public void setItemBoughtPrice(double itemBoughtPrice) {
+        this.itemBoughtPrice = itemBoughtPrice;
     }
 }

@@ -1,5 +1,8 @@
 package com.opdapp.dto;
 
+import com.opdapp.model.GRNStatus;
+import com.opdapp.model.PaymentDetails;
+
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +11,8 @@ public class POForGrnDTO {
     private String supplier;
     private List<PoForGrnDetailDTO> details;
     private Date expectedRecieveDate;
+    private GRNStatus grnStatus;
+    private PaymentDetails paymentDetails;
 
     public long getPoNumber() {
         return poNumber;
@@ -39,5 +44,21 @@ public class POForGrnDTO {
 
     public void setExpectedRecieveDate(Date expectedRecieveDate) {
         this.expectedRecieveDate = expectedRecieveDate;
+    }
+
+    public GRNStatus getGrnStatus() {
+        return grnStatus;
+    }
+
+    public void setGrnStatus(GRNStatus grnStatus) {
+        this.grnStatus = grnStatus;
+    }
+
+    public PaymentDetails getPaymentDetails() {
+        return paymentDetails;
+    }
+
+    public void setPaymentDetails(PaymentDetails paymentDetails) {
+        this.paymentDetails = paymentDetails;
     }
 }

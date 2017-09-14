@@ -105,7 +105,7 @@ public class PoServiceImpl implements POService {
         final List<PoForGrnDetailDTO> list = new ArrayList<>();
         for (final PurchaseOrderDetail detail : purchaseOrder.getPurchaseOrderDetails()) {
             final PoForGrnDetailDTO detailDTO = new PoForGrnDetailDTO();
-            detailDTO.setItemId(detail.getDrugPackage().getDrugPackageId());
+            detailDTO.setDrugPacakgeId(detail.getDrugPackage().getDrugPackageId());
             detailDTO.setItemName(detail.getDrugPackage().getDrug().getBrandName() + " " + detail.getDrugPackage().getStrength().getStrengthAmount() + detail.getDrugPackage().getStrength().getStrengthUnit().getUnitName());
             detailDTO.setOrderedQty(detail.getOrderQty());
             detailDTO.setBalanceQty(detail.getOrderQty() - detail.getReceivedQty());
@@ -119,6 +119,11 @@ public class PoServiceImpl implements POService {
     @Override
     public PurchaseOrder registerGRN(POForGrnDTO grn) {
 
+        if (grn.getPaymentDetails() == null) {
+            grn.setGrnStatus(GRNStatus.CREATED);
+        } else {
+
+        }
         final PurchaseOrder purchaseOrder = poRepository.findOne(grn.getPoNumber());
         final GoodReceivingNote grnObj = new GoodReceivingNote();
         grnObj.setPurchaseOrder(purchaseOrder);
@@ -149,6 +154,9 @@ public class PoServiceImpl implements POService {
     private GRNDetails createGRNDetail(PurchaseOrderDetail detail, PoForGrnDetailDTO dto) {
         final GRNDetails obj = new GRNDetails();
         obj.setReceivingQty(dto.getReceivedQty());
+        DrugPackage drugPacakge = drugPackageRepository.findOne(dto.getDrugPacakgeId());
+        obj.setDrugPackage(drugPacakge);
+        obj.setItemBoughtPrice(dto.getItemBoughtPrice());
         return obj;
     }
 

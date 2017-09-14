@@ -48,6 +48,7 @@ import {SupplierComponent} from "./supplier/supplier.component";
 import {IssueFinderComponent} from './issue/issue-finder.component';
 import {IssueServiceService} from "./services/issue-service.service";
 import { PharmacyComponent } from './pharmacy/pharmacy.component';
+import { PaymentComponent } from './grn/payment.component';
 
 @NgModule({
     declarations: [
@@ -84,6 +85,7 @@ import { PharmacyComponent } from './pharmacy/pharmacy.component';
         GrnComponent,
         IssueFinderComponent,
         PharmacyComponent,
+        PaymentComponent,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

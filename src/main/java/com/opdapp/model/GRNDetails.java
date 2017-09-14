@@ -11,6 +11,13 @@ public class GRNDetails {
 
     private double receivingQty;
 
+
+    @ManyToOne()
+    @JoinColumn(name = "drugPackageId")
+    private DrugPackage drugPackage;
+
+    private double itemBoughtPrice;
+
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "drnid", nullable = false)
     private GoodReceivingNote goodReceivingNote;
@@ -37,5 +44,21 @@ public class GRNDetails {
 
     public void setGoodReceivingNote(GoodReceivingNote goodReceivingNote) {
         this.goodReceivingNote = goodReceivingNote;
+    }
+
+    public DrugPackage getDrugPackage() {
+        return drugPackage;
+    }
+
+    public void setDrugPackage(DrugPackage drugPackage) {
+        this.drugPackage = drugPackage;
+    }
+
+    public double getItemBoughtPrice() {
+        return itemBoughtPrice;
+    }
+
+    public void setItemBoughtPrice(double itemBoughtPrice) {
+        this.itemBoughtPrice = itemBoughtPrice;
     }
 }
