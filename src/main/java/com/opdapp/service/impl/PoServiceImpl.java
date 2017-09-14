@@ -101,6 +101,7 @@ public class PoServiceImpl implements POService {
         final PurchaseOrder purchaseOrder = poRepository.findOne(podId);
         final POForGrnDTO dto = new POForGrnDTO();
         dto.setPoNumber(purchaseOrder.getPurchaseOrderNo());
+        dto.setSupplier(purchaseOrder.getItemSupplier().getSupplierName() + ", " + purchaseOrder.getItemSupplier().getSupplierAddress());
         final List<PoForGrnDetailDTO> list = new ArrayList<>();
         for (final PurchaseOrderDetail detail : purchaseOrder.getPurchaseOrderDetails()) {
             final PoForGrnDetailDTO detailDTO = new PoForGrnDetailDTO();
@@ -121,6 +122,7 @@ public class PoServiceImpl implements POService {
         final PurchaseOrder purchaseOrder = poRepository.findOne(grn.getPoNumber());
         final GoodReceivingNote grnObj = new GoodReceivingNote();
         grnObj.setPurchaseOrder(purchaseOrder);
+        grnObj.setGrnDate(new java.sql.Date(grn.getExpectedRecieveDate().getTime()));
         final Set<GRNDetails> grnDetailsSet = new HashSet<>();
         for (final PoForGrnDetailDTO dto : grn.getDetails()) {
             updateGRN(dto, purchaseOrder, grnDetailsSet, grnObj);

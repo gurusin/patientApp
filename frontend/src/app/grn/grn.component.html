@@ -7,7 +7,8 @@
     <div class="col-lg-2">
       <input type="text" (keyup)="loadPo($event,po.value)" #po/>
     </div>
-    <div class="col-md-8" align="right"><b>Supplier :</b> {{poDetail.supplier}}</div>
+    <div class="col-lg-6" align="right"><b>Supplier :</b> {{poDetail.supplier}}</div>
+    <div class="col-lg-2" >Date : <input type="date"  [(ngModel)]='poDetail.expectedRecieveDate' required id="expectedRecieveDate" name="expectedRecieveDate"></div>
   </div>
 
   <table class="table table-responsive">

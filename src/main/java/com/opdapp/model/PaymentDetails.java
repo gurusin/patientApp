@@ -16,6 +16,7 @@ public class PaymentDetails {
     private long grnNo; //NOTE :This is not linked at entity level?
     private double amount;
     private PaymentMethod paymentMethod;
+    private String paymentMethodDetails;
 
     public long getPaymentDetailsId() {
         return paymentDetailsId;
@@ -63,5 +64,13 @@ public class PaymentDetails {
 
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public String getPaymentMethodDetails() {
+        return paymentMethodDetails;
+    }
+
+    public void setPaymentMethodDetails(String paymentMethodDetails) {
+        this.paymentMethodDetails = paymentMethodDetails;
     }
 }
