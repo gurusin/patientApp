@@ -8,7 +8,7 @@ public class DrugPackageDTO {
 
     private StrengthDTO strength;
 
-    private int quantity;
+    private double quantity;
 
     private double minOrderLevel;
 
@@ -22,11 +22,11 @@ public class DrugPackageDTO {
         this.drugPackageId = drugPackageId;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 

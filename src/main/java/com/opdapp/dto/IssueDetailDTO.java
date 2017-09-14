@@ -1,16 +1,16 @@
 package com.opdapp.dto;
 
 public class IssueDetailDTO {
-    private long itemId;
+    private int itemId;
     private double quantity;
     private double itemPrice;
     private String description;
 
-    public long getItemId() {
+    public int getItemId() {
         return itemId;
     }
 
-    public void setItemId(long itemId) {
+    public void setItemId(int itemId) {
         this.itemId = itemId;
     }
 

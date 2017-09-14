@@ -10,8 +10,8 @@ public class PurchaseOrderDetail {
     private long purchaseOrderDetailId;
 
     @ManyToOne
-    @JoinColumn(name = "itemId")
-    private Item item;
+    @JoinColumn(name = "drugPackageId")
+    private DrugPackage drugPackage;
 
     private double orderQty;
 
@@ -20,6 +20,7 @@ public class PurchaseOrderDetail {
     private PurchaseOrder purchaseOrder;
 
     private double receivedQty;
+
     public long getPurchaseOrderDetailId() {
         return purchaseOrderDetailId;
     }
@@ -36,12 +37,12 @@ public class PurchaseOrderDetail {
         this.receivedQty = receivedQty;
     }
 
-    public Item getItem() {
-        return item;
+    public DrugPackage getDrugPackage() {
+        return drugPackage;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setDrugPackage(DrugPackage drugPackage) {
+        this.drugPackage = drugPackage;
     }
 
     public double getOrderQty() {
@@ -57,5 +58,6 @@ public class PurchaseOrderDetail {
     }
 
     public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder; }
+        this.purchaseOrder = purchaseOrder;
+    }
 }

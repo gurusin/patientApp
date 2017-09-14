@@ -48,10 +48,10 @@
     <tbody>
        <tr *ngFor="let detail of po.poDetails">
          <td>
-           <select [(ngModel)]='detail.itemId' name="itemId">
-             <option *ngFor="let x of items; let i = index"
-                     [ngValue]="x.itemId">
-               {{x.itemDescription}}</option>
+           <select [(ngModel)]='detail.drugPackageId' name="drugPackageId">
+             <option *ngFor="let x of drugPackages; let i = index"
+                     [ngValue]="x.drugPackageId">
+               {{x.drug.brandName}} {{x.strength.strengthAmount}} {{x.strength.strengthUnit}}</option>
            </select>
          </td>
          <td>

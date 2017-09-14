@@ -3,6 +3,7 @@ import {ItemSupplierService} from "../services/itemsupplier.service";
 import {ItemServiceService} from "../services/item-service.service";
 import {POServiceService} from "../services/poservice.service";
 import {Router} from "@angular/router";
+import {DrugServiceService} from "../services/drug-service.service";
 
 @Component({
   selector: 'app-purchseorder',
@@ -13,11 +14,11 @@ export class PurchseorderComponent implements OnInit {
 
   po: PurchaseOrderDTO;
   suppliers = [];
-  items = [];
+  drugPackages = [];
   pono: number;
   pendingPos = [];
 
-  constructor(private supplierService: ItemSupplierService, private itemService: ItemServiceService,
+  constructor(private supplierService: ItemSupplierService, private drugService: DrugServiceService,
               private poService: POServiceService, private router: Router) {
 
   }
@@ -29,7 +30,7 @@ export class PurchseorderComponent implements OnInit {
   onSave() {
     this.poService.savePO(this.po);
     this.po = new PurchaseOrderDTO();
-    this.router.navigate(['/supplier']);
+    this.router.navigate(['/po']);
   }
 
   onCancel() {
@@ -63,8 +64,8 @@ export class PurchseorderComponent implements OnInit {
   }
 
   private initItems() {
-    this.itemService.loadItems().subscribe(items => {
-        this.items = items;
+    this.drugService.loadDrugPacakges().subscribe(drugPackages => {
+        this.drugPackages = drugPackages;
       }
     );
   }
@@ -96,6 +97,6 @@ export class PurchaseOrderDTO {
 }
 
 export class PODetail {
-  itemId: number;
+  drugPackageId: number;
   qty: number;
 }

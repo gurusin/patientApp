@@ -20,7 +20,7 @@ export class GrnComponent implements OnInit {
   {
     this.poService.saveGRN(this.poDetail).subscribe(
       data =>{
-        this.router.navigate(['/supplier']);
+        this.poDetail = [];
       }
     );
   }
