@@ -8,9 +8,17 @@
       <input type="text" (keyup)="loadPo($event,po.value)" #po/>
     </div>
     <div class="col-lg-6" align="right"><b>Supplier :</b> {{poDetail.supplier}}</div>
-    <div class="col-lg-2" >Date : <input type="date"  [(ngModel)]='poDetail.expectedRecieveDate' required id="expectedRecieveDate" name="expectedRecieveDate"></div>
   </div>
-
+  <div class="row">
+    <div class="col-lg-4">
+      <label></label>
+    </div>
+    <div class="col-lg-4">
+      <label> Supplier Invoice </label>
+      <input type="text"  [(ngModel)]='poDetail.supplierInvoice' required id="supplierInvoice" name="supplierInvoice"></div>
+    <div class="col-lg-4" >Date : <input type="date"  [(ngModel)]='poDetail.expectedRecieveDate' required id="expectedRecieveDate" name="expectedRecieveDate"></div>
+  </div>
+<br/>
   <table class="table table-responsive">
     <thead>
        <tr>

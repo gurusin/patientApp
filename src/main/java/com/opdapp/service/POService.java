@@ -1,5 +1,6 @@
 package com.opdapp.service;
 
+import com.opdapp.dto.GRNDTOForPay;
 import com.opdapp.dto.IssueDTO;
 import com.opdapp.dto.POForGrnDTO;
 import com.opdapp.dto.PurchaseOrderDTO;
@@ -8,8 +9,7 @@ import com.opdapp.model.PurchaseOrder;
 
 import java.util.List;
 
-public interface POService
-{
+public interface POService {
     PurchaseOrder savePO(final PurchaseOrderDTO purchaseOrderDTO);
 
     POForGrnDTO loadForGrn(long podId);
@@ -19,4 +19,6 @@ public interface POService
     void saveIssue(IssueDTO issueDTO);
 
     List<PurchaseOrderDTO> findPurchaseOrderByPoStatus(final POStatus poStatus);
+
+//    GRNDTOForPay loadGRNForPay(Long grnId);
 }

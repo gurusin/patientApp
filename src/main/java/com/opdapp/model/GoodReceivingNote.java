@@ -22,6 +22,8 @@ public class GoodReceivingNote {
 
     private GRNStatus grnStatus;
 
+    private String supplierInvoice;
+
     public long getDrnid() {
         return drnid;
     }
@@ -60,5 +62,13 @@ public class GoodReceivingNote {
 
     public void setGrnStatus(GRNStatus grnStatus) {
         this.grnStatus = grnStatus;
+    }
+
+    public String getSupplierInvoice() {
+        return supplierInvoice;
+    }
+
+    public void setSupplierInvoice(String supplierInvoice) {
+        this.supplierInvoice = supplierInvoice;
     }
 }

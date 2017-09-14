@@ -14,6 +14,8 @@ public class POForGrnDTO {
     private GRNStatus grnStatus;
     private PaymentDetails paymentDetails;
 
+    private String supplierInvoice;
+
     public long getPoNumber() {
         return poNumber;
     }
@@ -60,5 +62,13 @@ public class POForGrnDTO {
 
     public void setPaymentDetails(PaymentDetails paymentDetails) {
         this.paymentDetails = paymentDetails;
+    }
+
+    public String getSupplierInvoice() {
+        return supplierInvoice;
+    }
+
+    public void setSupplierInvoice(String supplierInvoice) {
+        this.supplierInvoice = supplierInvoice;
     }
 }
