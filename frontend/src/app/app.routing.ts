@@ -50,6 +50,7 @@ const APP_ROUTES: Routes = [
     {path: 'findIssue', component: IssueFinderComponent},
     {path: 'printPo',component:PrintreceiptComponent},
     {path: 'pharmacyList', component:PharmacyComponent}
+  // {path: 'medServiceItem', component: MedicalSer}
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)

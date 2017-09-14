@@ -26,14 +26,9 @@ export class PatientServiceService {
     return this.http.post(url, nic).map((res: Response) => res.json());
   }
 
-  getByNIC(nic: string) {
+  getByNIC(nic: string) :Observable<any> {
     var url = localStorage.getItem("rootURL")  + this.patientGetByNIC;
-    return this.http.post(url, nic).map((res: Response) => res.json()).subscribe(
-      data => {
-        this.patient.next(data);
-        this.patientObject = data;
-      }
-    );
+    return this.http.post(url, nic).map((res: Response) => res.json());
   }
 
   savePatientVisit(patientVisit: any): Observable<any[]> {
@@ -46,26 +41,18 @@ export class PatientServiceService {
     return this.http.post(url , patient).map((res: Response) => res.json());
   }
 
-  getByPatNo(patNo: string) {
+  getByPatNo(patNo: string):Observable<any> {
     var url = localStorage.getItem("rootURL") + "getByPatientId";
-    this.http.post(url , patNo).map((res: Response) => res.json()).subscribe(
-      data => {
-        this.patient.next(data);
-        this.patientObject = data;
-      }
-    );
+    return this.http.post(url , patNo).map((res: Response) => res.json());
   }
 
-  getByPhoneNo(phoneNo: string) {
+  getByPhoneNo(phoneNo: string): Observable<any>
+  {
     var url = localStorage.getItem("rootURL") + "getByPhoneNo";
-    this.http.post(url, phoneNo).map((res: Response) => res.json()).subscribe(
-      data => {
-        this.patient.next(data);
-      }
-    );
+    return this.http.post(url, phoneNo).map((res: Response) => res.json());
   }
 
-  searchByPhone(phoneNo: string) {
+  searchByPhone(phoneNo: string) :Observable<any> {
     var url = localStorage.getItem("rootURL")  + "searchPatByPhoneNo";
     return this.http.post(url, phoneNo).map((res: Response) => res.json());
   }
