@@ -20,5 +20,5 @@ public interface POService {
 
     List<PurchaseOrderDTO> findPurchaseOrderByPoStatus(final POStatus poStatus);
 
-//    GRNDTOForPay loadGRNForPay(Long grnId);
+    List<GRNDTOForPay> loadGRNForPay(String supplierInvoice);
 }

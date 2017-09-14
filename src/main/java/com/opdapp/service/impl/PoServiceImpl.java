@@ -29,6 +29,9 @@ public class PoServiceImpl implements POService {
     @Autowired
     private IssueNoteRepository issueNoteRepository;
 
+    @Autowired
+    private GoodReceivingNoteRepository goodReceivingNoteRepository;
+
     @Override
     public PurchaseOrder savePO(PurchaseOrderDTO purchaseOrderDTO) {
 
@@ -186,8 +189,43 @@ public class PoServiceImpl implements POService {
         item.setQuantity(item.getQuantity() + qty);
     }
 
-//    public GRNDTOForPay loadGRNForPay(Long grnId) {
-//
-//    }
+    @Override
+    public List<GRNDTOForPay> loadGRNForPay(String supplierInvoice) {
+        List<GoodReceivingNote> goodReceivingNoteList = goodReceivingNoteRepository.getGoodReceivingNoteBySupplierInvoiceLike(supplierInvoice);
+
+        final List<GRNDTOForPay> grndtoForPayList = new ArrayList<GRNDTOForPay>();
+
+        for (GoodReceivingNote drn : goodReceivingNoteList) {
+            final GRNDTOForPay grndtoForPay = new GRNDTOForPay();
+            createGrndtoForPay(grndtoForPay, drn);
+            grndtoForPayList.add(grndtoForPay);
+        }
+
+        return grndtoForPayList;
+    }
+
+    private void createGrndtoForPay(GRNDTOForPay grndtoForPay, GoodReceivingNote grn) {
+        grndtoForPay.setGrnStatus(grn.getGrnStatus());
+        grndtoForPay.setDrnid(grn.getDrnid());
+        grndtoForPay.setGrnDate(grn.getGrnDate());
+        grndtoForPay.setSupplierInvoice(grn.getSupplierInvoice());
+        Set<PoForGrnDetailDTO> poForGrnDetailDTOS = new HashSet<PoForGrnDetailDTO>();
+        for (GRNDetails grnDetail : grn.getgRNDetails()){
+
+            final PoForGrnDetailDTO detailDTO = new PoForGrnDetailDTO();
+            createPoForGrnDetailDTO(grnDetail, detailDTO);
+            poForGrnDetailDTOS.add(detailDTO);
+        }
+        grndtoForPay.setPoForGrnDetailDTO(poForGrnDetailDTOS);
+    }
+
+    private void createPoForGrnDetailDTO(GRNDetails detail, PoForGrnDetailDTO detailDTO) {
+        detailDTO.setPoDetailId(detail.getGrnDetailNo());
+        detailDTO.setItemBoughtPrice(detail.getItemBoughtPrice());
+        detailDTO.setReceivedQty(detail.getReceivingQty());
+        detailDTO.setDrugPacakgeId(detail.getDrugPackage().getDrugPackageId());
+        detailDTO.setItemName(detail.getDrugPackage().getDrug().getBrandName() + " " + detail.getDrugPackage().getStrength().getStrengthAmount() + detail.getDrugPackage().getStrength().getStrengthUnit().getUnitName());
+
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.opdapp.controller;
 
+import com.opdapp.dto.GRNDTOForPay;
 import com.opdapp.dto.IssueDTO;
 import com.opdapp.dto.POForGrnDTO;
 import com.opdapp.dto.PurchaseOrderDTO;
@@ -39,6 +40,14 @@ public class POController {
     {
         return poService.loadForGrn(Long.parseLong(poId));
     }
+
+    @RequestMapping(path="/loadGRNForPay", method = RequestMethod.POST)
+    public @ResponseBody
+    List<GRNDTOForPay> loadGRNForPay(@RequestBody final String supplierInvoice)
+    {
+        return poService.loadGRNForPay(supplierInvoice);
+    }
+
 
     @RequestMapping(path="/registerGRN", method = RequestMethod.POST)
     public @ResponseBody POForGrnDTO registerGRN(@RequestBody final POForGrnDTO grn) {
