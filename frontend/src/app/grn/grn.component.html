@@ -7,14 +7,16 @@
     <div class="col-lg-2">
       <input type="text" (keyup)="loadPo($event,po.value)" #po/>
     </div>
+    <div class="col-md-8" align="right"><b>Supplier :</b> {{poDetail.supplier}}</div>
   </div>
+
   <table class="table table-responsive">
     <thead>
        <tr>
-         <td>Item</td>
-         <td>Ordered Qty.</td>
-         <td>Balance Qty.</td>
-         <td>Received Qty.</td>
+         <th>Item</th>
+         <th>Ordered Qty.</th>
+         <th>Balance Qty.</th>
+         <th>Received Qty.</th>
        </tr>
     </thead>
     <tbody>
