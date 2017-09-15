@@ -51,6 +51,7 @@ import { PharmacyComponent } from './pharmacy/pharmacy.component';
 import { PaymentComponent } from './grn/payment.component';
 import { MedicalServiceComponentComponent } from './item/medical-service-component/medical-service-component.component';
 import { SelectedRowDirective } from './selected-row.directive';
+import { ServiceComponentComponent } from './treatment/service-component.component';
 
 @NgModule({
     declarations: [
@@ -90,6 +91,7 @@ import { SelectedRowDirective } from './selected-row.directive';
         PaymentComponent,
         MedicalServiceComponentComponent,
         SelectedRowDirective,
+        ServiceComponentComponent,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

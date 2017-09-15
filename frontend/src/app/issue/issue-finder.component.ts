@@ -29,7 +29,6 @@ export class IssueFinderComponent implements OnInit {
             this.issueService.findIssue(value).subscribe(
                 data => {
                     this.issue=data;
-                    console.log(data);
                     this.issue.issueNoteDetails.forEach(
                         item => {item.issuedQty = item.buyingQuantity}
                     );

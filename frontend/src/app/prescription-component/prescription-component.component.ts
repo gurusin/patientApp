@@ -99,6 +99,7 @@ export class Prescription
   notes:string;
   prescriptionDetails:PrescriptionDetail[];
   patientId:number;
+  medicalServices:any[];
 
 }
 export class PrescriptionDetail

@@ -18,6 +18,10 @@ public class IssueNote {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issueNote", cascade = CascadeType.ALL)
     private Set<IssueNoteDetails> issueNoteDetails;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "issueNote", cascade = CascadeType.ALL)
+    private Set<IssueNoteServiceItem> issueNoteServiceItems;
+
+
     @ManyToOne
     @JoinColumn(name = "patientId")
     private Patient patient;
@@ -82,5 +86,13 @@ public class IssueNote {
 
     public void setExternalId(long externalId) {
         this.externalId = externalId;
+    }
+
+    public Set<IssueNoteServiceItem> getIssueNoteServiceItems() {
+        return issueNoteServiceItems;
+    }
+
+    public void setIssueNoteServiceItems(Set<IssueNoteServiceItem> issueNoteServiceItems) {
+        this.issueNoteServiceItems = issueNoteServiceItems;
     }
 }

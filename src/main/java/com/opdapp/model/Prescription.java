@@ -30,6 +30,18 @@ public class Prescription {
 
     private Date date;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "prescription",cascade = CascadeType.ALL)
+    private Set<PrescriptionServiceItem> medicalServices;
+
+
+    public Set<PrescriptionServiceItem> getMedicalServices() {
+        return medicalServices;
+    }
+
+    public void setMedicalServices(Set<PrescriptionServiceItem> medicalServices) {
+        this.medicalServices = medicalServices;
+    }
+
     public Date getDate() {
         return date;
     }

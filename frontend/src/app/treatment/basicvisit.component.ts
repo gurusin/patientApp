@@ -43,6 +43,7 @@ export class BasicvisitComponent implements OnInit {
 
   onSave() {
     var presc = new Prescription();
+    presc.medicalServices = this.patientVisit.medicalServices;
     presc.prescriptionDetails = [];
     presc.patientId = this.patientService.patientObject.patientId;
     presc.diagnosis = this.patientVisit.diagnoseData;
@@ -52,7 +53,6 @@ export class BasicvisitComponent implements OnInit {
     var details = [];
     this.patientVisit.prescribableDrug.forEach((obj: PrescribableDrug) => {
         var detail = new PrescriptionDetail();
-        console.log(obj);
         detail.drugId = obj.drug.drugId;
         detail.drug.drugId = obj.drug.drugId;
         detail.amount = obj.doseAmount;

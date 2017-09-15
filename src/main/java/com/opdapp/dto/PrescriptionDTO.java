@@ -1,9 +1,11 @@
 package com.opdapp.dto;
 
+import com.opdapp.model.MedicalServItem;
 import com.opdapp.model.PrescriptionDetail;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by sudarshana on 13/08/2017.
@@ -15,6 +17,7 @@ public class PrescriptionDTO {
     private String notes;
     private String symptoms;
     private Date prescriptionDate;
+    private Set<MedicalServItem> medicalServices;
 
     private List<PrescriptionDetailDTO> prescriptionDetailDTOS;
 
@@ -83,5 +86,13 @@ public class PrescriptionDTO {
 
     public void setPatientName(String patientName) {
         this.patientName = patientName;
+    }
+
+    public Set<MedicalServItem> getMedicalServices() {
+        return medicalServices;
+    }
+
+    public void setMedicalServices(Set<MedicalServItem> medicalServices) {
+        this.medicalServices = medicalServices;
     }
 }

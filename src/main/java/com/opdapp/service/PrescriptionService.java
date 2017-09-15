@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface PrescriptionService {
-    SavedPrescriptionDTO savePrescription(final PrescriptionDTO dto);
+     SavedPrescriptionDTO savePrescription(final PrescriptionDTO dto);
 
     List<PrescriptionDTO> loadPrescriptions(long l);
 

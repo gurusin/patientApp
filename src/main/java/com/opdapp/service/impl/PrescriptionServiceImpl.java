@@ -28,6 +28,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Autowired
     private FrequencyRepository frequencyRepository;
 
+    @Autowired
+    private MedicalServiceRepository medicalServiceRepository;
+
     @Override
     public List<PrescriptionDTO> loadPrescriptions(long l) {
         final Patient p = patientRepository.findOne(l);
@@ -102,6 +105,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
         final Prescription prescription = createPrescription(dto);
         prescription.setPrescriptionDetails(createDetails(dto, prescription));
+        prescription.setMedicalServices(createMedicalServices(dto,prescription));
         Prescription savedPrescription = prescriptionRepository.save(prescription);
 
         // Saving the auto created issue note
@@ -109,6 +113,19 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         SavedPrescriptionDTO savedPrescriptionDTO = getSavedPrescriptionDTO(note, savedPrescription);
         return savedPrescriptionDTO;
 
+    }
+
+    private Set<PrescriptionServiceItem> createMedicalServices(PrescriptionDTO dto, Prescription prescription) {
+       final Set<PrescriptionServiceItem> returnSet = new HashSet<>();
+       for (final MedicalServItem item : dto.getMedicalServices())
+       {
+           final PrescriptionServiceItem obj = new PrescriptionServiceItem();
+           obj.setFee(item.getUnitPrice());
+           obj.setPrescription(prescription);
+           obj.setMedicalServItem(medicalServiceRepository.findOne(item.getItemId()));
+           returnSet.add(obj);
+       }
+       return returnSet;
     }
 
     private SavedPrescriptionDTO getSavedPrescriptionDTO(IssueNote note, Prescription prescription){
@@ -171,7 +188,21 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         issueNote.setPaymentMethod(PaymentMethod.CASH);
         issueNote.setExternalId(prescription.getId());
         issueNote.setIssueNoteDetails(createIssueDetails(prescription, issueNote));
+        issueNote.setIssueNoteServiceItems(createIssueNoteServiceItems(issueNote,prescription));
         return issueNoteRepository.save(issueNote);
+    }
+
+    private Set<IssueNoteServiceItem> createIssueNoteServiceItems(IssueNote issueNote, Prescription prescription) {
+       final Set<IssueNoteServiceItem> returnSet = new HashSet<>();
+       for (final PrescriptionServiceItem item : prescription.getMedicalServices())
+       {
+           final IssueNoteServiceItem obj = new IssueNoteServiceItem();
+           obj.setIssueNote(issueNote);
+           obj.setFee(item.getFee());
+           obj.setMedicalServItem(item.getMedicalServItem());
+           returnSet.add(obj);
+       }
+       return returnSet;
     }
 
     private Set<IssueNoteDetails> createIssueDetails(Prescription prescription, final IssueNote issueNote) {
@@ -184,6 +215,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             detailsSet.add(issueNoteDetail);
         }
         return detailsSet;
+    }
+
+    private void addServices(Prescription prescription, final IssueNote issueNote)
+    {
+
     }
 
     private DrugPackage findDrugPackage(final PrescriptionDetail prescriptionDetail) {

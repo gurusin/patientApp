@@ -3,7 +3,9 @@
 
     <!--The component for DPrescriptionDTOtion -->
     <app-prescription-component [patientVisit]="patientVisit"></app-prescription-component>
-
+    <hr/>
+    <app-service-component [patientVisit]="patientVisit"></app-service-component>
+    <hr/>
       <label for="symptoms">Symptoms</label>
       <input type="text" id="symptoms" [(ngModel)]='patientVisit.symptoms' name="symptoms"
              placeholder="Symstomes Fever, toothache..">

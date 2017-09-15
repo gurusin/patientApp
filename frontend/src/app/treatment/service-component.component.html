@@ -1,0 +1,19 @@
+<h2> Services </h2>
+<table class="table table-striped">
+  <tr>
+    <th>Service</th>
+    <th>Price</th>
+  </tr>
+  <tr *ngFor="let row of patientVisit.medicalServices;let i=index">
+    <td>
+      <select [(ngModel)]="row.serviceIndex" (change)="serviceChanged(row.serviceIndex,i)">
+        <option *ngFor="let x of medicalServices" value="{{x.itemId}}">{{x.itemDescription}}</option>
+      </select>
+    </td>
+    <td>
+      <input type="number" [(ngModel)]="row.unitPrice">
+    </td>
+    <td><button type="button" class="btn btn-primary" (click)="onAdd()">Add</button></td>
+    <td><button type="button" class="btn btn-danger" (click)="onRemove(i)">Remove</button></td>
+  </tr>
+</table>
