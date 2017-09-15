@@ -48,7 +48,7 @@ public class PoServiceImpl implements POService {
         purchaseOrder.setOrderedDate(new Date(dt.getTime()));
         poRepository.save(purchaseOrder);
         // Dummy return. Change to a proper return type
-//        return new PurchaseOrder();
+//        return onNew PurchaseOrder();
         final java.util.Date odt = purchaseOrderDTO.getExpectedRecieveDate().toDateTimeAtStartOfDay().toDate();
         purchaseOrder.setExpectedRecieveDate(new Date(dt.getTime()));
         purchaseOrder.setPoStatus(purchaseOrderDTO.getPoStatus());

@@ -49,6 +49,8 @@ import {IssueFinderComponent} from './issue/issue-finder.component';
 import {IssueServiceService} from "./services/issue-service.service";
 import { PharmacyComponent } from './pharmacy/pharmacy.component';
 import { PaymentComponent } from './grn/payment.component';
+import { MedicalServiceComponentComponent } from './item/medical-service-component/medical-service-component.component';
+import { SelectedRowDirective } from './selected-row.directive';
 
 @NgModule({
     declarations: [
@@ -86,6 +88,8 @@ import { PaymentComponent } from './grn/payment.component';
         IssueFinderComponent,
         PharmacyComponent,
         PaymentComponent,
+        MedicalServiceComponentComponent,
+        SelectedRowDirective,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,
