@@ -17,6 +17,17 @@ public class MedicalServItem {
 
     private double unitPrice;
 
+    @Transient
+    private String externalRef;
+
+    public String getExternalRef() {
+        return externalRef;
+    }
+
+    public void setExternalRef(String externalRef) {
+        this.externalRef = externalRef;
+    }
+
     public long getItemId() {
         return itemId;
     }

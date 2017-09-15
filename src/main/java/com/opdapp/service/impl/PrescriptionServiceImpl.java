@@ -123,6 +123,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
            obj.setFee(item.getUnitPrice());
            obj.setPrescription(prescription);
            obj.setMedicalServItem(medicalServiceRepository.findOne(item.getItemId()));
+           obj.setExternalRef(item.getExternalRef());
            returnSet.add(obj);
        }
        return returnSet;
@@ -200,6 +201,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
            obj.setIssueNote(issueNote);
            obj.setFee(item.getFee());
            obj.setMedicalServItem(item.getMedicalServItem());
+           obj.setExternalId(item.getExternalRef());
            returnSet.add(obj);
        }
        return returnSet;

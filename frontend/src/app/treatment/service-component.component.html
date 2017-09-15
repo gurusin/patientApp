@@ -3,6 +3,9 @@
   <tr>
     <th>Service</th>
     <th>Price</th>
+    <th>External Reference</th>
+    <th></th>
+    <th></th>
   </tr>
   <tr *ngFor="let row of patientVisit.medicalServices;let i=index">
     <td>
@@ -13,6 +16,8 @@
     <td>
       <input type="number" [(ngModel)]="row.unitPrice">
     </td>
+    <td> <input type="text" [(ngModel)]="row.externalRef"></td>
+
     <td><button type="button" class="btn btn-primary" (click)="onAdd()">Add</button></td>
     <td><button type="button" class="btn btn-danger" (click)="onRemove(i)">Remove</button></td>
   </tr>

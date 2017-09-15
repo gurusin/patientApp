@@ -39,11 +39,13 @@
             <tr>
                 <th>Service</th>
                 <th>Fee</th>
+                <th>External Reference</th>
             </tr>
         </thead>
         <tr *ngFor="let row of issue.issueNoteServiceItems">
             <td>{{row.medicalServItem.itemDescription}}</td>
             <td>{{row.fee}}</td>
+            <td>{{row.externalId}}</td>
         </tr>
     </table>
   <br/>

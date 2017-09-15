@@ -17,8 +17,17 @@ public class PrescriptionServiceItem{
     @JoinColumn(name = "prescriptionId", nullable = false)
     private Prescription prescription;
 
-
     private double fee;
+
+    private String externalRef;
+
+    public String getExternalRef() {
+        return externalRef;
+    }
+
+    public void setExternalRef(String externalRef) {
+        this.externalRef = externalRef;
+    }
 
     public long getId() {
         return id;
