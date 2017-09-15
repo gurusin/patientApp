@@ -9,7 +9,7 @@
   </tr>
   <tr *ngFor="let row of patientVisit.medicalServices;let i=index">
     <td>
-      <select [(ngModel)]="row.serviceIndex" (change)="serviceChanged(row.serviceIndex,i)">
+      <select [(ngModel)]="row.itemId" (change)="serviceChanged(row.itemId,i)">
         <option *ngFor="let x of medicalServices" value="{{x.itemId}}">{{x.itemDescription}}</option>
       </select>
     </td>

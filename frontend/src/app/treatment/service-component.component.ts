@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Patientvisit} from "./patientvisit";
 import {ItemProductService} from "../services/itemProduct.service";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
     selector: 'app-service-component',
@@ -19,15 +20,24 @@ export class ServiceComponentComponent implements OnInit {
         this.prodTypeService.getAllMedicalServices().subscribe(
             data => {
                 this.medicalServices = data;
-                this.patientVisit.medicalServices.push(new Object());
+                this.serviceChanged(0,0);
+                var x =Object.assign({},this.medicalServices[0]);
+                this.patientVisit.medicalServices.push(x);
             }
         );
     }
 
-    serviceChanged(i,j) {
-        this.patientVisit.medicalServices[j] = Object.assign({},this.medicalServices[i]);
-        this.patientVisit.medicalServices[j].serviceIndex =i;
+    serviceChanged(itemId,rowIndex) {
+        this.medicalServices.forEach(child=>{
+            if (itemId == child.itemId)
+            {
+                this.patientVisit.medicalServices[rowIndex] = Object.assign({},child);
+            }
+        });
+
     }
+
+
 
     onAdd()
     {
