@@ -1,14 +1,8 @@
 package com.opdapp.controller;
 
-import com.opdapp.model.ItemSupplier;
-import com.opdapp.model.MedicalServItem;
-import com.opdapp.model.ProductType;
-import com.opdapp.model.UnitOfMeasure;
+import com.opdapp.model.*;
 import com.opdapp.repository.ProductTypeRepository;
-import com.opdapp.service.ItemSupplierService;
-import com.opdapp.service.ItemTypeService;
-import com.opdapp.service.MedicalServiceService;
-import com.opdapp.service.UnitOfMeasureService;
+import com.opdapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
