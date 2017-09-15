@@ -7,10 +7,8 @@
     <div class="col-lg-2">
       <input type="text" (keyup)="loadGRN($event,grn.value)" #grn/>
     </div>
-    <!--<div class="col-lg-6" align="right"><b>Supplier :</b> {{poDetail.supplier}}</div>-->
-    <!--<div class="col-lg-2" >Date : <input type="date"  [(ngModel)]='poDetail.expectedRecieveDate' required id="expectedRecieveDate" name="expectedRecieveDate"></div>-->
   </div>
-<br/>
+  <br/>
   <table class="table table-responsive" border="3">
     <thead>
     <tr>
@@ -42,7 +40,7 @@
       <td>
         <input type="date" [(ngModel)]='x.paymentDetails.paymentDate' required id="paymentDate" name="paymentDate">
       </td>
-      <td> <input type="text" [(ngModel)]='x.paymentDetails.amount' required id="amount" name="amount"></td>
+      <td><input type="text" [(ngModel)]='x.paymentDetails.amount' required id="amount" name="amount"></td>
       <td>
         <select name="paymentMethod" [(ngModel)]="x.paymentDetails.paymentMethod">
           <option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod">
@@ -50,7 +48,8 @@
           </option>
         </select>
       </td>
-      <td><input type="text" [(ngModel)]='x.paymentDetails.paymentMethodDetails' id="paymentMethodDetails" name="paymentMethodDetails"></td>
+      <td><input type="text" [(ngModel)]='x.paymentDetails.paymentMethodDetails' id="paymentMethodDetails"
+                 name="paymentMethodDetails"></td>
       <button type="button" class="button btn-primary" (click)="makePay(i)">Pay</button>
     </tr>
     </tbody>
