@@ -4,6 +4,7 @@ import com.opdapp.model.ItemSupplier;
 import com.opdapp.model.MedicalServItem;
 import com.opdapp.model.ProductType;
 import com.opdapp.model.UnitOfMeasure;
+import com.opdapp.repository.ProductTypeRepository;
 import com.opdapp.service.ItemSupplierService;
 import com.opdapp.service.ItemTypeService;
 import com.opdapp.service.MedicalServiceService;
@@ -30,6 +31,9 @@ public class AdminContoller {
 
     @Autowired
     private MedicalServiceService medicalServiceService;
+
+    @Autowired
+    private ProductTypeRepository productTypeRepository;
 
     @RequestMapping(path = "/loadItemSuppliers", method = RequestMethod.GET)
     public @ResponseBody
@@ -72,7 +76,20 @@ public class AdminContoller {
 
     @RequestMapping(path = "/saveMedicalServiceItem", method = RequestMethod.POST)
     public @ResponseBody
-    MedicalServItem saveMedicalServiceItem(@RequestBody final MedicalServItem medicalServiceItem) {
-        return medicalServiceService.save(medicalServiceItem);
+    List<MedicalServItem> saveMedicalServiceItem(@RequestBody final MedicalServItem medicalServiceItem) {
+        medicalServiceService.save(medicalServiceItem);
+        return medicalServiceService.loadAllMedicalService();
+    }
+
+    @RequestMapping(path = "/getProductTypes", method = RequestMethod.GET)
+    public @ResponseBody Iterable<ProductType> getProductTypes()
+    {
+        return productTypeRepository.findAll();
+    }
+
+    @RequestMapping(path = "/getMedicalServices", method = RequestMethod.GET)
+    public @ResponseBody List<MedicalServItem> getMedicalServices()
+    {
+        return medicalServiceService.loadAllMedicalService();
     }
 }

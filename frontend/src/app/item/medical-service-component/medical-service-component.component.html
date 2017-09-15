@@ -1,0 +1,68 @@
+<div class="container">
+  <header>
+    <h2>Medical Services</h2>
+  </header>
+  <nav>
+    <table border="2" width="100%" class="table table-hover" [class.active]="i == selectedRow">
+      <tr>
+        <th width="10%">Id</th>
+        <th width="20%">Product Type</th>
+        <th width="30%">Description</th>
+        <th width="10%">Unit Price</th>
+      </tr>
+
+      <tr *ngFor="let obj of medicalServices; let i = index" (click)="setClickedRow(i)">
+        <td>{{obj.itemId}}</td>
+        <td>
+          {{obj.productType.itemtype}}
+        </td>
+        <td>{{obj.itemDescription}}</td>
+        <td>{{obj.unitPrice}}</td>
+      </tr>
+    </table >
+  </nav>
+  <article>
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+      <h3> Edit Service details </h3>
+      <table width="100%">
+        <tr>
+          <th width="30%"></th>
+          <th width="100%"></th>
+          <th width="1%"> </th>
+        </tr>
+        <tr>
+          <td><label>Product Type</label></td>
+          <td>
+            <select name="productType" [(ngModel)]="item.productType.itemTypeId">
+              <option *ngFor="let productType of productTypes" [value]="productType.itemTypeId">{{productType.itemtype}}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="desc">Description : </label>
+          </td>
+          <td><input type="text" id="desc" name="desc" required [(ngModel)]="item.itemDescription"/>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            <label for="unitPrice">Unit Price : </label>
+          </td>
+          <td><input type="number" id="unitPrice" name="unitPrice" [(ngModel)]="item.unitPrice" />
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
+          </td>
+          <td><button type='button' class="btn btn-primary" (click)="cancelEdit()">Cancel</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </article>
+</div>
+

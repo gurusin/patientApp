@@ -23,6 +23,7 @@ import {GrnComponent} from "./grn/grn.component";
 import {IssueFinderComponent} from "./issue/issue-finder.component";
 import {PharmacyComponent} from "./pharmacy/pharmacy.component";
 import {PaymentComponent} from "./grn/payment.component";
+import {MedicalServiceComponentComponent} from "./item/medical-service-component/medical-service-component.component";
 
 const APP_ROUTES: Routes = [
     {path: '', component: PatientSearchComponent},
@@ -51,8 +52,8 @@ const APP_ROUTES: Routes = [
     {path: 'findIssue', component: IssueFinderComponent},
     {path: 'printPo',component:PrintreceiptComponent},
     {path: 'pharmacyList', component:PharmacyComponent},
-    {path: 'payment', component: PaymentComponent}
-  // {path: 'medServiceItem', component: MedicalSer}
+    {path: 'payment', component: PaymentComponent},
+    {path: 'medServiceItem', component: MedicalServiceComponentComponent}
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)
