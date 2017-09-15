@@ -63,4 +63,9 @@ public class POController {
         return new IssueDTO();
     }
 
+    @RequestMapping(path="/makePayment", method = RequestMethod.POST)
+    public @ResponseBody
+    List<GRNDTOForPay> makePayment(@RequestBody final GRNDTOForPay gRNDTOForPay) {
+        return poService.makePayment(gRNDTOForPay);
+    }
 }

@@ -21,4 +21,6 @@ public interface POService {
     List<PurchaseOrderDTO> findPurchaseOrderByPoStatus(final POStatus poStatus);
 
     List<GRNDTOForPay> loadGRNForPay(String supplierInvoice);
+
+    List<GRNDTOForPay> makePayment(final GRNDTOForPay gRNDTOForPay);
 }

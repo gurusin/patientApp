@@ -53,4 +53,9 @@ export class AdminService {
     return this.http.get(url).map((res:Response) =>res.json())
   }
 
+  loadPaymentMethod():Observable<any[]>
+  {
+    var url = localStorage.getItem("rootURL") +"loadPaymentMethod";
+    return this.http.get(url).map((res:Response) =>res.json())
+  }
 }

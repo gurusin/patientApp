@@ -32,6 +32,9 @@ public class PoServiceImpl implements POService {
     @Autowired
     private GoodReceivingNoteRepository goodReceivingNoteRepository;
 
+    @Autowired
+    private PaymentDetailRepository paymentDetailRepository;
+
     @Override
     public PurchaseOrder savePO(PurchaseOrderDTO purchaseOrderDTO) {
 
@@ -116,22 +119,19 @@ public class PoServiceImpl implements POService {
             list.add(detailDTO);
         }
         dto.setDetails(list);
+        dto.setPaymentDetails(new PaymentDetails());
         return dto;
     }
 
     @Override
     public PurchaseOrder registerGRN(POForGrnDTO grn) {
-
-        if (grn.getPaymentDetails() == null) {
-            grn.setGrnStatus(GRNStatus.CREATED);
-        } else {
-
-        }
+        grn.setGrnStatus(GRNStatus.CREATED);
         final PurchaseOrder purchaseOrder = poRepository.findOne(grn.getPoNumber());
         final GoodReceivingNote grnObj = new GoodReceivingNote();
         grnObj.setPurchaseOrder(purchaseOrder);
         grnObj.setSupplierInvoice(grn.getSupplierInvoice());
         grnObj.setGrnDate(new java.sql.Date(grn.getExpectedRecieveDate().getTime()));
+        grnObj.setGrnStatus(grn.getGrnStatus());
         final Set<GRNDetails> grnDetailsSet = new HashSet<>();
         for (final PoForGrnDetailDTO dto : grn.getDetails()) {
             updateGRN(dto, purchaseOrder, grnDetailsSet, grnObj);
@@ -210,13 +210,19 @@ public class PoServiceImpl implements POService {
         grndtoForPay.setGrnDate(grn.getGrnDate());
         grndtoForPay.setSupplierInvoice(grn.getSupplierInvoice());
         Set<PoForGrnDetailDTO> poForGrnDetailDTOS = new HashSet<PoForGrnDetailDTO>();
-        for (GRNDetails grnDetail : grn.getgRNDetails()){
+        PaymentDetails paymentDetails = new PaymentDetails();
+        double totalAmpount = 0;
+        for (GRNDetails grnDetail : grn.getgRNDetails()) {
 
             final PoForGrnDetailDTO detailDTO = new PoForGrnDetailDTO();
             createPoForGrnDetailDTO(grnDetail, detailDTO);
             poForGrnDetailDTOS.add(detailDTO);
+            totalAmpount = totalAmpount + grnDetail.getItemBoughtPrice() * grnDetail.getReceivingQty();
         }
+        paymentDetails.setGrnNo(grn.getDrnid());
         grndtoForPay.setPoForGrnDetailDTO(poForGrnDetailDTOS);
+        grndtoForPay.setPaymentDetails(paymentDetails);
+        grndtoForPay.setTotalAmount(totalAmpount);
     }
 
     private void createPoForGrnDetailDTO(GRNDetails detail, PoForGrnDetailDTO detailDTO) {
@@ -228,4 +234,19 @@ public class PoServiceImpl implements POService {
 
     }
 
+    @Override
+    public List<GRNDTOForPay> makePayment(final GRNDTOForPay gRNDTOForPay){
+        GoodReceivingNote grn = goodReceivingNoteRepository.findOne(gRNDTOForPay.getDrnid());
+        if (gRNDTOForPay.getTotalAmount() <= gRNDTOForPay.getPaymentDetails().getAmount()) {
+            grn.setGrnStatus(GRNStatus.PAID);
+        } else {
+            grn.setGrnStatus(GRNStatus.HALF_PAID);
+        }
+
+        goodReceivingNoteRepository.save(grn);
+        PaymentDetails paymentToSave = gRNDTOForPay.getPaymentDetails();
+        paymentToSave.setPaymentMode(PaymentMode.OUT);
+        paymentDetailRepository.save(paymentToSave);
+        return loadGRNForPay(gRNDTOForPay.getSupplierInvoice());
+    }
 }

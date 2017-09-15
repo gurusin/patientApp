@@ -22,6 +22,8 @@ public class GRNDTOForPay {
 
     private PaymentDetails paymentDetails;
 
+    private double totalAmount;
+
     public long getDrnid() {
         return drnid;
     }
@@ -68,5 +70,13 @@ public class GRNDTOForPay {
 
     public void setPoForGrnDetailDTO(Set<com.opdapp.dto.PoForGrnDetailDTO> poForGrnDetailDTO) {
         this.poForGrnDetailDTO = poForGrnDetailDTO;
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 }

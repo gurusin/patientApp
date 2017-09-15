@@ -44,4 +44,9 @@ export class POServiceService {
     return this.http.post(url, supplierInvoice).map((res: Response) => res.json());
   }
 
+  savePayment(payment: any) {
+    var url = localStorage.getItem("rootURL") + "makePayment";
+    return this.http.post(url, payment).map((res: Response) => res.json());
+  }
+
 }
