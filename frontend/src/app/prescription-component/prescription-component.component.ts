@@ -119,6 +119,15 @@ export class PrescriptionDetail
     this.frequency = new Dosefrequency();
     this.strength = new Strength();
   }
+
+  public isValid():boolean
+  {
+    var passed = true;
+    passed = (this.amount > 0) && (this.duration >0) && (this.intervalUnit != null) &&
+        this.frequency != null && this.drugId != null && this.meal != null;
+    return passed;
+  }
+
 }
 
 
