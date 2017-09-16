@@ -16,6 +16,8 @@ export class PrescribableDrug {
   meal:string;
   drugList:any[];
   rowId:number;
+  packages:any[];
+  availableQty:any;
 
   constructor()
   {
@@ -23,4 +25,8 @@ export class PrescribableDrug {
     this.rowId = new Date().getMilliseconds();
     this.selectedStrength = new Strength();
   }
+
+    public findAvailableQty() {
+        this.availableQty = this.packages[this.selectedStrengthIndex].quantity;
+    }
 }

@@ -60,6 +60,14 @@ export class PrescriptionComponentComponent implements OnInit {
       });
   }
 
+    selectStrength(i)
+    {
+       var obj = this.patientVisit.prescribableDrug[i];
+       obj.availableQty = obj.packages[obj.selectedStrengthIndex].qunatity;
+       this.patientVisit.prescribableDrug[i].availableQty = obj.packages[obj.selectedStrengthIndex].quantity;
+       console.log(this.patientVisit.prescribableDrug[i]);
+    }
+
   setDrugId(pres:PrescribableDrug) {
     pres.drugList.forEach((obj: DrugSearchResult) => {
         if (obj.brandName === pres.drug.brandName) {

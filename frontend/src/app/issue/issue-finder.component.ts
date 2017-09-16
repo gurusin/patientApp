@@ -30,7 +30,7 @@ export class IssueFinderComponent implements OnInit {
                 data => {
                     this.issue=data;
                     this.issue.issueNoteDetails.forEach(
-                        item => {item.issuedQty = item.buyingQuantity}
+                        item => {item.issuedQty = item.buyingQuantity;}
                     );
                 }
             );
@@ -51,9 +51,11 @@ export class IssueFinderComponent implements OnInit {
             }
         );
 
-        this.issueService.makeIssue(obj).subscribe();
-
-      this.router.navigate(['/pharmacyList']);
+        this.issueService.makeIssue(obj).subscribe(
+            data =>{
+                this.router.navigate(['/pharmacyList']);
+            }
+        );
     }
 
 }

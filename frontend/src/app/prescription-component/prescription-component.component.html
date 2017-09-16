@@ -4,6 +4,7 @@
   <tr>
     <th>Drug</th>
     <th>Strength</th>
+    <th>Available Stock</th>
     <th>Frequency</th>
     <th>Amount</th>
     <th>Duration</th>
@@ -20,11 +21,11 @@
         <option *ngFor="let drug of row.drugList" value="{{drug.brandName}}">{{drug.brandName}}</option>
       </datalist>
     </td>
-    <td><select [(ngModel)]="row.selectedStrengthIndex">
+    <td><select [(ngModel)]="row.selectedStrengthIndex" (change)="selectStrength(i)">
       <option *ngFor="let x of row.strengths;let j=index" value="{{j}}">{{x.strengthAmount +","+x.strengthUnit.unitName}}</option>
     </select>
     </td>
-
+    <td>{{row.availableQty}}</td>
     <td><select [(ngModel)]="row.selectedFrequency">
       <option *ngFor="let x of row.doseFrequency" value="{{x.doseFrequencyId}}">{{x.noofDoses}} times {{x.timeUnit}}</option>
     </select>

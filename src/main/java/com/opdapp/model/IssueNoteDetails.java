@@ -22,6 +22,36 @@ public class IssueNoteDetails {
 
     private double buyingQuantity;
 
+    private double prescribedQty;
+
+    private double balanceQty;
+
+    private String issueInformation;
+
+    public String getIssueInformation() {
+        return issueInformation;
+    }
+
+    public void setIssueInformation(String issueInformation) {
+        this.issueInformation = issueInformation;
+    }
+
+    public double getBalanceQty() {
+        return balanceQty;
+    }
+
+    public void setBalanceQty(double balanceQty) {
+        this.balanceQty = balanceQty;
+    }
+
+    public double getPrescribedQty() {
+        return prescribedQty;
+    }
+
+    public void setPrescribedQty(double prescribedQty) {
+        this.prescribedQty = prescribedQty;
+    }
+
     public long getIssueNoteId() {
         return issueNoteId;
     }
@@ -52,5 +82,14 @@ public class IssueNoteDetails {
 
     public void setIssueNote(IssueNote issueNote) {
         this.issueNote = issueNote;
+    }
+
+    @PostLoad
+    public void prepare()
+    {
+        if (issueInformation == null)
+        {
+            issueInformation ="";
+        }
     }
 }

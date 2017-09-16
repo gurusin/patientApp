@@ -10,6 +10,15 @@ public class PrescribableDrug implements Serializable {
     private double doseAmount;
     private double doseDuration;
     private List<String> durationUnit;
+    List<DrugPackage> packages;
+
+    public List<DrugPackage> getPackages() {
+        return packages;
+    }
+
+    public void setPackages(List<DrugPackage> packages) {
+        this.packages = packages;
+    }
 
     public Drug getDrug() {
         return drug;

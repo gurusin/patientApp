@@ -49,15 +49,15 @@ public class DrugServiceImpl implements DrugService {
         durationunit.add("Weeks");
         durationunit.add("Months");
 
-
         prescribableDrug.setDurationUnit(durationunit);
 
         Drug drug = drugRepository.findOne(drugId);
         prescribableDrug.setDrug(drug);
 
-        List<DrugPackage> strengthList = drugPackageRepository.getDrugPackageByDrug(drug);
+        List<DrugPackage> packages = drugPackageRepository.getDrugPackageByDrug(drug);
+        prescribableDrug.setPackages(packages);
         List<Strength> strenghts = new ArrayList<Strength>();
-        for (DrugPackage obj : strengthList) {
+        for (DrugPackage obj : packages) {
             strenghts.add(obj.getStrength());
         }
         prescribableDrug.setStrengths(strenghts);

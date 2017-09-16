@@ -9,6 +9,7 @@ import com.opdapp.model.IssueStatus;
 import com.opdapp.repository.DrugPackageRepository;
 import com.opdapp.repository.IssueNoteRepository;
 import com.opdapp.service.IssueService;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,11 @@ public class IssueServiceImpl implements IssueService {
         for (final IssueNoteDetails detail : issueNote.getIssueNoteDetails())
         {
             final double issuedQty = issueMap.get(detail.getIssueNoteId()).getIssuedQty();
-            detail.setBuyingQuantity(issuedQty);
+            detail.setBuyingQuantity(detail.getBuyingQuantity() +  issuedQty);
+            detail.setBalanceQty(detail.getBalanceQty() - issuedQty);
+            final StringBuilder builder = new StringBuilder(detail.getIssueInformation());
+            builder.append("{").append(new LocalDate()).append("=>").append(issuedQty).append("}");
+            detail.setIssueInformation(builder.toString());
             updateStock(detail.getDrugPackage(),issuedQty);
         }
         // Should this be issued ????

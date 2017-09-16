@@ -164,7 +164,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         prescriptionDTO.setDiagnosis(prescription.getDiagnosis());
         prescriptionDTO.setPrescriptionDetailDTOS(convertToDetailDTO(prescription));
         prescriptionDTO.setPrescriptionDate(prescription.getDate());
-        prescriptionDTO.setPatientName(prescription.getPatient().getFirstname() + prescription.getPatient().getLastname());
+        final Patient patient = prescription.getPatient();
+        if (patient != null)
+        {
+            prescriptionDTO.setPatientName(prescription.getPatient().getFirstname() + prescription.getPatient().getLastname());
+        }
         dto.setPrescriptionDTO(prescriptionDTO);
     }
 
@@ -212,7 +216,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         for (final PrescriptionDetail prescDet : prescription.getPrescriptionDetails()) {
             IssueNoteDetails issueNoteDetail = new IssueNoteDetails();
             issueNoteDetail.setIssueNote(issueNote);
-            issueNoteDetail.setBuyingQuantity(getBuyingQty(prescDet));
+            double buyingQty = getBuyingQty(prescDet);
+            issueNoteDetail.setPrescribedQty(buyingQty);
+            issueNoteDetail.setBalanceQty(buyingQty);
             issueNoteDetail.setDrugPackage(findDrugPackage(prescDet));
             detailsSet.add(issueNoteDetail);
         }

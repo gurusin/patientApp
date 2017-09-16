@@ -17,7 +17,7 @@ public class IssueController {
     private IssueService issueService;
 
     @RequestMapping(path="/makeIssue", method = RequestMethod.POST)
-    public @ResponseBody String findIssue(@RequestBody MakeIssue issue)
+    public @ResponseBody String makeIssue(@RequestBody MakeIssue issue)
     {
         issueService.makeIssue(issue);
         return "Found";
