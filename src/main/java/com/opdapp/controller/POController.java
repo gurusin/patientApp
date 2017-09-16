@@ -1,9 +1,6 @@
 package com.opdapp.controller;
 
-import com.opdapp.dto.GRNDTOForPay;
-import com.opdapp.dto.IssueDTO;
-import com.opdapp.dto.POForGrnDTO;
-import com.opdapp.dto.PurchaseOrderDTO;
+import com.opdapp.dto.*;
 import com.opdapp.model.POStatus;
 import com.opdapp.model.PurchaseOrder;
 import com.opdapp.service.POService;
@@ -29,33 +26,33 @@ public class POController {
     }
 
     @RequestMapping(path = "/loadPendingPOs", method = RequestMethod.GET)
-    public @ResponseBody List<PurchaseOrderDTO> loadPendingPOs() {
+    public @ResponseBody
+    List<PurchaseOrderDTO> loadPendingPOs() {
         List<PurchaseOrderDTO> list = poService.findPurchaseOrderByPoStatus(POStatus.INITIAL);
         return list;
     }
 
-    @RequestMapping(path="/loadPOForInput", method = RequestMethod.POST)
+    @RequestMapping(path = "/loadPOForInput", method = RequestMethod.POST)
     public @ResponseBody
-    POForGrnDTO loadPOForInput(@RequestBody final String poId)
-    {
+    POForGrnDTO loadPOForInput(@RequestBody final String poId) {
         return poService.loadForGrn(Long.parseLong(poId));
     }
 
-    @RequestMapping(path="/loadGRNForPay", method = RequestMethod.POST)
+    @RequestMapping(path = "/loadGRNForPay", method = RequestMethod.POST)
     public @ResponseBody
-    List<GRNDTOForPay> loadGRNForPay(@RequestBody final String supplierInvoice)
-    {
+    List<GRNDTOForPay> loadGRNForPay(@RequestBody final String supplierInvoice) {
         return poService.loadGRNForPay(supplierInvoice);
     }
 
 
-    @RequestMapping(path="/registerGRN", method = RequestMethod.POST)
-    public @ResponseBody POForGrnDTO registerGRN(@RequestBody final POForGrnDTO grn) {
+    @RequestMapping(path = "/registerGRN", method = RequestMethod.POST)
+    public @ResponseBody
+    POForGrnDTO registerGRN(@RequestBody final POForGrnDTO grn) {
         poService.registerGRN(grn);
         return grn;
     }
 
-    @RequestMapping(path="/saveIssue", method = RequestMethod.POST)
+    @RequestMapping(path = "/saveIssue", method = RequestMethod.POST)
     public @ResponseBody
     IssueDTO saveIssue(@RequestBody final IssueDTO issueDTO) {
         poService.saveIssue(issueDTO);
@@ -63,9 +60,23 @@ public class POController {
         return new IssueDTO();
     }
 
-    @RequestMapping(path="/makePayment", method = RequestMethod.POST)
+    @RequestMapping(path = "/makePayment", method = RequestMethod.POST)
     public @ResponseBody
     List<GRNDTOForPay> makePayment(@RequestBody final GRNDTOForPay gRNDTOForPay) {
         return poService.makePayment(gRNDTOForPay);
+    }
+
+    @RequestMapping(path = "/loadGRNDTOForReturn", method = RequestMethod.POST)
+    public @ResponseBody
+    GRNDTOForReturn loadGRNDTOForReturn(@RequestBody final String supplierInvoice) {
+        return poService.loadGRNDTOForReturn(supplierInvoice);
+    }
+
+
+    @RequestMapping(path = "/saveGoodReturn", method = RequestMethod.POST)
+    public @ResponseBody
+    String saveGoodReturn(@RequestBody final GRNDTOForReturn gRNDTOForReturn) {
+        poService.saveGoodReturn(gRNDTOForReturn);
+        return "Success";
     }
 }

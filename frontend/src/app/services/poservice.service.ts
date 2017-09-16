@@ -39,7 +39,7 @@ export class POServiceService {
     return this.http.post(url, issueObject).map((res: Response) => res.json());
   }
 
-  loadGRN(supplierInvoice):Observable<any[]> {
+  loadGRN(supplierInvoice): Observable<any[]> {
     var url = localStorage.getItem("rootURL") + "loadGRNForPay";
     return this.http.post(url, supplierInvoice).map((res: Response) => res.json());
   }
@@ -49,4 +49,14 @@ export class POServiceService {
     return this.http.post(url, payment).map((res: Response) => res.json());
   }
 
+  loadGRNForRet(supplierInvoice): any {
+    var url = localStorage.getItem("rootURL") + "loadGRNDTOForReturn";
+    return this.http.post(url, supplierInvoice).map((res: Response) => res.json());
+
+  }
+
+  saveRet(grnsToReturn: any) : any{
+    var url = localStorage.getItem("rootURL") + "saveGoodReturn";
+    return this.http.post(url, grnsToReturn).map((res: Response) => res.json());
+  }
 }

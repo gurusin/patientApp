@@ -12,6 +12,7 @@
   <table class="table table-responsive" border="3">
     <thead>
     <tr>
+      <th> Supplier</th>
       <th>GRN No</th>
       <th>Supplier Invoice</th>
       <th>GRN Date</th>
@@ -27,6 +28,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let x of grnsToPay let i = index">
+      <th> {{x.supplierName}}</th>
       <td>{{x.drnid}}</td>
       <td>{{x.supplierInvoice}}</td>
       <td>{{x.grnDate}}</td>

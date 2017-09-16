@@ -52,6 +52,7 @@ import { PaymentComponent } from './grn/payment.component';
 import { MedicalServiceComponentComponent } from './item/medical-service-component/medical-service-component.component';
 import { SelectedRowDirective } from './selected-row.directive';
 import { ServiceComponentComponent } from './treatment/service-component.component';
+import {ReturnoutComponent} from "./purchseorder/returnout.component";
 
 @NgModule({
     declarations: [
@@ -92,6 +93,7 @@ import { ServiceComponentComponent } from './treatment/service-component.compone
         MedicalServiceComponentComponent,
         SelectedRowDirective,
         ServiceComponentComponent,
+        ReturnoutComponent,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

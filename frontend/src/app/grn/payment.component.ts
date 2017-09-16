@@ -10,12 +10,14 @@ import {AdminService} from "../services/admin.service";
 })
 export class PaymentComponent implements OnInit {
 
-  constructor(private poService: POServiceService, private  router: Router, private adminService: AdminService) {
-  }
 
   grnsToPay = [];
   paymentMethods = [];
   grnToSave:any;
+
+  constructor(private poService: POServiceService, private  router: Router, private adminService: AdminService) {
+  }
+
 
   ngOnInit() {
     this.adminService.loadPaymentMethod().subscribe(
@@ -36,7 +38,6 @@ export class PaymentComponent implements OnInit {
   }
 
   makePay(index) {
-    alert(index);
     this.grnToSave = this.grnsToPay[index];
     this.poService.savePayment(this.grnToSave).subscribe(
       data => {

@@ -1,9 +1,6 @@
 package com.opdapp.service;
 
-import com.opdapp.dto.GRNDTOForPay;
-import com.opdapp.dto.IssueDTO;
-import com.opdapp.dto.POForGrnDTO;
-import com.opdapp.dto.PurchaseOrderDTO;
+import com.opdapp.dto.*;
 import com.opdapp.model.POStatus;
 import com.opdapp.model.PurchaseOrder;
 
@@ -23,4 +20,8 @@ public interface POService {
     List<GRNDTOForPay> loadGRNForPay(String supplierInvoice);
 
     List<GRNDTOForPay> makePayment(final GRNDTOForPay gRNDTOForPay);
+
+    GRNDTOForReturn loadGRNDTOForReturn(final String supplierInvoice);
+
+    void saveGoodReturn(final GRNDTOForReturn gRNDTOForReturn);
 }
