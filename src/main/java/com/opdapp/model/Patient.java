@@ -1,6 +1,9 @@
 package com.opdapp.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -67,6 +70,16 @@ public class Patient implements Serializable {
     @Column
     private String profession;
 
+    @Transient
+    private String calculatedAge;
+
+    public String getCalculatedAge() {
+        return calculatedAge;
+    }
+
+    public void setCalculatedAge(String calculatedAge) {
+        this.calculatedAge = calculatedAge;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -188,4 +201,15 @@ public class Patient implements Serializable {
     public void setSocialHistory(String socialHistory) {
         this.socialHistory = socialHistory;
     }
+
+    @PostLoad
+    public void calculateAge()
+    {
+       final org.joda.time.LocalDate dob = new org.joda.time.LocalDate(dateOfBirth);
+       final  org.joda.time.LocalDate now = new LocalDate();
+       final Period period = new Period(dob,now, PeriodType.yearMonthDay());
+       calculatedAge = period.getYears() +" years and " + period.getMonths() +" months";
+    }
+
+
 }

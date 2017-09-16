@@ -103,11 +103,9 @@ export class PatientSearchComponent {
     onKeyName(event: any, value)
     {
         if (event.keyCode == 13) {
-
             var patId = this.patientList[this.patIndex].patientId;
             this.patientService.getByPatNo(patId).subscribe(
                 data =>{
-
                     this.patientService.patientObject = data;
                     this.router.navigate(["patientvisit/treatment"]);
                 }
