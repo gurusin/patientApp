@@ -19,4 +19,6 @@ public interface PatientService
     Patient getByPhoneNo(String phoneNo);
 
     List<Patient> loadPatients();
+
+    List<Patient> findByName(String name);
 }

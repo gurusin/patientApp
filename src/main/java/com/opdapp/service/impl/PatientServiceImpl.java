@@ -59,4 +59,9 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> loadPatients() {
         return patientRepository.findAll();
     }
+
+    @Override
+    public List<Patient> findByName(String name) {
+        return patientRepository.findByFirstnameLikeOrLastnameLike(name,name);
+    }
 }

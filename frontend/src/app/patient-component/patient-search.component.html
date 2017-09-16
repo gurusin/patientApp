@@ -26,9 +26,21 @@
       <label>Phone No :</label>
     </div>
     <div class="col-md-3">
-      <input list='phoneNumber' [(ngModel)]="phone" (keyup)="onKeyPhoneNumber($event)" >
-      <datalist id='phoneNumber' (select)="onChange()">
+      <input list='phoneNumber' [(ngModel)]="phone" (keyup)="onKeyPhoneNumber($event)">
+      <datalist id='phoneNumber'>
         <option *ngFor="let pat of patientList" value="{{pat.phone}}">{{pat.nic}},{{pat.firstname}}</option>
+      </datalist>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <label>Name :</label>
+    </div>
+    <div class="col-md-3">
+      <input #ctr list='name' [(ngModel)]="patIndex" (keyup)="onKeyName($event,ctr.value)">
+      <datalist id='name'>
+        <option  (select)="name(i)" *ngFor="let pat of patientList; let i=index" value="{{i}}">{{pat.firstname}},{{pat.lastname}}</option>
       </datalist>
     </div>
   </div>

@@ -14,6 +14,7 @@ export class PatientSearchComponent {
   nic: string;
   phone:string;
   patNo:string;
+  patIndex:string;
 
   patientList = [];
 
@@ -34,19 +35,15 @@ export class PatientSearchComponent {
     }
   }
 
-  onChange()
-  {
-    alert('Changed');
-  }
-
   newPatient()
   {
     this.patientService.clearPatient();
     this.router.navigate(["patientsave"]);
   }
 
-  onKeyPhoneNumber(event:any)
+  onKeyPhoneNumber(event:any, value)
   {
+
     if (event.keyCode == 13) {
       this.patientService.getByPhoneNo(this.phone).subscribe(
           data =>{
@@ -88,11 +85,53 @@ export class PatientSearchComponent {
   }
 
   searchByPhone() {
-    this.patientService.searchByPhone(this.phone).subscribe(
-      data => {
-        this.patientList = data;
-      }
-    );
-  }
+        this.patientService.searchByPhone(this.phone).subscribe(
+            data => {
+                this.patientList = data;
+            }
+        );
+    }
+
+    searchByName(name) {
+        this.patientService.findByName(name).subscribe(
+            data => {
+                this.patientList = data;
+            }
+        );
+    }
+
+    onKeyName(event: any, value)
+    {
+        if (event.keyCode == 13) {
+
+            var patId = this.patientList[this.patIndex].patientId;
+            this.patientService.getByPatNo(patId).subscribe(
+                data =>{
+
+                    this.patientService.patientObject = data;
+                    this.router.navigate(["patientvisit/treatment"]);
+                }
+            );
+        }
+        else if (value.length == 2) {
+            this.patientService.findByName(value).subscribe(
+                data =>{
+                    this.patientList = data;
+                }
+            );
+        } else if (value.length < 2) {
+            this.patientList = [];
+        }
+    }
+
+    onChangeName()
+    {
+       alert('Value Selected');
+    }
+
+    name(i)
+    {
+        alert('Selected index '+ i);
+    }
 
 }

@@ -64,6 +64,12 @@ public class PatientController
         return patientService.getByPhoneNo(phoneNo);
     }
 
+    @RequestMapping(path="/findByName", method = RequestMethod.POST)
+    public @ResponseBody List<Patient> findByName(@RequestBody final String name)
+    {
+        return patientService.findByName(name+"%");
+    }
+
     @RequestMapping(path="/loadPatients", method = RequestMethod.GET)
     public @ResponseBody
     List<Patient> loadPatients() {

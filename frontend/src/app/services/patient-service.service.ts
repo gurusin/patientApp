@@ -68,4 +68,9 @@ export class PatientServiceService {
     var url = localStorage.getItem("rootURL")  + "loadPatients";
     return this.http.get(url).map((res: Response) => res.json())
   }
+
+    findByName(name: any) :Observable<any>{
+        var url = localStorage.getItem("rootURL")  + "findByName";
+        return this.http.post(url,name).map((res: Response) => res.json())
+    }
 }
