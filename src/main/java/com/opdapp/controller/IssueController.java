@@ -17,10 +17,10 @@ public class IssueController {
     private IssueService issueService;
 
     @RequestMapping(path="/makeIssue", method = RequestMethod.POST)
-    public @ResponseBody String makeIssue(@RequestBody MakeIssue issue)
+    public @ResponseBody IssueNote makeIssue(@RequestBody MakeIssue issue)
     {
         issueService.makeIssue(issue);
-        return "Found";
+        return new IssueNote();
     }
 
     @RequestMapping(path="/findIssue", method = RequestMethod.POST)

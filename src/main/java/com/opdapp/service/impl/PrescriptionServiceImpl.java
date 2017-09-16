@@ -78,9 +78,10 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 issueNotesList = issueNoteMap.get(issueNote.getExternalId());
             }else {
                 issueNotesList = new ArrayList<IssueNote>();
+                issueNoteMap.put(issueNote.getExternalId(), issueNotesList);
             }
             issueNotesList.add(issueNote);
-            issueNoteMap.put(issueNote.getExternalId(), issueNotesList);
+
         }
         List<SavedPrescriptionDTO> savedPrescriptionDTOS = new ArrayList<SavedPrescriptionDTO>();
 
@@ -92,7 +93,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                     savedPrescriptionDTOS.add(savedPrescriptionDTO);
                 }
             } else {
-                SavedPrescriptionDTO savedPrescriptionDTO = getSavedPrescriptionDTO(null, presc);
+                SavedPrescriptionDTO savedPrescriptionDTO = getSavedPrescriptionDTO(new IssueNote(), presc);
                 savedPrescriptionDTOS.add(savedPrescriptionDTO);
             }
         }
@@ -167,7 +168,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         final Patient patient = prescription.getPatient();
         if (patient != null)
         {
-            prescriptionDTO.setPatientName(prescription.getPatient().getFirstname() + prescription.getPatient().getLastname());
+            prescriptionDTO.setPatientName(prescription.getPatient().getFirstname()+"," + prescription.getPatient().getLastname());
         }
         dto.setPrescriptionDTO(prescriptionDTO);
     }
