@@ -1,0 +1,44 @@
+<div class="container">
+<h1>Retruns of Goods</h1>
+<div class="row">
+  <div class="col-lg-2">
+    <label>Supplier Invoice number</label>
+  </div>
+  <div class="col-lg-2">
+    <input type="text" (keyup)="loadgrnbysi($event,grn.value)" #grn/>
+  </div>
+</div>
+<br/>
+
+<table class="table table-responsive" border="3">
+  <tr>
+    <td>Supplier Name : {{grnsToReturn.supplierName}}</td>
+    <td>GRN Id : {{grnsToReturn.drnid}}</td>
+    <td>GRN Date : {{grnsToReturn.grnDate}}</td>
+  </tr>
+  <tr>
+    <td>Return Date :</td>
+    <td colspan="2"><input type="date" [(ngModel)]='grnsToReturn.returnDate' required id="returnDate" name="returnDate">
+    </td>
+  </tr>
+</table>
+<br/>
+<table class="table table-responsive" border="2">
+  <tr>
+    <th>Drug Name</th>
+    <th> Received Qty</th>
+    <th> Return Qty</th>
+  </tr>
+  <tr *ngFor="let obj of grnsToReturn.returnOutDetailDTOList ">
+    <td>{{obj.drugName}}</td>
+    <td>{{obj.recievedQty}}</td>
+    <td><input type="text" [(ngModel)]='obj.returnQty' required id="returnQty" name="returnQty"></td>
+  </tr>
+</table>
+
+<div>
+  <button type="button" class="button btn-primary" (click)="returnGoods()">Return</button>
+</div>
+</div>
+
+

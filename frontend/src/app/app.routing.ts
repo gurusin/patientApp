@@ -24,36 +24,38 @@ import {IssueFinderComponent} from "./issue/issue-finder.component";
 import {PharmacyComponent} from "./pharmacy/pharmacy.component";
 import {PaymentComponent} from "./grn/payment.component";
 import {MedicalServiceComponentComponent} from "./item/medical-service-component/medical-service-component.component";
+import {ReturnoutComponent} from "./purchseorder/returnout.component";
 
 const APP_ROUTES: Routes = [
-    {path: '', component: PatientSearchComponent},
-    {path: 'patientsave', component: PatientsaveComponent},
-    {path: 'treatment', component: TreatmentComponent},
-    {
-        path: 'patientvisit', component: PatientVisitComponent, children: [
-        {path: 'treatment', component: BasicvisitComponent},
-        {path: 'treatmentHistory', component: PrescriptionHistoryComponent}
-    ]
-    },
-    {path: 'printReceipt', component: PrintreceiptComponent},
-    {path: 'patientAdmin', component: PatientadminComponent},
-    {path: 'printpop', component: PrintpopComponent},
-    {path: 'drugAdmin', component: DrugAdminComponent},
-    {path: 'baseDrugAdmin', component: BasedrugadminComponent},
-    {path: 'drugPackageAdmin', component: DrugpackageadminComponent},
-    {path: 'po', component: PurchseorderComponent},
-    {path: 'item', component: ItemComponent},
-    {path: 'issue', component: IssueComponent},
-    {path: 'report', component: ReportComponent},
-    {path: 'supplier', component: SupplierComponent},
-    {path: 'itemtype', component: ItemtypeComponent},
-    {path: 'grn', component: GrnComponent},
-    {path: 'po', component: PurchseorderComponent},
-    {path: 'findIssue', component: IssueFinderComponent},
-    {path: 'printPo',component:PrintreceiptComponent},
-    {path: 'pharmacyList', component:PharmacyComponent},
-    {path: 'payment', component: PaymentComponent},
-    {path: 'medServiceItem', component: MedicalServiceComponentComponent}
+  {path: '', component: PatientSearchComponent},
+  {path: 'patientsave', component: PatientsaveComponent},
+  {path: 'treatment', component: TreatmentComponent},
+  {
+    path: 'patientvisit', component: PatientVisitComponent, children: [
+    {path: 'treatment', component: BasicvisitComponent},
+    {path: 'treatmentHistory', component: PrescriptionHistoryComponent}
+  ]
+  },
+  {path: 'printReceipt', component: PrintreceiptComponent},
+  {path: 'patientAdmin', component: PatientadminComponent},
+  {path: 'printpop', component: PrintpopComponent},
+  {path: 'drugAdmin', component: DrugAdminComponent},
+  {path: 'baseDrugAdmin', component: BasedrugadminComponent},
+  {path: 'drugPackageAdmin', component: DrugpackageadminComponent},
+  {path: 'po', component: PurchseorderComponent},
+  {path: 'item', component: ItemComponent},
+  {path: 'issue', component: IssueComponent},
+  {path: 'report', component: ReportComponent},
+  {path: 'supplier', component: SupplierComponent},
+  {path: 'itemtype', component: ItemtypeComponent},
+  {path: 'grn', component: GrnComponent},
+  {path: 'po', component: PurchseorderComponent},
+  {path: 'findIssue', component: IssueFinderComponent},
+  {path: 'printPo', component: PrintreceiptComponent},
+  {path: 'pharmacyList', component: PharmacyComponent},
+  {path: 'payment', component: PaymentComponent},
+  {path: 'medServiceItem', component: MedicalServiceComponentComponent},
+  {path: 'returnout', component: ReturnoutComponent}
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)

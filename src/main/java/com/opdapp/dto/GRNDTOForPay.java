@@ -24,6 +24,8 @@ public class GRNDTOForPay {
 
     private double totalAmount;
 
+    private String supplierName;
+
     public long getDrnid() {
         return drnid;
     }
@@ -78,5 +80,13 @@ public class GRNDTOForPay {
 
     public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 }

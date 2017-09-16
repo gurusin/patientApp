@@ -35,6 +35,9 @@ public class PoServiceImpl implements POService {
     @Autowired
     private PaymentDetailRepository paymentDetailRepository;
 
+    @Autowired
+    private RetrunsoutRepository retrunsoutRepository;
+
     @Override
     public PurchaseOrder savePO(PurchaseOrderDTO purchaseOrderDTO) {
 
@@ -209,6 +212,7 @@ public class PoServiceImpl implements POService {
         grndtoForPay.setDrnid(grn.getDrnid());
         grndtoForPay.setGrnDate(grn.getGrnDate());
         grndtoForPay.setSupplierInvoice(grn.getSupplierInvoice());
+        grndtoForPay.setSupplierName(grn.getPurchaseOrder().getItemSupplier().getSupplierName() + " " + grn.getPurchaseOrder().getItemSupplier().getSupplierAddress());
         Set<PoForGrnDetailDTO> poForGrnDetailDTOS = new HashSet<PoForGrnDetailDTO>();
         PaymentDetails paymentDetails = new PaymentDetails();
         double totalAmpount = 0;
@@ -235,7 +239,7 @@ public class PoServiceImpl implements POService {
     }
 
     @Override
-    public List<GRNDTOForPay> makePayment(final GRNDTOForPay gRNDTOForPay){
+    public List<GRNDTOForPay> makePayment(final GRNDTOForPay gRNDTOForPay) {
         GoodReceivingNote grn = goodReceivingNoteRepository.findOne(gRNDTOForPay.getDrnid());
         if (gRNDTOForPay.getTotalAmount() <= gRNDTOForPay.getPaymentDetails().getAmount()) {
             grn.setGrnStatus(GRNStatus.PAID);
@@ -248,5 +252,49 @@ public class PoServiceImpl implements POService {
         paymentToSave.setPaymentMode(PaymentMode.OUT);
         paymentDetailRepository.save(paymentToSave);
         return loadGRNForPay(gRNDTOForPay.getSupplierInvoice());
+    }
+
+    public GRNDTOForReturn loadGRNDTOForReturn(final String supplierInvoice) {
+        List<GoodReceivingNote> goodReceivingNoteList = goodReceivingNoteRepository.getGoodReceivingNoteBySupplierInvoiceLike(supplierInvoice);
+        GRNDTOForReturn grndtoForReturn = new GRNDTOForReturn();
+        if (goodReceivingNoteList.size() > 0) {
+            GoodReceivingNote note = goodReceivingNoteList.get(0);
+            grndtoForReturn.setDrnid(note.getDrnid());
+            grndtoForReturn.setGrnDate(note.getGrnDate());
+            grndtoForReturn.setSupplierInvoice(note.getSupplierInvoice());
+            grndtoForReturn.setSupplierName(note.getPurchaseOrder().getItemSupplier().getSupplierName() + " " + note.getPurchaseOrder().getItemSupplier().getSupplierAddress());
+            List<ReturnOutDetailDTO> returnOutDetailDTOList = new ArrayList<ReturnOutDetailDTO>();
+            for (GRNDetails grnDetails : note.getgRNDetails()) {
+                ReturnOutDetailDTO returnOutDetailDTO = new ReturnOutDetailDTO();
+                returnOutDetailDTO.setDrugName(grnDetails.getDrugPackage().getDrug().getBrandName() + " " + grnDetails.getDrugPackage().getStrength().getStrengthAmount() + grnDetails.getDrugPackage().getStrength().getStrengthUnit().getUnitName());
+                returnOutDetailDTO.setDrugPackageId(grnDetails.getDrugPackage().getDrugPackageId());
+                returnOutDetailDTO.setGrnDetailNo(grnDetails.getGrnDetailNo());
+                returnOutDetailDTO.setRecievedQty(grnDetails.getReceivingQty());
+                returnOutDetailDTOList.add(returnOutDetailDTO);
+            }
+            grndtoForReturn.setReturnOutDetailDTOList(returnOutDetailDTOList);
+        }
+        return grndtoForReturn;
+    }
+
+    public void saveGoodReturn(final GRNDTOForReturn gRNDTOForReturn) {
+        Returnsout returnsout = new Returnsout();
+        returnsout.setReturnDate(gRNDTOForReturn.getReturnDate());
+        returnsout.setSupplierInvoice(gRNDTOForReturn.getSupplierInvoice());
+        Set<ReturnOutDetail> returnsoutDetails = new HashSet<ReturnOutDetail>();
+        for (ReturnOutDetailDTO returnOutDetailDTO : gRNDTOForReturn.getReturnOutDetailDTOList()) {
+            if (returnOutDetailDTO.getReturnQty() > 0) {
+                ReturnOutDetail returnOutDetail = new ReturnOutDetail();
+                DrugPackage drugPackage = drugPackageRepository.findOne(returnOutDetailDTO.getDrugPackageId());
+                drugPackage.setQuantity(drugPackage.getQuantity() - returnOutDetailDTO.getReturnQty());
+                drugPackageRepository.save(drugPackage);
+                returnOutDetail.setDrugPackage(drugPackage);
+                returnOutDetail.setReturnQty(returnOutDetailDTO.getReturnQty());
+                returnOutDetail.setReturnsout(returnsout);
+                returnsoutDetails.add(returnOutDetail);
+            }
+        }
+        returnsout.setReturnOutDetail(returnsoutDetails);
+        retrunsoutRepository.save(returnsout);
     }
 }
