@@ -10,6 +10,9 @@ import {Router} from "@angular/router";
 export class IssueFinderComponent implements OnInit {
 
     issue: any;
+    show=false;
+    total =0;
+    date = new Date();
 
     constructor(private issueService: IssueServiceService, private router:Router,) {
         this.issue = new Object();
@@ -22,6 +25,19 @@ export class IssueFinderComponent implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    getTotal()
+    {
+        var total = 0;
+        this.issue.issueNoteDetails.forEach(
+            item =>{
+                total = total + (item.issuedQty * item.drugPackage.unitPrice);}
+        );
+        this.issue.issueNoteServiceItems.forEach(
+            item =>{total = total + item.fee;}
+        );
+        this.total =total;
     }
 
     onIssueNo(event: any, value: string) {
@@ -56,6 +72,26 @@ export class IssueFinderComponent implements OnInit {
                 this.router.navigate(['/pharmacyList']);
             }
         );
+    }
+
+    print(): void {
+        this.getTotal();
+        let printContents, popupWin;
+        printContents = document.getElementById('printContent').innerHTML;
+        popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+        popupWin.document.open();
+        popupWin.document.write(`
+      <html>
+        <head>
+          <!--<title>Print tab</title>-->
+          <!--<style>-->
+          <!--//........Customized style.......-->
+          <!--</style>-->
+        </head>
+        <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+        );
+        popupWin.document.close();
     }
 
 }
