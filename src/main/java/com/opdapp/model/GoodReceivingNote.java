@@ -1,5 +1,7 @@
 package com.opdapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
@@ -13,6 +15,7 @@ public class GoodReceivingNote {
 
     @ManyToOne
     @JoinColumn(name = "purchaseOrderNo")
+    @JsonBackReference
     private PurchaseOrder purchaseOrder;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "goodReceivingNote", cascade = CascadeType.ALL)

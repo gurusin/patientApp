@@ -1,6 +1,8 @@
 package com.opdapp.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,6 +19,7 @@ public class PurchaseOrderDetail {
 
     @ManyToOne
     @JoinColumn(name = "purchaseOrderNo")
+    @JsonBackReference
     private PurchaseOrder purchaseOrder;
 
     private double receivedQty;
