@@ -13,4 +13,6 @@ public interface PrescriptionService {
     List<PrescriptionDTO> loadPrescriptions(long l);
 
     List<SavedPrescriptionDTO> loadPrescriptionsByDate(final Date date);
+
+    Prescription get(String id);
 }

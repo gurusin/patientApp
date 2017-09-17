@@ -8,7 +8,8 @@
         <th width="10%">Patient name</th>
         <th witdh="5"> Issue no</th>
         <th width="60%">Drug details</th>
-        <th width="20%"></th>
+        <th width="20%">Issue Status</th>
+        <th width="5%">Print</th>
       </tr>
       <tr *ngFor="let obj of prescriptionDTOList ; let i = index">
         <td>{{obj.prescriptionDTO.patientName}}</td>
@@ -20,9 +21,8 @@
       </li>
       </ul>
         </td>
-        <td> {{obj.issueNote.issueStatus}}
-        </td>
-
+        <td>{{obj.issueNote.issueStatus}}</td>
+        <td><button type="button" class="btn btn-primary" (click)="printView(obj.prescriptionDTO)">Print</button></td>
       </tr>
     </table>
   </nav>

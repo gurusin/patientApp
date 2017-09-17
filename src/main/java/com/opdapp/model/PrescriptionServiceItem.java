@@ -1,5 +1,7 @@
 package com.opdapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,7 @@ public class PrescriptionServiceItem{
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "prescriptionId", nullable = false)
+    @JsonBackReference
     private Prescription prescription;
 
     private double fee;

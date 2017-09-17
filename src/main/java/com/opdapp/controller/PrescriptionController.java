@@ -43,5 +43,9 @@ public class PrescriptionController {
 
     }
 
-
+     @RequestMapping(path = "getPrescription",method = RequestMethod.POST)
+     public @ResponseBody Prescription getPrescription(@RequestBody String id)
+     {
+         return prescriptionService.get(id);
+     }
 }

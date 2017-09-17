@@ -12,10 +12,16 @@ export class PrintreceiptComponent implements OnInit {
   prescription : any;
   constructor(private drugService:DrugServiceService)
   {
-    this.prescription = this.drugService.savedPrescription;
+
   }
 
   ngOnInit() {
+      this.drugService.getPrescription(
+          this.drugService.savedPrescription.prescriptionId).subscribe(
+              data =>{
+                this.prescription = data;
+              }
+      );
   }
 
   clickButton(){

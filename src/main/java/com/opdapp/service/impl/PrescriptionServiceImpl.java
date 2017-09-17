@@ -62,6 +62,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
+    public Prescription get(String id) {
+        return prescriptionRepository.findOne(Long.parseLong(id));
+    }
+
+    @Override
     public List<SavedPrescriptionDTO> loadPrescriptionsByDate(final java.util.Date date){
         java.sql.Date sqlDate = new java.sql.Date( date.getTime() );
         List<Prescription> loadedPrecs = prescriptionRepository.findPrescriptionByDate(sqlDate);
@@ -162,6 +167,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     private void populateDTo(final SavedPrescriptionDTO dto, final Prescription prescription) {
         final PrescriptionDTO prescriptionDTO = new PrescriptionDTO();
+        prescriptionDTO.setPrescriptionId(prescription.getId());
+        prescriptionDTO.setPatient(prescription.getPatient());
         prescriptionDTO.setDiagnosis(prescription.getDiagnosis());
         prescriptionDTO.setPrescriptionDetailDTOS(convertToDetailDTO(prescription));
         prescriptionDTO.setPrescriptionDate(prescription.getDate());

@@ -1,96 +1,52 @@
 <!--<popup>-->
 <div id="print-section">
-<h1 align="center">OPD Name : ABS Medical Center</h1>
-<h4 align="center">Nugegoda, Gansabha handiya, </h4>
-<h4 align="center">0718345345</h4>
-<br/>
-<div> Doctor : Janaka </div>
-<div> Time : 2017/08/19 : 12.15 </div>
-
-  <div *ngIf="prescription.issueNote.issueNote > 0">
-    <label> Issue No : {{prescription.issueNote.issueNote}}</label><br/>
+  <div style="font-family: 'Times New Roman',Times,Serif;font-style: normal;font-weight: bold;
+    font-size: 20px;margin-left: 25px;">
+    <section>
+      <table>
+        <tr>
+          <td>Suwa Piyasa Medical Center</td>
+        </tr>
+        <tr>
+          <td>Dr. Janaka Abeysinghe</td>
+        </tr>
+        <tr>
+          <td>Ambagashandiya, Kiriwattuduwa</td>
+        </tr>
+      </table>
+    </section>
+  </div>
+  <div style="font-family: 'Courier New',Courier,Courier;font-style: normal;font-weight: bold;
+    font-size: 15px;margin-left: 25px;">
+    <label>Prescription No : {{prescription.id}}</label><br/>
+    <label>Date: {{prescription.date}}</label><br/>
+    <div *ngIf="prescription.issueNote != null">
+      <label> Issue No : {{prescription.issueNote.issueNote}}</label><br/>
+    </div>
     <label>Patient :</label>
-    <label>{{prescription.issueNote.patient.firstname}},{{prescription.issueNote.patient.lastname}}</label>
+    <label>{{prescription.patient.firstname}},{{prescription.patient.lastname}} -
+      {{prescription.patient.calculatedAge}}</label>
     <br/>
     <table class="table table-bordered">
       <thead>
-      <tr>
+      <tr style="border:1px">
         <td>Drug</td>
-        <td>Base Drug</td>
-        <td>Unit Price</td>
-        <td>Prescribed Qty</td>
-        <td>Price</td>
-        <!--<td>Issued Qty</td>-->
-        <!--<td>Price</td>-->
+        <td>Strength</td>
+        <td>Dosage</td>
+        <td>Duration</td>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let row of prescription.issueNote.issueNoteDetails">
-        <td>{{row.drugPackage.drug.brandName}}</td>
-        <td>{{row.drugPackage.drug.baseDrug.baseDrugName}}</td>
-        <td>{{row.drugPackage.unitPrice}}</td>
-        <td>{{row.buyingQuantity}}</td>
-        <td>{{row.drugPackage.unitPrice * row.buyingQuantity }}</td>
-        <!--<td><input type="number" [(ngModel)]="row.issuedQty"></td>-->
-        <!--<td>{{row.issuedQty * row.drugPackage.buyingQuantity}}</td>-->
+      <tr *ngFor="let row of prescription.prescriptionDetails">
+        <td>{{row.drug.brandName}}</td>
+        <td>{{row.strength.strengthAmount +" "}} {{row.strength.strengthUnit.unitName}}</td>
+        <td>{{row.frequency.noofDoses}}- Times per-{{row.frequency.timeUnit}},</td>
+        <td>{{row.duration}}, {{row.intervalUnit}}</td>
       </tr>
       </tbody>
     </table>
     <br/>
-
   </div>
-  <!--<button type="button" class="button btn-primary" (click)="makeIssue()">Make Issue</button>-->
-<!--<h2 align="center">Reciept : No 12323</h2>-->
-<!--<table width="100%">-->
-  <!--<tr >-->
-    <!--<th>#</th>-->
-    <!--<th>Description</th>-->
-    <!--<th>Unit price</th>-->
-    <!--<th>Qty</th>-->
-    <!--<th>Total</th>-->
-  <!--</tr>-->
-<!--cdcd-->
-  <!--<tr>-->
-    <!--<td>1</td>-->
-    <!--<td>Dr Fee</td>-->
-    <!--<td>200</td>-->
-    <!--<td>1</td>-->
-    <!--<td>200</td>-->
-  <!--</tr>-->
-
-  <!--<tr>-->
-    <!--<td>2</td>-->
-    <!--<td>Panadol </td>-->
-    <!--<td>2</td>-->
-    <!--<td>10</td>-->
-    <!--<td>20</td>-->
-  <!--</tr>-->
-
-  <!--<tr>-->
-    <!--<td>3</td>-->
-    <!--<td>Amoxilin</td>-->
-    <!--<td>10</td>-->
-    <!--<td>24</td>-->
-    <!--<td>240</td>-->
-  <!--</tr>-->
-
-  <!--<tr>-->
-    <!--<td>4</td>-->
-    <!--<td>Dressing</td>-->
-    <!--<td>200</td>-->
-    <!--<td>1</td>-->
-    <!--<td>200</td>-->
-  <!--</tr>-->
-
-  <!--<tr>-->
-    <!--<td></td>-->
-    <!--<td>Grand total</td>-->
-    <!--<td></td>-->
-    <!--<td></td>-->
-    <!--<td>660</td>-->
-  <!--</tr>-->
-<!--</table>-->
 </div>
 <button (click)="print()"> Print Prescription</button>
-<!--</popup>-->
-<!--<button (click)="clickButton()" > Click here </button>-->
+

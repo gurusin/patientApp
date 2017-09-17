@@ -85,5 +85,10 @@ export class DrugServiceService {
     var url = localStorage.getItem("rootURL") +"loadPrescriptionByDate";
     return this.http.post(url, date).map((res: Response) => res.json());
   }
+
+  getPrescription(id):Observable<any>{
+      var url = localStorage.getItem("rootURL") +"getPrescription";
+      return this.http.post(url, id).map((res: Response) => res.json());
+  }
 }
 

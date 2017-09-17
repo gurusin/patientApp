@@ -1,5 +1,7 @@
 package com.opdapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 /**
@@ -32,6 +34,7 @@ public class PrescriptionDetail {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "prescriptionId", nullable = false)
+    @JsonBackReference
     private Prescription prescription;
 
     private Meal meal;
