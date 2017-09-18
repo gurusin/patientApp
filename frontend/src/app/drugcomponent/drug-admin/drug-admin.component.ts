@@ -12,7 +12,7 @@ import {DrugPackage} from "../drug-package";
 export class DrugAdminComponent implements OnInit {
     baseDrugList = [];
     drugList = [];
-    selectedDrugRow: number;
+    selectedDrugRow = -1;
     setClickedDrugRow: Function;
     drug: Drug;
     selectedDrug: Drug;
@@ -61,7 +61,8 @@ export class DrugAdminComponent implements OnInit {
 
     cancelEdit() {
         this.selectedDrugRow = -1;
-        this.selectedDrug = new Drug();
-        this.drug = this.selectedDrug;
+        var x = new Drug();
+        x.baseDrug = this.drug.baseDrug;
+        this.drug = x;
     }
 }
