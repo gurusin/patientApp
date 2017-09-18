@@ -9,8 +9,24 @@ public class DrugPackage {
     @GeneratedValue
     private int drugPackageId;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DrugPackage)) return false;
+
+        DrugPackage that = (DrugPackage) o;
+
+        return getDrugPackageId() == that.getDrugPackageId();
+    }
+
+    @Override
+    public int hashCode() {
+        return getDrugPackageId();
+    }
+
     @ManyToOne
     @JoinColumn(name = "drugId")
+
     private Drug drug;
 
     @ManyToOne

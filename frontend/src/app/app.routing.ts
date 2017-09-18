@@ -27,6 +27,7 @@ import {MedicalServiceComponentComponent} from "./item/medical-service-component
 import {ReturnoutComponent} from "./purchseorder/returnout.component";
 import {DailyIncomeComponent} from "./report/daily-income.component";
 import {POListComponent} from "./purchaseorder/polist.component";
+import {InOutComponent} from "./item/in-out.component";
 
 const APP_ROUTES: Routes = [
     {path: '', component: PatientSearchComponent},
@@ -59,7 +60,8 @@ const APP_ROUTES: Routes = [
     {path: 'payment', component: PaymentComponent},
     {path: 'medServiceItem', component: MedicalServiceComponentComponent},
     {path: 'returnout', component: ReturnoutComponent},
-    {path: 'dailyIncome', component: DailyIncomeComponent}
+    {path: 'dailyIncome', component: DailyIncomeComponent},
+    {path: 'inOut', component: InOutComponent}
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)

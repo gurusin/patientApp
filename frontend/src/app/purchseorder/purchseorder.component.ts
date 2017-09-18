@@ -28,9 +28,11 @@ export class PurchseorderComponent implements OnInit {
   }
 
   onSave() {
-    this.poService.savePO(this.po);
-    this.po = new PurchaseOrderDTO();
-    this.router.navigate(['/po']);
+    this.poService.savePO(this.po).subscribe(
+        data =>{
+            this.router.navigate(['/po']);
+        }
+    );
   }
 
   onCancel() {

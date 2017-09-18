@@ -20,12 +20,9 @@ export class POServiceService {
 
   }
 
-  savePO(po: PurchaseOrderDTO) {
+  savePO(po: PurchaseOrderDTO): Observable<any> {
     var url = localStorage.getItem("rootURL") + "savePO";
-    this.http.post(url, po).map((res: Response) => res.json()).subscribe(
-      data => {
-      }
-    );
+    return this.http.post(url, po).map((res: Response) => res.json());
   }
 
   saveGRN(obj): Observable<any> {

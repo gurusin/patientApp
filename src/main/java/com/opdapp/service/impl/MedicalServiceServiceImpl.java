@@ -86,4 +86,5 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
                 productTypeRepository.findOne(medicalServiceItem.getProductType().getItemTypeId()));
         return medicalServiceRepository.save(medicalServiceItem);
     }
+
 }

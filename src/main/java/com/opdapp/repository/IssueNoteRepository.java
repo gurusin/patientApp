@@ -12,4 +12,6 @@ public interface IssueNoteRepository extends CrudRepository<IssueNote, Long> {
     List<IssueNote> findIssueNoteByExternalIdIn(List<Long> externalIds);
 
     List<IssueNote> findByIssueDate(final Date date);
+
+    List<IssueNote> findByIssueDateBetween(final Date fromDate, final Date toDate);
 }

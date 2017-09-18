@@ -15,6 +15,12 @@ export class AdminService {
     this.supplierObject = new ItemSupplier();
   }
 
+  getInOutReport(obj:any):Observable<any>
+  {
+      var url = localStorage.getItem("rootURL") +"inOutReport";
+      return this.http.post(url,obj).map((res:Response) =>res.json())
+  }
+
   getDailyIncome(date: any):Observable<any>
   {
       var url = localStorage.getItem("rootURL") +"dailyIncome";

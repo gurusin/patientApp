@@ -55,6 +55,7 @@ import { ServiceComponentComponent } from './treatment/service-component.compone
 import {ReturnoutComponent} from "./purchseorder/returnout.component";
 import { DailyIncomeComponent } from './report/daily-income.component';
 import { POListComponent } from './purchaseorder/polist.component';
+import { InOutComponent } from './item/in-out.component';
 
 @NgModule({
     declarations: [
@@ -98,6 +99,7 @@ import { POListComponent } from './purchaseorder/polist.component';
         ReturnoutComponent,
         DailyIncomeComponent,
         POListComponent,
+        InOutComponent,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

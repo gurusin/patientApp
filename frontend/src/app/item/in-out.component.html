@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="form-group">
+    <label>From Date</label>
+    <input type="date" id="fromDate" [(ngModel)]="searchCriteria.fromDate">
+    <label>To Date</label>
+    <input type="date" id="toDate" [(ngModel)]="searchCriteria.toDate">
+    <button type="button" class="btn btn-primary" (click)="doSearch()">Search</button>
+  </div>
+  <hr/>
+  <h5> Report </h5>
+  <div *ngFor="let obj of reports">
+    <li>{{obj.drugPackage.drug.brandName}}
+    <table class="table table-bordered">
+      <tr>
+        <td>Date</td>
+        <td>In</td>
+        <td>Out</td>
+        <td>Supplier</td>
+      </tr>
+      <tr *ngFor="let row of obj.inOutDetailsList">
+        <td>{{row.date}}</td>
+        <td>{{row.received}}</td>
+        <td>{{row.issued}}</td>
+        <td>{{row.supplierName}}</td>
+      </tr>
+    </table>
+    </li>
+  </div>
+</div>
