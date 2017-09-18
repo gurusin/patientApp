@@ -11,7 +11,7 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <td>Drug</td>
+            <td>Drug & Location</td>
             <td>Base Drug</td>
             <td>Dose and Duration</td>
             <td>Unit Price</td>
@@ -25,7 +25,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let row of issue.issueNoteDetails">
-            <td>{{row.drugPackage.drug.brandName}}</td>
+            <td>{{row.drugPackage.drug.brandName}}, {{row.drugPackage.drug.location}}</td>
             <td>{{row.drugPackage.drug.baseDrug.baseDrugName}}</td>
             <td>{{row.drugPackage.strength.strengthAmount}}- {{row.drugPackage.strength.strengthUnit.unitName}}</td>
             <td>{{row.drugPackage.unitPrice}}</td>

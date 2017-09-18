@@ -54,6 +54,9 @@ export class DrugAdminComponent implements OnInit {
                 {
                     this.drugList.push(data);
                     this.cancelEdit();
+                }else
+                {
+                    this.cancelEdit();
                 }
             }
         );

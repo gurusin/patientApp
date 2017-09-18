@@ -9,8 +9,9 @@
             <table border="2" width="100%" class="table table-hover">
               <tr>
                 <th width="10">Drug Id</th>
-                <th width="50%">Base Drug  Name</th>
+                <th width="40%">Base Drug  Name</th>
                 <th width="40%">Drug  Name</th>
+                <th width="10%">Location</th>
               </tr>
 
               <tr *ngFor="let obj of drugList; let i = index" (click)="setClickedDrugRow(i)" [class.active]="i == selectedDrugRow">
@@ -21,6 +22,7 @@
                 <td>
                   {{obj.brandName}}
                 </td>
+                <td>{{obj.location}}</td>
               </tr>
 
             </table>
@@ -55,6 +57,15 @@
               <label for="drugName"> Drug Name : </label>
             </td>
             <td><input type="text" id="drugName" name="drugName" required [(ngModel)]="drug.brandName"/>
+            </td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>
+              <label for="location"> Location : </label>
+            </td>
+            <td><input type="text" id="location" name="location" required [(ngModel)]="drug.location"/>
             </td>
             <td></td>
           </tr>

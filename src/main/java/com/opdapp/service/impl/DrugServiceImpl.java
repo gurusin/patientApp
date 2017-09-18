@@ -141,6 +141,7 @@ public class DrugServiceImpl implements DrugService {
         drugDTO.setBrandName(drug.getBrandName());
         drugDTO.setDrugId(drug.getDrugId());
         drugDTO.setBaseDrug(getBaseDrugDTO(drug.getBaseDrug()));
+        drugDTO.setLocation(drug.getLocation());
         return drugDTO;
     }
 
@@ -185,6 +186,7 @@ public class DrugServiceImpl implements DrugService {
         drug.setBaseDrug(createBaseDrug(drugDTO.getBaseDrug()));
         drug.setBrandName(drugDTO.getBrandName());
         drug.setDrugId(drugDTO.getDrugId());
+        drug.setLocation(drugDTO.getLocation());
         return drug;
     }
 
