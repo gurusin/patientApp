@@ -112,7 +112,7 @@ import { DailyIncomeComponent } from './report/daily-income.component';
 export class AppModule {
     constructor()
     {
-        localStorage.setItem("rootURL","http://localhost:8080/");
+        //localStorage.setItem("rootURL","http://localhost:8080/");
     }
 }
 

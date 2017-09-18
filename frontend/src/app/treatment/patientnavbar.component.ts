@@ -22,9 +22,6 @@ export class PatientnavbarComponent implements OnInit
 
   onEditPatient()
   {
-    this.patientService.patient = new Subject<Patient>();
-    this.patientService.patient.next(this.patient);
     this.router.navigate(["patientsave"]);
-
   }
 }
