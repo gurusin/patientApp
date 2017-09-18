@@ -1,5 +1,6 @@
 <div class="container">
   <h2>Admin Base Drug</h2>
+  <input type="text" #listFilter (keyup)="0" />
   <div class="row">
     <div class="col-lg-7">
       <table border="2" width="100%" class="table table-hover">
@@ -11,8 +12,10 @@
                 <th width="50%">Base Drug Name</th>
               </tr>
 
-              <tr *ngFor="let obj of baseDrugList; let i = index" (click)="setClickedBaseDrugRow(i)"
-                  [class.active]="i == selectedBaseDrugRow">
+              <!-- let i = index" (click)="setClickedBaseDrugRow(i)"
+                  [class.active]="i == selectedBaseDrugRow"> -->
+              <tr *ngFor="let obj of baseDrugList | drugFilter :listFilter.value; let i= index"
+                  [class.active]="i == selectedBaseDrugRow" (click)="setClickedBaseDrugRow(obj)" >
                 <td>{{obj.baseDrugId}}</td>
                 <td>
                   {{obj.baseDrugName}}

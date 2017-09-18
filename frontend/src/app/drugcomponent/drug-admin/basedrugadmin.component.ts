@@ -12,23 +12,17 @@ export class BasedrugadminComponent implements OnInit {
 
   baseDrugList = [];
   selectedBaseDrugRow: number;
-  setClickedBaseDrugRow: Function;
   baseDrug: Basedrug;
   selectedBaseDrug: Basedrug;
 
   constructor(private drugServiceService: DrugServiceService) {
     this.baseDrug = new Basedrug();
-
-    this.setClickedBaseDrugRow = function (index) {
-      this.selectedBaseDrugRow = index;
-      if (index >= 0 && index < this.baseDrugList.length) {
-        this.drugServiceService.baseDrug = this.baseDrugList[index];
-        this.selectedBaseDrug = this.baseDrugList[index];
-        this.baseDrug = this.selectedBaseDrug;
-      }
-    }
-
   }
+
+    setClickedBaseDrugRow(obj)
+    {
+        this.baseDrug = obj;
+    }
 
   ngOnInit() {
     this.drugServiceService.loadBaseDrugs(
@@ -41,8 +35,15 @@ export class BasedrugadminComponent implements OnInit {
 
   onSubmit() {
     this.drugServiceService.saveBaseDrug(this.baseDrug).subscribe(
-        data =>{ this.baseDrugList.push(data);
-        this.cancelEdit();}
+        data =>{
+            this.drugServiceService.loadBaseDrugs(
+            ).subscribe(
+                data => {
+                    this.baseDrugList = data;
+                }
+            );
+        this.cancelEdit();
+        }
     );
   }
 

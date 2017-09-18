@@ -56,6 +56,7 @@ import {ReturnoutComponent} from "./purchseorder/returnout.component";
 import { DailyIncomeComponent } from './report/daily-income.component';
 import { POListComponent } from './purchaseorder/polist.component';
 import { InOutComponent } from './item/in-out.component';
+import { FilterPipePipe } from './filter/filter-pipe.pipe';
 
 @NgModule({
     declarations: [
@@ -100,6 +101,7 @@ import { InOutComponent } from './item/in-out.component';
         DailyIncomeComponent,
         POListComponent,
         InOutComponent,
+        FilterPipePipe,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

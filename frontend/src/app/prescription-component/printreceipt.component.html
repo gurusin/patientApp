@@ -31,7 +31,7 @@
   <div style="font-family: 'Courier New',Courier,Courier;font-style: normal;font-weight: bold;
     font-size: 15px;margin-left: 25px;">
     <label>Prescription No : {{prescription.id}}</label><br/>
-    <label>Date: {{prescription.date}}</label><br/>
+    <label>Date: {{prescription.date | date }}</label><br/>
     <div *ngIf="prescription.issueNote != null">
       <label> Issue No : {{prescription.issueNote.issueNote}}</label><br/>
     </div>
