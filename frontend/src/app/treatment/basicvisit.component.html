@@ -6,17 +6,9 @@
     <hr/>
     <app-service-component [patientVisit]="patientVisit"></app-service-component>
     <hr/>
-      <label for="symptoms">Symptoms</label>
-      <input type="text" id="symptoms" [(ngModel)]='patientVisit.symptoms' name="symptoms"
-             placeholder="Symstomes Fever, toothache..">
-
-      <label for="diagnosys">Diagnosys</label>
-      <input type="text" id="diagnosys" [(ngModel)]='patientVisit.diagnoseData' name="diagnosys"
-             placeholder="Suspect Dengue, Viral fever..">
-
       <label for="notes">Notes</label>
       <input type="text" id="notes" [(ngModel)]='patientVisit.note' name="notes"
-             placeholder="Dengue antigen Negative..">
+             placeholder="notes">
 
     <br/>
 

@@ -33,7 +33,6 @@ export class PrescriptionComponentComponent implements OnInit {
   ngOnInit() {
     var obj = new PrescribableDrug();
     this.patientVisit.prescribableDrug.push(obj);
-    console.log(obj);
   }
 
   doSearch(drugName:string,row:PrescribableDrug) {

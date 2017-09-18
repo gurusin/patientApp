@@ -3,11 +3,14 @@
     <div><button type="button" class="btn btn-group-sm" (click)="doExpand()">Toggle</button> </div>
 </div>
 <div *ngIf="expanded">
+    <div>Notes : {{fullPrescription.notes}}</div>
+    <br/>
   <table class="table-bordered">
       <tr *ngFor="let obj of fullPrescription.prescriptionDetails">
           <td>{{obj.drug.brandName}},{{obj.strength.strengthAmount+"-"+obj.strength.strengthUnit.unitName}}</td>
           <td>{{obj.amount}},{{obj.frequency.noofDoses}},{{obj.frequency.timeUnit}}</td>
           <td>{{obj.duration}},{{obj.intervalUnit}}</td>
+
       </tr>
   </table>
 </div>

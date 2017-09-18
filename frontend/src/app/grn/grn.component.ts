@@ -9,11 +9,17 @@ import {Router} from "@angular/router";
 })
 export class GrnComponent implements OnInit {
 
+  po:any;
   poDetail ={};
-  constructor(private poService:POServiceService, private  router:Router) { }
-
+  constructor(private poService:POServiceService, private  router:Router) {
+      this.po = this.poService.selectedPO;
+  }
 
   ngOnInit() {
+      this.po = this.poService.selectedPO;
+      this.initPo(this.po.purchaseOrderNo)
+
+
   }
 
   onSave()
@@ -21,6 +27,7 @@ export class GrnComponent implements OnInit {
     this.poService.saveGRN(this.poDetail).subscribe(
       data =>{
         this.poDetail = [];
+        this.router.navigate(['po']);
       }
     );
   }
@@ -34,13 +41,17 @@ export class GrnComponent implements OnInit {
   {
     if (event.keyCode == 13)
     {
-       // Check for the PO
-       this.poService.loadPO(value).subscribe(
-         data =>{
-              this.poDetail = data;
-         }
-       );
+        this.initPo(value);
     }
   }
 
+
+    private initPo(value) {
+// Check for the PO
+        this.poService.loadPO(value).subscribe(
+            data => {
+                this.poDetail = data;
+            }
+        );
+    }
 }

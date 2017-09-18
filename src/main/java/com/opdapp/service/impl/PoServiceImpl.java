@@ -130,8 +130,10 @@ public class PoServiceImpl implements POService {
         final GoodReceivingNote grnObj = new GoodReceivingNote();
         grnObj.setPurchaseOrder(purchaseOrder);
         grnObj.setSupplierInvoice(grn.getSupplierInvoice());
-        grnObj.setGrnDate(new java.sql.Date(grn.getExpectedRecieveDate().getTime()));
-        grnObj.setGrnStatus(grn.getGrnStatus());
+        if (grn.getExpectedRecieveDate() != null)
+        {
+            grnObj.setGrnDate(new java.sql.Date(grn.getExpectedRecieveDate().getTime()));
+        }
         final Set<GRNDetails> grnDetailsSet = new HashSet<>();
         for (final PoForGrnDetailDTO dto : grn.getDetails()) {
             updateGRN(dto, purchaseOrder, grnDetailsSet, grnObj);
@@ -272,6 +274,12 @@ public class PoServiceImpl implements POService {
             grndtoForReturn.setReturnOutDetailDTOList(returnOutDetailDTOList);
         }
         return grndtoForReturn;
+    }
+
+    @Override
+    public List<PurchaseOrder> getPendingPO()
+    {
+        return poRepository.findPending();
     }
 
     public void saveGoodReturn(final GRNDTOForReturn gRNDTOForReturn) {

@@ -1,0 +1,19 @@
+<div class="container">
+  <h5>Pending Purchase Orders</h5>
+  <br/>
+  <table class="table table-bordered">
+    <tr>
+      <td>PO Number</td>
+      <td>Supplier</td>
+      <td>Date</td>
+    </tr>
+    <tr *ngFor="let row of pendingPOList">
+      <td>{{row.purchaseOrderNo}}</td>
+      <td> <button type="button" class="btn btn-sm" (click)="doGrn(row)">GRN</button></td>
+      <td>{{row.itemSupplier.supplierName}},{{row.itemSupplier.supplierAddress}}</td>
+      <td>{{row.orderedDate}}</td>
+    </tr>
+  </table>
+  <br/>
+  <div><button type="button" class="btn btn-primary" (click)="newPo()">Create New PO</button> </div>
+</div>

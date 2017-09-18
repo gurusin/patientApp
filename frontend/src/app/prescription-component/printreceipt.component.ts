@@ -10,12 +10,14 @@ import {DrugServiceService} from "../services/drug-service.service";
 export class PrintreceiptComponent implements OnInit {
 
   prescription : any;
+  imageUrl ="";
   constructor(private drugService:DrugServiceService)
   {
-
+     this.imageUrl = localStorage.getItem("rootURL"+'assets/Sign.gif');
   }
 
   ngOnInit() {
+      this.imageUrl = localStorage.getItem("rootURL"+'assets/Sign.gif');
       this.drugService.getPrescription(
           this.drugService.savedPrescription.prescriptionId).subscribe(
               data =>{

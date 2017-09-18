@@ -7,9 +7,18 @@ import 'rxjs/Rx';
 @Injectable()
 export class POServiceService {
 
+  public selectedPO:any;
+
   constructor(private http: Http) {
   }
 
+
+  getPendingPO():Observable<any>
+  {
+      var url = localStorage.getItem("rootURL") + "pendingPO";
+      return this.http.get(url).map((res: Response) => res.json());
+
+  }
 
   savePO(po: PurchaseOrderDTO) {
     var url = localStorage.getItem("rootURL") + "savePO";

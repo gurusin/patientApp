@@ -1,6 +1,8 @@
 package com.opdapp.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,7 @@ public class GRNDetails {
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "drnid", nullable = false)
+    @JsonBackReference
     private GoodReceivingNote goodReceivingNote;
 
     public long getGrnDetailNo() {

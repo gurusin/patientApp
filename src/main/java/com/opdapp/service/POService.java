@@ -11,7 +11,7 @@ public interface POService {
 
     POForGrnDTO loadForGrn(long podId);
 
-    Object registerGRN(POForGrnDTO grn);
+    PurchaseOrder registerGRN(POForGrnDTO grn);
 
     void saveIssue(IssueDTO issueDTO);
 
@@ -24,4 +24,6 @@ public interface POService {
     GRNDTOForReturn loadGRNDTOForReturn(final String supplierInvoice);
 
     void saveGoodReturn(final GRNDTOForReturn gRNDTOForReturn);
+
+    List<PurchaseOrder> getPendingPO();
 }

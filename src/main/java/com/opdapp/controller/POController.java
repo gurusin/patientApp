@@ -18,6 +18,13 @@ public class POController {
     @Autowired
     private POService poService;
 
+    @RequestMapping(path = "/pendingPO", method = RequestMethod.GET)
+    public @ResponseBody List<PurchaseOrder> getPendingPO()
+    {
+        return poService.getPendingPO();
+
+    }
+
     @RequestMapping(path = "/savePO", method = RequestMethod.POST)
     public @ResponseBody
     PurchaseOrder savePO(@RequestBody PurchaseOrderDTO purchaseOrderDTO) {

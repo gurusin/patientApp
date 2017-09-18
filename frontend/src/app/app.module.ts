@@ -54,6 +54,7 @@ import { SelectedRowDirective } from './selected-row.directive';
 import { ServiceComponentComponent } from './treatment/service-component.component';
 import {ReturnoutComponent} from "./purchseorder/returnout.component";
 import { DailyIncomeComponent } from './report/daily-income.component';
+import { POListComponent } from './purchaseorder/polist.component';
 
 @NgModule({
     declarations: [
@@ -96,6 +97,7 @@ import { DailyIncomeComponent } from './report/daily-income.component';
         ServiceComponentComponent,
         ReturnoutComponent,
         DailyIncomeComponent,
+        POListComponent,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

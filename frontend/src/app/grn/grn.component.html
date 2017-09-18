@@ -5,9 +5,9 @@
       <label>PO Number</label>
     </div>
     <div class="col-lg-2">
-      <input type="text" (keyup)="loadPo($event,po.value)" #po/>
+      <input type="text" #pot (keyup)="loadPo($event,pot.value)" [(ngModel)]='po.purchaseOrderNo'/>
     </div>
-    <div class="col-lg-6" align="right"><b>Supplier :</b> {{poDetail.supplier}}</div>
+    <div class="col-lg-6" align="right"><b>Supplier :</b>{{po.itemSupplier.supplierName}},{{po.itemSupplier.supplierAddress}}</div>
   </div>
   <div class="row">
     <div class="col-lg-4">
@@ -16,7 +16,7 @@
     <div class="col-lg-4">
       <label> Supplier Invoice </label>
       <input type="text"  [(ngModel)]='poDetail.supplierInvoice' required id="supplierInvoice" name="supplierInvoice"></div>
-    <div class="col-lg-4" >Date : <input type="date"  [(ngModel)]='poDetail.expectedRecieveDate' required id="expectedRecieveDate" name="expectedRecieveDate"></div>
+     <div class="col-lg-4" >Date : <input type="date"  [(ngModel)]='poDetail.expectedRecieveDate' required id="expectedRecieveDate" name="expectedRecieveDate"></div>
   </div>
 <br/>
   <table class="table table-responsive">

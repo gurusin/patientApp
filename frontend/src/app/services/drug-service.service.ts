@@ -37,7 +37,6 @@ export class DrugServiceService {
   }
 
   loadPrescriptions(patientId: any): Observable<any[]> {
-    alert(patientId);
     var url = localStorage.getItem("rootURL") +"loadPrescriptions";
     return this.http.post(url, patientId).map((res: Response) => res.json())
   }

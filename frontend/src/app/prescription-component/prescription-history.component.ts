@@ -21,5 +21,4 @@ export class PrescriptionHistoryComponent implements OnInit {
       }
     );
   }
-
 }

@@ -26,6 +26,7 @@ import {PaymentComponent} from "./grn/payment.component";
 import {MedicalServiceComponentComponent} from "./item/medical-service-component/medical-service-component.component";
 import {ReturnoutComponent} from "./purchseorder/returnout.component";
 import {DailyIncomeComponent} from "./report/daily-income.component";
+import {POListComponent} from "./purchaseorder/polist.component";
 
 const APP_ROUTES: Routes = [
     {path: '', component: PatientSearchComponent},
@@ -43,7 +44,8 @@ const APP_ROUTES: Routes = [
     {path: 'drugAdmin', component: DrugAdminComponent},
     {path: 'baseDrugAdmin', component: BasedrugadminComponent},
     {path: 'drugPackageAdmin', component: DrugpackageadminComponent},
-    {path: 'po', component: PurchseorderComponent},
+    {path: 'po', component: POListComponent},
+    {path: 'poDetail', component: PurchseorderComponent},
     {path: 'item', component: ItemComponent},
     {path: 'issue', component: IssueComponent},
     {path: 'report', component: ReportComponent},
