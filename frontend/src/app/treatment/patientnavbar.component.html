@@ -1,7 +1,6 @@
 <div class="container">
   <div *ngIf="patient !==null" class="patientBar">
-    Selected Patient : ({{patient.calculatedAge}})
-    <a (click)="onEditPatient()">{{patient.firstname}},{{patient.lastname}}</a>
+    <a (click)="onEditPatient()">{{patient.firstname}},{{patient.lastname}}</a> ({{patient.calculatedAge}})
   </div>
   <ul class="nav nav-tabs">
     <li><a [routerLink]='["treatment"]'>Basic Treatment</a></li>
