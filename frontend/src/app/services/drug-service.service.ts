@@ -37,6 +37,7 @@ export class DrugServiceService {
   }
 
   loadPrescriptions(patientId: any): Observable<any[]> {
+    alert(patientId);
     var url = localStorage.getItem("rootURL") +"loadPrescriptions";
     return this.http.post(url, patientId).map((res: Response) => res.json())
   }
@@ -90,5 +91,10 @@ export class DrugServiceService {
       var url = localStorage.getItem("rootURL") +"getPrescription";
       return this.http.post(url, id).map((res: Response) => res.json());
   }
+
+    loadPrescriptionLight(patientId: number):Observable<any> {
+        var url = localStorage.getItem("rootURL") +"loadPrescriptionLite";
+        return this.http.post(url,patientId).map((res: Response) => res.json());
+    }
 }
 

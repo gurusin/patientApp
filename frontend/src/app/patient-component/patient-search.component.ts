@@ -121,15 +121,4 @@ export class PatientSearchComponent {
             this.patientList = [];
         }
     }
-
-    onChangeName()
-    {
-       alert('Value Selected');
-    }
-
-    name(i)
-    {
-        alert('Selected index '+ i);
-    }
-
 }

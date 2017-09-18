@@ -33,7 +33,7 @@ public class PrescriptionController {
     @RequestMapping(path = "loadPrescriptions",method = RequestMethod.POST)
     public @ResponseBody List<PrescriptionDTO> loadPrescriptions(@RequestBody String patId)
     {
-       return  prescriptionService.loadPrescriptions(Long.parseLong(patId));
+       return  prescriptionService.loadPrescriptionsForPatient(Long.parseLong(patId));
     }
 
     @RequestMapping(path = "loadPrescriptionByDate",method = RequestMethod.POST)

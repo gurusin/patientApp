@@ -8,17 +8,15 @@ import {Subject} from "rxjs/Subject";
 @Injectable()
 export class PatientServiceService {
 
-  // rootUrl ="http://localhost:8080/";
   patientSearchURL = "searchPat";
   patientVisitSaveURL = "savePatientVisit";
   patientSaveURL = "savePatient";
   patientGetByNIC = "getByNIC";
 
-  public patient: Subject<Patient>;
   public patientObject: Patient;
 
   constructor(private http: Http) {
-    this.patient = new Subject();
+
   }
 
   searchByNIC(nic: string): Observable<any[]> {
@@ -61,7 +59,6 @@ export class PatientServiceService {
   public clearPatient() {
     this.patientObject = new Patient();
     this.patientObject.patientId = 0;
-    this.patient = new Subject<Patient>();
   }
 
   loadPatients(): Observable<any[]> {

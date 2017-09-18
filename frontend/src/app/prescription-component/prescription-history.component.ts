@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PatientServiceService} from "../services/patient-service.service";
 import {DrugServiceService} from "../services/drug-service.service";
+import {Patientvisit} from "../treatment/patientvisit";
 
 @Component({
   selector: 'app-prescription-history',
@@ -9,6 +10,7 @@ import {DrugServiceService} from "../services/drug-service.service";
 })
 export class PrescriptionHistoryComponent implements OnInit {
 
+  @Input() patientVisit: Patientvisit;
   prescriptionList =[];
   constructor(private drugService:DrugServiceService,private patientService:PatientServiceService) { }
 

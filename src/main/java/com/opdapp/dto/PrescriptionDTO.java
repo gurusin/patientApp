@@ -12,7 +12,6 @@ import java.util.Set;
  * Created by sudarshana on 13/08/2017.
  */
 public class PrescriptionDTO {
-
     private long prescriptionId;
     private long patientId;
     private String patientName;
@@ -22,6 +21,7 @@ public class PrescriptionDTO {
     private Date prescriptionDate;
     private Set<MedicalServItem> medicalServices;
     private Patient patient;
+
 
     public Patient getPatient() {
         return patient;

@@ -6,33 +6,42 @@ import {PatientServiceService} from "../services/patient-service.service";
 import {Subject} from "rxjs/Subject";
 
 @Component({
-  selector: 'app-patient-visit',
-  templateUrl: './patient-visit.component.html',
-  styleUrls: ['./patient-visit.component.css']
+    selector: 'app-patient-visit',
+    templateUrl: './patient-visit.component.html',
+    styleUrls: ['./patient-visit.component.css']
 })
-export class PatientVisitComponent implements OnInit{
-  patientVisit: Patientvisit;
-  patient: Patient = null;
-  @Input() selectedPatient: Patient;
+export class PatientVisitComponent implements OnInit {
+    patientVisit: Patientvisit;
+    patient: Patient = null;
+    @Input() selectedPatient: Patient;
 
-  onEditPatient()
-  {
-    this.patientService.patient = new Subject<Patient>();
-    this.patientService.patient.next(this.patient);
-    this.router.navigate(["patientsave"]);
+    toggleText = "show";
+    showHistory = false;
 
-  }
+    onEditPatient() {
+        this.patientService.patientObject = new Patient();
+        this.router.navigate(["patientsave"]);
 
-  ngOnInit(): void {
-    this.patientService.patient.subscribe(
-      patient =>{
-        this.patient = patient;
-        this.patientService.patientObject = patient;
-      }
-    );
-  }
+    }
 
-  constructor(private router:Router,private patientService:PatientServiceService) {
-    this.patientVisit = new Patientvisit();
-  }
+    handleHistory() {
+        this.showHistory = !this.showHistory;
+        if (this.showHistory) {
+            this.toggleText = 'Hide';
+        } else {
+            this.toggleText = 'Show';
+        }
+
+    }
+
+    ngOnInit(): void {
+        console.log(this.patientService.patientObject);
+        this.patient = this.patientService.patientObject;
+        this.patientVisit = new Patientvisit();
+        this.patientVisit.patientId = this.patient.patientId;
+    }
+
+    constructor(private router: Router, private patientService: PatientServiceService) {
+
+    }
 }

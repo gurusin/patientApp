@@ -32,31 +32,17 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private MedicalServiceRepository medicalServiceRepository;
 
     @Override
-    public List<PrescriptionDTO> loadPrescriptions(long l) {
+    public List<PrescriptionDTO> loadPrescriptionsForPatient(long l) {
         final Patient p = patientRepository.findOne(l);
         final List<PrescriptionDTO> dtoList = new ArrayList<>();
         for (final Prescription obj : prescriptionRepository.findPrescriptionByPatient(p)) {
             final PrescriptionDTO dto = new PrescriptionDTO();
+            dto.setPrescriptionId(obj.getId());
             dto.setNotes(obj.getNotes());
             dto.setSymptoms(obj.getSymptoms());
             dto.setDiagnosis(obj.getDiagnosis());
             dto.setPrescriptionDate(obj.getDate());
-
-            final List<PrescriptionDetailDTO> prescriptionDetailDTOS = new ArrayList<PrescriptionDetailDTO>();
-            for (PrescriptionDetail prescriptionDetail : obj.getPrescriptionDetails()) {
-                final PrescriptionDetailDTO prescriptionDetailDTO = new PrescriptionDetailDTO();
-                prescriptionDetailDTO.setAmount(prescriptionDetail.getAmount());
-                prescriptionDetailDTO.setDrug(prescriptionDetail.getDrug());
-                prescriptionDetailDTO.setDuration(prescriptionDetail.getDuration());
-                prescriptionDetailDTO.setFrequency(prescriptionDetail.getFrequency());
-                prescriptionDetailDTO.setStrength(prescriptionDetail.getStrength().toString());
-                prescriptionDetailDTO.setIntervalUnit(prescriptionDetail.getIntervalUnit());
-                prescriptionDetailDTO.setMeal(prescriptionDetail.getMeal());
-                prescriptionDetailDTOS.add(prescriptionDetailDTO);
-            }
-            dto.setPrescriptionDetailDTOS(prescriptionDetailDTOS);
             dtoList.add(dto);
-
         }
         return dtoList;
     }
