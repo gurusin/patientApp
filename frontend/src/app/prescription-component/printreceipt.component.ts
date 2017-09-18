@@ -53,7 +53,8 @@ export class PrintreceiptComponent implements OnInit {
           <!--//........Customized style.......-->
           <!--</style>-->
         </head>
-        <body onload="window.print();window.close()">${printContents}</body>
+        <body onload="window.print();window.close()">${printContents}
+        </body>
       </html>`
     );
     popupWin.document.close();
