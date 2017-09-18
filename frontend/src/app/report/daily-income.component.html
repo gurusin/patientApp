@@ -1,0 +1,29 @@
+<div class="container">
+    <h3> Daily Report</h3>
+    <br/>
+    <label> Date :</label><input type="date" [(ngModel)]="dailyIncome.date">
+    <button type="button" class="btn btn-primary" (click)="doReport()">Execute</button>
+     <div>Drugs </div>
+     <br/>
+     <table class=" table table-bordered">
+         <tr *ngFor="let obj of dailyIncome.drugIncome">
+             <td>{{obj.name}}</td>
+             <td>{{obj.amount}}</td>
+         </tr>
+         <td>Drug Total</td>
+         <td>{{dailyIncome.drugTotal}}</td>
+     </table>
+     <br/>
+     <div>Services</div>
+    <table class=" table table-bordered">
+        <tr *ngFor="let obj of dailyIncome.servicesIncome">
+            <td>{{obj.name}}</td>
+            <td>{{obj.amount}}</td>
+        </tr>
+        <td>Services Total</td>
+        <td>{{dailyIncome.servicesTotal}}</td>
+    </table>
+    <br/>
+    <div>Grand Total :{{dailyIncome.servicesTotal + dailyIncome.drugTotal}}</div>
+</div>
+

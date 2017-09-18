@@ -1,8 +1,10 @@
 package com.opdapp.controller;
 
+import com.opdapp.dto.issue.DailyIncomeReport;
 import com.opdapp.model.*;
 import com.opdapp.repository.ProductTypeRepository;
 import com.opdapp.service.*;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -94,6 +96,13 @@ public class AdminContoller {
     public @ResponseBody
     List<PaymentMethod> loadPaymentMethod() {
         return paymentMethodService.loadPaymentMethod();
+    }
+
+    @RequestMapping(path = "/dailyIncome", method = RequestMethod.POST)
+    public @ResponseBody
+    DailyIncomeReport getDailyIncome(@RequestBody DailyIncomeReport report)
+    {
+        return medicalServiceService.getDailyIncome(report.getDate());
     }
 
 }
