@@ -8,4 +8,6 @@ public interface IssueService {
     IssueNote findIssue(final long issueNo);
 
     void makeIssue(MakeIssue issue);
+
+    MakeIssue createIssueForPrescription(String prescriptionId);
 }

@@ -1,29 +1,41 @@
 <div class="container">
   <header>
-    <h2>Todays Prescriptions</h2>
+    <h2>Today's Prescriptions</h2>
   </header>
-  <nav>
     <table border="2" width="100%" class="table table-hover">
       <tr>
         <th width="10%">Patient name</th>
         <th witdh="5"> Issue no</th>
         <th width="60%">Drug details</th>
-        <th width="20%">Issue Status</th>
+        <th width="20%">Status</th>
         <th width="5%">Print</th>
       </tr>
-      <tr *ngFor="let obj of prescriptionDTOList ; let i = index">
-        <td>{{obj.prescriptionDTO.patientName}}</td>
-        <td><a (click)='issueDrugs(i)'>{{obj.issueNote.issueNote}}</a></td>
+      <tr *ngFor="let obj of prescriptionList ; let i = index">
+        <td>{{obj.patient.firstname}},{{obj.patient.lastname}} </td>
+        <td><a (click)='issueDrugs(obj.id)'>{{obj.id}}</a></td>
         <td>
           <ul>
-      <li *ngFor="let row of obj.issueNote.issueNoteDetails">
-       {{row.drugPackage.drug.brandName}}  <td>{{row.drugPackage.drug.baseDrug.baseDrugName}}
-      </li>
-      </ul>
+            <li *ngFor="let row of obj.prescriptionDetails">
+              {{row.drugPackage.drug.brandName}}
+            </li>
+          </ul>
         </td>
-        <td>{{obj.issueNote.issueStatus}}</td>
-        <td><button type="button" class="btn btn-primary" (click)="printView(obj.prescriptionDTO)">Print</button></td>
+        <td>{{obj.prescriptionStatus}}</td>
+        <td><button type="button" class="btn btn-primary"
+                    (click)="printView(obj)">Print</button></td>
       </tr>
     </table>
-  </nav>
 </div>
+        <!---->
+        <!--<td>-->
+          <!--<ul>-->
+      <!--<li *ngFor="let row of obj.prescriptionDetails">-->
+       <!--{{row.drugPackage.drug.brandName}},{{row.drugPackage.drug.baseDrug.baseDrugName}}-->
+      <!--</li>-->
+      <!--</ul>-->
+        <!--</td>-->
+        <!--<td>Need the issue status here</td>-->
+        <!--<td></td>-->
+      <!--</tr>-->
+    <!--</table>-->
+<!--</div>-->

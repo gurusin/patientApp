@@ -15,10 +15,6 @@ public class PrescriptionDetail {
     private long Id;
 
     @ManyToOne()
-    @JoinColumn(name = "strengthId")
-    private Strength strength;
-
-    @ManyToOne()
     @JoinColumn(name = "doseFrequencyId")
     private DoseFrequency frequency;
 
@@ -29,8 +25,8 @@ public class PrescriptionDetail {
     private String intervalUnit;
 
     @ManyToOne()
-    @JoinColumn(name = "drugId")
-    private Drug drug;
+    @JoinColumn(name = "drugPackageId")
+    private DrugPackage drugPackage;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "prescriptionId", nullable = false)
@@ -38,6 +34,14 @@ public class PrescriptionDetail {
     private Prescription prescription;
 
     private Meal meal;
+
+    public DrugPackage getDrugPackage() {
+        return drugPackage;
+    }
+
+    public void setDrugPackage(DrugPackage drugPackage) {
+        this.drugPackage = drugPackage;
+    }
 
     public Prescription getPrescription() {
         return prescription;
@@ -53,14 +57,6 @@ public class PrescriptionDetail {
 
     public void setId(long id) {
         Id = id;
-    }
-
-    public Strength getStrength() {
-        return strength;
-    }
-
-    public void setStrength(Strength strength) {
-        this.strength = strength;
     }
 
     public double getAmount() {
@@ -85,14 +81,6 @@ public class PrescriptionDetail {
 
     public void setIntervalUnit(String intervalUnit) {
         this.intervalUnit = intervalUnit;
-    }
-
-    public Drug getDrug() {
-        return drug;
-    }
-
-    public void setDrug(Drug drug) {
-        this.drug = drug;
     }
 
     public Meal getMeal() {

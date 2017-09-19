@@ -53,58 +53,19 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public List<SavedPrescriptionDTO> loadPrescriptionsByDate(final java.util.Date date){
+    public List<Prescription> loadPrescriptionsByDate(final java.util.Date date){
         java.sql.Date sqlDate = new java.sql.Date( date.getTime() );
-        List<Prescription> loadedPrecs = prescriptionRepository.findPrescriptionByDate(sqlDate);
-        List<Long> prescriptionIds = new ArrayList<Long>();
-
-        for (Prescription presc: loadedPrecs){
-            prescriptionIds.add(presc.getId());
-        }
-        List<IssueNote> issueNotes = issueNoteRepository.findIssueNoteByExternalIdIn(prescriptionIds);
-        Map<Long,List<IssueNote>> issueNoteMap = new HashMap<Long, List<IssueNote>>();
-        for (IssueNote issueNote: issueNotes) {
-            List<IssueNote> issueNotesList = null;
-            if (issueNoteMap.containsKey(issueNote.getExternalId())) {
-                issueNotesList = issueNoteMap.get(issueNote.getExternalId());
-            }else {
-                issueNotesList = new ArrayList<IssueNote>();
-                issueNoteMap.put(issueNote.getExternalId(), issueNotesList);
-            }
-            issueNotesList.add(issueNote);
-
-        }
-        List<SavedPrescriptionDTO> savedPrescriptionDTOS = new ArrayList<SavedPrescriptionDTO>();
-
-        for (Prescription presc: loadedPrecs){
-            if (issueNoteMap.containsKey(presc.getId())) {
-                List<IssueNote> issueNoteperPrec = issueNoteMap.get(presc.getId());
-                for (IssueNote in : issueNoteperPrec) {
-                    SavedPrescriptionDTO savedPrescriptionDTO = getSavedPrescriptionDTO(in, presc);
-                    savedPrescriptionDTOS.add(savedPrescriptionDTO);
-                }
-            } else {
-                SavedPrescriptionDTO savedPrescriptionDTO = getSavedPrescriptionDTO(new IssueNote(), presc);
-                savedPrescriptionDTOS.add(savedPrescriptionDTO);
-            }
-        }
-        return  savedPrescriptionDTOS;
-
+        return prescriptionRepository.findPrescriptionByDate(sqlDate);
     }
 
     @Override
-    public SavedPrescriptionDTO savePrescription(PrescriptionDTO dto) {
+    public Prescription savePrescription(PrescriptionDTO dto) {
 
         final Prescription prescription = createPrescription(dto);
         prescription.setPrescriptionDetails(createDetails(dto, prescription));
         prescription.setMedicalServices(createMedicalServices(dto,prescription));
-        Prescription savedPrescription = prescriptionRepository.save(prescription);
-
-        // Saving the auto created issue note
-        final IssueNote note = saveIssueNote(savedPrescription);
-        SavedPrescriptionDTO savedPrescriptionDTO = getSavedPrescriptionDTO(note, savedPrescription);
-        return savedPrescriptionDTO;
-
+        prescription.setPrescriptionStatus(PrescriptionStatus.INITIAL);
+        return prescriptionRepository.save(prescription);
     }
 
     private Set<PrescriptionServiceItem> createMedicalServices(PrescriptionDTO dto, Prescription prescription) {
@@ -121,59 +82,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
        return returnSet;
     }
 
-    private SavedPrescriptionDTO getSavedPrescriptionDTO(IssueNote note, Prescription prescription){
-        final SavedPrescriptionDTO savedPrescriptionDTO = new SavedPrescriptionDTO();
-        savedPrescriptionDTO.setIssueNote(note);
-        populateDTo(savedPrescriptionDTO, prescription);
-        return savedPrescriptionDTO;
-    }
-
-    private IssueDTO getIssueDTO(IssueNote issueNote) {
-        IssueDTO issueNoteDTO = new IssueDTO();
-        issueNoteDTO.setIssueDate(issueNote.getIssueDate());
-        issueNoteDTO.setIssueStatus(issueNote.getIssueStatus());
-        issueNoteDTO.setPaymentMethod(issueNote.getPaymentMethod());
-        issueNoteDTO.setIssueNo(issueNote.getIssueNote());
-        issueNoteDTO.setDetails(getIssueDetailsDTO(issueNote.getIssueNoteDetails()));
-        return issueNoteDTO;
-    }
-
-    private List<IssueDetailDTO> getIssueDetailsDTO(Set<IssueNoteDetails> issueNoteDetails) {
-        List<IssueDetailDTO> issueDetailDTOS = new ArrayList<IssueDetailDTO>();
-        for (IssueNoteDetails issueNoteDetail : issueNoteDetails) {
-            IssueDetailDTO issueDetailDTO = new IssueDetailDTO();
-            issueDetailDTO.setItemId(issueNoteDetail.getDrugPackage().getDrugPackageId());
-            issueDetailDTO.setQuantity(issueNoteDetail.getBuyingQuantity());
-            issueDetailDTO.setItemPrice(issueNoteDetail.getDrugPackage().getUnitPrice());
-            issueDetailDTO.setDescription(issueNoteDetail.getDrugPackage().getDrug().getBrandName() + ", " + issueNoteDetail.getDrugPackage().getStrength().getStrengthAmount() + issueNoteDetail.getDrugPackage().getStrength().getStrengthAmount());
-            issueDetailDTOS.add(issueDetailDTO);
-        }
-        return issueDetailDTOS;
-    }
-
-    private void populateDTo(final SavedPrescriptionDTO dto, final Prescription prescription) {
-        final PrescriptionDTO prescriptionDTO = new PrescriptionDTO();
-        prescriptionDTO.setPrescriptionId(prescription.getId());
-        prescriptionDTO.setPatient(prescription.getPatient());
-        prescriptionDTO.setDiagnosis(prescription.getDiagnosis());
-        prescriptionDTO.setPrescriptionDetailDTOS(convertToDetailDTO(prescription));
-        prescriptionDTO.setPrescriptionDate(prescription.getDate());
-        final Patient patient = prescription.getPatient();
-        if (patient != null)
-        {
-            prescriptionDTO.setPatientName(prescription.getPatient().getFirstname()+"," + prescription.getPatient().getLastname());
-        }
-        dto.setPrescriptionDTO(prescriptionDTO);
-    }
-
     private List<PrescriptionDetailDTO> convertToDetailDTO(Prescription prescription) {
         final List<PrescriptionDetailDTO> dtoSet = new ArrayList<>();
         for (final PrescriptionDetail detail : prescription.getPrescriptionDetails()) {
             final PrescriptionDetailDTO dto = new PrescriptionDetailDTO();
-            // TODO: Create detached objects to avoid the stack overflow
-            dto.setDrug(detail.getDrug());
             dto.setAmount(detail.getAmount());
-            dto.setStrength(detail.getStrength().getStrengthAmount() + "," + detail.getStrength().getStrengthUnit());
             dtoSet.add(dto);
         }
         return dtoSet;
@@ -219,14 +132,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         return detailsSet;
     }
 
-    private void addServices(Prescription prescription, final IssueNote issueNote)
-    {
-
-    }
 
     private DrugPackage findDrugPackage(final PrescriptionDetail prescriptionDetail) {
-        return drugPackageRepository.findByDrugAndStrength(prescriptionDetail.getDrug(),
-                prescriptionDetail.getStrength());
+        return prescriptionDetail.getDrugPackage();
     }
 
     private double getBuyingQty(final PrescriptionDetail prescDet) {
@@ -259,9 +167,16 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     private Set<PrescriptionDetail> createDetails(final PrescriptionDTO dto, final Prescription p) {
         final Set<PrescriptionDetail> set = new HashSet<>();
-        for (final PrescriptionDetail obj : dto.getPrescriptionDetails()) {
-            obj.setPrescription(p);
-            set.add(obj);
+        for (final PrescriptionDetailDTO obj : dto.getPrescriptionDetailDTOS()) {
+            final PrescriptionDetail detail = new PrescriptionDetail();
+            detail.setPrescription(p);
+            detail.setDrugPackage(drugPackageRepository.findOne(obj.getDrugPackageId()));
+            detail.setFrequency(frequencyRepository.findOne(obj.getDoseFrequencyId()));
+            detail.setMeal(obj.getMeal());
+            detail.setDuration(obj.getDuration());
+            detail.setAmount(obj.getAmount());
+            detail.setIntervalUnit(obj.getIntervalUnit());
+            set.add(detail);
         }
         return set;
 

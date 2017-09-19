@@ -7,7 +7,7 @@ public class ReturnOutDetailDTO {
 
     private String drugName;
 
-    private int drugPackageId;
+    private long drugPackageId;
 
     private double recievedQty;
 
@@ -37,11 +37,11 @@ public class ReturnOutDetailDTO {
         this.drugName = drugName;
     }
 
-    public int getDrugPackageId() {
+    public long getDrugPackageId() {
         return drugPackageId;
     }
 
-    public void setDrugPackageId(int drugPackageId) {
+    public void setDrugPackageId(long drugPackageId) {
         this.drugPackageId = drugPackageId;
     }
 

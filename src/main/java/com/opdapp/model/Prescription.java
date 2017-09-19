@@ -33,6 +33,26 @@ public class Prescription {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "prescription",cascade = CascadeType.ALL)
     private Set<PrescriptionServiceItem> medicalServices;
 
+    private PrescriptionStatus prescriptionStatus;
+
+    @Transient
+    private long issueNoteId;
+
+    public PrescriptionStatus getPrescriptionStatus() {
+        return prescriptionStatus;
+    }
+
+    public void setPrescriptionStatus(PrescriptionStatus prescriptionStatus) {
+        this.prescriptionStatus = prescriptionStatus;
+    }
+
+    public long getIssueNoteId() {
+        return issueNoteId;
+    }
+
+    public void setIssueNoteId(long issueNoteId) {
+        this.issueNoteId = issueNoteId;
+    }
 
     public Set<PrescriptionServiceItem> getMedicalServices() {
         return medicalServices;

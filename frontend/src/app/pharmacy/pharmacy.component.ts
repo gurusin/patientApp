@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class PharmacyComponent implements OnInit {
 
-    prescriptionDTOList = [];
+    prescriptionList = [];
     date: Date;
 
     constructor(private issueService: IssueServiceService, private drugService: DrugServiceService, private router: Router) {
@@ -26,14 +26,19 @@ export class PharmacyComponent implements OnInit {
         this.drugService.loadPrescriptionByDate(this.date
         ).subscribe(
             data => {
-                this.prescriptionDTOList = data;
+                this.prescriptionList = data;
             }
         );
     }
 
-    issueDrugs(index) {
-        this.issueService.issue = this.prescriptionDTOList[index].issueNote;
-        this.router.navigate(["/findIssue"]);
+    issueDrugs(prescriptionId) {
+        this.issueService.createIssueForPrescription(prescriptionId).subscribe(
+          data =>{
+            this.issueService.makeIssue = data;
+            this.router.navigate(["/findIssue"]);
+          }
+        );
+
     }
 
 }

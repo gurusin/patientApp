@@ -25,7 +25,7 @@ public class PrescriptionController {
 
     @RequestMapping(path = "savePrescription",method = RequestMethod.POST)
     public @ResponseBody
-    SavedPrescriptionDTO savePrescription(@RequestBody PrescriptionDTO prescriptionDTO)
+    Prescription savePrescription(@RequestBody PrescriptionDTO prescriptionDTO)
     {
         return prescriptionService.savePrescription(prescriptionDTO);
     }
@@ -37,7 +37,7 @@ public class PrescriptionController {
     }
 
     @RequestMapping(path = "loadPrescriptionByDate",method = RequestMethod.POST)
-    public @ResponseBody List<SavedPrescriptionDTO> loadPrescriptionsByDate(@RequestBody Date date)
+    public @ResponseBody List<Prescription> loadPrescriptionsByDate(@RequestBody Date date)
     {
         return  prescriptionService.loadPrescriptionsByDate(date);
 

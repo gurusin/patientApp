@@ -8,11 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 public interface PrescriptionService {
-     SavedPrescriptionDTO savePrescription(final PrescriptionDTO dto);
+    Prescription savePrescription(final PrescriptionDTO dto);
 
     List<PrescriptionDTO> loadPrescriptionsForPatient(long l);
 
-    List<SavedPrescriptionDTO> loadPrescriptionsByDate(final Date date);
+    List<Prescription> loadPrescriptionsByDate(final Date date);
 
     Prescription get(String id);
 }

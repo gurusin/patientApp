@@ -7,7 +7,7 @@ public class DrugPackage {
 
     @Id
     @GeneratedValue
-    private int drugPackageId;
+    private long drugPackageId;
 
     @Override
     public boolean equals(Object o) {
@@ -21,7 +21,7 @@ public class DrugPackage {
 
     @Override
     public int hashCode() {
-        return getDrugPackageId();
+        return (int)getDrugPackageId();
     }
 
     @ManyToOne
@@ -36,11 +36,11 @@ public class DrugPackage {
     private double minOrderLevel;
     private double unitPrice;
 
-    public int getDrugPackageId() {
+    public long getDrugPackageId() {
         return drugPackageId;
     }
 
-    public void setDrugPackageId(int drugPackageId) {
+    public void setDrugPackageId(long drugPackageId) {
         this.drugPackageId = drugPackageId;
     }
 

@@ -10,6 +10,7 @@ import com.opdapp.service.DrugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,35 +35,41 @@ public class DrugServiceImpl implements DrugService {
     @Autowired
     private UnitOfMeasureRepository unitOfMeasureRepository;
 
+    private List<DoseFrequency> doseFrequencies;
+
+    private List<String> durationunit = new ArrayList<String>();
+
     @Autowired
     private ItemRepository itemRepository;
 
+
+    public DrugServiceImpl() {
+
+    }
+
+    @PostConstruct
+    public void init()
+    {
+        doseFrequencies = frequencyRepository.findAll();
+        buildDurationUnits();
+    }
+
     public PrescribableDrug getByDrugId(long drugId) {
         PrescribableDrug prescribableDrug = new PrescribableDrug();
-        List<DoseFrequency> doseFrequencies = frequencyRepository.findAll();
-
         prescribableDrug.setDoseFrequency(doseFrequencies);
+        prescribableDrug.setDurationUnit(durationunit);
+        Drug drug = drugRepository.findOne(drugId);
+        prescribableDrug.setDrug(drug);
+        List<DrugPackage> packages = drugPackageRepository.getDrugPackageByDrug(drug);
+        prescribableDrug.setPackages(packages);
+        return prescribableDrug;
+    }
 
-        List<String> durationunit = new ArrayList<String>();
+    private void buildDurationUnits() {
         durationunit.add("Days");
         durationunit.add("Hours");
         durationunit.add("Weeks");
         durationunit.add("Months");
-
-        prescribableDrug.setDurationUnit(durationunit);
-
-        Drug drug = drugRepository.findOne(drugId);
-        prescribableDrug.setDrug(drug);
-
-        List<DrugPackage> packages = drugPackageRepository.getDrugPackageByDrug(drug);
-        prescribableDrug.setPackages(packages);
-        List<Strength> strenghts = new ArrayList<Strength>();
-        for (DrugPackage obj : packages) {
-            strenghts.add(obj.getStrength());
-        }
-        prescribableDrug.setStrengths(strenghts);
-
-        return prescribableDrug;
     }
 
     public List<SearchedDrug> getByBrandName(String brandName) {

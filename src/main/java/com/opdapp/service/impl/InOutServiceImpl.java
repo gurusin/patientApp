@@ -6,6 +6,7 @@ import com.opdapp.dto.inout.InOutSearchCriteria;
 import com.opdapp.model.*;
 import com.opdapp.repository.GoodReceivingNoteRepository;
 import com.opdapp.repository.IssueNoteRepository;
+import com.opdapp.repository.ServiceIssueItemRepository;
 import com.opdapp.service.InOutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class InOutServiceImpl implements InOutService
 
     @Autowired
     private IssueNoteRepository issueNoteRepository;
+
+    @Autowired
+    private ServiceIssueItemRepository serviceIssueItemRepository;
 
     @Override
     public  List<InOutReport> getInOut(final InOutSearchCriteria criteria)

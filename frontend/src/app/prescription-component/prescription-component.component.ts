@@ -62,9 +62,7 @@ export class PrescriptionComponentComponent implements OnInit {
     selectStrength(i)
     {
        var obj = this.patientVisit.prescribableDrug[i];
-       obj.availableQty = obj.packages[obj.selectedStrengthIndex].qunatity;
        this.patientVisit.prescribableDrug[i].availableQty = obj.packages[obj.selectedStrengthIndex].quantity;
-       console.log(this.patientVisit.prescribableDrug[i]);
     }
 
   setDrugId(pres:PrescribableDrug) {
@@ -108,13 +106,14 @@ export class Prescription
   symptoms:string;
   diagnosis:string;
   notes:string;
-  prescriptionDetails:PrescriptionDetail[];
+  prescriptionDetailDTOS:PrescriptionDetail[];
   patientId:number;
   medicalServices:any[];
 
 }
 export class PrescriptionDetail
 {
+  drugPackageId:number;
   drug:Drug;
   drugId:string;
   strength:Strength;
@@ -123,6 +122,7 @@ export class PrescriptionDetail
   duration:number;
   intervalUnit:string;
   meal:string;
+  doseFrequencyId:number;
 
 
   constructor() {
@@ -135,7 +135,7 @@ export class PrescriptionDetail
   {
     var passed = true;
     passed = (this.amount > 0) && (this.duration >0) && (this.intervalUnit != null) &&
-        this.frequency != null && this.drugId != null && this.meal != null;
+        this.doseFrequencyId != null && this.drugPackageId != null && this.meal != null;
     return passed;
   }
 

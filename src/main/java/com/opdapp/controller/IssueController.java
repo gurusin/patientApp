@@ -16,6 +16,12 @@ public class IssueController {
     @Autowired
     private IssueService issueService;
 
+
+    @RequestMapping(path="/prepareIssue", method = RequestMethod.POST)
+    public @ResponseBody MakeIssue createIssueForPrescription(@RequestBody String prescriptionId)
+    {
+        return issueService.createIssueForPrescription(prescriptionId);
+    }
     @RequestMapping(path="/makeIssue", method = RequestMethod.POST)
     public @ResponseBody IssueNote makeIssue(@RequestBody MakeIssue issue)
     {

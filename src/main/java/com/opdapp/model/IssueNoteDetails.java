@@ -17,7 +17,7 @@ public class IssueNoteDetails {
     private IssueNote issueNote;
 
     @ManyToOne
-    @JoinColumn(name = "itemId")
+    @JoinColumn(name = "drugPackageId")
     private DrugPackage drugPackage;
 
     private double buyingQuantity;

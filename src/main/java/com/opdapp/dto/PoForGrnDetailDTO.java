@@ -1,7 +1,7 @@
 package com.opdapp.dto;
 
 public class PoForGrnDetailDTO {
-    private int drugPacakgeId;
+    private long drugPacakgeId;
     private String itemName;
     private double orderedQty;
     private double balanceQty;
@@ -49,11 +49,11 @@ public class PoForGrnDetailDTO {
         this.poDetailId = poDetailId;
     }
 
-    public int getDrugPacakgeId() {
+    public long getDrugPacakgeId() {
         return drugPacakgeId;
     }
 
-    public void setDrugPacakgeId(int drugPacakgeId) {
+    public void setDrugPacakgeId(long drugPacakgeId) {
         this.drugPacakgeId = drugPacakgeId;
     }
 

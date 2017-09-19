@@ -37,4 +37,9 @@ public class DoseFrequency {
     public void setNoofDoses(int noofDoses) {
         this.noofDoses = noofDoses;
     }
+
+    public String getValue()
+    {
+        return noofDoses + "per" + timeUnit;
+    }
 }

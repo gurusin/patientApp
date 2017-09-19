@@ -43,7 +43,7 @@ export class BasicvisitComponent implements OnInit {
     onSave() {
         var presc = new Prescription();
         presc.medicalServices = this.patientVisit.medicalServices;
-        presc.prescriptionDetails = [];
+        presc.prescriptionDetailDTOS = [];
         presc.patientId = this.patientService.patientObject.patientId;
         presc.diagnosis = this.patientVisit.diagnoseData;
         presc.notes = this.patientVisit.note;
@@ -52,19 +52,16 @@ export class BasicvisitComponent implements OnInit {
         var bOK = true;
         this.patientVisit.prescribableDrug.forEach((obj: PrescribableDrug) => {
                 var detail = new PrescriptionDetail();
-
-                detail.drugId = obj.drug.drugId;
-                detail.drug.drugId = obj.drug.drugId;
+                detail.drugPackageId = obj.packages[obj.selectedStrengthIndex].drugPackageId;
                 detail.amount = obj.doseAmount;
                 detail.duration = obj.doseDuration;
-                if (obj.strengths == null)
+                if (obj.selectedStrengthIndex == null)
                 {
                     alert('Prescription has empty fields');
                     bOK=false;
                     return;
                 }
-                detail.strength = obj.strengths[obj.selectedStrengthIndex];
-                detail.frequency.doseFrequencyId = obj.selectedFrequency;
+                detail.doseFrequencyId = obj.selectedFrequency;
                 detail.intervalUnit = obj.selectedDuration;
                 detail.meal = obj.meal;
                 if (!detail.isValid()){
@@ -78,7 +75,7 @@ export class BasicvisitComponent implements OnInit {
         if (!bOK) {
             return;
         }
-        presc.prescriptionDetails = details;
+        presc.prescriptionDetailDTOS = details;
         this.drugService.savePrescription(presc).subscribe(
             data => {
                 this.drugService.setSavedPrescription(data);

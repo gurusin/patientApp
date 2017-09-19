@@ -1,16 +1,16 @@
 package com.opdapp.dto;
 
 public class PODetail {
-    private int drugPackageId;
+    private long drugPackageId;
     private double qty;
     private long podetailId;
     private String itemName;
 
-    public int getDrugPackageId() {
+    public long getDrugPackageId() {
         return drugPackageId;
     }
 
-    public void setDrugPackageId(int drugPackageId) {
+    public void setDrugPackageId(long drugPackageId) {
         this.drugPackageId = drugPackageId;
     }
 

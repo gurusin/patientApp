@@ -1,5 +1,6 @@
 package com.opdapp.dto;
 
+import com.opdapp.model.DrugPackage;
 import com.opdapp.model.MedicalServItem;
 import com.opdapp.model.Patient;
 import com.opdapp.model.PrescriptionDetail;
@@ -22,6 +23,7 @@ public class PrescriptionDTO {
     private Set<MedicalServItem> medicalServices;
     private Patient patient;
 
+    private List<PrescriptionDetailDTO> prescriptionDetailDTOS;
 
     public Patient getPatient() {
         return patient;
@@ -39,9 +41,7 @@ public class PrescriptionDTO {
         this.prescriptionId = prescriptionId;
     }
 
-    private List<PrescriptionDetailDTO> prescriptionDetailDTOS;
 
-    private List<PrescriptionDetail> prescriptionDetails;
 
     public Date getPrescriptionDate() {
         return prescriptionDate;
@@ -57,15 +57,6 @@ public class PrescriptionDTO {
 
     public void setPrescriptionDetailDTOS(List<PrescriptionDetailDTO> prescriptionDetailDTOS) {
         this.prescriptionDetailDTOS = prescriptionDetailDTOS;
-    }
-
-    public List<PrescriptionDetail> getPrescriptionDetails() {
-        return prescriptionDetails;
-    }
-
-
-    public void setPrescriptionDetails(List<PrescriptionDetail> prescriptionDetails) {
-        this.prescriptionDetails = prescriptionDetails;
     }
 
     public long getPatientId() {

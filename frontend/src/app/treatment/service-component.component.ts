@@ -46,7 +46,11 @@ export class ServiceComponentComponent implements OnInit {
 
     onRemove(i)
     {
-        this.patientVisit.medicalServices.splice(i);
+        if (i>0)
+        {
+          this.patientVisit.medicalServices.splice(i);
+        }
+
     }
 
 

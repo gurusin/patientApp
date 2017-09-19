@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DrugPackageRepository extends CrudRepository<DrugPackage, Integer> {
+public interface DrugPackageRepository extends CrudRepository<DrugPackage, Long> {
     List<DrugPackage> getDrugPackageByDrug(Drug drug);
 
     List<DrugPackage> findAll();
