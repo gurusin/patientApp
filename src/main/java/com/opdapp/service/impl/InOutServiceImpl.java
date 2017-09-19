@@ -88,7 +88,7 @@ public class InOutServiceImpl implements InOutService
                 final InOutDetails details = new InOutDetails();
                 details.setDate(grn.getGrnDate());
                 details.setSupplierName(grn.getPurchaseOrder().getItemSupplier().getSupplierName());
-                details.setReceived(details.getReceived());
+                details.setReceived(child.getReceivingQty());
                 list.add(details);
             }
         }

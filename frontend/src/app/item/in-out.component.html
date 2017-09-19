@@ -9,8 +9,11 @@
   <hr/>
   <h5> Report </h5>
   <div *ngFor="let obj of reports">
-    <li>{{obj.drugPackage.drug.brandName}}
-    <table class="table table-bordered">
+    <li>{{obj.drugPackage.drug.brandName}}- {{obj.drugPackage.strength.strengthAmount}},
+      {{obj.drugPackage.strength.strengthUnit.unitName}}
+      <br/>
+      <label>Current Stock :{{obj.drugPackage.quantity}}</label>
+      <table class="table table-bordered">
       <tr>
         <td>Date</td>
         <td>In</td>
