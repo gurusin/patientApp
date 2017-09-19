@@ -62,7 +62,10 @@ export class PurchseorderComponent implements OnInit {
   }
 
   doDelete(i) {
-    this.po.poDetails.splice(i, 1);
+    if (i > 0)
+    {
+      this.po.poDetails.splice(i, 1);
+    }
   }
 
   private initItems() {

@@ -79,8 +79,12 @@ export class PrescriptionComponentComponent implements OnInit {
 
   removeDrug(i:number)
   {
-    this.patientVisit.prescribableDrug.
-    splice(i,1);
+    if (i>0)
+    {
+      this.patientVisit.prescribableDrug.
+      splice(i,1);
+    }
+
   }
 
   searchDrug(event: any, row:PrescribableDrug,i:number) {

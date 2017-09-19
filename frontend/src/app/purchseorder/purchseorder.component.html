@@ -46,7 +46,7 @@
         </tr>
     </thead>
     <tbody>
-       <tr *ngFor="let detail of po.poDetails">
+       <tr *ngFor="let detail of po.poDetails;let j =index">
          <td>
            <select [(ngModel)]='detail.drugPackageId' name="drugPackageId">
              <option *ngFor="let x of drugPackages; let i = index"
@@ -58,7 +58,7 @@
            <input type="number" required [(ngModel)]='detail.qty' name="qty"/>
          </td>
          <td><button type="button"  class="button btn-primary" (click)="doAdd()">Add</button>
-           <button type="button"  class="button btn-danger" (click)="doDelete(i)">Remove</button></td>
+           <button type="button"  class="button btn-danger" (click)="doDelete(j)">Remove</button></td>
        </tr>
     </tbody>
   </table>
