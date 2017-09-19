@@ -22,8 +22,6 @@ public class InOutServiceImpl implements InOutService
     @Autowired
     private IssueNoteRepository issueNoteRepository;
 
-    @Autowired
-    private ServiceIssueItemRepository serviceIssueItemRepository;
 
     @Override
     public  List<InOutReport> getInOut(final InOutSearchCriteria criteria)

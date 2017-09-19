@@ -9,12 +9,13 @@ import {AdminService} from "../services/admin.service";
 export class DailyIncomeComponent implements OnInit {
 
   dailyIncome : any;
-  selectedDate:Date;
+
   constructor(private adminService:AdminService) { }
 
   ngOnInit() {
     this.dailyIncome = new Object();
-    this.dailyIncome.date = new Date();
+    var x = new Date();
+    this.dailyIncome.date = new Date(x.getUTCFullYear(),  x.getMonth(),x.getDate());
   }
 
     doReport()

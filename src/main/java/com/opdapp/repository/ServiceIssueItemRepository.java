@@ -13,4 +13,6 @@ public interface ServiceIssueItemRepository extends CrudRepository<ServiceIssueI
 
     List<ServiceIssueItem> findServiceIssueItemByDateBetween(final Date fromDate, final Date toDate);
 
+    List<ServiceIssueItem> findByDate(final Date date);
+
 }

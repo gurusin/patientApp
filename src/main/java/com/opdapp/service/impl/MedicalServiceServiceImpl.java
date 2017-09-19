@@ -2,13 +2,11 @@ package com.opdapp.service.impl;
 
 import com.opdapp.dto.DailyIncome;
 import com.opdapp.dto.issue.DailyIncomeReport;
-import com.opdapp.model.IssueNote;
-import com.opdapp.model.IssueNoteDetails;
-import com.opdapp.model.IssueNoteServiceItem;
-import com.opdapp.model.MedicalServItem;
+import com.opdapp.model.*;
 import com.opdapp.repository.IssueNoteRepository;
 import com.opdapp.repository.MedicalServiceRepository;
 import com.opdapp.repository.ProductTypeRepository;
+import com.opdapp.repository.ServiceIssueItemRepository;
 import com.opdapp.service.MedicalServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +24,9 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
 
     @Autowired
     private IssueNoteRepository issueNoteRepository;
+
+    @Autowired
+    private ServiceIssueItemRepository serviceIssueItemRepository;
 
     @Override
     public List<MedicalServItem> loadAllMedicalService() {
@@ -56,22 +57,25 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
                 income.setAmount(income.getAmount() + value);
                 total = total + value;
             }
+        }
 
+        final List<ServiceIssueItem> serviceIssueItems = serviceIssueItemRepository.findByDate(
+                new java.sql.Date(date.getTime()));
 
-            for (final IssueNoteServiceItem details : obj.getIssueNoteServiceItems()){
-                double value = details.getFee();
-                final long id = details.getId();
+            for (final ServiceIssueItem service : serviceIssueItems){
+                double value = service.getFee();
+                final long id = service.getMedicalServItem().getItemId();
                 DailyIncome income = servicesIncome.get(id);
                 if (income == null) {
                     income = new DailyIncome();
                     income.setId(id);
-                    income.setName(details.getMedicalServItem().getItemDescription());
+                    income.setName(service.getMedicalServItem().getItemDescription());
                     servicesIncome.put(id, income);
                 }
                 income.setAmount(income.getAmount() + value);
                 serviceTotal = serviceTotal + value;
             }
-        }
+
         report.setDate(date);
         report.setDrugTotal(total);
         report.setServicesTotal(serviceTotal);
