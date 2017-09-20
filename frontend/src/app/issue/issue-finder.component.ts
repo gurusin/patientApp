@@ -18,11 +18,11 @@ export class IssueFinderComponent implements OnInit {
 
   }
 
-  registerIssue(){
+  registerIssue() {
     this.issueService.registerIssue(this.makeIssue).subscribe(
-       data =>{
-         this.router.navigate(['pharmacyList']);
-       }
+      data => {
+        this.router.navigate(['pharmacyList']);
+      }
     )
   }
 
@@ -47,51 +47,24 @@ export class IssueFinderComponent implements OnInit {
     this.calculateTotal();
   }
 
-  getTotal() {
-
-  }
-
-  // Actually call server and make the  issue
-  makeIssueItem() {
-    // var obj  = new MakeIssue();
-    // obj.issueNote = this.issue.issueNote;
-    // this.issue.issueNoteDetails.forEach(
-    //     item => {
-    //         var detail = new MakeIssueDetailDTO();
-    //         detail.issueNoteId = item.issueNoteId;
-    //         detail.issuedQty = item.issuedQty;
-    //         obj.details.push(detail);
-    //     }
-    // );
-    //
-    // this.issueService.makeIssue(obj).subscribe(
-    //     data =>{
-    //         this.router.navigate(['/pharmacyList']);
-    //     }
-    // );
-  }
-
   print() {
+    var printContents = document.getElementById('printContent').innerHTML;
+    let popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <!--<title>Print tab</title>-->
+          <!--<style>-->
+          <!--//........Customized style.......-->
+          <!--</style>-->
+        </head>
+        <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
   }
 
-  //     this.getTotal();
-  //     let printContents, popupWin;
-  //     printContents = document.getElementById('printContent').innerHTML;
-  //     popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-  //     popupWin.document.open();
-  //     popupWin.document.write(`
-  //   <html>
-  //     <head>
-  //       <!--<title>Print tab</title>-->
-  //       <!--<style>-->
-  //       <!--//........Customized style.......-->
-  //       <!--</style>-->
-  //     </head>
-  //     <body onload="window.print();window.close()">${printContents}</body>
-  //   </html>`
-  //     );
-  //     popupWin.document.close();
-  // }
 }
 
 
