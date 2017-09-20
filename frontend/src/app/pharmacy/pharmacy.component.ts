@@ -12,10 +12,21 @@ export class PharmacyComponent implements OnInit {
 
     prescriptionList = [];
     date: Date;
+    prescriptionSearchCriteria : any
 
-    constructor(private issueService: IssueServiceService, private drugService: DrugServiceService, private router: Router) {
-        this.date = new Date();
+    constructor(private issueService: IssueServiceService, private drugService: DrugServiceService,
+                private router: Router) {
+        this.prescriptionSearchCriteria = new Object();
+        this.prescriptionSearchCriteria.initial = true;
+        this.prescriptionSearchCriteria.fromDate= new Date();
     }
+
+   doSearch()
+   {
+     this.drugService.searchPrescriptions(this.prescriptionSearchCriteria).subscribe(
+       data =>{ this.prescriptionList = data;}
+     );
+   }
 
     printView(savedPrescription) {
         this.drugService.savedPrescription = savedPrescription;

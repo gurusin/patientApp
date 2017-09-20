@@ -1,6 +1,7 @@
 package com.opdapp.service.impl;
 
 import com.opdapp.dto.*;
+import com.opdapp.dto.prescription.PrescriptionSearchDTO;
 import com.opdapp.model.*;
 import com.opdapp.repository.*;
 import com.opdapp.service.PrescriptionService;
@@ -45,6 +46,21 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             dtoList.add(dto);
         }
         return dtoList;
+    }
+
+    @Override
+    public List<Prescription> findPrescriptions(PrescriptionSearchDTO prescriptionSearchDTO) {
+        final Set<PrescriptionStatus> statSet = new HashSet<>();
+        if(prescriptionSearchDTO.isCompleted()){statSet.add(PrescriptionStatus.COMPLETED);}
+        if(prescriptionSearchDTO.isPartCompleted()){statSet.add(PrescriptionStatus.PARTIALLY_ISSED);}
+        if(prescriptionSearchDTO.isInitial()){statSet.add(PrescriptionStatus.INITIAL);}
+        if (prescriptionSearchDTO.isAll())
+        {
+            return prescriptionRepository.findPrescriptionByDateBetween(
+                    prescriptionSearchDTO.getFromDate(), prescriptionSearchDTO.getToDate());
+        }
+        return prescriptionRepository.findPrescriptionByDateBetweenAndPrescriptionStatusIn(
+                prescriptionSearchDTO.getFromDate(), prescriptionSearchDTO.getToDate(),statSet);
     }
 
     @Override

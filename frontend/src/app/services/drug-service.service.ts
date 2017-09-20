@@ -95,5 +95,11 @@ export class DrugServiceService {
         var url = localStorage.getItem("rootURL") +"loadPrescriptionLite";
         return this.http.post(url,patientId).map((res: Response) => res.json());
     }
+
+  searchPrescriptions(prescriptionSearchCriteria: any):Observable<any>
+  {
+    var url = localStorage.getItem("rootURL") +"prescriptionSearch";
+    return this.http.post(url,prescriptionSearchCriteria).map((res: Response) => res.json());
+  }
 }
 

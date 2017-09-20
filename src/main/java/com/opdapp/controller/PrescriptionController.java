@@ -2,6 +2,7 @@ package com.opdapp.controller;
 
 import com.opdapp.dto.PrescriptionDTO;
 import com.opdapp.dto.SavedPrescriptionDTO;
+import com.opdapp.dto.prescription.PrescriptionSearchDTO;
 import com.opdapp.model.Prescription;
 import com.opdapp.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,13 @@ public class PrescriptionController {
     public @ResponseBody List<Prescription> loadPrescriptionsByDate(@RequestBody Date date)
     {
         return  prescriptionService.loadPrescriptionsByDate(date);
+
+    }
+
+    @RequestMapping(path = "prescriptionSearch",method = RequestMethod.POST)
+    public @ResponseBody List<Prescription> findPrescription(@RequestBody PrescriptionSearchDTO prescriptionSearchDTO)
+    {
+        return  prescriptionService.findPrescriptions(prescriptionSearchDTO);
 
     }
 
