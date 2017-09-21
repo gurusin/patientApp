@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="dropdown">
+<div class="dropdown" *ngIf="userType ===1">
   <button class="dropbtn">Report</button>
   <div class="dropdown-content">
     <a routerLink="dailyIncome">Daily Income</a>
@@ -39,7 +39,7 @@
 <div class="dropdown">
   <button class="dropbtn">Patient Search</button>
   <div class="dropdown-content">
-    <a routerLink="">Patient Search</a>
+    <a routerLink="start">Patient Search</a>
   </div>
 </div>
 

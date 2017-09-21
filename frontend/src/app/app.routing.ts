@@ -28,9 +28,12 @@ import {ReturnoutComponent} from "./purchseorder/returnout.component";
 import {DailyIncomeComponent} from "./report/daily-income.component";
 import {POListComponent} from "./purchaseorder/polist.component";
 import {InOutComponent} from "./item/in-out.component";
+import {LoginComponentComponent} from "./login-component/login-component.component";
+import {HomeComponent} from "./home/home.component";
 
 const APP_ROUTES: Routes = [
-    {path: '', component: PatientSearchComponent},
+    {path: '', component: LoginComponentComponent},
+    {path: 'start', component: PatientSearchComponent},
     {path: 'patientsave', component: PatientsaveComponent},
     {path: 'treatment', component: TreatmentComponent},
     {

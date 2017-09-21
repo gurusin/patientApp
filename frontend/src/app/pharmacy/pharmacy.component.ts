@@ -34,12 +34,7 @@ export class PharmacyComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.drugService.loadPrescriptionByDate(this.date
-        ).subscribe(
-            data => {
-                this.prescriptionList = data;
-            }
-        );
+
     }
 
     issueDrugs(prescriptionId) {

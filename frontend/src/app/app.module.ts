@@ -57,6 +57,9 @@ import { DailyIncomeComponent } from './report/daily-income.component';
 import { POListComponent } from './purchaseorder/polist.component';
 import { InOutComponent } from './item/in-out.component';
 import { FilterPipePipe } from './filter/filter-pipe.pipe';
+import {LoginComponentComponent} from "./login-component/login-component.component";
+import {LoginService} from "./services/login-service.service";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
     declarations: [
@@ -102,6 +105,8 @@ import { FilterPipePipe } from './filter/filter-pipe.pipe';
         POListComponent,
         InOutComponent,
         FilterPipePipe,
+        LoginComponentComponent,
+        HomeComponent,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,
@@ -111,7 +116,7 @@ import { FilterPipePipe } from './filter/filter-pipe.pipe';
     ],
     entryComponents: [PrintpopComponent],
     providers: [PatientServiceService, DrugServiceService, AdminService, ItemSupplierService,
-        ItemProductService, ItemServiceService, POServiceService, IssueServiceService],
+        ItemProductService, ItemServiceService, POServiceService, IssueServiceService,LoginService],
         // MdDialog, OVERLAY_PROVIDERS],
     bootstrap: [AppComponent]
 })

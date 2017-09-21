@@ -2,6 +2,7 @@ import {Component, HostListener} from '@angular/core';
 import {PatientServiceService} from "../services/patient-service.service";
 import {Data, Router} from "@angular/router";
 import {Patient} from "../patient";
+import {LoginService} from "../services/login-service.service";
 
 
 @Component({
@@ -18,7 +19,7 @@ export class PatientSearchComponent {
 
   patientList = [];
 
-  constructor(private patientService: PatientServiceService,private router:Router) {
+  constructor(private patientService: PatientServiceService,private router:Router, private loginService:LoginService) {
 
   }
 
@@ -27,11 +28,18 @@ export class PatientSearchComponent {
     if (event.keyCode == 13) {
       this.patientService.getByPatNo(this.patNo).subscribe(
           data =>{
-              this.patientService.patientObject = data;
-              this.router.navigate(["patientvisit/treatment"]);
+            this.loadPrescription(data);
           }
       );
 
+    }
+  }
+
+  private loadPrescription(data) {
+    if (this.loginService.loggedInUser.userType ===1)
+    {
+      this.patientService.patientObject = data;
+      this.router.navigate(["patientvisit/treatment"]);
     }
   }
 

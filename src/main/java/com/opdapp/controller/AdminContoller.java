@@ -2,6 +2,7 @@ package com.opdapp.controller;
 
 import com.opdapp.dto.issue.DailyIncomeReport;
 import com.opdapp.model.*;
+import com.opdapp.model.admin.MedSysUser;
 import com.opdapp.repository.ProductTypeRepository;
 import com.opdapp.service.*;
 import org.joda.time.LocalDate;
@@ -33,6 +34,9 @@ public class AdminContoller {
 
     @Autowired
     private ProductTypeRepository productTypeRepository;
+
+    @Autowired
+    private LoginService loginService;
 
     @RequestMapping(path = "/loadItemSuppliers", method = RequestMethod.GET)
     public @ResponseBody
@@ -103,6 +107,12 @@ public class AdminContoller {
     DailyIncomeReport getDailyIncome(@RequestBody DailyIncomeReport report)
     {
         return medicalServiceService.getDailyIncome(report.getDate());
+    }
+
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    public @ResponseBody MedSysUser login(@RequestBody MedSysUser medSysUser)
+    {
+        return loginService.login(medSysUser);
     }
 
 }

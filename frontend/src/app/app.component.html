@@ -1,18 +1,17 @@
-<!--<head>-->
-  <!--<style>-->
-    <!--p {-->
-      <!--text-indent: 500px;-->
-      <!--color: darkgreen;-->
-      <!--background-color: lightblue;-->
-    <!--}-->
-  <!--</style>-->
-<!--</head>-->
-<!--<div><h1><p>Med Sys Patient Administration </h1></div>-->
-<!--<app-navbar></app-navbar>-->
-<!--<router-outlet></router-outlet>-->
-<div><header><h1>Medsys Patient and Drug Administration </h1>
-</header></div>
-<app-menubar></app-menubar>
+<div>
+  <header><h1>Medsys Patient and Drug Administration </h1>
+    <div *ngIf="loginService.loggedIn">
+      Welcome {{"      " +loginService.loggedInUser.firstname}}!
+      <div align="left" class="text-warning">
+        <button type="button" class="btn btn-primary" (click)="logOff()">Log Off</button>
+      </div>
+    </div>
+  </header>
+</div>
+<div *ngIf="loginService.loggedIn">
+  <app-menubar></app-menubar>
+</div>
 <router-outlet></router-outlet>
-<footer>Copyright &copy; dasoftsolutions </footer>
+<footer>Copyright &copy; dasoftsolutions</footer>
+
 
