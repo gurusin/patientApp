@@ -36,10 +36,14 @@ export class PatientSearchComponent {
   }
 
   private loadPrescription(data) {
+    this.patientService.patientObject = data;
     if (this.loginService.loggedInUser.userType ===1)
     {
-      this.patientService.patientObject = data;
+
       this.router.navigate(["patientvisit/treatment"]);
+    } else
+    {
+      this.router.navigate(["serviceIssue"]);
     }
   }
 

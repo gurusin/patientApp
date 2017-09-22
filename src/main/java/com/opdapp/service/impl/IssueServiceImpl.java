@@ -118,6 +118,13 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public void makeIssue(final MakeIssue issue) {
+
+        // Check whether this is a service only issue
+        if (issue.getPrescriptionId() <  1)
+        {
+            makeServiceOnlyIssue(issue);
+            return;
+        }
         final Map<Long,MakeIssueDetailDTO> issueMap = mapIssues(issue);
         final IssueNote note = new IssueNote();
         final Set<IssueNoteDetails> detailsSet = new HashSet<IssueNoteDetails>();
@@ -180,6 +187,26 @@ public class IssueServiceImpl implements IssueService {
         if (newPrescription)
         {
             saveServices(issue, prescription);
+        }
+    }
+
+    private void makeServiceOnlyIssue(MakeIssue issue)
+    {
+        final IssueNote note = new IssueNote();
+        note.setIssueDate(new java.sql.Date(issue.getDateOfIssue().getTime()));
+        note.setPatient(issue.getPatient()); // TODO : Load patient for session if this object is returned;
+
+        for (final PrescriptionServiceItem serviceItem : issue.getServiceItems())
+        {
+            final ServiceIssueItem item = new ServiceIssueItem();
+            item.setPatient(issue.getPatient());
+            item.setPrescriptionId(-1);
+            // Please load this if this object is returned
+            item.setMedicalServItem(serviceItem.getMedicalServItem());
+            item.setFee(serviceItem.getFee());
+            item.setExteranlId(serviceItem.getExternalRef());
+            item.setDate(new java.sql.Date(issue.getDateOfIssue().getTime()));
+            serviceIssueItemRepository.save(item);
         }
     }
 

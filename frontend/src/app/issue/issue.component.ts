@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ItemServiceService} from "../services/item-service.service";
 import {Router} from "@angular/router";
 import {POServiceService} from "../services/poservice.service";
+import {IssueServiceService} from "../services/issue-service.service";
+import {PatientServiceService} from "../services/patient-service.service";
+import {Patientvisit} from "../treatment/patientvisit";
 
 @Component({
   selector: 'app-issue',
@@ -10,78 +13,49 @@ import {POServiceService} from "../services/poservice.service";
 })
 export class IssueComponent implements OnInit {
 
-  items = [];
-  issueObject;
-  total=0;
+  patientVisit =new Patientvisit();
+  dateOfIssue = new Date();
 
-  constructor(private itemService: ItemServiceService,private router:Router,
-              private poService:POServiceService) { }
+  constructor(private issueService: IssueServiceService, private router: Router,
+              private patientService:PatientServiceService) {
+
+  }
+
+  cancelIssue()
+  {
+    this.router.navigate(['start']);
+  }
+
+  saveIssue()
+  {
+    let makeIssue = Object();
+    makeIssue.patient = new Object();
+    makeIssue.patient.patientId = this.patientService.patientObject.patientId;
+    makeIssue.prescriptionId = -1;
+    makeIssue.dateOfIssue = this.dateOfIssue;
+    makeIssue.serviceItems = [];
+    this.patientVisit.medicalServices.forEach( item =>{
+         var detail =  {
+           medicalServItem:{itemId: item.itemId},
+           fee : item.unitPrice,
+           externalRef : item.externalRef
+         };
+         makeIssue.serviceItems.push(detail);
+      });
+     this.issueService.registerIssue(makeIssue).subscribe(
+        data =>{
+          this.router.navigate(['start']);
+        }
+     );
+
+  }
 
   ngOnInit() {
-    this.initItems();
-    this.issueObject = new Object();
-    this.issueObject.details=[];
-    this.issueObject.issueDate = new Date();
-    this.issueObject.paymentMethod ='CASH';
-    this.issueObject.issueStatus = 'CREATED';
-    this.addNew();
-
-  }
-
-  addNew()
-  {
-    this.issueObject.details.push({
-      unitPrice : 0,
-      itemId :0,
-      avQuantity: 0,
-      quantity : 0,
-    });
-  }
-
-  onSelectItem(itemIndex, issueIndex)
-  {
-     var detail = this.issueObject.details[issueIndex];
-     var item = this.items[itemIndex];
-     detail.unitPrice = item.unitPrice;
-     detail.itemId = item.itemId;
-     detail.avQuantity = item.quantity;
-  }
-
-  calculateTotal()
-  {
-    this.total =0;
-    for (let obj of this.issueObject.details){
-      this.total = this.total +(obj.unitPrice * obj.quantity);
+    if (!this.patientService.patientObject)
+    {
+      alert('Please select a patient first');
+      this.router.navigate(['start']);
     }
-  }
-
-  doAdd()
-  {
-    this.addNew();
-  }
-
-  doDelete(i)
-  {
-    this.issueObject.details.splice(i,1);
-    this.calculateTotal();
-  }
-  private initItems() {
-    this.itemService.loadItems().subscribe(items => {
-        this.items = items;
-      }
-    );
-  }
-
-  onSave() {
-    this.poService.saveIssue(this.issueObject).subscribe(
-      data =>{
-        this.router.navigate(['/supplier']);
-      }
-    );
-  }
-
-  onCancel() {
-    this.router.navigate(['/supplier']);
   }
 
 }

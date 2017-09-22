@@ -12,6 +12,7 @@ export class ServiceComponentComponent implements OnInit {
 
     @Input() patientVisit: Patientvisit;
     medicalServices = [];
+    servicesTotal = 0;
 
     constructor(private prodTypeService: ItemProductService) {
     }
@@ -27,6 +28,15 @@ export class ServiceComponentComponent implements OnInit {
         );
     }
 
+    calculateTotal()
+    {
+      this.servicesTotal = 0;
+      this.patientVisit.medicalServices.forEach(item =>{
+        this.servicesTotal += item.unitPrice;
+      });
+
+    }
+
     serviceChanged(itemId,rowIndex) {
         this.medicalServices.forEach(child=>{
             if (itemId == child.itemId)
@@ -34,7 +44,7 @@ export class ServiceComponentComponent implements OnInit {
                 this.patientVisit.medicalServices[rowIndex] = Object.assign({},child);
             }
         });
-
+        this.calculateTotal();
     }
 
 
@@ -50,6 +60,7 @@ export class ServiceComponentComponent implements OnInit {
         {
           this.patientVisit.medicalServices.splice(i);
         }
+        this.calculateTotal();
 
     }
 

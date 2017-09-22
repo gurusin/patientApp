@@ -1,6 +1,6 @@
 <div class="container">
-  <div *ngIf="patient !==null" class="patientBar">
-    <a (click)="onEditPatient()">{{patient.firstname}},{{patient.lastname}}</a> ({{patient.calculatedAge}})
+  <div *ngIf="patientService.patientObject" class="patientBar">
+    <a (click)="onEditPatient()">{{patientService.patientObject.firstname}},{{patientService.patientObject.lastname}}</a> ({{patientService.patientObject.calculatedAge}})
   </div>
   <br>
 </div>

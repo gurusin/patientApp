@@ -1,63 +1,49 @@
 <div class="container">
-  <h1> Issue Goods</h1>
-
-  <div class="row">
-    <div class="col-lg-4">
-      <label>Date Of Issue</label>
-    <input type="date" [(ngModel)]='issueObject.issueDate'/>
-    </div>
-    <div class="col-lg-4">
-      <label>Payment method</label>
-      <select name="paymentMethod" [(ngModel)]="issueObject.paymentMethod">
-        <option value="CASH">Cash</option>
-        <option value="CREDIT">Credit</option>
-        <option value="CHEQUE">Cheque</option>
-        <option value="VOUCHER">Voucher</option>
-      </select>
-    </div>
-    <div class="col-lg-4">
-      <label>Status</label>
-      <select name="issueStatus" [(ngModel)]="issueObject.issueStatus">
-        <option value="CREATED">Created</option>
-        <option value="PAID">Paid</option>
-        <option value="CREDIT">Credit</option>
-      </select>
-    </div>
-  </div>
+  <label>Date of Issue</label>
+  <input type="date" [(ngModel)]="dateOfIssue"/>
   <br/>
-  <table class="table table-responsive">
-    <thead>
-     <tr>
-       <td>Item</td>
-       <td>Unit Price</td>
-       <td>Available Qty</td>
-       <td>Issued Qty</td>
-       <td>Price</td>
-       <td>Add</td>
-       <td>Remove</td>
-     </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let row of issueObject.details;let i = index">
-          <td>
-            <select [(ngModel)]='row.selectedIndex' (change)="onSelectItem(row.selectedIndex,i)">
-              <option *ngFor="let x of items; let c = index"
-                      [ngValue]="c">
-                {{x.itemDescription}}</option>
-            </select>
-          </td>
-          <td>{{row.unitPrice}}</td>
-          <td>{{row.avQuantity}}</td>
-          <td><input type="number"  [(ngModel)]='row.quantity' (change)="calculateTotal()"></td>
-          <td>{{row.unitPrice * row.quantity}}</td>
-          <td><button type="button"  class="button btn-primary" (click)="doAdd()">Add</button></td>
-          <td><button type="button"  class="button btn-danger" (click)="doDelete(i)">Remove</button></td>
-        </tr>
-    </tbody>
-  </table>
-  <hr/>
-  <label>Total : </label> {{total}}
-   <br/>
-  <button type="button" class="btn-primary" (click)="onSave()">Save </button>
-  <button type="button" class="btn-primary" (click)="onCancel()">Cancel </button>
-</div>
+
+  <app-service-component [patientVisit]="patientVisit"></app-service-component>
+  <div>
+    <button type="button" class="btn btn-primary" (click)="saveIssue()"> Save Issue</button>
+    <button type="button" class="btn btn-danger" (click)="cancelIssue()"> CancelIssue</button>
+  </div>
+
+
+<!--&lt;!&ndash; Printing Part &ndash;&gt;-->
+
+<!--<div id="printContent" style="display: none">-->
+  <!--<h4> Suwapiyasa Medical Center - Indoor Pharmacy</h4>-->
+  <!--<h4>Date :{{makeIssue.dateOfIssue | date}}</h4>-->
+  <!--<h5>Drugs</h5>-->
+  <!--<table>-->
+    <!--<tr *ngFor="let row of makeIssue.details">-->
+      <!--<td>{{row.drugPackage.drug.brandName}}</td>-->
+      <!--<td>{{row.currentIssuedQty}}</td>-->
+      <!--<td>{{row.currentIssuedQty * row.drugPackage.unitPrice}}</td>-->
+    <!--</tr>-->
+  <!--</table>-->
+  <!--<h5> Services </h5>-->
+  <!--<table class="table table-bordered">-->
+    <!--<thead>-->
+    <!--<tr>-->
+      <!--<th>Service</th>-->
+      <!--<th>Fee</th>-->
+      <!--<th>External Reference</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tr *ngFor="let row of makeIssue.serviceItems">-->
+      <!--<td>{{row.medicalServItem.itemDescription}}</td>-->
+      <!--<td>{{row.fee}}</td>-->
+      <!--<td>{{row.externalRef}}</td>-->
+    <!--</tr>-->
+  <!--</table>-->
+  <!--<hr/>-->
+  <!--<label>Total:{{total}}</label>-->
+  <!--<br/>-->
+  <!--<label>Cash :{{paidAmount}}</label>-->
+  <!--<br/>-->
+  <!--<label>Balance : {{paidAmount - total}}</label>-->
+<!--</div>-->
+<!--<button type="button" class="btn btn-primary" (click)="print()">Print</button>-->
+

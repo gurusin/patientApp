@@ -14,7 +14,7 @@
       </select>
     </td>
     <td>
-      <input type="number" [(ngModel)]="row.unitPrice">
+      <input type="number" [(ngModel)]="row.unitPrice" (change)="calculateTotal()">
     </td>
     <td> <input type="text" [(ngModel)]="row.externalRef"></td>
 
@@ -22,3 +22,7 @@
     <td><button type="button" class="btn btn-danger" (click)="onRemove(i)">Remove</button></td>
   </tr>
 </table>
+<br>
+<div>
+  <label>Services Total : {{servicesTotal}}</label>
+</div>

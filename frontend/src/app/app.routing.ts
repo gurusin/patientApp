@@ -33,6 +33,7 @@ import {HomeComponent} from "./home/home.component";
 
 const APP_ROUTES: Routes = [
     {path: '', component: LoginComponentComponent},
+  {path: 'serviceIssue', component:IssueComponent},
     {path: 'start', component: PatientSearchComponent},
     {path: 'patientsave', component: PatientsaveComponent},
     {path: 'treatment', component: TreatmentComponent},
