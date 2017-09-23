@@ -30,4 +30,6 @@ public interface DrugService {
     BaseDrugDTO saveBaseDrug(final BaseDrugDTO BaseDrugDTO);
 
     DrugPackageDTO saveDrugPackage(final DrugPackageDTO drugPackageDTO);
+
+    List<DrugPackage> findDrugPackages(String drugName);
 }

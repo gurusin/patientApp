@@ -1,0 +1,70 @@
+<div class="container">
+  <div *ngIf="saved">
+    Adjustment done
+  </div>
+  <label>From Date :</label>
+  <input type="date" [(ngModel)]="searchCritera.fromDate">
+  <label>To Date :</label>
+  <input type="date" [(ngModel)]="searchCritera.toDate">
+  <button type="button" class="btn btn-primary" (click)="doSearch()">Search</button>
+  <table class="table table-bordered">
+    <thead>
+      <th>Date</th>
+      <th>Drug Package</th>
+      <th>Amount</th>
+      <th>Notes</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of adjustments">
+        <td>{{row.dateOfAdjustment | date}}</td>
+        <td>{{row.drugPackage.drug.brandName}}</td>
+        <td>{{row.adjustedQty}}</td>
+        <td>{{row.remarks}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="background-color: #bfd2c8">
+    <table cellpadding="50px" cellspacing="50px">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Date of Adjustment</td>
+        <td></td>
+        <td><input type="date" [(ngModel)]="adjustment.dateOfAdjustment"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Drug Package</td>
+        <td></td>
+        <td width="80%">
+          <div *ngIf="selectedDrugPackage">
+            {{selectedDrugPackage.drug.brandName}},{{selectedDrugPackage.strength.strengthUnit.unitName}},{{selectedDrugPackage.strength.strengthAmount}}
+          </div>
+          <input #search type="text" list='packageList' id="drug" name="drug" placeholder="Drug Package to search"
+                 (keyup)="searchDrugPackage($event,search.value)" size="10" [(ngModel)]="selectedIndex">
+          <datalist id="packageList" >
+            <option *ngFor="let row of drugPackageList;let i=index" value="{{i}}">
+              {{row.drug.brandName}},{{row.strength.strengthUnit.unitName}},{{row.strength.strengthAmount}}</option>
+          </datalist>
+        </td>
+      </tr>
+      <tr>
+        <td>Adjusted Amount</td>
+        <td></td>
+        <input type="number" [(ngModel)]="adjustment.adjustedQty">
+      </tr>
+
+      <tr>
+        <td>Remarks</td>
+        <td></td>
+        <input type="text" size="100" [(ngModel)]="adjustment.remarks">
+      </tr>
+    </table>
+    <br/>
+    <button type="button" class="btn btn-primary" (click)="saveAdjustment()">Save </button>
+  </div>
+</div>

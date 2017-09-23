@@ -1,10 +1,14 @@
 package com.opdapp.controller;
 
+import com.opdapp.dto.common.DatePeriod;
 import com.opdapp.dto.issue.DailyIncomeReport;
 import com.opdapp.model.*;
 import com.opdapp.model.admin.MedSysUser;
+import com.opdapp.model.admin.StockAdjustmentItem;
 import com.opdapp.repository.ProductTypeRepository;
+import com.opdapp.repository.StockAdjustmentItemRepository;
 import com.opdapp.service.*;
+import com.opdapp.service.admin.StockAdjustmentService;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +40,25 @@ public class AdminContoller {
     private ProductTypeRepository productTypeRepository;
 
     @Autowired
+    private StockAdjustmentService stockAdjustmentService;
+
+    @Autowired
     private LoginService loginService;
+
+    @RequestMapping(path = "/adjustStock", method = RequestMethod.POST)
+    public @ResponseBody
+    IssueNote adjustStock(@RequestBody final StockAdjustmentItem item)
+    {
+        stockAdjustmentService.adjustStock(item);
+        return new IssueNote();
+    }
+
+    @RequestMapping(path = "/findAdjustments", method = RequestMethod.POST)
+    public @ResponseBody
+    List<StockAdjustmentItem> findAdjustments(@RequestBody final DatePeriod period)
+    {
+        return stockAdjustmentService.findAdjustments(period);
+    }
 
     @RequestMapping(path = "/loadItemSuppliers", method = RequestMethod.GET)
     public @ResponseBody

@@ -30,42 +30,44 @@ import {POListComponent} from "./purchaseorder/polist.component";
 import {InOutComponent} from "./item/in-out.component";
 import {LoginComponentComponent} from "./login-component/login-component.component";
 import {HomeComponent} from "./home/home.component";
+import {StockAdjustmentComponent} from "./drugcomponent/admin/stock-adjustment/stock-adjustment.component";
 
 const APP_ROUTES: Routes = [
-    {path: '', component: LoginComponentComponent},
-  {path: 'serviceIssue', component:IssueComponent},
-    {path: 'start', component: PatientSearchComponent},
-    {path: 'patientsave', component: PatientsaveComponent},
-    {path: 'treatment', component: TreatmentComponent},
-    {
-        path: 'patientvisit', component: PatientVisitComponent, children: [
-        {path: 'treatment', component: BasicvisitComponent},
-        {path: 'treatmentHistory', component: PrescriptionHistoryComponent}
-    ]
-    },
-    {path: 'printReceipt', component: PrintreceiptComponent},
-    {path: 'patientAdmin', component: PatientadminComponent},
-    {path: 'printpop', component: PrintpopComponent},
-    {path: 'drugAdmin', component: DrugAdminComponent},
-    {path: 'baseDrugAdmin', component: BasedrugadminComponent},
-    {path: 'drugPackageAdmin', component: DrugpackageadminComponent},
-    {path: 'po', component: POListComponent},
-    {path: 'poDetail', component: PurchseorderComponent},
-    {path: 'item', component: ItemComponent},
-    {path: 'issue', component: IssueComponent},
-    {path: 'report', component: ReportComponent},
-    {path: 'supplier', component: SupplierComponent},
-    {path: 'itemtype', component: ItemtypeComponent},
-    {path: 'grn', component: GrnComponent},
-    {path: 'po', component: PurchseorderComponent},
-    {path: 'findIssue', component: IssueFinderComponent},
-    {path: 'printPo', component: PrintreceiptComponent},
-    {path: 'pharmacyList', component: PharmacyComponent},
-    {path: 'payment', component: PaymentComponent},
-    {path: 'medServiceItem', component: MedicalServiceComponentComponent},
-    {path: 'returnout', component: ReturnoutComponent},
-    {path: 'dailyIncome', component: DailyIncomeComponent},
-    {path: 'inOut', component: InOutComponent}
+  {path: '', component: LoginComponentComponent},
+  {path: 'serviceIssue', component: IssueComponent},
+  {path: 'adjustStock', component: StockAdjustmentComponent},
+  {path: 'start', component: PatientSearchComponent},
+  {path: 'patientsave', component: PatientsaveComponent},
+  {path: 'treatment', component: TreatmentComponent},
+  {
+    path: 'patientvisit', component: PatientVisitComponent, children: [
+    {path: 'treatment', component: BasicvisitComponent},
+    {path: 'treatmentHistory', component: PrescriptionHistoryComponent}
+  ]
+  },
+  {path: 'printReceipt', component: PrintreceiptComponent},
+  {path: 'patientAdmin', component: PatientadminComponent},
+  {path: 'printpop', component: PrintpopComponent},
+  {path: 'drugAdmin', component: DrugAdminComponent},
+  {path: 'baseDrugAdmin', component: BasedrugadminComponent},
+  {path: 'drugPackageAdmin', component: DrugpackageadminComponent},
+  {path: 'po', component: POListComponent},
+  {path: 'poDetail', component: PurchseorderComponent},
+  {path: 'item', component: ItemComponent},
+  {path: 'issue', component: IssueComponent},
+  {path: 'report', component: ReportComponent},
+  {path: 'supplier', component: SupplierComponent},
+  {path: 'itemtype', component: ItemtypeComponent},
+  {path: 'grn', component: GrnComponent},
+  {path: 'po', component: PurchseorderComponent},
+  {path: 'findIssue', component: IssueFinderComponent},
+  {path: 'printPo', component: PrintreceiptComponent},
+  {path: 'pharmacyList', component: PharmacyComponent},
+  {path: 'payment', component: PaymentComponent},
+  {path: 'medServiceItem', component: MedicalServiceComponentComponent},
+  {path: 'returnout', component: ReturnoutComponent},
+  {path: 'dailyIncome', component: DailyIncomeComponent},
+  {path: 'inOut', component: InOutComponent}
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)

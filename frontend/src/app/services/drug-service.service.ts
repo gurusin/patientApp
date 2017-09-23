@@ -61,6 +61,11 @@ export class DrugServiceService {
     return this.http.get(url).map((res: Response) => res.json());
   }
 
+  findDrugPackages(name:string): Observable<any[]> {
+    var url = localStorage.getItem("rootURL") +"findDrugPackages";
+    return this.http.post(url,name).map((res: Response) => res.json());
+  }
+
   saveDrugPackage(drugPackage: any):Observable<any> {
     var url = localStorage.getItem("rootURL") +"saveDrugPackage";
     return this.http.post(url, drugPackage).map((res: Response) => res.json());
@@ -100,6 +105,17 @@ export class DrugServiceService {
   {
     var url = localStorage.getItem("rootURL") +"prescriptionSearch";
     return this.http.post(url,prescriptionSearchCriteria).map((res: Response) => res.json());
+  }
+
+  adjustStock(stock: any):Observable<any>
+  {
+    var url = localStorage.getItem("rootURL") +"adjustStock";
+    return this.http.post(url,stock).map((res: Response) => res.json());
+  }
+
+  searchAdjustment(searchCritera: any) {
+    var url = localStorage.getItem("rootURL") +"findAdjustments";
+    return this.http.post(url,searchCritera).map((res: Response) => res.json());
   }
 }
 

@@ -60,6 +60,7 @@ import { FilterPipePipe } from './filter/filter-pipe.pipe';
 import {LoginComponentComponent} from "./login-component/login-component.component";
 import {LoginService} from "./services/login-service.service";
 import { HomeComponent } from './home/home.component';
+import { StockAdjustmentComponent } from './drugcomponent/admin/stock-adjustment/stock-adjustment.component';
 
 @NgModule({
     declarations: [
@@ -107,6 +108,7 @@ import { HomeComponent } from './home/home.component';
         FilterPipePipe,
         LoginComponentComponent,
         HomeComponent,
+        StockAdjustmentComponent,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

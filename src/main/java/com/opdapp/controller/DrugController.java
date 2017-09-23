@@ -20,6 +20,14 @@ public class DrugController {
     @Autowired
     private DrugService drugService;
 
+
+
+    @RequestMapping(path = "/findDrugPackages", method = RequestMethod.POST)
+    public @ResponseBody
+    List<DrugPackage> findDrugPackages(@RequestBody final String drugName) {
+        return drugService.findDrugPackages(drugName);
+    }
+
     @RequestMapping(path = "/getDrugByName", method = RequestMethod.POST)
     public @ResponseBody
     List<SearchedDrug> getByDrugName(@RequestBody final String drugName) {

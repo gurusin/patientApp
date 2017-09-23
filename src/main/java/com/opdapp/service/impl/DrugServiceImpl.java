@@ -217,6 +217,11 @@ public class DrugServiceImpl implements DrugService {
         return getDrugPackageDTO(savedDrugPackage);
     }
 
+    @Override
+    public List<DrugPackage> findDrugPackages(String drugName) {
+        return drugPackageRepository.findByDrugName(drugName+"%");
+    }
+
     private DrugPackage getDrugPackage(DrugPackageDTO drugPackageDTO) {
 
         DrugPackage drugPackage =  null;
