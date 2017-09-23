@@ -31,11 +31,14 @@ import {InOutComponent} from "./item/in-out.component";
 import {LoginComponentComponent} from "./login-component/login-component.component";
 import {HomeComponent} from "./home/home.component";
 import {StockAdjustmentComponent} from "./drugcomponent/admin/stock-adjustment/stock-adjustment.component";
+import {StrengthComponent} from "./drugcomponent/admin/strengh/strength.component";
 
 const APP_ROUTES: Routes = [
   {path: '', component: LoginComponentComponent},
   {path: 'serviceIssue', component: IssueComponent},
   {path: 'adjustStock', component: StockAdjustmentComponent},
+  {path: 'strength', component: StrengthComponent},
+
   {path: 'start', component: PatientSearchComponent},
   {path: 'patientsave', component: PatientsaveComponent},
   {path: 'treatment', component: TreatmentComponent},

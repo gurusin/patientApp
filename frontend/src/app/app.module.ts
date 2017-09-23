@@ -61,6 +61,7 @@ import {LoginComponentComponent} from "./login-component/login-component.compone
 import {LoginService} from "./services/login-service.service";
 import { HomeComponent } from './home/home.component';
 import { StockAdjustmentComponent } from './drugcomponent/admin/stock-adjustment/stock-adjustment.component';
+import { StrengthComponent } from './drugcomponent/admin/strengh/strength.component';
 
 @NgModule({
     declarations: [
@@ -109,6 +110,7 @@ import { StockAdjustmentComponent } from './drugcomponent/admin/stock-adjustment
         LoginComponentComponent,
         HomeComponent,
         StockAdjustmentComponent,
+        StrengthComponent,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

@@ -7,14 +7,14 @@ public class StrengthUnit {
 
     @Id
     @GeneratedValue
-    private int unitId;
+    private long unitId;
     private String unitName;
 
-    public int getUnitId() {
+    public long getUnitId() {
         return unitId;
     }
 
-    public void setUnitId(int unitId) {
+    public void setUnitId(long unitId) {
         this.unitId = unitId;
     }
 

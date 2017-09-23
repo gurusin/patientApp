@@ -1,5 +1,6 @@
 package com.opdapp.controller;
 
+import com.opdapp.dto.StrengthDTO;
 import com.opdapp.dto.common.DatePeriod;
 import com.opdapp.dto.issue.DailyIncomeReport;
 import com.opdapp.model.*;
@@ -45,6 +46,9 @@ public class AdminContoller {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private DrugService drugService;
+
     @RequestMapping(path = "/adjustStock", method = RequestMethod.POST)
     public @ResponseBody
     IssueNote adjustStock(@RequestBody final StockAdjustmentItem item)
@@ -89,6 +93,20 @@ public class AdminContoller {
     public @ResponseBody
     List<UnitOfMeasure> loadUnitOfMeasures() {
         return unitOfMeasureService.loadUnitOfMeasures();
+    }
+
+    @RequestMapping(path = "/getStrengthUnits", method = RequestMethod.GET)
+    public @ResponseBody
+    Iterable<StrengthUnit> getStrengthUnits() {
+        return unitOfMeasureService.getAllStrengthUnits();
+    }
+
+
+    @RequestMapping(path = "/saveStrength", method = RequestMethod.POST)
+    public @ResponseBody
+    List<StrengthDTO> saveStrength(@RequestBody Strength strength) {
+        unitOfMeasureService.saveStrength(strength);
+        return drugService.findAllStrengths();
     }
 
 

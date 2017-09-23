@@ -64,9 +64,20 @@ export class AdminService {
     return this.http.get(url).map((res:Response) =>res.json())
   }
 
+  getStrengthUnits():Observable<any[]>
+  {
+    var url = localStorage.getItem("rootURL") +"getStrengthUnits";
+    return this.http.get(url).map((res:Response) =>res.json())
+  }
+
   loadPaymentMethod():Observable<any[]>
   {
     var url = localStorage.getItem("rootURL") +"loadPaymentMethod";
     return this.http.get(url).map((res:Response) =>res.json())
+  }
+
+  saveStrength(strength: any):Observable<any[]> {
+    var url = localStorage.getItem("rootURL") +"saveStrength";
+    return this.http.post(url, strength).map((res:Response) => res.json());
   }
 }
