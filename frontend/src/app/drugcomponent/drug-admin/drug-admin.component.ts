@@ -13,7 +13,6 @@ export class DrugAdminComponent implements OnInit {
     baseDrugList = [];
     drugList = [];
     selectedDrugRow = -1;
-    setClickedDrugRow: Function;
     drug: Drug;
     selectedDrug: Drug;
 
@@ -22,14 +21,11 @@ export class DrugAdminComponent implements OnInit {
 
         this.drug = new Drug();
 
-        this.setClickedDrugRow = function (index) {
-            this.selectedDrugRow = index;
-            if (index >= 0 && index < this.drugList.length) {
-                this.drugServiceService.drug = this.drugList[index];
-                this.selectedDrug = this.drugList[index];
-                this.drug = this.selectedDrug;
-            }
-        }
+    }
+
+    setClickedDrugRow(obj: any)
+    {
+      this.drug = obj;
     }
 
     ngOnInit() {

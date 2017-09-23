@@ -11,7 +11,6 @@ export class DrugpackageadminComponent implements OnInit {
 
 
   selectedDrugPackageRow: number;
-  setClickedDrugPackageRow: Function;
   drugPackage: DrugPackage;
   selectedDrugPackage: DrugPackage;
   drugPackageList = [];
@@ -22,14 +21,11 @@ export class DrugpackageadminComponent implements OnInit {
 
     this.drugPackage = new DrugPackage();
 
-    this.setClickedDrugPackageRow = function (index) {
-      this.selectedDrugPackageRow = index;
-      if (index >= 0 && index < this.drugPackageList.length) {
-        this.drugServiceService.drugPackage = this.drugPackageList[index];
-        this.selectedDrugPackage = this.drugPackageList[index];
-        this.drugPackage = this.selectedDrugPackage;
-      }
-    }
+  }
+
+  setClickedDrugPackageRow(obj: any)
+  {
+     this.drugPackage = obj;
   }
 
   ngOnInit() {

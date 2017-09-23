@@ -62,6 +62,8 @@ import {LoginService} from "./services/login-service.service";
 import { HomeComponent } from './home/home.component';
 import { StockAdjustmentComponent } from './drugcomponent/admin/stock-adjustment/stock-adjustment.component';
 import { StrengthComponent } from './drugcomponent/admin/strengh/strength.component';
+import { DrugPackagePipe } from './filter/drug-package.pipe';
+import { DrugPipePipe } from './filter/drug-pipe.pipe';
 
 @NgModule({
     declarations: [
@@ -111,6 +113,8 @@ import { StrengthComponent } from './drugcomponent/admin/strengh/strength.compon
         HomeComponent,
         StockAdjustmentComponent,
         StrengthComponent,
+        DrugPackagePipe,
+        DrugPipePipe,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

@@ -3,6 +3,8 @@
   <div class="row">
     <div class="col-lg-7">
       <h3>Admin Drug</h3>
+      <label>Filte Text for Brand name :</label>
+      <input type="text" #listFilter (keyup)="0" />
       <table border="2" width="100%" class="table table-hover">
         <tr>
           <td>
@@ -14,7 +16,8 @@
                 <th width="10%">Location</th>
               </tr>
 
-              <tr *ngFor="let obj of drugList; let i = index" (click)="setClickedDrugRow(i)" [class.active]="i == selectedDrugRow">
+              <tr *ngFor="let obj of drugList | drugPipe:listFilter.value; let i = index" (click)="setClickedDrugRow(obj)"
+                  [class.active]="i == selectedDrugRow">
                 <td>{{obj.drugId}}</td>
                 <td>
                   {{obj.baseDrug.baseDrugName}}

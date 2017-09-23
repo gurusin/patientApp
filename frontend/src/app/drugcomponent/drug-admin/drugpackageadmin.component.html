@@ -2,7 +2,8 @@
   <h2>Drug package details</h2>
   <div class="row">
     <div class="col-lg-7">
-
+       <label>Filte Text for Brand name :</label>
+      <input type="text" #listFilter (keyup)="0" />
       <table border="2" width="100%" class="table table-hover">
         <tr>
           <th width="10">Drug package Id</th>
@@ -14,7 +15,7 @@
           <th width="5%"> Unit Price</th>
         </tr>
 
-        <tr *ngFor="let obj of drugPackageList; let i = index" (click)="setClickedDrugPackageRow(i)"
+        <tr *ngFor="let obj of drugPackageList | drugPackagePipe:listFilter.value ; let i = index" (click)="setClickedDrugPackageRow(obj)"
             [class.active]="i == selectedDrugPackageRow">
           <td>{{obj.drugPackageId}}</td>
           <td>
