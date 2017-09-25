@@ -177,6 +177,7 @@ public class DrugServiceImpl implements DrugService {
         drugPackageDTO.setQuantity(drugPackage.getQuantity());
         drugPackageDTO.setMinOrderLevel(drugPackage.getMinOrderLevel());
         drugPackageDTO.setUnitPrice(drugPackage.getUnitPrice());
+        drugPackageDTO.setDrugPackageContentType(drugPackage.getDrugPackageContentType());
         return drugPackageDTO;
     }
 
@@ -238,6 +239,7 @@ public class DrugServiceImpl implements DrugService {
         drugPackage.setStrength(getStrength(drugPackageDTO.getStrength()));
         drugPackage.setMinOrderLevel(drugPackageDTO.getMinOrderLevel());
         drugPackage.setUnitPrice(drugPackageDTO.getUnitPrice());
+        drugPackage.setDrugPackageContentType(drugPackageDTO.getDrugPackageContentType());
         return drugPackage;
     }
 

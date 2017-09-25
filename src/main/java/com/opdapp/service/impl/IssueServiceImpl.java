@@ -35,47 +35,41 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public MakeIssue createIssueForPrescription(String prescriptionId)
-    {
+    public MakeIssue createIssueForPrescription(String prescriptionId) {
         final Prescription prescription = prescriptionRepository.findOne(Long.parseLong(prescriptionId));
-        final Map<Long,PrescriptionDetail> detailIds = new HashMap<>();
-        for (final PrescriptionDetail detail: prescription.getPrescriptionDetails())
-        {
-            detailIds.put(detail.getId(),detail);
+        final Map<Long, PrescriptionDetail> detailIds = new HashMap<>();
+        for (final PrescriptionDetail detail : prescription.getPrescriptionDetails()) {
+            detailIds.put(detail.getId(), detail);
         }
         Iterable<PrescriptionIssueDetail> issuedItems = prescriptionIssueDetailRepository.
                 findByPrescriptionDetailIdIn(detailIds.keySet());
 
-        final Map<Long,PrescriptionIssueDetail> issuedItemMap = new HashMap<>();
-        for (final PrescriptionIssueDetail obj : issuedItems)
-        {
-            issuedItemMap.put(obj.getPrescriptionDetailId(),obj);
+        final Map<Long, PrescriptionIssueDetail> issuedItemMap = new HashMap<>();
+        for (final PrescriptionIssueDetail obj : issuedItems) {
+            issuedItemMap.put(obj.getPrescriptionDetailId(), obj);
         }
 
         final Set<MakeIssueDetailDTO> makeIssueDetailDTOList = new HashSet<>();
-        for (final PrescriptionDetail detail: prescription.getPrescriptionDetails())
-        {
+        for (final PrescriptionDetail detail : prescription.getPrescriptionDetails()) {
             final MakeIssueDetailDTO dto = new MakeIssueDetailDTO();
             final PrescriptionIssueDetail obj = issuedItemMap.get(detail.getId());
-            if (obj == null)
-            {
+            if (obj == null) {
                 // Item not issued yet Create new MakeIssue Details.
                 dto.setDrugPackage(detail.getDrugPackage());
                 dto.setPrescribedQty(getPrescribedQty(detail));
                 dto.setPrescriptionDetailId(detail.getId());
-                dto.setDuration(detail.getDuration() +","+ detail.getIntervalUnit());
+                dto.setDuration(detail.getDuration() + "," + detail.getIntervalUnit());
                 dto.setFrequency(detail.getFrequency().getValue());
                 dto.setDose(detail.getAmount());
-            } else
-            {
+            } else {
                 // Item is already issued
                 dto.setDrugPackage(detail.getDrugPackage());
                 dto.setPrescribedQty(obj.getPrescribedAmount());
                 dto.setPrescriptionDetailId(obj.getPrescriptionDetailId());
-                dto.setDuration(detail.getDuration() +","+ detail.getIntervalUnit());
+                dto.setDuration(detail.getDuration() + "," + detail.getIntervalUnit());
                 dto.setFrequency(detail.getFrequency().getValue());
                 dto.setDose(detail.getAmount());
-                dto.setIssuedQty(obj.getPrescribedAmount()- obj.getBalanceAmount());
+                dto.setIssuedQty(obj.getPrescribedAmount() - obj.getBalanceAmount());
             }
             makeIssueDetailDTOList.add(dto);
         }
@@ -112,7 +106,13 @@ public class IssueServiceImpl implements IssueService {
             default: {
             }
         }
-        returnQty = noOfTimes * durationInDays * noOfItemsPerOneTake;
+        if (prescDet.getDrugPackage().getDrugPackageContentType() == DrugPackageContentType.CREAM) {
+            returnQty = 1;
+
+        } else {
+            returnQty = noOfTimes * durationInDays * noOfItemsPerOneTake;
+        }
+
         return returnQty;
     }
 
@@ -120,26 +120,23 @@ public class IssueServiceImpl implements IssueService {
     public void makeIssue(final MakeIssue issue) {
 
         // Check whether this is a service only issue
-        if (issue.getPrescriptionId() <  1)
-        {
+        if (issue.getPrescriptionId() < 1) {
             makeServiceOnlyIssue(issue);
             return;
         }
-        final Map<Long,MakeIssueDetailDTO> issueMap = mapIssues(issue);
+        final Map<Long, MakeIssueDetailDTO> issueMap = mapIssues(issue);
         final IssueNote note = new IssueNote();
         final Set<IssueNoteDetails> detailsSet = new HashSet<IssueNoteDetails>();
         note.setIssueDate(new java.sql.Date(issue.getDateOfIssue().getTime()));
 
-         Map<Long,PrescriptionIssueDetail> issuedItems = getIssuedItemMap(issueMap.keySet());
+        Map<Long, PrescriptionIssueDetail> issuedItems = getIssuedItemMap(issueMap.keySet());
         boolean completedPrescription = true;
         boolean newPrescription = true;
 
-        for(final MakeIssueDetailDTO dto : issueMap.values())
-        {
+        for (final MakeIssueDetailDTO dto : issueMap.values()) {
             PrescriptionIssueDetail issueDetail = issuedItems.get(dto.getPrescriptionDetailId());
 
-            if (issueDetail == null)
-            {
+            if (issueDetail == null) {
                 issueDetail = new PrescriptionIssueDetail();
                 issueDetail.setPrescriptionDetailId(dto.getPrescriptionDetailId());
                 issueDetail.setPrescribedAmount(dto.getPrescribedQty());
@@ -147,8 +144,7 @@ public class IssueServiceImpl implements IssueService {
                 prescriptionIssueDetailRepository.save(issueDetail);
                 completedPrescription = completedPrescription && issueDetail.getBalanceAmount() < 1;
 
-            } else
-            {
+            } else {
                 newPrescription = false;
                 issueDetail.setBalanceAmount(dto.getIssuedQty() - dto.getCurrentIssuedQty());
                 prescriptionIssueDetailRepository.save(issueDetail);
@@ -158,7 +154,7 @@ public class IssueServiceImpl implements IssueService {
 
             // Update stock in DrugPackage
             final DrugPackage drugPackage = drugPackageRepository.findOne(dto.getDrugPackage().getDrugPackageId());
-            drugPackage.setQuantity(drugPackage.getQuantity()- dto.getCurrentIssuedQty());
+            drugPackage.setQuantity(drugPackage.getQuantity() - dto.getCurrentIssuedQty());
             drugPackageRepository.save(drugPackage);
 
             final IssueNoteDetails detail = new IssueNoteDetails();
@@ -174,30 +170,25 @@ public class IssueServiceImpl implements IssueService {
         issueNoteRepository.save(note);
         // Update the prescription
         final Prescription prescription = prescriptionRepository.findOne(issue.getPrescriptionId());
-        if (completedPrescription)
-        {
+        if (completedPrescription) {
             prescription.setPrescriptionStatus(PrescriptionStatus.COMPLETED);
-        }else
-        {
+        } else {
             prescription.setPrescriptionStatus(PrescriptionStatus.PARTIALLY_ISSED);
         }
         prescriptionRepository.save(prescription);
 
         // Saving the services
-        if (newPrescription)
-        {
+        if (newPrescription) {
             saveServices(issue, prescription);
         }
     }
 
-    private void makeServiceOnlyIssue(MakeIssue issue)
-    {
+    private void makeServiceOnlyIssue(MakeIssue issue) {
         final IssueNote note = new IssueNote();
         note.setIssueDate(new java.sql.Date(issue.getDateOfIssue().getTime()));
         note.setPatient(issue.getPatient()); // TODO : Load patient for session if this object is returned;
 
-        for (final PrescriptionServiceItem serviceItem : issue.getServiceItems())
-        {
+        for (final PrescriptionServiceItem serviceItem : issue.getServiceItems()) {
             final ServiceIssueItem item = new ServiceIssueItem();
             item.setPatient(issue.getPatient());
             item.setPrescriptionId(-1);
@@ -213,12 +204,12 @@ public class IssueServiceImpl implements IssueService {
     /**
      * Saves the services in the database. This should happen only in the event of the first time
      * issue is made in the prescription
+     *
      * @param issue
      * @param prescription
      */
     private void saveServices(MakeIssue issue, Prescription prescription) {
-        for (final PrescriptionServiceItem serviceItem : issue.getServiceItems())
-        {
+        for (final PrescriptionServiceItem serviceItem : issue.getServiceItems()) {
             final ServiceIssueItem item = new ServiceIssueItem();
             item.setPatient(prescription.getPatient());
             item.setPrescriptionId(prescription.getId());
@@ -233,35 +224,31 @@ public class IssueServiceImpl implements IssueService {
 
     /**
      * Return a map of Issued Items for this PO items
+     *
      * @param keys
      * @return
      */
-    private Map<Long,PrescriptionIssueDetail> getIssuedItemMap(Set<Long> keys)
-    {
+    private Map<Long, PrescriptionIssueDetail> getIssuedItemMap(Set<Long> keys) {
         Iterable<PrescriptionIssueDetail> issuedItems = prescriptionIssueDetailRepository.
                 findByPrescriptionDetailIdIn(keys);
 
-        final Map<Long,PrescriptionIssueDetail> issuedItemMap = new HashMap<>();
-        for (final PrescriptionIssueDetail obj : issuedItems)
-        {
-            issuedItemMap.put(obj.getPrescriptionDetailId(),obj);
+        final Map<Long, PrescriptionIssueDetail> issuedItemMap = new HashMap<>();
+        for (final PrescriptionIssueDetail obj : issuedItems) {
+            issuedItemMap.put(obj.getPrescriptionDetailId(), obj);
         }
         return issuedItemMap;
     }
 
-    private void updateStock(final DrugPackage drugPackage, final double qty)
-    {
+    private void updateStock(final DrugPackage drugPackage, final double qty) {
         final double currentQty = drugPackage.getQuantity();
-        drugPackage.setQuantity((int)(currentQty-qty));
+        drugPackage.setQuantity((int) (currentQty - qty));
         drugPackageRepository.save(drugPackage);
     }
 
-    private Map<Long,MakeIssueDetailDTO> mapIssues(final MakeIssue issue)
-    {
-        final Map<Long,MakeIssueDetailDTO> returnMap = new HashMap<>();
-        for (final MakeIssueDetailDTO dto : issue.getDetails())
-        {
-            returnMap.put(dto.getPrescriptionDetailId(),dto);
+    private Map<Long, MakeIssueDetailDTO> mapIssues(final MakeIssue issue) {
+        final Map<Long, MakeIssueDetailDTO> returnMap = new HashMap<>();
+        for (final MakeIssueDetailDTO dto : issue.getDetails()) {
+            returnMap.put(dto.getPrescriptionDetailId(), dto);
         }
         return returnMap;
     }

@@ -1,5 +1,7 @@
 package com.opdapp.dto;
 
+import com.opdapp.model.DrugPackageContentType;
+
 public class DrugPackageDTO {
 
     private long drugPackageId;
@@ -13,6 +15,16 @@ public class DrugPackageDTO {
     private double minOrderLevel;
 
     private double unitPrice;
+
+    DrugPackageContentType drugPackageContentType;
+
+    public DrugPackageContentType getDrugPackageContentType() {
+        return drugPackageContentType;
+    }
+
+    public void setDrugPackageContentType(DrugPackageContentType drugPackageContentType) {
+        this.drugPackageContentType = drugPackageContentType;
+    }
 
     public long getDrugPackageId() {
         return drugPackageId;

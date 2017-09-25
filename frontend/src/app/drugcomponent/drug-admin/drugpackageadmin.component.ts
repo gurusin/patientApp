@@ -52,6 +52,7 @@ export class DrugpackageadminComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.drugPackage);
     this.drugServiceService.saveDrugPackage(this.drugPackage).subscribe(
         data =>{
             this.drugPackageList = data;

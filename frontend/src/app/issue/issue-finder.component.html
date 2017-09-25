@@ -26,7 +26,8 @@
       <td>{{row.drugPackage.quantity}}</td>
       <td>{{row.prescribedQty}}</td>
       <td>{{row.issuedQty}}</td>
-      <td><input type="number" (keyup)="calculateTotal()" [(ngModel)]="row.currentIssuedQty"></td>
+      <td><input type="number" (keyup)="calculateTotal()" [(ngModel)]="row.currentIssuedQty"
+                 [disabled]="saveDisabled"></td>
       <td>{{row.currentIssuedQty * row.drugPackage.unitPrice }}</td>
       <td>{{row.prescribedQty - ((row.currentIssuedQty + row.issuedQty))}}</td>
     </tr>
@@ -56,7 +57,7 @@
   <br/>
   <label>Balance :{{paidAmount - total}}</label>
   <br/>
-  <button type="button" class="button btn-primary" (click)="registerIssue()">Make Issue</button>
+  <button type="button" class="button btn-primary" (click)="registerIssue()" [disabled]="saveDisabled">Make Issue</button>
 </div>
 
 
@@ -95,7 +96,7 @@
       <br/>
       <label>Balance : {{paidAmount - total}}</label>
     </div>
-<button type="button" class="btn btn-primary" (click)="print()">Print</button>
+<button type="button" class="btn btn-primary" (click)="print()" [disabled]="printDisabled">Print</button>
 
         <!--<br/>-->
         <!--<h5>Services</h5>-->

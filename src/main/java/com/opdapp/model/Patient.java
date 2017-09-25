@@ -208,7 +208,7 @@ public class Patient implements Serializable {
        final org.joda.time.LocalDate dob = new org.joda.time.LocalDate(dateOfBirth);
        final  org.joda.time.LocalDate now = new LocalDate();
        final Period period = new Period(dob,now, PeriodType.yearMonthDay());
-       calculatedAge = period.getYears() +" years and " + period.getMonths() +" months";
+       calculatedAge = period.getYears() +"Y " + period.getMonths() +" M";
     }
 
 

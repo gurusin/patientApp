@@ -40,6 +40,6 @@ public class DoseFrequency {
 
     public String getValue()
     {
-        return noofDoses + "per" + timeUnit;
+        return noofDoses + " time(s) " + timeUnit;
     }
 }

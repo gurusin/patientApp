@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container pharmacyHeader">
   <header>
-    <h2>Prescription List</h2>
-    <div class="row form-control">
+    <h2 class="subHeader">Prescription List</h2>
+    <div class="row">
       <div class="col-sm-2">
         <label>From Date :</label>
         <input type="date" [(ngModel)]="prescriptionSearchCriteria.fromDate">
@@ -10,55 +10,65 @@
         <label>To Date :</label>
         <input type="date" [(ngModel)]="prescriptionSearchCriteria.toDate">
       </div>
-      <div class="col-sm-6">
+
+      <div class="col-sm-4">
         <label for="all"><span>All</span></label>
         <input id='all' type="checkbox" name="All" [(ngModel)]="prescriptionSearchCriteria.all">
         <label for="initial"><span>Initial</span></label>
         <input id='initial' type="checkbox" name="INITIAL" [(ngModel)]="prescriptionSearchCriteria.initial">
         <label for="initial">Partially Completed</label>
-        <input id='part' type="checkbox" name="PARTIALLY COMPLETED" [(ngModel)]="prescriptionSearchCriteria.partCompleted">
+        <input id='part' type="checkbox" name="PARTIALLY COMPLETED"
+               [(ngModel)]="prescriptionSearchCriteria.partCompleted">
         <label for="completed">Completed</label>
-        <input id='completed'type="checkbox" name="COMPLETED" [(ngModel)]="prescriptionSearchCriteria.completed">
+        <input id='completed' type="checkbox" name="COMPLETED" [(ngModel)]="prescriptionSearchCriteria.completed">
       </div>
       <div class="col-sm-2">
         <button type="button" class="btn btn-primary" (click)="doSearch()">Search</button>
       </div>
     </div>
   </header>
-    <table border="2" width="100%" class="table table-hover">
-      <tr>
-        <th width="10%">Patient name</th>
-        <th witdh="5"> Issue no</th>
-        <th width="60%">Drug details</th>
-        <th width="20%">Status</th>
-        <th width="5%">Print</th>
-      </tr>
-      <tr *ngFor="let obj of prescriptionList ; let i = index">
-        <td>{{obj.patient.firstname}},{{obj.patient.lastname}} </td>
-        <td><a (click)='issueDrugs(obj.id)'>{{obj.id}}</a></td>
-        <td>
-          <ul>
-            <li *ngFor="let row of obj.prescriptionDetails">
-              {{row.drugPackage.drug.brandName}}
-            </li>
-          </ul>
-        </td>
-        <td>{{obj.prescriptionStatus}}</td>
-        <td><button type="button" class="btn btn-primary"
-                    (click)="printView(obj)">Print</button></td>
-      </tr>
-    </table>
+  <br/>
+  <label>Patient Filter</label>
+  <input type="text" #listFilter (keyup)="0" [disabled]="prescriptionList.length == 0"/>
+
+  <br/>
+  <table border="2" width="100%" class="table table-hover dataTable ">
+    <tr>
+      <th width="10%">Patient name</th>
+      <th witdh="5"> Issue no</th>
+      <th width="60%">Drug details</th>
+      <th width="20%">Status</th>
+      <th width="5%">Print</th>
+    </tr>
+    <tr *ngFor="let obj of prescriptionList | patient:listFilter.value; let i = index">
+      <td>{{obj.patient.firstname}},{{obj.patient.lastname}}</td>
+      <td><a (click)='issueDrugs(obj.id)'>{{obj.id}}</a></td>
+      <td>
+        <ul>
+          <li *ngFor="let row of obj.prescriptionDetails">
+            {{row.drugPackage.drug.brandName}}
+          </li>
+        </ul>
+      </td>
+      <td>{{obj.prescriptionStatus}}</td>
+      <td>
+        <button type="button" class="btn btn-primary"
+                (click)="printView(obj)">Print
+        </button>
+      </td>
+    </tr>
+  </table>
 </div>
-        <!---->
-        <!--<td>-->
-          <!--<ul>-->
-      <!--<li *ngFor="let row of obj.prescriptionDetails">-->
-       <!--{{row.drugPackage.drug.brandName}},{{row.drugPackage.drug.baseDrug.baseDrugName}}-->
-      <!--</li>-->
-      <!--</ul>-->
-        <!--</td>-->
-        <!--<td>Need the issue status here</td>-->
-        <!--<td></td>-->
-      <!--</tr>-->
-    <!--</table>-->
+<!---->
+<!--<td>-->
+<!--<ul>-->
+<!--<li *ngFor="let row of obj.prescriptionDetails">-->
+<!--{{row.drugPackage.drug.brandName}},{{row.drugPackage.drug.baseDrug.baseDrugName}}-->
+<!--</li>-->
+<!--</ul>-->
+<!--</td>-->
+<!--<td>Need the issue status here</td>-->
+<!--<td></td>-->
+<!--</tr>-->
+<!--</table>-->
 <!--</div>-->

@@ -13,6 +13,8 @@ export class IssueFinderComponent implements OnInit {
   makeIssue: any;
   total = 0;
   paidAmount = 0;
+  printDisabled = true;
+  saveDisabled = false;
 
   constructor(private issueService: IssueServiceService, private router: Router,) {
 
@@ -21,7 +23,8 @@ export class IssueFinderComponent implements OnInit {
   registerIssue() {
     this.issueService.registerIssue(this.makeIssue).subscribe(
       data => {
-        this.router.navigate(['pharmacyList']);
+        this.saveDisabled = true;
+        this.printDisabled = false;
       }
     )
   }

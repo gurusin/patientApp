@@ -49,7 +49,7 @@
       <tr *ngFor="let row of prescription.prescriptionDetails">
         <td>{{row.drugPackage.drug.brandName}}</td>
         <td>{{row.drugPackage.strength.strengthAmount +" "}} {{row.drugPackage.strength.strengthUnit.unitName}}</td>
-        <td>{{row.frequency.noofDoses}}- Times per-{{row.frequency.timeUnit}},</td>
+        <td>{{row.frequency.noofDoses + ' '}}Time(s){{row.frequency.timeUnit}}</td>
         <td>{{row.duration}}, {{row.intervalUnit}}</td>
       </tr>
       </tbody>

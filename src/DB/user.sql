@@ -1,0 +1,23 @@
+INSERT INTO `med_sys_user` ( `firstname`, `lastname`, `password`, `user_type`, `username`) VALUES ( 'Nurse', 'Nurse', 'NurseView', '2', 'rosi');
+INSERT INTO `med_sys_user` ( `firstname`, `lastname`, `password`, `user_type`, `username`) VALUES ( 'Janaka', 'Abeysinghe', '123Ja', 1, 'janaka');
+
+insert into medsys.dose_frequency (time_unit,noof_doses) values('Daily',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('Daily',2);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('Daily',3);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('Daily',4);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('When needed',0);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('Stat and repeat in 1 week',0);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('2 hourly',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('4 hourly',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('5 hourly',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('6 hourly',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('8 hourly',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('12 hourly',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('Every other day',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('Monthly',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('Morning',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('Night',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('Noon',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('Evening',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('At Bed Time',1);
+insert into medsys.dose_frequency (time_unit,noof_doses) values('1 time a Week',1);

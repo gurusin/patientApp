@@ -22,12 +22,12 @@
       </datalist>
     </td>
     <td><select [(ngModel)]="row.selectedStrengthIndex" (change)="selectStrength(i)">
-      <option *ngFor="let x of row.packages;let j=index" value="{{j}}">{{x.strength.strengthAmount +","+x.strength.strengthUnit.unitName}}</option>
+      <option *ngFor="let x of row.packages;let j=index" value="{{j}}">{{x.strength.strengthAmount+x.strength.strengthUnit.unitName}}</option>
     </select>
     </td>
     <td>{{row.availableQty}}</td>
     <td><select [(ngModel)]="row.selectedFrequency">
-      <option *ngFor="let x of row.doseFrequency" value="{{x.doseFrequencyId}}">{{x.noofDoses}} times {{x.timeUnit}}</option>
+      <option *ngFor="let x of row.doseFrequency" value="{{x.doseFrequencyId}}">{{x.noofDoses +' '}} time(s) {{' '+x.timeUnit}}</option>
     </select>
     </td>
     <td><input type='text' [(ngModel)]="row.doseAmount" size="3"></td>

@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {Patient} from "../patient";
 import {Router} from "@angular/router";
 import {Subject} from "rxjs/Subject";
+import {LoginService} from "../services/login-service.service";
 
 
 @Component({
@@ -27,7 +28,8 @@ export class PatientsaveComponent implements OnInit{
 
   }
 
-  constructor(private patientService: PatientServiceService, private router: Router)
+  constructor(private patientService: PatientServiceService, private router: Router,
+    private loginService:LoginService)
   {
   }
 
@@ -35,7 +37,13 @@ export class PatientsaveComponent implements OnInit{
     this.patientService.savePatient(this.patient).subscribe(
         data =>{
             this.patientService.patientObject = data;
-            this.router.navigate(['patientvisit/treatment']);
+          if (this.loginService.loggedInUser.userType ===1)
+          {
+            this.router.navigate(["patientvisit/treatment"]);
+          } else
+          {
+            this.router.navigate(["serviceIssue"]);
+          }
         }
     );
 

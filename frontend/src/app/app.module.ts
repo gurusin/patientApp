@@ -64,6 +64,7 @@ import { StockAdjustmentComponent } from './drugcomponent/admin/stock-adjustment
 import { StrengthComponent } from './drugcomponent/admin/strengh/strength.component';
 import { DrugPackagePipe } from './filter/drug-package.pipe';
 import { DrugPipePipe } from './filter/drug-pipe.pipe';
+import { PatientPipe } from './filter/patient.pipe';
 
 @NgModule({
     declarations: [
@@ -115,6 +116,7 @@ import { DrugPipePipe } from './filter/drug-pipe.pipe';
         StrengthComponent,
         DrugPackagePipe,
         DrugPipePipe,
+        PatientPipe,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

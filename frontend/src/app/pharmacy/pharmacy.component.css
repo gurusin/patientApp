@@ -1,21 +1,14 @@
-div.container {
-  width: 100%;
-  border: 1px solid gray;
-}
+.pharmacyHeader{
+  background-color: #d2cb87;
 
-header, footer {
-  padding: .05em;
-  color: white;
-  background-color: lightseagreen;
-  clear: left;
+}
+.pharmacyHeader .subHeader
+{
   text-align: center;
+  font-family: "Microsoft Yi Baiti";
 }
 
-nav {
-  float: left;
-  width: 100%;
-  margin: 0;
-  padding: 1em;
-  background-color: lightcyan;
-  height: 100%;
+.pharmacyHeader .dataTable
+{
+  background-color: #fff709;
 }

@@ -5,12 +5,13 @@
 <div *ngIf="expanded">
     <div>Notes : {{fullPrescription.notes}}</div>
     <br/>
-  <table class="table-bordered">
+  <table class="table-bordered" border="1">
       <tr *ngFor="let obj of fullPrescription.prescriptionDetails">
-          <td>{{obj.drug.brandName}},{{obj.strength.strengthAmount+"-"+obj.strength.strengthUnit.unitName}}</td>
+          <td>{{obj.drugPackage.drug.brandName}},{{obj.drugPackage.strength.strengthAmount+obj.drugPackage.strength.strengthUnit.unitName}}</td>
+          <td>&nbsp;</td>
           <td>{{obj.amount}},{{obj.frequency.noofDoses}},{{obj.frequency.timeUnit}}</td>
+          <td>&nbsp;</td>
           <td>{{obj.duration}},{{obj.intervalUnit}}</td>
-
       </tr>
   </table>
 </div>

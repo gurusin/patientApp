@@ -15,6 +15,7 @@ export class IssueComponent implements OnInit {
 
   patientVisit =new Patientvisit();
   dateOfIssue = new Date();
+  printDisabled = true;
 
   constructor(private issueService: IssueServiceService, private router: Router,
               private patientService:PatientServiceService) {
