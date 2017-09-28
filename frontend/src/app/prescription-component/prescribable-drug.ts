@@ -18,6 +18,7 @@ export class PrescribableDrug {
   rowId:number;
   packages:any[];
   availableQty:any;
+  unitPrice=0.00;
 
   constructor()
   {

@@ -1,22 +1,18 @@
-.header
-{
-    font-family: "Times New Roman", Times, serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    margin-left: 25px;
+.printHeader {
+  margin-left: 25px;
 }
 
-.content{
-    font-family: "Courier";
-    font-size: 30px;
+.printHeader .nameText {
+  font-family: 'Times New Roman', Times, Serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
 }
 
-hr {
-    display: block;
-    height: 1px;
-    background: transparent;
-    width: 100%;
-    border: none;
-    border-top: solid 1px #aaa;
+.header.nameText.nameSubText {
+  font-family: 'Times New Roman', Times, Serif;
+  font-style: normal;
+  font-size: 17px;
+  text-align: left;
 }

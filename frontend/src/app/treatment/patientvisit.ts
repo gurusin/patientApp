@@ -8,6 +8,7 @@ export class Patientvisit {
     public prescribableDrug:PrescribableDrug[];
     medicalServices;
 
+
     constructor()
     {
       this.prescribableDrug = [];

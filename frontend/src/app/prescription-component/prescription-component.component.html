@@ -5,12 +5,13 @@
     <th>Drug</th>
     <th>Strength</th>
     <th>Available Stock</th>
+    <th>Unit Price</th>
     <th>Frequency</th>
     <th>Amount</th>
     <th>Duration</th>
     <th>Interval Unit</th>
-    <th> B/A Meal</th>
-    <th> Add</th>
+    <th>Application</th>
+    <th>Add</th>
     <th>Remove</th>
   </tr>
   <tr *ngFor="let row of patientVisit.prescribableDrug;let i=index">
@@ -26,6 +27,7 @@
     </select>
     </td>
     <td>{{row.availableQty}}</td>
+    <td>{{row.unitPrice}}</td>
     <td><select [(ngModel)]="row.selectedFrequency">
       <option *ngFor="let x of row.doseFrequency" value="{{x.doseFrequencyId}}">{{x.noofDoses +' '}} time(s) {{' '+x.timeUnit}}</option>
     </select>
@@ -37,10 +39,10 @@
       <option *ngFor="let x of row.durationUnit" value="{{x}}">{{x}}</option>
     </select>
     </td>
-    <td><select [(ngModel)]="row.meal" value="AFTER">
-      <option value="AFTER">After</option>
-      <option value="BEFORE">Before</option>
-      <option value="NA">NA</option>
+    <td><select [(ngModel)]="row.meal" value="ORAL">
+      <option value="ORAL">Oral</option>
+      <option value="LA">Local Application</option>
+      <option value="EYE_DROP">Eye Drop</option>
     </select>
     </td>
     <td>

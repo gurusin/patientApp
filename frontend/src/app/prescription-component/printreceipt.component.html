@@ -1,57 +1,83 @@
 <!--<popup>-->
 <div id="print-section">
-  <div style="font-family: 'Times New Roman',Times,Serif;font-style: normal;font-weight: bold;
-    font-size: 20px;margin-left: 25px;">
-    <section>
-      <table>
-        <tr>
-          <td colspan="3"><div align="center">SuwaPiyasa Medical Center</div></td>
-        </tr>
-        <tr>
-          <td width="40%"></td>
-          <td width="20%"></td>
-
-        </tr>
-        <tr>
-          <td>Dr. Janaka Abeysinghe MBBS(SL)</td>
-          <td></td>
-          <td width="60%">Reg. No. 17261</td>
-        </tr>
-        <tr>
-          <td>Ambagashandiya, Kiriwattuduwa</td>
-          <td></td>
-          <td>Tel : 0773-425881, 0778-608100</td>
-        </tr>
-      </table>
-    </section>
-    <br/>
+  <div style="margin-left: 25px;">
+    <table>
+      <tr>
+        <td colspan="3">
+          <div style="font-family: 'Times New Roman', Times, Serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;">SUWAPIYASA MEDICAL CENTER
+          </div>
+        </td>
+      </tr>
+      <tr style="font-family: 'Times New Roman', Times, Serif;
+      font-style: normal;
+      font-size: 17px;
+      text-align: left;">
+        <td>Dr. Janaka Abeysinghe MBBS(SL)</td>
+        <td></td>
+        <td width="40%">Reg. No. 17261</td>
+      </tr>
+      <tr>
+        <td>Ambagashandiya, Kiriwattuduwa</td>
+        <td></td>
+        <td>Tel : 0773-425881, 0778-608100</td>
+      </tr>
+    </table>
     <hr/>
-    <br/>
   </div>
   <div style="font-family: 'Courier New',Courier,Courier;font-style: normal;font-weight: bold;
-    font-size: 15px;margin-left: 25px;">
+    font-size: 12px;margin-left: 10px;">
     <label>Prescription No : {{prescription.id}}</label><br/>
     <label>Date: {{prescription.date | date }}</label><br/>
     <label>Patient :</label>
-    <label>{{prescription.patient.firstname}},{{prescription.patient.lastname}} -
-      {{prescription.patient.calculatedAge}}</label>
+    <label>[{{prescription.patient.patientId}}]-{{prescription.patient.firstname}},{{prescription.patient.lastname}} -
+      {{prescription.patient.calculatedAge}} </label>
     <br/>
     <table class="table table-bordered">
-      <thead>
-      <tr style="border:1px">
-        <td>Drug</td>
-        <td>Strength</td>
-        <td>Dosage</td>
-        <td>Duration</td>
-      </tr>
-      </thead>
+      <!--<thead>-->
+      <!--<tr style="border:1px;font-size: 12px">-->
+      <!--<td>Drug</td>-->
+      <!--<td>Strength</td>-->
+      <!--<td>Dosage</td>-->
+      <!--<td>Amount</td>-->
+      <!--<td>Duration</td>-->
+      <!--</tr>-->
+      <!--</thead>-->
       <tbody>
-      <tr *ngFor="let row of prescription.prescriptionDetails">
-        <td>{{row.drugPackage.drug.brandName}}</td>
-        <td>{{row.drugPackage.strength.strengthAmount +" "}} {{row.drugPackage.strength.strengthUnit.unitName}}</td>
-        <td>{{row.frequency.noofDoses + ' '}}Time(s){{row.frequency.timeUnit}}</td>
-        <td>{{row.duration}}, {{row.intervalUnit}}</td>
+      <tr *ngFor="let row of prescription.prescriptionDetails" style="border:1px;font-size: 12px">
+        <!-- Tablets & fluids-->
+        <div *ngIf="row.meal==='ORAL'">
+          <td>{{row.drugPackage.drug.brandName}}&nbsp;</td>
+          <td>{{(row.drugPackage.strength.strengthAmount * row.amount)+row.drugPackage.strength.strengthUnit.unitName}}
+          </td>
+          <td>{{row.frequency.noofDoses + ' '}}Time(s){{' '+row.frequency.timeUnit}}&nbsp;</td>
+          <td>for&nbsp;</td>
+          <td>{{row.duration}}&nbsp;{{row.intervalUnit}}</td>
+        </div>
+
+        <!-- Creams -->
+        <div *ngIf="row.meal==='LA'">
+          <td>{{row.drugPackage.drug.brandName}}</td>
+          <td>{{row.frequency.noofDoses + ' '}}Time(s){{' '+row.frequency.timeUnit}}</td>
+          <td> for</td>
+          <td>{{row.duration}}&nbsp;{{row.intervalUnit}}</td>
+          <td>Local Application</td>
+        </div>
+
+
+        <!-- Eye Drops -->
+        <div *ngIf="row.meal==='EYE_DROP'">
+          <td>{{row.drugPackage.drug.brandName}} - Eye Drop,</td>
+          <td>{{row.frequency.noofDoses}}&nbsp;Time(s)&nbsp;{{row.frequency.timeUnit}}</td>
+          <td> for&nbsp;</td>
+          <td>{{row.duration}}&nbsp;{{row.intervalUnit}}</td>
+          <td>Eye Drop</td>
+        </div>
       </tr>
+      <hr/>
       </tbody>
     </table>
     <br/>

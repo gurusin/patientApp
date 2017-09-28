@@ -54,8 +54,9 @@ export class PrescriptionComponentComponent implements OnInit {
   private searchPrescribable(row:PrescribableDrug,i:number) {
     this.drugService.searchPrescribable(this.selectedId).subscribe(
       data => {
-        console.log(data);
         this.patientVisit.prescribableDrug.splice(i,1,data);
+        this.patientVisit.prescribableDrug[i].selectedStrengthIndex =0;
+        this.selectStrength(0);
       });
   }
 
@@ -63,6 +64,8 @@ export class PrescriptionComponentComponent implements OnInit {
     {
        var obj = this.patientVisit.prescribableDrug[i];
        this.patientVisit.prescribableDrug[i].availableQty = obj.packages[obj.selectedStrengthIndex].quantity;
+      this.patientVisit.prescribableDrug[i].unitPrice =obj.packages[obj.selectedStrengthIndex].unitPrice;
+      this.patientVisit.prescribableDrug[i].meal='ORAL';
     }
 
   setDrugId(pres:PrescribableDrug) {
