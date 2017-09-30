@@ -2,6 +2,8 @@
   <h1>Patient Details </h1>
   <div>
     <div class="form-group">
+      <label>Patient Filter (Enter first name or last name)</label>
+      <input type="text" #listFilter (keyup)="0" [disabled]="patientList.length < 3"/>
     </div>
   </div>
   <div class="scrollit">
@@ -20,8 +22,8 @@
         <th>Remarks</th>
       </tr>
 
-      <tr *ngFor="let obj of patientList; let i = index"  [class.active]="i == selectedRow">
-        <td>{{obj.patientId}}</td>
+      <tr *ngFor="let obj of patientList | patientAdminFilter:listFilter.value; let i = index" [class.active]="i == selectedRow">
+        <td>{{obj.patientId}}</td>ng
         <td>
           <a (click)='goToEditView(i)'>{{obj.firstname}} {{obj.middlename}} {{obj.lastname}}</a>
         </td>

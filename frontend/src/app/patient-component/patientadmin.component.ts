@@ -27,6 +27,7 @@ export class PatientadminComponent implements OnInit {
     this.patientService.loadPatients(
     ).subscribe(
       data => {
+        console.log(data);
         this.patientList = data;
       }
     );

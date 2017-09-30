@@ -66,6 +66,7 @@ import { DrugPackagePipe } from './filter/drug-package.pipe';
 import { DrugPipePipe } from './filter/drug-pipe.pipe';
 import { PatientPipe } from './filter/patient.pipe';
 import {DateValueAccessorModule} from "angular-date-value-accessor/src/module";
+import { PatientAdminFilterPipe } from './filter/patient-admin-filter.pipe';
 
 @NgModule({
     declarations: [
@@ -118,6 +119,7 @@ import {DateValueAccessorModule} from "angular-date-value-accessor/src/module";
         DrugPackagePipe,
         DrugPipePipe,
         PatientPipe,
+        PatientAdminFilterPipe,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,
