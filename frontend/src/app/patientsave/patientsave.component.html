@@ -5,13 +5,13 @@
   <h1>Please enter patient details</h1>
   <hr/>
 
-    <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="patient">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="patient">
     <div class="row">
       <div class="col-md-5">
 
         <div class="row">
           <div class="col-md-4">
-            <label for="firstname">First names : </label>
+            <label for="firstname">First names</label>
           </div>
           <div class="col-md-6">
             <input type="text" id="firstname" name="firstname" required [(ngModel)]="patient.firstname"/>
@@ -20,7 +20,7 @@
         <br/>
         <div class="row">
           <div class="col-md-4">
-            <label for="middlename">Middle names : </label>
+            <label for="middlename">Middle names</label>
           </div>
           <div class="col-md-6">
             <input type="text" id="middlename" name="middlename" [(ngModel)]="patient.middlename"/>
@@ -28,35 +28,44 @@
         </div>
         <br/>
         <div class="row">
-        <div class="col-md-4">
-          <label for="lastname">Last name : </label>
-        </div>
-        <div class="col-md-6">
-          <input type="text" id="lastname" name="middlename" required [(ngModel)]="patient.lastname"/>
-        </div>
-      </div>
-        <br/>
-        <div class="row">
           <div class="col-md-4">
-            <label for="lastname">NIC : </label>
+            <label for="lastname">Last name</label>
           </div>
           <div class="col-md-6">
-            <input type="text" id="nic" name="nic"  [(ngModel)]="patient.nic"/>
+            <input type="text" id="lastname" name="lastname" [(ngModel)]="patient.lastname"/>
           </div>
         </div>
         <br/>
         <div class="row">
           <div class="col-md-4">
-            <label for="address">Address </label>
+            <label for="lastname">NIC</label>
           </div>
           <div class="col-md-6">
-            <input type="text" id="address" name="address"  [(ngModel)]="patient.address"/>
+            <input type="text" id="nic" name="nic" [(ngModel)]="patient.nic"/>
           </div>
         </div>
         <br/>
         <div class="row">
           <div class="col-md-4">
-            <label >Gender </label>
+            <label for="address">Telephone</label>
+          </div>
+          <div class="col-md-6">
+            <input type="text" id="phone" name="phone" [(ngModel)]="patient.phone"/>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="address">Address</label>
+          </div>
+          <div class="col-md-6">
+            <input type="text" id="address" name="address" [(ngModel)]="patient.address"/>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-4">
+            <label>Gender </label>
           </div>
           <div class="col-md-6">
             <select name="gender" [(ngModel)]="patient.gender">
@@ -80,21 +89,34 @@
 
 
       <div class="col-md-6">
+
         <div class="row">
           <div class="col-md-12">
-          <label for="socialHistory">Family History : </label>
+            <label for="socialHistory">Medical History</label>
+          </div>
+          <div class="col-md-8">
+            <textarea class="input" id="medicalHistory" name="medicalHistory"
+                      [(ngModel)]="patient.medicalHistory"></textarea>
+          </div>
         </div>
-        <div class="col-md-8">
-          <textarea class="input" id="familyHistory" name="familyHistory" [(ngModel)]="patient.familyHistory"></textarea>
+
+        <div class="row">
+          <div class="col-md-12">
+            <label for="socialHistory">Family History : </label>
+          </div>
+          <div class="col-md-8">
+            <textarea class="input" id="familyHistory" name="familyHistory"
+                      [(ngModel)]="patient.familyHistory"></textarea>
+          </div>
         </div>
-      </div>
 
         <div class="row">
           <div class="col-md-12">
             <label for="socialHistory">Social History : </label>
           </div>
           <div class="col-md-8">
-            <textarea class="input" id="socialHistory" name="socialHistory" [(ngModel)]="patient.socialHistory"></textarea>
+            <textarea class="input" id="socialHistory" name="socialHistory"
+                      [(ngModel)]="patient.socialHistory"></textarea>
           </div>
         </div>
         <br/>
@@ -110,19 +132,19 @@
       </div>
 
     </div>
-      <br/>
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="form-group">
-            <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
-          </div>
+    <br/>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="form-group">
+          <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
         </div>
       </div>
+    </div>
 
   </form>
+</div>
+<div class="cell">
+  <div>
+    <app-prescription-history></app-prescription-history>
   </div>
-    <div class="cell">
-      <div>
-        <app-prescription-history></app-prescription-history>
-      </div>
-    </div>
+</div>

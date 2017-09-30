@@ -11,6 +11,7 @@ export class Patient {
   public allergies: string;
   public familyHistory: string;
   public socialHistory: string;
+  public medicalHistory:string;
   constructor() {
 
   }

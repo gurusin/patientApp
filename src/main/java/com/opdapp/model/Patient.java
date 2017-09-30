@@ -51,6 +51,8 @@ public class Patient implements Serializable {
     @Column
     private String socialHistory;
 
+    private String medicalHistory;
+
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private Date dateOfBirth;
@@ -200,6 +202,14 @@ public class Patient implements Serializable {
 
     public void setSocialHistory(String socialHistory) {
         this.socialHistory = socialHistory;
+    }
+
+    public String getMedicalHistory() {
+        return medicalHistory;
+    }
+
+    public void setMedicalHistory(String medicalHistory) {
+        this.medicalHistory = medicalHistory;
     }
 
     @PostLoad
