@@ -10,7 +10,6 @@ import {Patientvisit} from "../treatment/patientvisit";
 })
 export class PrescriptionHistoryComponent implements OnInit {
 
-  @Input() patientVisit: Patientvisit;
   prescriptionList =[];
   constructor(private drugService:DrugServiceService,private patientService:PatientServiceService) { }
 

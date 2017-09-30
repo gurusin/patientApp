@@ -1,7 +1,12 @@
 <div class="container">
   <div *ngIf="patientService.patientObject && patientService.patientObject.patientId > 0" class="patientBar">
+    <label>Patient Id :</label>{{patientService.patientObject.patientId}}
     <a (click)="onEditPatient()">{{patientService.patientObject.firstname}},{{patientService.patientObject.lastname}}</a> ({{patientService.patientObject.calculatedAge}})
+  <button type="button" class="btn btn-primary" (click)="handleHistory()">{{toggleText}}</button>
   </div>
   <br>
+  <div *ngIf="showHistory">
+    <app-prescription-history></app-prescription-history>
+  </div>
 </div>
 

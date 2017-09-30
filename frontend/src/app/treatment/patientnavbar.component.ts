@@ -12,6 +12,8 @@ import {Router} from "@angular/router";
 export class PatientnavbarComponent implements OnInit
 {
   patient : any;
+  showHistory = false;
+  toggleText ='Show';
   constructor(private patientService:PatientServiceService, private router:Router){
      this.patient = patientService.patientObject;
   }
@@ -19,6 +21,17 @@ export class PatientnavbarComponent implements OnInit
   ngOnInit(): void {
 
   }
+
+  handleHistory() {
+    this.showHistory = !this.showHistory;
+    if (this.showHistory) {
+      this.toggleText = 'Hide';
+    } else {
+      this.toggleText = 'Show';
+    }
+
+  }
+
 
   onEditPatient()
   {
