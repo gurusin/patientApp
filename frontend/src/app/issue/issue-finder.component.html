@@ -2,7 +2,8 @@
   <label>Patient :</label>
   <label>{{makeIssue.patient.firstname}},{{makeIssue.patient.lastname}}</label>
   <label>Date of Issue</label>
-  <input type="date" [(ngModel)]="makeIssue.dateOfIssue"/>
+  <input type="date" [ngModel]="makeIssue.dateOfIssue| date:'yyyy-MM-dd'"
+         (ngModelChange)="prescriptionSearchCriteria.toDate = $event"/>
   <br/>
   <h5>Drugs </h5>
   <table class="table table-bordered">
@@ -57,55 +58,56 @@
   <br/>
   <label>Balance :{{paidAmount - total}}</label>
   <br/>
-  <button type="button" class="button btn-primary" (click)="registerIssue()" [disabled]="saveDisabled">Make Issue</button>
+  <button type="button" class="button btn-primary" (click)="registerIssue()" [disabled]="saveDisabled">Make Issue
+  </button>
 </div>
 
 
-    <!--&lt;!&ndash; Printing Part &ndash;&gt;-->
+<!--&lt;!&ndash; Printing Part &ndash;&gt;-->
 
-    <div id="printContent" style="display: none">
-        <h4> Suwapiyasa Medical Center - Indoor Pharmacy</h4>
-        <h4>Date :{{makeIssue.dateOfIssue | date}}</h4>
-        <h5>Drugs</h5>
-        <table>
-        <tr *ngFor="let row of makeIssue.details">
-            <td>{{row.drugPackage.drug.brandName}}</td>
-            <td>{{row.currentIssuedQty}}</td>
-            <td>{{row.currentIssuedQty * row.drugPackage.unitPrice}}</td>
-        </tr>
-        </table>
-        <h5> Services </h5>
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th>Service</th>
-          <th>Fee</th>
-          <th>External Reference</th>
-        </tr>
-        </thead>
-        <tr *ngFor="let row of makeIssue.serviceItems">
-          <td>{{row.medicalServItem.itemDescription}}</td>
-          <td>{{row.fee}}</td>
-          <td>{{row.externalRef}}</td>
-        </tr>
-      </table>
-      <hr/>
-      <label>Total:{{total}}</label>
-      <br/>
-      <label>Cash :{{paidAmount}}</label>
-      <br/>
-      <label>Balance : {{paidAmount - total}}</label>
-    </div>
+<div id="printContent" style="display: none">
+  <h4> Suwapiyasa Medical Center - Indoor Pharmacy</h4>
+  <h4>Date :{{makeIssue.dateOfIssue | date}}</h4>
+  <h5>Drugs</h5>
+  <table>
+    <tr *ngFor="let row of makeIssue.details">
+      <td>{{row.drugPackage.drug.brandName}}</td>
+      <td>{{row.currentIssuedQty}}</td>
+      <td>{{row.currentIssuedQty * row.drugPackage.unitPrice}}</td>
+    </tr>
+  </table>
+  <h5> Services </h5>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Service</th>
+      <th>Fee</th>
+      <th>External Reference</th>
+    </tr>
+    </thead>
+    <tr *ngFor="let row of makeIssue.serviceItems">
+      <td>{{row.medicalServItem.itemDescription}}</td>
+      <td>{{row.fee}}</td>
+      <td>{{row.externalRef}}</td>
+    </tr>
+  </table>
+  <hr/>
+  <label>Total:{{total}}</label>
+  <br/>
+  <label>Cash :{{paidAmount}}</label>
+  <br/>
+  <label>Balance : {{paidAmount - total}}</label>
+</div>
 <button type="button" class="btn btn-primary" (click)="print()" [disabled]="printDisabled">Print</button>
 
-        <!--<br/>-->
-        <!--<h5>Services</h5>-->
-        <!--<tr *ngFor="let row of issue.issueNoteServiceItems">-->
-            <!--<td>{{row.medicalServItem.itemDescription}}</td>-->
-            <!--<td>{{row.fee}}</td>-->
-        <!--</tr>-->
-        <!--<br/>-->
-        <!--<label>Total :{{total}}</label>-->
-    <!--</div>-->
-    <!---->
+<!--<br/>-->
+<!--<h5>Services</h5>-->
+<!--<tr *ngFor="let row of issue.issueNoteServiceItems">-->
+<!--<td>{{row.medicalServItem.itemDescription}}</td>-->
+<!--<td>{{row.fee}}</td>-->
+<!--</tr>-->
+<!--<br/>-->
+<!--<label>Total :{{total}}</label>-->
+<!--</div>-->
+<!---->
 <!--</div>-->

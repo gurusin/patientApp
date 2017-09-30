@@ -47,6 +47,7 @@ export class IssueFinderComponent implements OnInit {
 
   ngOnInit() {
     this.makeIssue = this.issueService.makeIssue;
+    this.makeIssue.dateOfIssue = new Date();
     this.calculateTotal();
   }
 
