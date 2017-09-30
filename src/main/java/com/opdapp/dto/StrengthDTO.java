@@ -6,7 +6,7 @@ public class StrengthDTO {
 
     private String unitName;
 
-    private int strengthAmount;
+    private double strengthAmount;
 
     public int getStrengthId() {
         return strengthId;
@@ -24,11 +24,11 @@ public class StrengthDTO {
         this.unitName = unitName;
     }
 
-    public int getStrengthAmount() {
+    public double getStrengthAmount() {
         return strengthAmount;
     }
 
-    public void setStrengthAmount(int strengthAmount) {
+    public void setStrengthAmount(double strengthAmount) {
         this.strengthAmount = strengthAmount;
     }
 }

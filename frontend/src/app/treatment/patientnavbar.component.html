@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="patientService.patientObject" class="patientBar">
+  <div *ngIf="patientService.patientObject && patientService.patientObject.patientId > 0" class="patientBar">
     <a (click)="onEditPatient()">{{patientService.patientObject.firstname}},{{patientService.patientObject.lastname}}</a> ({{patientService.patientObject.calculatedAge}})
   </div>
   <br>

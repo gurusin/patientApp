@@ -65,6 +65,7 @@ import { StrengthComponent } from './drugcomponent/admin/strengh/strength.compon
 import { DrugPackagePipe } from './filter/drug-package.pipe';
 import { DrugPipePipe } from './filter/drug-pipe.pipe';
 import { PatientPipe } from './filter/patient.pipe';
+import {DateValueAccessorModule} from "angular-date-value-accessor/src/module";
 
 @NgModule({
     declarations: [
@@ -122,7 +123,8 @@ import { PatientPipe } from './filter/patient.pipe';
         BrowserModule, //BrowserAnimationsModule,
         FormsModule,
         DropdownModule, //NoopAnimationsModule,
-        HttpModule, routing//, MdDialogModule//PopupModule.forRoot(),
+        HttpModule, routing, //, MdDialogModule//PopupModule.forRoot(),
+        DateValueAccessorModule
     ],
     entryComponents: [PrintpopComponent],
     providers: [PatientServiceService, DrugServiceService, AdminService, ItemSupplierService,

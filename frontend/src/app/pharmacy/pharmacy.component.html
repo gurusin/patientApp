@@ -4,11 +4,13 @@
     <div class="row">
       <div class="col-sm-2">
         <label>From Date :</label>
-        <input type="date" [(ngModel)]="prescriptionSearchCriteria.fromDate">
+        <input type="date" [ngModel] ="prescriptionSearchCriteria.fromDate | date:'yyyy-MM-dd'"
+               (ngModelChange)="prescriptionSearchCriteria.fromDate = $event">
       </div>
       <div class="col-sm-2">
         <label>To Date :</label>
-        <input type="date" [(ngModel)]="prescriptionSearchCriteria.toDate">
+        <input type="date" [ngModel] ="prescriptionSearchCriteria.toDate | date:'yyyy-MM-dd'"
+               (ngModelChange)="prescriptionSearchCriteria.toDate = $event">
       </div>
 
       <div class="col-sm-4">
@@ -29,7 +31,7 @@
   </header>
   <br/>
   <label>Patient Filter</label>
-  <input type="text" #listFilter (keyup)="0" [disabled]="prescriptionList.length == 0"/>
+  <input type="text" #listFilter (keyup)="0" [disabled]="prescriptionList.length < 3"/>
 
   <br/>
   <table border="2" width="100%" class="table table-hover dataTable ">
@@ -40,6 +42,7 @@
       <th width="20%">Status</th>
       <th width="5%">Print</th>
     </tr>
+    <!---->
     <tr *ngFor="let obj of prescriptionList | patient:listFilter.value; let i = index">
       <td>{{obj.patient.firstname}},{{obj.patient.lastname}}</td>
       <td><a (click)='issueDrugs(obj.id)'>{{obj.id}}</a></td>

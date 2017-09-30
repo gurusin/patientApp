@@ -4,7 +4,6 @@
     <div class="sub-menu-item">
       <a routerLink="supplier">Suppliers</a>
       <a routerLink="patientAdmin">Customers</a>
-      <a routerLink="patientsave">New Patient</a>
       <a routerLink="medServiceItem">Medical services</a>
       <a routerLink="strength">Strength</a>
       <a [routerLink]='["drugAdmin"]'>Drug Admin</a>
@@ -45,6 +44,7 @@
     <div class="sub-menu-item">
       <a routerLink="start">Patient Search</a>
       <a [routerLink]='["patientAdmin"]'>Patient Administration</a>
+      <a (click)="newPatient()">New Patient</a>
     </div>
   </div>
 </div>

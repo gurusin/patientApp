@@ -21,7 +21,7 @@ export class PatientsaveComponent implements OnInit{
 
   ngOnInit(): void {
     this.patient =  this.patientService.patientObject;
-    if (this.patient.patientId > 0)
+    if (this.patient && this.patient.patientId > 0)
     {
       this.newPatient = false;
     }

@@ -66,6 +66,7 @@ export class IssueFinderComponent implements OnInit {
       </html>`
     );
     popupWin.document.close();
+    this.router.navigate(['pharmacyList']);
   }
 
 }

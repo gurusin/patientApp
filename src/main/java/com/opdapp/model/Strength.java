@@ -13,7 +13,7 @@ public class Strength {
     @JoinColumn(name = "unitId")
     private StrengthUnit strengthUnit;
 
-    private int strengthAmount;
+    private double strengthAmount;
 
     public StrengthUnit getStrengthUnit() {
         return strengthUnit;
@@ -31,11 +31,11 @@ public class Strength {
         this.strengthId = strengthId;
     }
 
-    public int getStrengthAmount() {
+    public double getStrengthAmount() {
         return strengthAmount;
     }
 
-    public void setStrengthAmount(int strengthAmount) {
+    public void setStrengthAmount(double strengthAmount) {
         this.strengthAmount = strengthAmount;
     }
 }
