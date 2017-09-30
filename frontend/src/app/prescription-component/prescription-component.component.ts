@@ -112,6 +112,7 @@ export class Prescription
   prescriptionDetailDTOS:PrescriptionDetail[];
   patientId:number;
   medicalServices:any[];
+  externalNote:string;
 
 }
 export class PrescriptionDetail

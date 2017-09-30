@@ -21,6 +21,16 @@ public class Prescription {
 
     private String notes;
 
+    private String externalNote;
+
+    public String getExternalNote() {
+        return externalNote;
+    }
+
+    public void setExternalNote(String externalNote) {
+        this.externalNote = externalNote;
+    }
+
     @ManyToOne()
     @JoinColumn(name = "patientId")
     private Patient patient;

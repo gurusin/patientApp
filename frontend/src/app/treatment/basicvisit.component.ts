@@ -48,6 +48,7 @@ export class BasicvisitComponent implements OnInit {
         presc.diagnosis = this.patientVisit.diagnoseData;
         presc.notes = this.patientVisit.note;
         presc.symptoms = this.patientVisit.symptoms;
+        presc.externalNote = this.patientVisit.externalNote;
         var details = [];
         var bOK = true;
         this.patientVisit.prescribableDrug.forEach((obj: PrescribableDrug) => {

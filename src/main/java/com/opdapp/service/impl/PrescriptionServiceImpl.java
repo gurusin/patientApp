@@ -205,6 +205,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         prescription.setNotes(dto.getNotes());
         prescription.setSymptoms(dto.getSymptoms());
         prescription.setDate(new Date(System.currentTimeMillis()));
+        prescription.setExternalNote(dto.getExternalNote());
         return prescription;
     }
 

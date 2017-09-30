@@ -10,10 +10,12 @@
              placeholder="notes">
 
     <br/>
-
+    <hr/>
+    <label for="externalNote">External Note</label>
+    <input type="text" id="externalNote" [(ngModel)]='patientVisit.externalNote' name="notes"
+           placeholder="notes">
   </div>
   <div class="col-md-4">
-<!--<app-prescriptionDTO-history  [patient]="patient"></app-prescriptionDTO-history>-->
   </div>
 
 </div>
@@ -21,9 +23,6 @@
 <button class="btn-primary" (click)="onSave()">Save Prescription</button>
 <button class="btn-primary" (click)="onCancel()">Cancel Prescription</button>
 
-
-
-<!--<app-printpop  [patientVisit]="patientVisit"></app-printpop>-->
 
 
 

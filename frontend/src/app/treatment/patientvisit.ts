@@ -4,6 +4,7 @@ export class Patientvisit {
     diagnosys: "";
     diagnoseData:string;
     note: "";
+    externalNote="";
     patientId:number;
     public prescribableDrug:PrescribableDrug[];
     medicalServices;
