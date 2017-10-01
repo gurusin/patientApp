@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DrugServiceService} from "../services/drug-service.service";
+import {Router} from "@angular/router";
 // import {Popup} from "ng2-opd-popup";
 
 @Component({
@@ -11,7 +12,7 @@ export class PrintreceiptComponent implements OnInit {
 
   prescription : any;
   imageUrl ="";
-  constructor(private drugService:DrugServiceService)
+  constructor(private drugService:DrugServiceService, private router:Router)
   {
      this.imageUrl = localStorage.getItem("rootURL"+'assets/Sign.gif');
   }
@@ -42,6 +43,7 @@ export class PrintreceiptComponent implements OnInit {
       </html>`
     );
     popupWin.document.close();
+    this.router.navigate(['start']);
   }
 
 }
