@@ -17,17 +17,20 @@ export class PatientadminComponent implements OnInit {
   constructor(private patientService: PatientServiceService, private router: Router){
   }
 
-  goToEditView(index)
+  goToEditView(patId)
   {
-    this.patientService.patientObject = this.patientList[index];
-    this.router.navigate(["/patientsave"]);
+    this.patientService.getByPatNo(patId).subscribe(
+      data =>{
+        this.patientService.patientObject = data;
+        this.router.navigate(["/patientsave"]);
+      }
+    );
   }
 
   ngOnInit() {
     this.patientService.loadPatients(
     ).subscribe(
       data => {
-        console.log(data);
         this.patientList = data;
       }
     );

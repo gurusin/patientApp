@@ -25,7 +25,7 @@
       <tr *ngFor="let obj of patientList | patientAdminFilter:listFilter.value; let i = index" [class.active]="i == selectedRow">
         <td>{{obj.patientId}}</td>ng
         <td>
-          <a (click)='goToEditView(i)'>{{obj.firstname}} {{obj.middlename}} {{obj.lastname}}</a>
+          <a (click)='goToEditView(obj.patientId)'>{{obj.firstname}} {{obj.middlename}} {{obj.lastname}}</a>
         </td>
         <td>{{obj.address}}</td>
         <td>{{obj.gender}}</td>
