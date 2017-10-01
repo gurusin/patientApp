@@ -32,7 +32,7 @@
     </select>
     </td>
     <td>{{prescribableDrug.availableQty}}</td>
-    <td>{{prescribableDrug.unitPrice}}</td>
+    <td>{{prescribableDrug.unitPrice | number:'1.2-2'}}</td>
     <td><select [(ngModel)]="prescribableDrug.selectedFrequency" name="freq" required
      (change)="checkValid()">
       <option *ngFor="let x of prescribableDrug.doseFrequency" value="{{x.doseFrequencyId}}">{{x.noofDoses +' '}}
@@ -53,8 +53,8 @@
       <option value="EYE_DROP">Eye Drop</option>
     </select>
     </td>
-    <td>{{prescribableDrug.neededQty}}</td>
-    <td>{{prescribableDrug.price}}</td>
+    <td>{{prescribableDrug.neededQty | number:'1.2-2'}}</td>
+    <td>{{prescribableDrug.price | number:'1.2-2'}}</td>
     <td>
       <button type='button' class="btn btn-primary" (click)="addDrug()" [disabled]="!prescribableDrug.valid">Add</button>
     </td>
@@ -70,12 +70,12 @@
     <td>{{row.selectedDuration}}</td>
     <td>{{row.meal}}</td>
     <td>{{row.neededQty}}</td>
-    <td>{{row.price}}</td>
+    <td>{{row.price | number:'1.2-2'}}</td>
     <td><button class="btn btn-danger" (click)="removeDrug(i)">Remove</button></td>
   </tr>
 </table>
 <br/>
-Total : {{total}}
+Total : {{total | number:'1.2-2'}}
 
 
 
