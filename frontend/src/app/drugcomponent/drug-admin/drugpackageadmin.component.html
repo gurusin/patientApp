@@ -58,7 +58,7 @@
             <label> Drug : </label>
           </td>
           <td>
-            <select name="drug" [(ngModel)]="drugPackage.drug.drugId">
+            <select name="drug" [(ngModel)]="drugPackage.drug.drugId" required>
               <option *ngFor="let drug of drugList" [value]="drug.drugId">{{drug.brandName}}</option>
             </select>
           </td>
@@ -70,7 +70,7 @@
             <label> Strength : </label>
           </td>
           <td>
-            <select name="strength" [(ngModel)]="drugPackage.strength.strengthId">
+            <select name="strength" [(ngModel)]="drugPackage.strength.strengthId" required>
               <option *ngFor="let strength of strengthList" [value]="strength.strengthId">
                 {{strength.strengthAmount}} {{strength.unitName}}
               </option>
@@ -112,7 +112,7 @@
           <td>
             <label for="contentForm">Form of Content : </label>
           </td>
-          <td><select id="contentForm" name="contentForm" [(ngModel)]="drugPackage.drugPackageContentType">
+          <td><select id="contentForm" name="contentForm" [(ngModel)]="drugPackage.drugPackageContentType" required>
             <option value="TABLET">TABLET</option>
             <option value="LIQUID">LIQUID</option>
             <option value="CREAM">CREAM</option>
