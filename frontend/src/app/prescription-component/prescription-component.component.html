@@ -1,5 +1,3 @@
-<h5> Drug Details (Prescribed) </h5>
-<br/>
 <table class="table table-striped">
   <tr>
     <th>Drug</th>
@@ -11,48 +9,73 @@
     <th>Duration</th>
     <th>Interval Unit</th>
     <th>Application</th>
+    <th>Needed Qty</th>
+    <th>Price</th>
     <th>Add</th>
-    <th>Remove</th>
   </tr>
-  <tr *ngFor="let row of patientVisit.prescribableDrug;let i=index">
+  <tr>
     <td>
-      <input type="text" [attr.list]='i' id="drug" name="drug" placeholder="Drug to search"
-             (keyup)="searchDrug($event,row,i)" [(ngModel)]="row.drug.brandName" size="6">
-      <datalist [id]="i">
-        <option *ngFor="let drug of row.drugList" value="{{drug.brandName}}">{{drug.brandName}}</option>
+      <input type="text" list='datalist' id="drug" name="drug" placeholder="Drug to search"
+             (keyup)="searchDrug($event, drugName.value)" [(ngModel)]="drugId" size="6" #drugName>
+      <datalist id="datalist">
+        <option *ngFor="let drug of prescribableDrug.drugList" value="{{drug.drugId}}">
+          {{drug.drugId}},{{drug.brandName}}
+        </option>
       </datalist>
+      {{prescribableDrug.drug.brandName}}
     </td>
-    <td><select [(ngModel)]="row.selectedStrengthIndex" (change)="selectStrength(i)">
-      <option *ngFor="let x of row.packages;let j=index" value="{{j}}">{{x.strength.strengthAmount+x.strength.strengthUnit.unitName}}</option>
+    <td><select name='strength' [(ngModel)]="prescribableDrug.selectedStrengthIndex"
+                (change)="selectStrength()" required>
+      <option *ngFor="let x of prescribableDrug.packages;let j=index" value="{{j}}">
+        {{x.strength.strengthAmount+x.strength.strengthUnit.unitName}}
+      </option>
     </select>
     </td>
-    <td>{{row.availableQty}}</td>
-    <td>{{row.unitPrice}}</td>
-    <td><select [(ngModel)]="row.selectedFrequency">
-      <option *ngFor="let x of row.doseFrequency" value="{{x.doseFrequencyId}}">{{x.noofDoses +' '}} time(s) {{' '+x.timeUnit}}</option>
+    <td>{{prescribableDrug.availableQty}}</td>
+    <td>{{prescribableDrug.unitPrice}}</td>
+    <td><select [(ngModel)]="prescribableDrug.selectedFrequency" name="freq" required
+     (change)="checkValid()">
+      <option *ngFor="let x of prescribableDrug.doseFrequency" value="{{x.doseFrequencyId}}">{{x.noofDoses +' '}}
+        time(s) {{' '+x.timeUnit}}
+      </option>
     </select>
     </td>
-    <td><input type='text' [(ngModel)]="row.doseAmount" size="3"></td>
-    <td><input type='text' [(ngModel)]="row.doseDuration" size="3"></td>
+    <td><input type='text' name='amount' required [(ngModel)]="prescribableDrug.doseAmount" size="3" (keyup)="checkValid()"></td>
+    <td><input type='text' name='duration' required [(ngModel)]="prescribableDrug.doseDuration" size="3" (keyup)="checkValid()"></td>
     <td>
-      <select [(ngModel)]="row.selectedDuration">
-      <option *ngFor="let x of row.durationUnit" value="{{x}}">{{x}}</option>
-    </select>
+      <select name='durationType' required [(ngModel)]="prescribableDrug.selectedDuration" (change)="checkValid()">
+        <option *ngFor="let x of prescribableDrug.durationUnit" value="{{x}}">{{x}}</option>
+      </select>
     </td>
-    <td><select [(ngModel)]="row.meal" value="ORAL">
+    <td><select name='meal' required [(ngModel)]="prescribableDrug.meal" value="ORAL" (change)="checkValid()">
       <option value="ORAL">Oral</option>
       <option value="LA">Local Application</option>
       <option value="EYE_DROP">Eye Drop</option>
     </select>
     </td>
+    <td>{{prescribableDrug.neededQty}}</td>
+    <td>{{prescribableDrug.price}}</td>
     <td>
-      <button (click)="addDrug()" class="btn btn-primary">Add</button>
+      <button type='button' class="btn btn-primary" (click)="addDrug()" [disabled]="!prescribableDrug.valid">Add</button>
     </td>
-    <td>
-      <button class="btn btn-danger" (click)="removeDrug(i)">Remove</button>
-    </td>
+    <hr/>
+  <tr *ngFor="let row of patientVisit.prescribableDrug">
+    <td>{{row.drug.brandName}}</td>
+    <td>{{row.selectedStrength.strengthAmount}}{{row.selectedStrength.strengthUnit.unitName}}</td>
+    <td>{{row.availableQty}}</td>
+    <td>{{row.unitPrice}}</td>
+    <td>{{row.frequency.noofDoses +' '}} time(s) {{' '+row.frequency.timeUnit}}</td>
+    <td>{{row.doseAmount}}</td>
+    <td>{{row.doseDuration}}</td>
+    <td>{{row.selectedDuration}}</td>
+    <td>{{row.meal}}</td>
+    <td>{{row.neededQty}}</td>
+    <td>{{row.price}}</td>
+    <td><button class="btn btn-danger" (click)="removeDrug(i)">Remove</button></td>
   </tr>
 </table>
+<br/>
+Total : {{total}}
 
 
 
