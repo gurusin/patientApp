@@ -34,6 +34,7 @@ export class BasicvisitComponent implements OnInit {
     }
 
     onCancel() {
+      this.patientService.patientObject = null;
       this.router.navigate(['/start']);
     }
 
@@ -79,6 +80,7 @@ export class BasicvisitComponent implements OnInit {
         presc.prescriptionDetailDTOS = details;
         this.drugService.savePrescription(presc).subscribe(
             data => {
+                this.patientService.patientObject = null;
                 this.drugService.setSavedPrescription(data);
                 this.router.navigate(['printPo']);
             }
