@@ -24,6 +24,7 @@ export class ServiceComponentComponent implements OnInit {
                 this.serviceChanged(0,0);
                 var x =Object.assign({},this.medicalServices[0]);
                 this.patientVisit.medicalServices.push(x);
+                this.servicesTotal = this.medicalServices[0].unitPrice;
             }
         );
     }
@@ -51,7 +52,7 @@ export class ServiceComponentComponent implements OnInit {
 
     onAdd()
     {
-        this.patientVisit.medicalServices.push(new Object());
+        this.patientVisit.medicalServices.unshift(new Object());
     }
 
     onRemove(i)
