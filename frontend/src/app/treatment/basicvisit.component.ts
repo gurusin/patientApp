@@ -34,7 +34,7 @@ export class BasicvisitComponent implements OnInit {
     }
 
     onCancel() {
-        // Navigate to any page
+      this.router.navigate(['/start']);
     }
 
     ngOnInit() {
