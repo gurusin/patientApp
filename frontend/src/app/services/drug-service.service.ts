@@ -26,7 +26,7 @@ export class DrugServiceService {
     return this.http.post(url, drugName).map((res: Response) => res.json());
   }
 
-  searchPrescribable(drugId: number): Observable<PrescribableDrug> {
+  searchPrescribable(drugId: any): Observable<PrescribableDrug> {
     var url = localStorage.getItem("rootURL") +"getPrescribable";
     return this.http.post(url, drugId).map((res: Response) => res.json());
   }

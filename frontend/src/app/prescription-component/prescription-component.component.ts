@@ -25,7 +25,7 @@ export class PrescriptionComponentComponent implements OnInit {
   @Input() patientVisit: Patientvisit;
   prescribableDrug: PrescribableDrug;
   selectedId: any;
-  drugId = 0;
+  drugId = '';
   total = 0;
 
   constructor(private drugService: DrugServiceService,
@@ -45,13 +45,15 @@ export class PrescriptionComponentComponent implements OnInit {
     );
   }
 
-  addDrug() {
+  addDrug(comp:any) {
     var x = new PrescribableDrug();
     this.prescribableDrug.frequency = this.prescribableDrug.doseFrequency[this.prescribableDrug.selectedFrequency];
     Object.assign(x,this.prescribableDrug);
     this.patientVisit.prescribableDrug.unshift(x);
     this.prescribableDrug = new PrescribableDrug();
+    this.drugId='';
     this.calculateTotal();
+    comp.focus();
   }
 
   private searchPrescribable() {
@@ -61,6 +63,7 @@ export class PrescriptionComponentComponent implements OnInit {
         this.prescribableDrug.selectedStrength = this.prescribableDrug.packages[0].strength;
         this.prescribableDrug.selectedStrengthIndex =0;
         this.selectStrength();
+        this.drugId = this.prescribableDrug.drug.brandName;
       });
   }
 
