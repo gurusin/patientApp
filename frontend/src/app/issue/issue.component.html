@@ -1,6 +1,7 @@
 <div class="container">
   <label>Date of Issue</label>
-  <input type="date" [(ngModel)]="dateOfIssue"/>
+  <input type="date" [ngModel]="dateOfIssue | date:'yyyy-MM-dd'"
+    (ngModelChange)="dateOfIssue = $event"/>
   <br/>
 
   <app-service-component [patientVisit]="patientVisit"></app-service-component>

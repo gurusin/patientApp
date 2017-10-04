@@ -12,7 +12,11 @@ export class InOutComponent implements OnInit {
 
     reports =[];
     constructor(private adminService: AdminService) {
-        this.searchCriteria = new Object();
+        this.searchCriteria =
+          {
+            fromDate:new Date(),
+            toDate:new Date()
+          };
     }
 
     ngOnInit() {

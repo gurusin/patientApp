@@ -3,24 +3,26 @@
     Adjustment done
   </div>
   <label>From Date :</label>
-  <input type="date" [(ngModel)]="searchCritera.fromDate">
+  <input type="date" [ngModel]="searchCritera.fromDate | date:'yyyy-MM-dd'"
+         (ngModelChange)="searchCritera.fromDate = $event">
   <label>To Date :</label>
-  <input type="date" [(ngModel)]="searchCritera.toDate">
+  <input type="date" [ngModel]="searchCritera.toDate| date:'yyyy-MM-dd'"
+         (ngModelChange)="searchCritera.toDate = $event">
   <button type="button" class="btn btn-primary" (click)="doSearch()">Search</button>
   <table class="table table-bordered">
     <thead>
-      <th>Date</th>
-      <th>Drug Package</th>
-      <th>Amount</th>
-      <th>Notes</th>
+    <th>Date</th>
+    <th>Drug Package</th>
+    <th>Amount</th>
+    <th>Notes</th>
     </thead>
     <tbody>
-      <tr *ngFor="let row of adjustments">
-        <td>{{row.dateOfAdjustment | date}}</td>
-        <td>{{row.drugPackage.drug.brandName}}</td>
-        <td>{{row.adjustedQty}}</td>
-        <td>{{row.remarks}}</td>
-      </tr>
+    <tr *ngFor="let row of adjustments">
+      <td>{{row.dateOfAdjustment | date}}</td>
+      <td>{{row.drugPackage.drug.brandName}}</td>
+      <td>{{row.adjustedQty}}</td>
+      <td>{{row.remarks}}</td>
+    </tr>
     </tbody>
   </table>
   <div style="background-color: #bfd2c8">
@@ -34,7 +36,8 @@
       <tr>
         <td>Date of Adjustment</td>
         <td></td>
-        <td><input type="date" [(ngModel)]="adjustment.dateOfAdjustment"></td>
+        <td><input type="date" [ngModel]="adjustment.dateOfAdjustment |date:'yyyy-MM-dd'"
+                   (ngModelChange)="adjustment.dateOfAdjustment = $event"></td>
         <td></td>
       </tr>
       <tr>
@@ -46,9 +49,10 @@
           </div>
           <input #search type="text" list='packageList' id="drug" name="drug" placeholder="Drug Package to search"
                  (keyup)="searchDrugPackage($event,search.value)" size="10" [(ngModel)]="selectedIndex">
-          <datalist id="packageList" >
+          <datalist id="packageList">
             <option *ngFor="let row of drugPackageList;let i=index" value="{{i}}">
-              {{row.drug.brandName}},{{row.strength.strengthUnit.unitName}},{{row.strength.strengthAmount}}</option>
+              {{row.drug.brandName}},{{row.strength.strengthUnit.unitName}},{{row.strength.strengthAmount}}
+            </option>
           </datalist>
         </td>
       </tr>
@@ -65,6 +69,6 @@
       </tr>
     </table>
     <br/>
-    <button type="button" class="btn btn-primary" (click)="saveAdjustment()">Save </button>
+    <button type="button" class="btn btn-primary" (click)="saveAdjustment()">Save</button>
   </div>
 </div>

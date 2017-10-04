@@ -1,6 +1,6 @@
 package com.opdapp.dto.common;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class DatePeriod
 {

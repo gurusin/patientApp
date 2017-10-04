@@ -1,6 +1,7 @@
 <div class="container">
 
-  <label> Date :</label><input type="date" [(ngModel)]="dailyIncome.date">
+  <label> Date :</label><input type="date" [ngModel]="dailyIncome.date |date:'yyyy-MM-dd'"
+                               (ngModelChange)="dailyIncome.date = $event">
   <button type="button" class="btn btn-primary" (click)="doReport()">Execute</button>
 
   <h3> Daily Report for {{dailyIncome.date | date}}</h3>

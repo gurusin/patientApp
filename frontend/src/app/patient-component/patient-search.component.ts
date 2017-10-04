@@ -39,7 +39,6 @@ export class PatientSearchComponent {
     this.patientService.patientObject = data;
     if (this.loginService.loggedInUser.userType ===1)
     {
-
       this.router.navigate(["patientvisit/treatment"]);
     } else
     {

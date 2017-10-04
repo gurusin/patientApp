@@ -16,11 +16,13 @@
   <tr>
     <td>
       <input type="text" list='datalist' id="drug" name="drug" placeholder="Drug to search"
-             (keyup)="searchDrug($event, drugName.value)" [(ngModel)]="drugId" size="6" #drugName>
-      <datalist id="datalist">
-        <option *ngFor="let drug of prescribableDrug.drugList" value="{{drug.drugId}}">
-          {{drug.drugId}},{{drug.brandName}}
-        </option>
+             [(ngModel)]="drugId" size="6" #drugName (input)="searchDrug($event, ddComp,drugName)">
+      <datalist id="datalist" #datalist>
+        <select #ddComp>
+          <option *ngFor="let drug of prescribableDrug.drugList" value="{{drug.brandName}}">
+            <div class="nameText">{{drug.brandName}}</div>
+          </option>
+        </select>
       </datalist>
       {{prescribableDrug.drug.brandName}}
     </td>

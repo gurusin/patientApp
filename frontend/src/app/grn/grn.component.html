@@ -7,30 +7,35 @@
     <div class="col-lg-2">
       <input type="text" #pot (keyup)="loadPo($event,pot.value)" [(ngModel)]='po.purchaseOrderNo'/>
     </div>
-    <div class="col-lg-6" align="right"><b>Supplier :</b>{{po.itemSupplier.supplierName}},{{po.itemSupplier.supplierAddress}}</div>
-  </div>
-  <div class="row">
-    <div class="col-lg-4">
-      <label></label>
+    <div class="col-lg-6">
+      <b>Supplier :</b>{{po.itemSupplier.supplierName}},{{po.itemSupplier.supplierAddress}}
     </div>
-    <div class="col-lg-4">
-      <label> Supplier Invoice </label>
-      <input type="text"  [(ngModel)]='poDetail.supplierInvoice' required id="supplierInvoice" name="supplierInvoice"></div>
-     <div class="col-lg-4" >Date : <input type="date"  [(ngModel)]='poDetail.expectedRecieveDate' required id="expectedRecieveDate" name="expectedRecieveDate"></div>
   </div>
-<br/>
+  <br/>
+  <div class="row">
+    <div class="col-lg-2">
+      <label> Supplier Invoice </label>
+    </div>
+    <div class="col-lg-2">
+      <input type="text" [(ngModel)]='poDetail.supplierInvoice' required id="supplierInvoice" name="supplierInvoice">
+    </div>
+    <div class="col-lg-6">Date :
+      <input type="date" [ngModel]="poDetail.expectedRecieveDate|date:'yyyy-MM-dd'" required id="expectedRecieveDate"
+             (ngModelChange)="poDetail.expectedRecieveDate = $event"></div>
+  </div>
+  <br/>
   <table class="table table-responsive">
     <thead>
-       <tr>
-         <th>Item</th>
-         <th>Item bought Price</th>
-         <th>Ordered Qty.</th>
-         <th>Balance Qty.</th>
-         <th>Received Qty.</th>
-       </tr>
+    <tr>
+      <th>Item</th>
+      <th>Item bought Price</th>
+      <th>Ordered Qty.</th>
+      <th>Balance Qty.</th>
+      <th>Received Qty.</th>
+    </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let x of poDetail.details" >
+    <tr *ngFor="let x of poDetail.details">
       <td>{{x.itemName}}</td>
       <td><input type="text" [(ngModel)]='x.itemBoughtPrice'></td>
       <td>{{x.orderedQty}}</td>

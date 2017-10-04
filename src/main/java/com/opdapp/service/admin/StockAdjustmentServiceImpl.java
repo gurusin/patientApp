@@ -31,7 +31,12 @@ public class StockAdjustmentServiceImpl implements StockAdjustmentService
 
     @Override
     public List<StockAdjustmentItem> findAdjustments(DatePeriod period) {
-        return stockAdjustmentItemRepository.findByDateOfAdjustmentBetween(period.getFromDate(),
-                period.getToDate());
+        return stockAdjustmentItemRepository.findByDateOfAdjustmentBetween(convert(period.getFromDate()),
+                convert(period.getToDate()));
+    }
+
+    private java.sql.Date convert(java.util.Date date)
+    {
+        return new java.sql.Date(date.getTime());
     }
 }

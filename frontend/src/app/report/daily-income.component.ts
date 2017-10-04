@@ -14,8 +14,7 @@ export class DailyIncomeComponent implements OnInit {
 
   ngOnInit() {
     this.dailyIncome = new Object();
-    var x = new Date();
-    this.dailyIncome.date = new Date(x.getUTCFullYear(),  x.getMonth(),x.getDate());
+    this.dailyIncome.date = new Date();
   }
 
     doReport()

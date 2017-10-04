@@ -56,9 +56,15 @@ export class PrescriptionComponentComponent implements OnInit {
     comp.focus();
   }
 
-  private searchPrescribable() {
-    this.drugService.searchPrescribable(this.drugId).subscribe(
+  selected()
+  {
+    alert('selected');
+  }
+
+  private searchPrescribable(searchId) {
+    this.drugService.searchPrescribable(searchId).subscribe(
       data => {
+        console.log(data);
         this.prescribableDrug = data;
         this.prescribableDrug.selectedStrength = this.prescribableDrug.packages[0].strength;
         this.prescribableDrug.selectedStrengthIndex =0;
@@ -106,9 +112,11 @@ export class PrescriptionComponentComponent implements OnInit {
       this.calculateTotal();
   }
 
-  searchDrug(event: any, searchText: string) {
-    if (event.keyCode == 13) {
-      this.searchPrescribable();
+  searchDrug(event: any, dd:any, textCmp: any) {
+     var searchText:string = textCmp.value;
+    if (dd.selectedIndex > -1) {
+      var drugId = this.getSelectedId(searchText);
+       this.searchPrescribable(drugId);
     } else if (searchText.length == 2) {
       // Search for drug
       this.doSearch(searchText);
@@ -118,19 +126,19 @@ export class PrescriptionComponentComponent implements OnInit {
     }
   }
 
-  searchDrug_dep(event: any, row: PrescribableDrug, i: number) {
-    var drugName = row.drug.brandName;
-    if (event.keyCode == 13) {
-      // Search for prescibable
-      this.setDrugId(row);
-      this.searchPrescribable();
-    } else if (drugName.length == 2) {
-      // Search for drug
-      //this.doSearch(drugName,row);
-    } else if (drugName.length == 1) {
-      //clear search
-      row.drugList = [];
-    }
+  getSelectedId(text:string):string
+  {
+     var retObj = '-1';
+     this.prescribableDrug.drugList.forEach(
+       item =>{
+           if (item.brandName === text)
+           {
+             retObj = item.drugId;
+             return retObj;
+           }
+       }
+     );
+     return retObj;
   }
 
   calculatePrice() {
