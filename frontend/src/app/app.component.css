@@ -1,6 +1,8 @@
-div.container {
+.head{
   width: 100%;
   border: 1px solid gray;
+  color: white;
+  background-color: lightseagreen;
 }
 
 header, footer {

@@ -25,7 +25,6 @@ export class PatientsaveComponent implements OnInit{
     {
       this.newPatient = false;
     }
-
   }
 
   constructor(private patientService: PatientServiceService, private router: Router,

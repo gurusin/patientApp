@@ -70,20 +70,21 @@ public class DrugServiceImpl implements DrugService {
         durationunit.add("Hours");
         durationunit.add("Weeks");
         durationunit.add("Months");
+        durationunit.add("When Needed");
     }
 
     public List<SearchedDrug> getByBrandName(String brandName) {
-        List<Drug> searchedDrug = drugRepository.findDrugsByBrandNameLike(brandName + "%");
+        List<DrugPackage> searchedDrug = drugPackageRepository.findByDrugName(brandName + "%");
         //todo search in bse drug and add
         return getSearchedDrug(searchedDrug);
     }
 
-    private List<SearchedDrug> getSearchedDrug(List<Drug> drugs) {
+    private List<SearchedDrug> getSearchedDrug(List<DrugPackage> drugs) {
         List<SearchedDrug> searchedDrugList = new ArrayList<SearchedDrug>();
-        for (Drug drug : drugs) {
+        for (DrugPackage drug : drugs) {
             SearchedDrug searchedDrug = new SearchedDrug();
-            searchedDrug.setBrandName(drug.getBrandName());
-            searchedDrug.setDrugId(drug.getDrugId());
+            searchedDrug.setBrandName(drug.getDrug().getBrandName());
+            searchedDrug.setDrugId(drug.getDrug().getDrugId());
             searchedDrugList.add(searchedDrug);
         }
         return searchedDrugList;
@@ -155,8 +156,11 @@ public class DrugServiceImpl implements DrugService {
     private List<DrugPackageDTO> getDrugPackageDTOList(List<DrugPackage> durgPackagelist) {
         List<DrugPackageDTO> packageDTOList = new ArrayList<DrugPackageDTO>();
         for (DrugPackage drugPackage : durgPackagelist) {
-            DrugPackageDTO drugPackageDTO = getDrugPackageDTO(drugPackage);
-            packageDTOList.add(drugPackageDTO);
+            if (drugPackage.getDrug() != null)
+            {
+                DrugPackageDTO drugPackageDTO = getDrugPackageDTO(drugPackage);
+                packageDTOList.add(drugPackageDTO);
+            }
         }
         return packageDTOList;
     }

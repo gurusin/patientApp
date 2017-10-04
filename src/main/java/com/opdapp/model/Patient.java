@@ -54,7 +54,6 @@ public class Patient implements Serializable {
     private String medicalHistory;
 
     @Temporal(TemporalType.DATE)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private Date dateOfBirth;
 
     @Column

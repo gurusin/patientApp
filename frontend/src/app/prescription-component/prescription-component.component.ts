@@ -56,20 +56,16 @@ export class PrescriptionComponentComponent implements OnInit {
     comp.focus();
   }
 
-  selected()
-  {
-    alert('selected');
-  }
 
-  private searchPrescribable(searchId) {
+  private searchPrescribable(searchId,nextComp:any) {
     this.drugService.searchPrescribable(searchId).subscribe(
       data => {
-        console.log(data);
         this.prescribableDrug = data;
         this.prescribableDrug.selectedStrength = this.prescribableDrug.packages[0].strength;
         this.prescribableDrug.selectedStrengthIndex =0;
         this.selectStrength();
         this.drugId = this.prescribableDrug.drug.brandName;
+        nextComp.focus();
       });
   }
 
@@ -79,15 +75,25 @@ export class PrescriptionComponentComponent implements OnInit {
       this.prescribableDrug.drug &&
       this.prescribableDrug.selectedStrengthIndex >-1 &&
       this.prescribableDrug.selectedFrequency >-1 &&
-      this.prescribableDrug.doseAmount > 0 && this.prescribableDrug.doseDuration >0;
-      this.prescribableDrug.selectedDuration && this.prescribableDrug.meal;
-
+      this.checkDoseAmount();
       if (this.prescribableDrug.valid)
       {
         this.calculatePrice();
       }
+  }
 
-
+  calcNeeded()
+  {
+    this.prescribableDrug.price = this.prescribableDrug.unitPrice * this.prescribableDrug.neededQty;
+  }
+  private checkDoseAmount():boolean
+  {
+     var result:boolean = !(!this.prescribableDrug.meal || !this.prescribableDrug.selectedDuration);
+     if (result && this.prescribableDrug.selectedDuration !=='When Needed' )
+     {
+       result = this.prescribableDrug.doseAmount > 0 && this.prescribableDrug.doseDuration >0;
+     }
+     return result;
   }
 
 
@@ -112,11 +118,12 @@ export class PrescriptionComponentComponent implements OnInit {
       this.calculateTotal();
   }
 
-  searchDrug(event: any, dd:any, textCmp: any) {
+  searchDrug(event: any, dd:any, textCmp: any,nextComp: any) {
      var searchText:string = textCmp.value;
     if (dd.selectedIndex > -1) {
       var drugId = this.getSelectedId(searchText);
-       this.searchPrescribable(drugId);
+       this.searchPrescribable(drugId,nextComp);
+
     } else if (searchText.length == 2) {
       // Search for drug
       this.doSearch(searchText);
@@ -182,6 +189,10 @@ export class PrescriptionComponentComponent implements OnInit {
       }
       case "Months": {
         obj.neededQty = freq.noofDoses * 30 * obj.doseAmount * obj.doseDuration;
+        break;
+      }
+      case "When Needed": {
+        obj.neededQty = obj.doseAmount * 1;
         break;
       }
     }

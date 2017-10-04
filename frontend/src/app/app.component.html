@@ -1,12 +1,13 @@
-<div>
-  <header><h2>Medsys Patient and Drug Administration </h2>
-    <div *ngIf="loginService.loggedIn">
-      Welcome {{"      " +loginService.loggedInUser.firstname}}!
-      <div align="left" class="text-warning">
-        <button type="button" class="btn btn-primary" (click)="logOff()">Log Off</button>
+<div class="head">
+  <div class="row">
+    <div class="col-lg-6"><h4> Medsys Patient and Drug Administration</h4></div>
+    <div class="col-lg-6">
+      <div *ngIf="loginService.loggedIn">
+        Welcome {{" " +loginService.loggedInUser.firstname}}!
+          <button type="button" class="btn btn-primary" (click)="logOff()">Log Off</button>
       </div>
     </div>
-  </header>
+  </div>
 </div>
 <div *ngIf="loginService.loggedIn">
   <app-menubar></app-menubar>
