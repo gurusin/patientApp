@@ -35,6 +35,16 @@ public class PrescriptionDetail {
 
     private Meal meal;
 
+    private double prescribedQty;
+
+    public double getPrescribedQty() {
+        return prescribedQty;
+    }
+
+    public void setPrescribedQty(double prescribedQty) {
+        this.prescribedQty = prescribedQty;
+    }
+
     public DrugPackage getDrugPackage() {
         return drugPackage;
     }

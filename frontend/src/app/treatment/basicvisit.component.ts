@@ -53,7 +53,7 @@ export class BasicvisitComponent implements OnInit {
         var details = [];
         var bOK = true;
         this.patientVisit.prescribableDrug.forEach((obj: PrescribableDrug) => {
-                var detail = new PrescriptionDetail();
+                var detail:PrescriptionDetail = new PrescriptionDetail();
                 detail.drugPackageId = obj.packages[obj.selectedStrengthIndex].drugPackageId;
                 detail.amount = obj.doseAmount;
                 detail.duration = obj.doseDuration;
@@ -66,11 +66,7 @@ export class BasicvisitComponent implements OnInit {
                 detail.doseFrequencyId = obj.selectedFrequency;
                 detail.intervalUnit = obj.selectedDuration;
                 detail.meal = obj.meal;
-                if (!detail.isValid()){
-                    alert("Empty rows found. Can't submit");
-                    bOK = false;
-                    return;
-                }
+                detail.neededQty = obj.neededQty;
                 details.push(detail);
             }
         );

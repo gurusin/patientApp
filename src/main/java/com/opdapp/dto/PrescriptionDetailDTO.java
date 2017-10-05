@@ -15,6 +15,15 @@ public class PrescriptionDetailDTO {
     private long doseFrequencyId;
     private Meal meal;
     private String intervalUnit;
+    private double neededQty;
+
+    public double getNeededQty() {
+        return neededQty;
+    }
+
+    public void setNeededQty(double neededQty) {
+        this.neededQty = neededQty;
+    }
 
     public long getDrugPackageId() {
         return drugPackageId;

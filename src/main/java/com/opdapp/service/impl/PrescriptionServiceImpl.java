@@ -192,6 +192,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             detail.setDuration(obj.getDuration());
             detail.setAmount(obj.getAmount());
             detail.setIntervalUnit(obj.getIntervalUnit());
+            detail.setPrescribedQty(obj.getNeededQty());
             set.add(detail);
         }
         return set;

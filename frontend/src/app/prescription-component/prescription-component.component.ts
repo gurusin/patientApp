@@ -221,6 +221,7 @@ export class PrescriptionDetail {
   intervalUnit: string;
   meal: string;
   doseFrequencyId: number;
+  neededQty:number;
 
 
   constructor() {
@@ -231,8 +232,6 @@ export class PrescriptionDetail {
 
   public isValid(): boolean {
     var passed = true;
-    passed = (this.amount > 0) && (this.duration > 0) && (this.intervalUnit != null) &&
-      this.doseFrequencyId != null && this.drugPackageId != null && this.meal != null;
     return passed;
   }
 

@@ -14,14 +14,11 @@ export class PrintreceiptComponent implements OnInit {
   imageUrl ="";
   constructor(private drugService:DrugServiceService, private router:Router)
   {
-     this.imageUrl = localStorage.getItem("rootURL"+'assets/Sign.gif');
+     this.imageUrl = 'assets/images/Sign.gif';
   }
 
   ngOnInit() {
-      this.imageUrl = localStorage.getItem("rootURL"+'assets/Sign.gif');
       this.prescription = this.drugService.savedPrescription;
-      console.log("Prescription is : " );
-      console.log(this.prescription);
   }
 
 

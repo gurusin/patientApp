@@ -56,7 +56,13 @@ public class IssueServiceImpl implements IssueService {
             if (obj == null) {
                 // Item not issued yet Create new MakeIssue Details.
                 dto.setDrugPackage(detail.getDrugPackage());
-                dto.setPrescribedQty(getPrescribedQty(detail));
+                double prescribedQty = detail.getPrescribedQty();
+                if (prescribedQty == 0)
+                {
+                    // Auto correction in cased it's missed during saving
+                    prescribedQty = getPrescribedQty(detail);
+                }
+                dto.setPrescribedQty(prescribedQty);
                 dto.setPrescriptionDetailId(detail.getId());
                 dto.setDuration(detail.getDuration() + "," + detail.getIntervalUnit());
                 dto.setFrequency(detail.getFrequency().getValue());
@@ -104,6 +110,7 @@ public class IssueServiceImpl implements IssueService {
                 break;
             }
             default: {
+                durationInDays = 1;
             }
         }
         if (prescDet.getDrugPackage().getDrugPackageContentType() == DrugPackageContentType.CREAM) {

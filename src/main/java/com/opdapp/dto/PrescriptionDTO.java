@@ -23,6 +23,7 @@ public class PrescriptionDTO {
     private Set<MedicalServItem> medicalServices;
     private Patient patient;
     private String externalNote;
+    private List<PrescriptionDetailDTO> prescriptionDetailDTOS;
 
     public String getExternalNote() {
         return externalNote;
@@ -31,8 +32,6 @@ public class PrescriptionDTO {
     public void setExternalNote(String externalNote) {
         this.externalNote = externalNote;
     }
-
-    private List<PrescriptionDetailDTO> prescriptionDetailDTOS;
 
     public Patient getPatient() {
         return patient;
