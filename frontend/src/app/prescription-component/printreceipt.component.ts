@@ -30,10 +30,6 @@ export class PrintreceiptComponent implements OnInit {
     popupWin.document.write(`
       <html>
         <head>
-          <!--<title>Print tab</title>-->
-          <!--<style>-->
-          <!--//........Customized style.......-->
-          <!--</style>-->
         </head>
         <body onload="window.print();window.close()">${printContents}
         </body>

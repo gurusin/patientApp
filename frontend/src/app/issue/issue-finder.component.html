@@ -65,27 +65,44 @@
 
 <!--&lt;!&ndash; Printing Part &ndash;&gt;-->
 
-<div id="printContent" style="display:none">
-  <h4> Suwapiyasa Medical Center - Indoor Pharmacy</h4>
-  <h4>Date :{{makeIssue.dateOfIssue | date}}</h4>
-  <table>
-    <tr *ngFor="let row of makeIssue.details">
-      <td>{{row.drugPackage.drug.brandName}} </td>
-      <td>{{row.currentIssuedQty | number:'1.2-2'}} @ {{row.drugPackage.unitPrice | number:'1.2-2'}}</td>
-      <td align="right">{{(row.currentIssuedQty * row.drugPackage.unitPrice)| number:'1.2-2'}}</td>
-    </tr>
-    <tr *ngFor="let row of makeIssue.serviceItems">
-      <td>{{row.medicalServItem.itemDescription}}</td>
-      <td></td>
-      <td align="right">{{row.fee | number:'1.2-2'}}</td>
-    </tr>
-  </table>
-  <hr/>
-  <label>Total:{{total | number:'1.2-2'}}</label>
-  <br/>
-  <label>Cash :{{paidAmount | number:'1.2-2'}}</label>
-  <br/>
-  <label>Balance : {{(paidAmount - total) | number:'1.2-2'}}</label>
+<div id="printContent" style="display: none">
+  <div style="font-family: 'Courier New', 'Courier New', Serif;
+font-style: normal;
+font-size: 10px;
+text-align: left;">
+    <label>Suwapiyasa Medical Center - Indoor Pharmacy</label>
+    <br/>
+    <label>Date :{{makeIssue.dateOfIssue | date}}</label>
+    <table style="font-family: 'Courier New', 'Courier New', Serif;
+font-style: normal;
+font-size: 10px;">
+      <tr *ngFor="let row of makeIssue.details">
+        <td>{{row.drugPackage.drug.brandName}}</td>
+        <td>{{row.currentIssuedQty | number:'1.2-2'}} @ {{row.drugPackage.unitPrice | number:'1.2-2'}}</td>
+        <td align="right">{{(row.currentIssuedQty * row.drugPackage.unitPrice)| number:'1.2-2'}}</td>
+      </tr>
+      <tr *ngFor="let row of makeIssue.serviceItems">
+        <td>{{row.medicalServItem.itemDescription}}</td>
+        <td></td>
+        <td align="right">{{row.fee | number:'1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>Total:</td>
+        <td></td>
+        <td>{{total | number:'1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>Cash:</td>
+        <td></td>
+        <td>{{paidAmount | number:'1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>Balance:</td>
+        <td></td>
+        <td>{{(paidAmount - total) | number:'1.2-2'}}</td>
+      </tr>
+    </table>
+  </div>
 </div>
 <button type="button" class="btn btn-primary" (click)="print()" [disabled]="printDisabled">Print</button>
 

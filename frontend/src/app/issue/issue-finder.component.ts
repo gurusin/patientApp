@@ -58,13 +58,9 @@ export class IssueFinderComponent implements OnInit {
     popupWin.document.write(`
       <html>
         <head>
-           <style>
-           div {background-color: #2aabd2;
-           font-family: "Courier New";}
-            </style>
-         </head>
+        </head>
         <body onload="window.print();window.close()">
-        <div>${printContents}</div></body>
+        ${printContents}</body>
       </html>`
     );
     popupWin.document.close();
