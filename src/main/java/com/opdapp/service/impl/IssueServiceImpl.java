@@ -84,7 +84,13 @@ public class IssueServiceImpl implements IssueService {
         makeIssue.setPatient(prescription.getPatient());
         makeIssue.setDetails(makeIssueDetailDTOList);
         makeIssue.setPrescriptionId(prescription.getId());
-        makeIssue.setServiceItems(prescription.getMedicalServices());
+        // Services items are added only when a prescription is issued for the
+        // first time.
+        if (prescription.getPrescriptionStatus() == PrescriptionStatus.INITIAL)
+        {
+            makeIssue.setServiceItems(prescription.getMedicalServices());
+        }
+
         return makeIssue;
     }
 

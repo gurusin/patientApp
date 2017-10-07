@@ -38,11 +38,14 @@ export class IssueFinderComponent implements OnInit {
       }
     );
 
-    this.makeIssue.serviceItems.forEach(
-      item => {
-        this.total += item.fee
-      }
-    );
+    if (this.makeIssue.serviceItems != null)
+    {
+      this.makeIssue.serviceItems.forEach(
+        item => {
+          this.total += item.fee
+        }
+      );
+    }
   }
 
   ngOnInit() {

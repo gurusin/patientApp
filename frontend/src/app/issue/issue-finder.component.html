@@ -35,21 +35,23 @@
   </table>
   <br/>
 
+  <div *ngIf="makeIssue.serviceItems !=null">
   <h2>Services</h2>
-  <table class="table table-bordered">
-    <thead>
-    <tr>
-      <th>Service</th>
-      <th>Fee</th>
-      <th>External Reference</th>
-    </tr>
-    </thead>
-    <tr *ngFor="let row of makeIssue.serviceItems">
-      <td>{{row.medicalServItem.itemDescription}}</td>
-      <td>{{row.fee| number:'1.2-2'}}</td>
-      <td>{{row.externalRef}}</td>
-    </tr>
-  </table>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Service</th>
+        <th>Fee</th>
+        <th>External Reference</th>
+      </tr>
+      </thead>
+      <tr *ngFor="let row of makeIssue.serviceItems">
+        <td>{{row.medicalServItem.itemDescription}}</td>
+        <td>{{row.fee| number:'1.2-2'}}</td>
+        <td>{{row.externalRef}}</td>
+      </tr>
+    </table>
+  </div>
 
   <br/>
   <label>Total : {{total}}</label>
