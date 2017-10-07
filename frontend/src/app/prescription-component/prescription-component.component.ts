@@ -56,13 +56,13 @@ export class PrescriptionComponentComponent implements OnInit {
     comp.focus();
   }
 
-
   private searchPrescribable(searchId,nextComp:any) {
     this.drugService.searchPrescribable(searchId).subscribe(
       data => {
         this.prescribableDrug = data;
         this.prescribableDrug.selectedStrength = this.prescribableDrug.packages[0].strength;
         this.prescribableDrug.selectedStrengthIndex =0;
+        this.prescribableDrug.selectedFrequency =-1;
         this.selectStrength();
         this.drugId = this.prescribableDrug.drug.brandName;
         nextComp.focus();
@@ -170,7 +170,8 @@ export class PrescriptionComponentComponent implements OnInit {
   }
 
   private getNoOfDosesForPrescription(obj: PrescribableDrug) {
-    var freq = obj.doseFrequency[obj.selectedFrequency - 1];
+    console.log(obj.selectedFrequency);
+    var freq = obj.doseFrequency[obj.selectedFrequency];
     obj.neededQty = 1;
 
     // Should not be calculated  for local application etc.

@@ -36,7 +36,7 @@
     <td>{{prescribableDrug.unitPrice | number:'1.2-2'}}</td>
     <td><select [(ngModel)]="prescribableDrug.selectedFrequency" name="freq" required
      (change)="checkValid()" #freq>
-      <option *ngFor="let x of prescribableDrug.doseFrequency" value="{{x.doseFrequencyId}}">{{x.noofDoses +' '}}
+      <option *ngFor="let x of prescribableDrug.doseFrequency; let freqIndex=index" value="{{freqIndex}}">{{x.noofDoses +' '}}
         time(s) {{' '+x.timeUnit}}
       </option>
     </select>
