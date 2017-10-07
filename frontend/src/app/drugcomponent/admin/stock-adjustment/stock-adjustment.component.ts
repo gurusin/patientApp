@@ -49,7 +49,6 @@ export class StockAdjustmentComponent implements OnInit {
   }
 
   doSearch() {
-    console.log(this.searchCritera);
     this.drugService.searchAdjustment(this.searchCritera).subscribe(
       data => {
         this.adjustments = data;

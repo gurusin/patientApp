@@ -170,7 +170,6 @@ export class PrescriptionComponentComponent implements OnInit {
   }
 
   private getNoOfDosesForPrescription(obj: PrescribableDrug) {
-    console.log(obj.selectedFrequency);
     var freq = obj.doseFrequency[obj.selectedFrequency];
     obj.neededQty = 1;
 

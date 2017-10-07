@@ -35,7 +35,6 @@ export class PatientVisitComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.patientService.patientObject);
         this.patient = this.patientService.patientObject;
         this.patientVisit = new Patientvisit();
         this.patientVisit.patientId = this.patient.patientId;

@@ -24,7 +24,6 @@ export class PrescriptiondetailComponent implements OnInit {
       {
         this.fullPrescription = this.drugService.getPrescription(this.prescription.prescriptionId)
             .subscribe(data =>{
-              console.log(data);
               this.fullPrescription = data;
             });
       }

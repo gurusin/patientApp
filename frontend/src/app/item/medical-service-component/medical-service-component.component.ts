@@ -47,7 +47,6 @@ export class MedicalServiceComponentComponent implements OnInit {
 
         this.prodTypeService.getAllMedicalServices().subscribe(
             data =>{
-                console.log(data);
                 this.medicalServices = data;
             }
         );

@@ -27,9 +27,7 @@ export class TreatmentComponent  {
   {
     this.patientService.searchByNIC(this.nic).subscribe(
       data =>{
-        console.log(data);
         this.patientList = data;
-        console.log(this.patientList);
       }
     );
   }
