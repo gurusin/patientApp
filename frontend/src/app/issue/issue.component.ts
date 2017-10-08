@@ -45,7 +45,7 @@ export class IssueComponent implements OnInit {
       });
      this.issueService.registerIssue(makeIssue).subscribe(
         data =>{
-          this.router.navigate(['start']);
+          this.printDisabled = false;
         }
      );
 
@@ -57,6 +57,21 @@ export class IssueComponent implements OnInit {
       alert('Please select a patient first');
       this.router.navigate(['start']);
     }
+  }
+  print() {
+    var printContents = document.getElementById('printContent').innerHTML;
+    let popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+        </head>
+        <body onload="window.print();window.close()">
+        ${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+    this.router.navigate(['pharmacyList']);
   }
 
 }

@@ -52,6 +52,9 @@
       <option value="ORAL">Oral</option>
       <option value="LA">Local Application</option>
       <option value="EYE_DROP">Eye Drop</option>
+      <option value="EAR_DROP">Ear Drops</option>
+      <option value="NASAL_DROP">Nasal Drop</option>
+      <option value="INHALE">Inhale</option>
     </select>
     </td>
     <td *ngIf="this.prescribableDrug.selectedDuration !=='When Needed'">{{prescribableDrug.neededQty | number:'1.2-2'}}</td>
@@ -63,7 +66,7 @@
       <button type='button' class="btn btn-primary" (click)="addDrug(drugName)" [disabled]="!prescribableDrug.valid">Add</button>
     </td>
     <hr/>
-  <tr *ngFor="let row of patientVisit.prescribableDrug">
+  <tr *ngFor="let row of patientVisit.prescribableDrug;let k = index">
     <td>{{row.drug.brandName}}</td>
     <td>{{row.selectedStrength.strengthAmount}}{{row.selectedStrength.strengthUnit.unitName}}</td>
     <td>{{row.availableQty}}</td>
@@ -75,7 +78,7 @@
     <td>{{row.meal}}</td>
     <td>{{row.neededQty}}</td>
     <td>{{row.price | number:'1.2-2'}}</td>
-    <td><button class="btn btn-danger" (click)="removeDrug(i)">Remove</button></td>
+    <td><button class="btn btn-danger" (click)="removeDrug(k)">Remove</button></td>
   </tr>
 </table>
 <br/>

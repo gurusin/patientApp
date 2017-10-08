@@ -19,6 +19,15 @@ public class PrescriptionIssueDetail {
 
     private double balanceAmount;
 
+    private double issuedAmount;
+
+    public double getIssuedAmount() {
+        return issuedAmount;
+    }
+
+    public void setIssuedAmount(double issuedAmount) {
+        this.issuedAmount = issuedAmount;
+    }
 
     public long getId() {
         return id;

@@ -75,7 +75,7 @@ public class IssueServiceImpl implements IssueService {
                 dto.setDuration(detail.getDuration() + "," + detail.getIntervalUnit());
                 dto.setFrequency(detail.getFrequency().getValue());
                 dto.setDose(detail.getAmount());
-                dto.setIssuedQty(obj.getPrescribedAmount() - obj.getBalanceAmount());
+                dto.setIssuedQty(obj.getIssuedAmount());
             }
             makeIssueDetailDTOList.add(dto);
         }
@@ -102,6 +102,13 @@ public class IssueServiceImpl implements IssueService {
         final double noOfItemsPerOneTake = prescDet.getAmount();
         final double duration = prescDet.getDuration();
         double durationInDays = 0;
+
+        // Amount is calculated only for oral application
+        if (!prescDet.getMeal().equals(Meal.ORAL))
+        {
+            return 1;
+        }
+
         switch (prescDet.getIntervalUnit().toUpperCase()) {
             case "DAYS": {
                 durationInDays = duration;
@@ -154,15 +161,16 @@ public class IssueServiceImpl implements IssueService {
                 issueDetail.setPrescriptionDetailId(dto.getPrescriptionDetailId());
                 issueDetail.setPrescribedAmount(dto.getPrescribedQty());
                 issueDetail.setBalanceAmount(dto.getPrescribedQty() - dto.getCurrentIssuedQty());
+                issueDetail.setIssuedAmount(dto.getCurrentIssuedQty());
                 prescriptionIssueDetailRepository.save(issueDetail);
                 completedPrescription = completedPrescription && issueDetail.getBalanceAmount() < 1;
 
             } else {
                 newPrescription = false;
                 issueDetail.setBalanceAmount(dto.getIssuedQty() - dto.getCurrentIssuedQty());
+                issueDetail.setIssuedAmount(issueDetail.getIssuedAmount() + dto.getCurrentIssuedQty());
                 prescriptionIssueDetailRepository.save(issueDetail);
                 completedPrescription = completedPrescription && issueDetail.getBalanceAmount() < 1;
-
             }
 
             // Update stock in DrugPackage

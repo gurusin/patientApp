@@ -42,15 +42,6 @@
       {{prescription.patient.calculatedAge}} </label>
     <br/>
     <table class="table table-bordered">
-      <!--<thead>-->
-      <!--<tr style="border:1px;font-size: 12px">-->
-      <!--<td>Drug</td>-->
-      <!--<td>Strength</td>-->
-      <!--<td>Dosage</td>-->
-      <!--<td>Amount</td>-->
-      <!--<td>Duration</td>-->
-      <!--</tr>-->
-      <!--</thead>-->
       <tbody>
       <tr *ngFor="let row of prescription.prescriptionDetails" style="border:1px;font-size: 12px">
         <!-- Tablets & fluids-->
@@ -80,6 +71,33 @@
           <td> for&nbsp;</td>
           <td>{{row.duration}}&nbsp;{{row.intervalUnit}}</td>
           <td>Eye Drop</td>
+        </div>
+
+        <!-- Ear Drops -->
+        <div *ngIf="row.meal==='EAR_DROP'">
+          <td>{{row.drugPackage.drug.brandName}} - Ear Drops,</td>
+          <td>{{row.frequency.noofDoses}}&nbsp;Time(s)&nbsp;{{row.frequency.timeUnit}}</td>
+          <td> for&nbsp;</td>
+          <td>{{row.duration}}&nbsp;{{row.intervalUnit}}</td>
+          <td>Ear Drop</td>
+        </div>
+
+        <!-- Nasal Drops -->
+        <div *ngIf="row.meal==='NASAL_DROP'">
+          <td>{{row.drugPackage.drug.brandName}} - Nasal Drops,</td>
+          <td>{{row.frequency.noofDoses}}&nbsp;Time(s)&nbsp;{{row.frequency.timeUnit}}</td>
+          <td> for&nbsp;</td>
+          <td>{{row.duration}}&nbsp;{{row.intervalUnit}}</td>
+          <td>Nasal Drop</td>
+        </div>
+
+        <!-- Nasal Drops -->
+        <div *ngIf="row.meal==='INHALE'">
+          <td>{{row.drugPackage.drug.brandName}} - Inhale,</td>
+          <td>{{row.frequency.noofDoses}}&nbsp;Time(s)&nbsp;{{row.frequency.timeUnit}}</td>
+          <td> for&nbsp;</td>
+          <td>{{row.duration}}&nbsp;{{row.intervalUnit}}</td>
+          <td>Inhale</td>
         </div>
       </tr>
       <hr/>

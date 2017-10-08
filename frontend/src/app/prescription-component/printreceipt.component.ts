@@ -18,7 +18,9 @@ export class PrintreceiptComponent implements OnInit {
   }
 
   ngOnInit() {
+
       this.prescription = this.drugService.savedPrescription;
+      console.log(this.prescription);
   }
 
 

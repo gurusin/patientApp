@@ -54,7 +54,7 @@
   </div>
 
   <br/>
-  <label>Total : {{total}}</label>
+  <label>Total : {{ total | number:'1.2-2'}}</label>
   <br/>
   <label>Amount Paid :</label><input type="number" [(ngModel)]="paidAmount">
   <br/>

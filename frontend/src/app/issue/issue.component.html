@@ -1,50 +1,53 @@
 <div class="container">
   <label>Date of Issue</label>
   <input type="date" [ngModel]="dateOfIssue | date:'yyyy-MM-dd'"
-    (ngModelChange)="dateOfIssue = $event"/>
+         (ngModelChange)="dateOfIssue = $event"/>
   <br/>
 
   <app-service-component [patientVisit]="patientVisit"></app-service-component>
   <div>
     <button type="button" class="btn btn-primary" (click)="saveIssue()"> Save Issue</button>
     <button type="button" class="btn btn-danger" (click)="cancelIssue()"> Cancel Issue</button>
+    <button type="button" class="btn btn-primary" (click)="print()" [disabled]="printDisabled">Print</button>
+  </div>
+</div>
+
+
+  <!--&lt;!&ndash; Printing Part &ndash;&gt;-->
+
+  <div id="printContent" style="display: none">
+    <div style="font-family: 'Courier New', 'Courier New', Serif;
+font-style: normal;
+font-size: 10px;
+text-align: left;">
+      <h4> Suwapiyasa Medical Center - Indoor Pharmacy</h4>
+      <h4>Date :{{dateOfIssue | date}}</h4>
+      <br/>
+      <label>Patient :</label>
+      <label>[{{patientService.patientObject.patientId}}]-{{patientService.patientObject.firstname}}
+        ,{{patientService.patientObject.lastname}} -
+        {{patientService.patientObject.calculatedAge}} </label>
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Service</th>
+          <th>Fee</th>
+          <th>External Reference</th>
+        </tr>
+        </thead>
+        <tr *ngFor="let row of patientVisit.medicalServices">
+          <td>{{row.itemDescription}}</td>
+          <td>{{row.fee}}</td>
+          <td>{{row.externalRef}}</td>
+        </tr>
+      </table>
+      <hr/>
+      <label>Total:{{total | number:'1.2-2'}}}</label>
+      <br/>
+      <label>Cash :{{paidAmount | number:'1.2-2'}}}</label>
+      <br/>
+      <label>Balance : {{(paidAmount - total)| number:'1.2-2'}}} </label>
+    </div>
   </div>
 
-
-<!--&lt;!&ndash; Printing Part &ndash;&gt;-->
-
-<!--<div id="printContent" style="display: none">-->
-  <!--<h4> Suwapiyasa Medical Center - Indoor Pharmacy</h4>-->
-  <!--<h4>Date :{{makeIssue.dateOfIssue | date}}</h4>-->
-  <!--<h5>Drugs</h5>-->
-  <!--<table>-->
-    <!--<tr *ngFor="let row of makeIssue.details">-->
-      <!--<td>{{row.drugPackage.drug.brandName}}</td>-->
-      <!--<td>{{row.currentIssuedQty}}</td>-->
-      <!--<td>{{row.currentIssuedQty * row.drugPackage.unitPrice}}</td>-->
-    <!--</tr>-->
-  <!--</table>-->
-  <!--<h5> Services </h5>-->
-  <!--<table class="table table-bordered">-->
-    <!--<thead>-->
-    <!--<tr>-->
-      <!--<th>Service</th>-->
-      <!--<th>Fee</th>-->
-      <!--<th>External Reference</th>-->
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tr *ngFor="let row of makeIssue.serviceItems">-->
-      <!--<td>{{row.medicalServItem.itemDescription}}</td>-->
-      <!--<td>{{row.fee}}</td>-->
-      <!--<td>{{row.externalRef}}</td>-->
-    <!--</tr>-->
-  <!--</table>-->
-  <!--<hr/>-->
-  <!--<label>Total:{{total}}</label>-->
-  <!--<br/>-->
-  <!--<label>Cash :{{paidAmount}}</label>-->
-  <!--<br/>-->
-  <!--<label>Balance : {{paidAmount - total}}</label>-->
-<!--</div>-->
-<!--<button type="button" class="btn btn-primary" (click)="print()">Print</button>-->
 
