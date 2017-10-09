@@ -71,7 +71,6 @@ export class IssueComponent implements OnInit {
     }
   }
   print() {
-    console.log(this.patientVisit.medicalServices);
     var printContents = document.getElementById('printContent').innerHTML;
     let popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
     popupWin.document.open();
