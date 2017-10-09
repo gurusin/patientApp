@@ -84,6 +84,7 @@ export class IssueComponent implements OnInit {
       </html>`
     );
     popupWin.document.close();
+    this.patientService.patientObject= null;
     this.router.navigate(['pharmacyList']);
   }
 
