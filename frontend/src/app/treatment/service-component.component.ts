@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Patientvisit} from "./patientvisit";
 import {ItemProductService} from "../services/itemProduct.service";
 import {forEach} from "@angular/router/src/utils/collection";
+
 
 @Component({
     selector: 'app-service-component',
@@ -11,6 +12,8 @@ import {forEach} from "@angular/router/src/utils/collection";
 export class ServiceComponentComponent implements OnInit {
 
     @Input() patientVisit: Patientvisit;
+    @Output() serviceAdded: EventEmitter<number> = new EventEmitter<number>();
+    @Output() serviceRemoved:EventEmitter<number> = new EventEmitter<number>();
     medicalServices = [];
     servicesTotal = 0;
 
@@ -24,7 +27,7 @@ export class ServiceComponentComponent implements OnInit {
                 this.serviceChanged(0,0);
                 var x =Object.assign({},this.medicalServices[0]);
                 this.patientVisit.medicalServices.push(x);
-                this.servicesTotal = this.medicalServices[0].unitPrice;
+               this.calculateTotal();
             }
         );
     }
@@ -35,6 +38,7 @@ export class ServiceComponentComponent implements OnInit {
       this.patientVisit.medicalServices.forEach(item =>{
         this.servicesTotal += item.unitPrice;
       });
+      this.serviceAdded.emit(this.servicesTotal);
 
     }
 
@@ -62,8 +66,6 @@ export class ServiceComponentComponent implements OnInit {
           this.patientVisit.medicalServices.splice(i);
         }
         this.calculateTotal();
-
     }
-
 
 }

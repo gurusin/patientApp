@@ -70,6 +70,11 @@ export class IssueFinderComponent implements OnInit {
     this.router.navigate(['pharmacyList']);
   }
 
+  updated(event)
+  {
+    this.total = event;
+  }
+
 }
 
 

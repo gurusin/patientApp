@@ -16,15 +16,27 @@ export class IssueComponent implements OnInit {
   patientVisit =new Patientvisit();
   dateOfIssue = new Date();
   printDisabled = true;
+  total = 0;
+  paidAmount =0;
 
   constructor(private issueService: IssueServiceService, private router: Router,
               private patientService:PatientServiceService) {
+
+    this.calculateTotal();
 
   }
 
   cancelIssue()
   {
     this.router.navigate(['start']);
+  }
+
+  calculateTotal()
+  {
+    this.total =0;
+    this.patientVisit.medicalServices.forEach( item =>{
+      this.total += this.total + item.unitPrice;
+    });
   }
 
   saveIssue()
@@ -59,6 +71,7 @@ export class IssueComponent implements OnInit {
     }
   }
   print() {
+    console.log(this.patientVisit.medicalServices);
     var printContents = document.getElementById('printContent').innerHTML;
     let popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
     popupWin.document.open();
@@ -72,6 +85,11 @@ export class IssueComponent implements OnInit {
     );
     popupWin.document.close();
     this.router.navigate(['pharmacyList']);
+  }
+
+  updated(event)
+  {
+    this.total = event;
   }
 
 }

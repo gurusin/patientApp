@@ -4,7 +4,11 @@
          (ngModelChange)="dateOfIssue = $event"/>
   <br/>
 
-  <app-service-component [patientVisit]="patientVisit"></app-service-component>
+  <app-service-component [patientVisit]="patientVisit" (serviceRemoved)="updated($event)"
+   (serviceAdded)="updated($event)">
+   </app-service-component>
+  <label>Total : {{total | number:'1.2-2'}}</label>
+  <tr><td> <label>Amount Paid :</label><input type="number" [(ngModel)]="paidAmount"></td></tr>
   <div>
     <button type="button" class="btn btn-primary" (click)="saveIssue()"> Save Issue</button>
     <button type="button" class="btn btn-danger" (click)="cancelIssue()"> Cancel Issue</button>
@@ -27,26 +31,31 @@ text-align: left;">
       <label>[{{patientService.patientObject.patientId}}]-{{patientService.patientObject.firstname}}
         ,{{patientService.patientObject.lastname}} -
         {{patientService.patientObject.calculatedAge}} </label>
+
+      <br/>
+
       <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th>Service</th>
-          <th>Fee</th>
-          <th>External Reference</th>
-        </tr>
-        </thead>
         <tr *ngFor="let row of patientVisit.medicalServices">
           <td>{{row.itemDescription}}</td>
-          <td>{{row.fee}}</td>
-          <td>{{row.externalRef}}</td>
+          <td></td>
+          <td align="right">{{row.unitPrice |number:'1.2-2'}}</td>
+        </tr>
+        <tr>
+          <td><label>Total:</label></td>
+          <td></td>
+          <td>{{total | number:'1.2-2'}}</td>
+        </tr>
+        <tr>
+          <td><label>Cash:</label></td>
+          <td></td>
+          <td>{{paidAmount | number:'1.2-2'}}</td>
+        </tr>
+        <tr>
+          <td><label>Balance:</label></td>
+          <td></td>
+          <td>{{(paidAmount - total)| number:'1.2-2'}}</td>
         </tr>
       </table>
-      <hr/>
-      <label>Total:{{total | number:'1.2-2'}}}</label>
-      <br/>
-      <label>Cash :{{paidAmount | number:'1.2-2'}}}</label>
-      <br/>
-      <label>Balance : {{(paidAmount - total)| number:'1.2-2'}}} </label>
     </div>
   </div>
 
