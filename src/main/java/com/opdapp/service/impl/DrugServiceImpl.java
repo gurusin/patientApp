@@ -188,25 +188,31 @@ public class DrugServiceImpl implements DrugService {
 
     public DrugDTO saveDrug(final DrugDTO drugDTO) {
         Drug drug = createDrug(drugDTO);
-        drug.setBaseDrug(baseDrugRepository.findOne(drug.getBaseDrug().getBaseDrugId()));
+        drug.setBaseDrug(baseDrugRepository.findOne(drugDTO.getBaseDrug().getBaseDrugId()));
         Drug savedDrug = drugRepository.save(drug);
         return getDrugDTO(savedDrug);
     }
 
     private Drug createDrug(DrugDTO drugDTO) {
-        Drug drug = new Drug();
-        drug.setBaseDrug(createBaseDrug(drugDTO.getBaseDrug()));
-        drug.setBrandName(drugDTO.getBrandName());
-        drug.setDrugId(drugDTO.getDrugId());
+
+        Drug drug = drugRepository.findOne(drugDTO.getDrugId());
+        if (drug == null)
+        {
+            drug = new Drug();
+        }
+        drug.setBrandName(drugDTO.getBrandName().trim());
         drug.setLocation(drugDTO.getLocation());
         return drug;
     }
 
     private BaseDrug createBaseDrug(BaseDrugDTO baseDrugDTO) {
-        BaseDrug basedrug = new BaseDrug();
-        basedrug.setBaseDrugId(baseDrugDTO.getBaseDrugId());
-        basedrug.setBaseDrugName(baseDrugDTO.getBaseDrugName());
-        return basedrug;
+        BaseDrug baseDrug =  baseDrugRepository.findOne(baseDrugDTO.getBaseDrugId());
+        if (baseDrug == null)
+        {
+            baseDrug = new BaseDrug();
+            baseDrug.setBaseDrugName(baseDrugDTO.getBaseDrugName());
+        }
+        return baseDrug;
     }
 
     public BaseDrugDTO saveBaseDrug(final BaseDrugDTO baseDrugDTO) {

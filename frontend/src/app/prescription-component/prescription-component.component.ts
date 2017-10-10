@@ -57,16 +57,19 @@ export class PrescriptionComponentComponent implements OnInit {
   }
 
   private searchPrescribable(searchId,nextComp:any) {
-    this.drugService.searchPrescribable(searchId).subscribe(
-      data => {
-        this.prescribableDrug = data;
-        this.prescribableDrug.selectedStrength = this.prescribableDrug.packages[0].strength;
-        this.prescribableDrug.selectedStrengthIndex =0;
-        this.prescribableDrug.selectedFrequency =-1;
-        this.selectStrength();
-        this.drugId = this.prescribableDrug.drug.brandName;
-        nextComp.focus();
-      });
+    if (searchId > -1)
+    {
+      this.drugService.searchPrescribable(searchId).subscribe(
+        data => {
+          this.prescribableDrug = data;
+          this.prescribableDrug.selectedStrength = this.prescribableDrug.packages[0].strength;
+          this.prescribableDrug.selectedStrengthIndex =0;
+          this.prescribableDrug.selectedFrequency =-1;
+          this.selectStrength();
+          this.drugId = this.prescribableDrug.drug.brandName;
+          nextComp.focus();
+        });
+    }
   }
 
   public checkValid()
@@ -120,7 +123,7 @@ export class PrescriptionComponentComponent implements OnInit {
 
   searchDrug(event: any, dd:any, textCmp: any,nextComp: any) {
      var searchText:string = textCmp.value;
-    if (dd.selectedIndex > -1) {
+    if (dd.selectedIndex > -1 && searchText.length > 1) {
       var drugId = this.getSelectedId(searchText);
        this.searchPrescribable(drugId,nextComp);
 
