@@ -81,8 +81,7 @@
             <label for="dateOfBirth">DOB </label>
           </div>
           <div class="col-md-6">
-            <input type="date" id="dateOfBirth"  name="dateOfBirth" [ngModel] ="patient.dateOfBirth | date:'yyyy-MM-dd'"
-                   (ngModelChange)="patient.dateOfBirth = $event">
+            <input type="date" id="dateOfBirth"  name="dateOfBirth" [(ngModel)] ="patient.dateOfBirth">
           </div>
         </div>
       </div>
