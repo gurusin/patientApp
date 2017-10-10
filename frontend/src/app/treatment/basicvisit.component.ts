@@ -63,7 +63,7 @@ export class BasicvisitComponent implements OnInit {
                     bOK=false;
                     return;
                 }
-                detail.doseFrequencyId = obj.selectedFrequency;
+                detail.doseFrequencyId = obj.frequency.doseFrequencyId;
                 detail.intervalUnit = obj.selectedDuration;
                 detail.meal = obj.meal;
                 detail.neededQty = obj.neededQty;
