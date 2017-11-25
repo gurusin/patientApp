@@ -5,10 +5,7 @@ import com.opdapp.model.IssueNote;
 import com.opdapp.service.IssueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class IssueController {
@@ -33,5 +30,19 @@ public class IssueController {
     public @ResponseBody IssueNote findIssue(@RequestBody String issueNo)
     {
         return issueService.findIssue(Long.parseLong(issueNo));
+    }
+
+    @RequestMapping(path="/findIssueForPatient", method = RequestMethod.GET)
+    public @ResponseBody Iterable<IssueNote> findIssueForPatient(@RequestParam("patientId")
+                                                                     final long patientId)
+    {
+        return issueService.findIssueForPatient(patientId);
+    }
+
+    @RequestMapping(path="/migrateIssueNotes", method = RequestMethod.GET)
+    public @ResponseBody IssueNote migrateIssues()
+    {
+        issueService.migrateNotes();
+        return new IssueNote();
     }
 }

@@ -1,0 +1,47 @@
+<div class="container">
+  <h2>Past Issues & Bills</h2>
+  <table class="table table-bordered table-responsive">
+    <thead>
+    <th>Date of Issue</th>
+    <th>Print</th>
+    </thead>
+    <tr *ngFor="let obj of issueNotes">
+      <td>{{obj.issueDate | date }}</td>
+      <td>
+        <a [routerLink]="['/printIssue',obj.issueNote]">Print</a>
+      </td>
+    </tr>
+  </table>
+
+
+  <div id="printContent" style="display: none">
+    <div style="font-family: 'Courier New', 'Courier New', Serif;
+font-style: normal;
+font-size: 10px;
+text-align: left;">
+      <h4> Suwapiyasa Medical Center - Indoor Pharmacy</h4>
+      <h4>Date :{{selectedIssueNote.issueDate}}</h4>
+      <br/>
+      <label>Patient :</label>
+      <label>[{{patientService.patientObject.patientId}}]-{{patientService.patientObject.firstname}}
+        ,{{patientService.patientObject.lastname}} -
+        {{patientService.patientObject.calculatedAge}} </label>
+      <br/>
+      <h4>Duplicate</h4>
+      <br/>
+      <table class="table table-bordered">
+      <tr *ngFor="let row of selectedIssueNote.issueNoteDetails">
+      <td>{{row.drugPackage.drug.brandName}} ({{row.buyingQuantity}})</td>
+      <td></td>
+      <td align="right">{{row.buyingQuantity *  row.drugPackage.unitPrice|number:'1.2-2'}}</td>
+      </tr>
+        <br/>
+        <tr *ngFor="let row of selectedIssueNote.issueNoteServiceItems">
+          <td>{{row.medicalServItem.itemDescription}}</td>
+          <td></td>
+          <td align="right">{{row.medicalServItem.unitPrice|number:'1.2-2'}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

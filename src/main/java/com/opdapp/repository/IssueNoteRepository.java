@@ -1,6 +1,7 @@
 package com.opdapp.repository;
 
 import com.opdapp.model.IssueNote;
+import com.opdapp.model.Patient;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,6 @@ public interface IssueNoteRepository extends CrudRepository<IssueNote, Long> {
     List<IssueNote> findByIssueDate(final Date date);
 
     List<IssueNote> findByIssueDateBetween(final Date fromDate, final Date toDate);
+
+    Iterable<IssueNote> findByPatient(Patient patient);
 }

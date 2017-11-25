@@ -26,4 +26,10 @@ export class IssueServiceService {
     var url = localStorage.getItem("rootURL") +"prepareIssue";
     return this.http.post(url,prescriptionId).map((res:Response) =>res.json())
   }
+
+  findIssuesForPatient(patientId:number):Observable<any>
+  {
+    var url = localStorage.getItem("rootURL") +"findIssueForPatient?patientId="+patientId;
+    return this.http.get(url).map((res:Response) =>res.json())
+  }
 }

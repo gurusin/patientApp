@@ -17,6 +17,8 @@ public class IssueServiceImpl implements IssueService {
     @Autowired
     private ServiceIssueItemRepository serviceIssueItemRepository;
 
+
+
     @Autowired
     private IssueNoteRepository issueNoteRepository;
 
@@ -29,9 +31,29 @@ public class IssueServiceImpl implements IssueService {
     @Autowired
     private PrescriptionIssueDetailRepository prescriptionIssueDetailRepository;
 
+    @Autowired
+    private PatientRepository patientRepository;
+
     @Override
     public IssueNote findIssue(long issueNo) {
         return issueNoteRepository.findOne(issueNo);
+    }
+
+    @Override
+    public void migrateNotes() {
+        for (final IssueNote note : issueNoteRepository.findAll())
+        {
+            if (note.getPatient() == null)
+            {
+                // Find the patient and set
+            }
+        }
+    }
+
+    @Override
+    public Iterable<IssueNote> findIssueForPatient(long patientId) {
+        final Patient patient = patientRepository.findOne(patientId);
+        return issueNoteRepository.findByPatient(patient);
     }
 
     @Override
@@ -188,7 +210,6 @@ public class IssueServiceImpl implements IssueService {
 
         }
         note.setIssueNoteDetails(detailsSet);
-        issueNoteRepository.save(note);
         // Update the prescription
         final Prescription prescription = prescriptionRepository.findOne(issue.getPrescriptionId());
         if (completedPrescription) {
@@ -196,30 +217,37 @@ public class IssueServiceImpl implements IssueService {
         } else {
             prescription.setPrescriptionStatus(PrescriptionStatus.PARTIALLY_ISSED);
         }
-        prescriptionRepository.save(prescription);
+        if (prescription != null)
+        {
+            note.setPatient(prescription.getPatient());
+        }
 
         // Saving the services
         if (newPrescription) {
-            saveServices(issue, prescription);
+            saveServices(issue, prescription,note);
         }
+        issueNoteRepository.save(note);
+        prescriptionRepository.save(prescription);
     }
 
     private void makeServiceOnlyIssue(MakeIssue issue) {
         final IssueNote note = new IssueNote();
         note.setIssueDate(new java.sql.Date(issue.getDateOfIssue().getTime()));
-        note.setPatient(issue.getPatient()); // TODO : Load patient for session if this object is returned;
-
+        note.setPatient(issue.getPatient()); //
+        // TODO : Load patient for session if this object is returned;
+        final Set<IssueNoteServiceItem> serviceItems = new HashSet<>();
         for (final PrescriptionServiceItem serviceItem : issue.getServiceItems()) {
-            final ServiceIssueItem item = new ServiceIssueItem();
-            item.setPatient(issue.getPatient());
-            item.setPrescriptionId(-1);
+
+            final IssueNoteServiceItem item = new IssueNoteServiceItem();
+            item.setIssueNote(note);
             // Please load this if this object is returned
             item.setMedicalServItem(serviceItem.getMedicalServItem());
             item.setFee(serviceItem.getFee());
-            item.setExteranlId(serviceItem.getExternalRef());
-            item.setDate(new java.sql.Date(issue.getDateOfIssue().getTime()));
-            serviceIssueItemRepository.save(item);
+            item.setExternalId(serviceItem.getExternalRef());
+            serviceItems.add(item);
         }
+        note.setIssueNoteServiceItems(serviceItems);
+        issueNoteRepository.save(note);
     }
 
     /**
@@ -229,18 +257,18 @@ public class IssueServiceImpl implements IssueService {
      * @param issue
      * @param prescription
      */
-    private void saveServices(MakeIssue issue, Prescription prescription) {
+    private void saveServices(MakeIssue issue, Prescription prescription, final IssueNote note) {
+        final Set<IssueNoteServiceItem> serviceItems = new HashSet<>();
         for (final PrescriptionServiceItem serviceItem : issue.getServiceItems()) {
-            final ServiceIssueItem item = new ServiceIssueItem();
-            item.setPatient(prescription.getPatient());
-            item.setPrescriptionId(prescription.getId());
+            final IssueNoteServiceItem item = new IssueNoteServiceItem();
+            item.setIssueNote(note);
             // Please load this if this object is returned
             item.setMedicalServItem(serviceItem.getMedicalServItem());
             item.setFee(serviceItem.getFee());
-            item.setExteranlId(serviceItem.getExternalRef());
-            item.setDate(new java.sql.Date(issue.getDateOfIssue().getTime()));
-            serviceIssueItemRepository.save(item);
+            item.setExternalId(serviceItem.getExternalRef());
+            serviceItems.add(item);
         }
+        note.setIssueNoteServiceItems(serviceItems);
     }
 
     /**

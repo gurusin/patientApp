@@ -10,4 +10,11 @@ public interface IssueService {
     void makeIssue(MakeIssue issue);
 
     MakeIssue createIssueForPrescription(String prescriptionId);
+
+    Iterable<IssueNote> findIssueForPatient(long patientId);
+
+    /**
+     * Fills the patient Id in the issue notes
+     */
+    void migrateNotes();
 }

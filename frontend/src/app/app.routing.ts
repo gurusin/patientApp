@@ -32,8 +32,12 @@ import {LoginComponentComponent} from "./login-component/login-component.compone
 import {HomeComponent} from "./home/home.component";
 import {StockAdjustmentComponent} from "./drugcomponent/admin/stock-adjustment/stock-adjustment.component";
 import {StrengthComponent} from "./drugcomponent/admin/strengh/strength.component";
+import {IssueHistoryComponent} from "./issue/issue-history.component";
+import {BillReprintComponent} from "./issue/bill-reprint.component";
 
 const APP_ROUTES: Routes = [
+  {path: 'printIssue/:issue', component: BillReprintComponent},
+  {path: 'issueHistory', component: IssueHistoryComponent},
   {path: '', component: LoginComponentComponent},
   {path: 'serviceIssue', component: IssueComponent},
   {path: 'adjustStock', component: StockAdjustmentComponent},

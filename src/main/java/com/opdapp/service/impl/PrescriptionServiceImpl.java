@@ -108,31 +108,6 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         return dtoSet;
     }
 
-    private IssueNote saveIssueNote(Prescription prescription) {
-        IssueNote issueNote = new IssueNote();
-        issueNote.setPatient(prescription.getPatient());
-        issueNote.setIssueDate(prescription.getDate());
-        issueNote.setIssueStatus(IssueStatus.CREATED);
-        issueNote.setPaymentMethod(PaymentMethod.CASH);
-        issueNote.setExternalId(prescription.getId());
-        issueNote.setIssueNoteDetails(createIssueDetails(prescription, issueNote));
-        issueNote.setIssueNoteServiceItems(createIssueNoteServiceItems(issueNote,prescription));
-        return issueNoteRepository.save(issueNote);
-    }
-
-    private Set<IssueNoteServiceItem> createIssueNoteServiceItems(IssueNote issueNote, Prescription prescription) {
-       final Set<IssueNoteServiceItem> returnSet = new HashSet<>();
-       for (final PrescriptionServiceItem item : prescription.getMedicalServices())
-       {
-           final IssueNoteServiceItem obj = new IssueNoteServiceItem();
-           obj.setIssueNote(issueNote);
-           obj.setFee(item.getFee());
-           obj.setMedicalServItem(item.getMedicalServItem());
-           obj.setExternalId(item.getExternalRef());
-           returnSet.add(obj);
-       }
-       return returnSet;
-    }
 
     private Set<IssueNoteDetails> createIssueDetails(Prescription prescription, final IssueNote issueNote) {
         Set<IssueNoteDetails> detailsSet = new HashSet<IssueNoteDetails>();
