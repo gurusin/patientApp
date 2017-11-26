@@ -207,7 +207,6 @@ public class IssueServiceImpl implements IssueService {
             detail.setPrescribedQty(dto.getPrescribedQty());
             detail.setIssueInformation("");
             detailsSet.add(detail);
-
         }
         note.setIssueNoteDetails(detailsSet);
         // Update the prescription

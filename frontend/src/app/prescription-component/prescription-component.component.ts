@@ -203,6 +203,9 @@ export class PrescriptionComponentComponent implements OnInit {
 }
 
 export class Prescription {
+  id:number;
+  patient:Patient;
+  prescriptionId:number;
   symptoms: string;
   diagnosis: string;
   notes: string;
@@ -210,7 +213,8 @@ export class Prescription {
   patientId: number;
   medicalServices: any[];
   externalNote: string;
-
+  prescriptionDetails =[];
+  prescriptionStatus;
 }
 
 export class PrescriptionDetail {

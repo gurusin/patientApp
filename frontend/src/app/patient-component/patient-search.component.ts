@@ -39,6 +39,7 @@ export class PatientSearchComponent {
     this.patientService.patientObject = data;
     if (this.loginService.loggedInUser.userType ===1)
     {
+      this.prepareForPrescription();
       this.router.navigate(["patientvisit/treatment"]);
     } else
     {
@@ -58,6 +59,7 @@ export class PatientSearchComponent {
     if (event.keyCode == 13) {
       this.patientService.getByPhoneNo(this.phone).subscribe(
           data =>{
+            this.prepareForPrescription();
               this.patientService.patientObject = data;
               this.router.navigate(["patientvisit/treatment"]);
           }
@@ -74,6 +76,7 @@ export class PatientSearchComponent {
     if (event.keyCode == 13) {
       this.patientService.getByNIC(this.nic).subscribe(
           data =>{
+            this.prepareForPrescription();
             this.patientService.patientObject = data;
               this.router.navigate(["patientvisit/treatment"]);
           }
@@ -117,6 +120,7 @@ export class PatientSearchComponent {
             var patId = this.patientList[this.patIndex].patientId;
             this.patientService.getByPatNo(patId).subscribe(
                 data =>{
+                    this.prepareForPrescription();
                     this.patientService.patientObject = data;
                     this.router.navigate(["patientvisit/treatment"]);
                 }
@@ -131,5 +135,10 @@ export class PatientSearchComponent {
         } else if (value.length < 2) {
             this.patientList = [];
         }
+    }
+
+    prepareForPrescription()
+    {
+      this.patientService.newPatientVisit();
     }
 }

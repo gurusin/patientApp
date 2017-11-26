@@ -21,15 +21,18 @@ export class ServiceComponentComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.prodTypeService.getAllMedicalServices().subscribe(
-            data => {
-                this.medicalServices = data;
-                this.serviceChanged(0,0);
-                var x =Object.assign({},this.medicalServices[0]);
-                this.patientVisit.medicalServices.push(x);
-               this.calculateTotal();
-            }
-        );
+         this.prodTypeService.getAllMedicalServices().subscribe(
+           data => {
+             this.medicalServices = data;
+             if (this.patientVisit.prescriptionId <= 0)
+             {
+               var x = Object.assign({}, this.medicalServices[0]);
+               this.patientVisit.medicalServices.push(x);
+             }else
+             {
+             }
+             this.calculateTotal();
+           });
     }
 
     calculateTotal()

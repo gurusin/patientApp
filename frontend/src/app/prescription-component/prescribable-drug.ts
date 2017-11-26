@@ -22,6 +22,7 @@ export class PrescribableDrug {
   price = 0.00;
   neededQty = 0;
   frequency : Dosefrequency;
+  drugPackage:any;
   valid=false;
 
   constructor() {

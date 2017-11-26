@@ -41,6 +41,7 @@
       <th width="60%">Drug details</th>
       <th width="20%">Status</th>
       <th width="5%">Print</th>
+      <th width="5%">Edit</th>
     </tr>
     <!---->
     <tr *ngFor="let obj of prescriptionList | patient:listFilter.value; let i = index">
@@ -59,19 +60,12 @@
                 (click)="printView(obj)">Print
         </button>
       </td>
+      <td>
+        <button type="button" class="btn btn-primary"
+                (click)="editPrescription(obj)" [disabled]="isLocked(obj)">Edit
+        </button>
+      </td>
     </tr>
   </table>
 </div>
-<!---->
-<!--<td>-->
-<!--<ul>-->
-<!--<li *ngFor="let row of obj.prescriptionDetails">-->
-<!--{{row.drugPackage.drug.brandName}},{{row.drugPackage.drug.baseDrug.baseDrugName}}-->
-<!--</li>-->
-<!--</ul>-->
-<!--</td>-->
-<!--<td>Need the issue status here</td>-->
-<!--<td></td>-->
-<!--</tr>-->
-<!--</table>-->
-<!--</div>-->
+

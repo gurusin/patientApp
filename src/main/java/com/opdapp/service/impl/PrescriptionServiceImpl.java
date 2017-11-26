@@ -77,6 +77,18 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Override
     public Prescription savePrescription(PrescriptionDTO dto) {
 
+        if (dto.getPrescriptionId() >0)
+        {
+            final Prescription oldPrescription = prescriptionRepository.findOne(dto.getPrescriptionId());
+            if (oldPrescription.getPrescriptionStatus() != PrescriptionStatus.INITIAL)
+            {
+                 throw new RuntimeException("Can't change a prescription after issued");
+            }
+            oldPrescription.setPrescriptionStatus(PrescriptionStatus.CANCELLED);
+            prescriptionRepository.save(oldPrescription);
+            dto.setPrescriptionId(0l);
+        }
+
         final Prescription prescription = createPrescription(dto);
         prescription.setPrescriptionDetails(createDetails(dto, prescription));
         prescription.setMedicalServices(createMedicalServices(dto,prescription));

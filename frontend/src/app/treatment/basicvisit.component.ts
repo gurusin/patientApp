@@ -23,14 +23,9 @@ export class BasicvisitComponent implements OnInit {
     patientVisit: Patientvisit;
     @Input() patient: Patient;
 
-    // dialogRef: MdDialogRef<PrintpopComponent>;
-
     constructor(private patientService: PatientServiceService,
                 private drugService: DrugServiceService, private router: Router) {
-        // public mdDialog: MdDialog){//}, private popup:Popup) {
-        this.patientVisit = new Patientvisit();
-        this.patientVisit.diagnoseData = '';
-        this.patientVisit.prescribableDrug = []
+        this.patientVisit = this.patientService.patientVisit;
     }
 
     onCancel() {
@@ -43,6 +38,7 @@ export class BasicvisitComponent implements OnInit {
 
     onSave() {
         var presc = new Prescription();
+        presc.prescriptionId = this.patientVisit.prescriptionId;
         presc.medicalServices = this.patientVisit.medicalServices;
         presc.prescriptionDetailDTOS = [];
         presc.patientId = this.patientService.patientObject.patientId;
@@ -54,10 +50,15 @@ export class BasicvisitComponent implements OnInit {
         var bOK = true;
         this.patientVisit.prescribableDrug.forEach((obj: PrescribableDrug) => {
                 var detail:PrescriptionDetail = new PrescriptionDetail();
-                detail.drugPackageId = obj.packages[obj.selectedStrengthIndex].drugPackageId;
+                if (obj.packages && obj.packages.length >0)
+                {
+                  detail.drugPackageId = obj.packages[obj.selectedStrengthIndex].drugPackageId;
+                } else {
+                  detail.drugPackageId = obj.drugPackage.drugPackageId;
+                }
                 detail.amount = obj.doseAmount;
                 detail.duration = obj.doseDuration;
-                if (obj.selectedStrengthIndex == null)
+                if (detail.drugPackageId < 0 )
                 {
                     alert('Prescription has empty fields');
                     bOK=false;

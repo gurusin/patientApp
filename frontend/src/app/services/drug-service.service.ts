@@ -7,6 +7,7 @@ import {Basedrug} from "../drugcomponent/basedrug";
 import {Drug} from "../drugcomponent/drug";
 import {DrugPackage} from "../drugcomponent/drug-package";
 import {Strength} from "../drugcomponent/strength";
+import {Patientvisit} from "../treatment/patientvisit";
 
 @Injectable()
 export class DrugServiceService {
