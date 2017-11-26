@@ -6,6 +6,9 @@
   </div>
   <br>
   <div *ngIf="showHistory">
+    <div *ngIf="patientService.patientObject && patientService.patientObject.patientId > 0" class="container">
+      {{patientService.patientObject.allergies}}
+    </div>
     <app-prescription-history></app-prescription-history>
   </div>
 </div>
