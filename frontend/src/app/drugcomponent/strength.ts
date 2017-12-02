@@ -2,6 +2,8 @@
 
 export class Strength {
   strengthId: number;
-  strengthUnit: string;
+  strengthUnit: {
+    unitName:string;
+  };
   strengthAmount: number;
 }

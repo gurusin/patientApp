@@ -12,5 +12,5 @@ public interface MedicalServiceService
 
     MedicalServItem save(MedicalServItem medicalServiceItem);
 
-    DailyIncomeReport getDailyIncome(Date date);
+    DailyIncomeReport getDailyIncome(DailyIncomeReport report);
 }

@@ -4,23 +4,30 @@ import com.opdapp.dto.DailyIncome;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 public class DailyIncomeReport {
 
-    private Date date;
+    private Date fromDate;
     private Collection<DailyIncome> drugIncome;
     private Collection<DailyIncome> servicesIncome;
     private double drugTotal;
     private double servicesTotal;
+    private Date toDate;
 
-    public Date getDate() {
-        return date;
+    public Date getToDate() {
+        return toDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
+    }
+
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
     }
 
     public Collection<DailyIncome> getDrugIncome() {

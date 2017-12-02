@@ -29,7 +29,7 @@
     <td><select name='strength' [(ngModel)]="prescribableDrug.selectedStrengthIndex"
                 (change)="selectStrength()" required>
       <option *ngFor="let x of prescribableDrug.packages;let j=index" value="{{j}}">
-        {{x.strength.strengthAmount+x.strength.strengthUnit.unitName}}
+        {{x.strength.strengthAmount+","+x.strength.strengthUnit.unitName}}
       </option>
     </select>
     </td>

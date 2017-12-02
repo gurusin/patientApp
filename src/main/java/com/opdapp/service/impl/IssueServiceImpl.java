@@ -219,6 +219,7 @@ public class IssueServiceImpl implements IssueService {
         if (prescription != null)
         {
             note.setPatient(prescription.getPatient());
+            note.setPrescriptionId(prescription.getId());
         }
 
         // Saving the services

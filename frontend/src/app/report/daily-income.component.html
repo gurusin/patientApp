@@ -1,10 +1,13 @@
 <div class="container">
 
-  <label> Date :</label><input type="date" [ngModel]="dailyIncome.date |date:'yyyy-MM-dd'"
-                               (ngModelChange)="dailyIncome.date = $event">
-  <button type="button" class="btn btn-primary" (click)="doReport()">Execute</button>
+  <label>  From Date :</label><input type="date" [ngModel]="dailyIncome.fromDate |date:'yyyy-MM-dd'"
+                               (ngModelChange)="dailyIncome.fromDate = $event">
 
-  <h3> Daily Report for {{dailyIncome.date | date}}</h3>
+  <label>  To Date :</label><input type="date" [ngModel]="dailyIncome.toDate |date:'yyyy-MM-dd'"
+                                     (ngModelChange)="dailyIncome.toDate = $event">
+  <button type="button" class="btn btn-primary" (click)="doReport()">Get Data</button>
+
+  <h3> Daily Report for {{dailyIncome.fromDate | date}} - {{dailyIncome.toDate | date}}</h3>
   <br/>
 
   <div>Drugs</div>
@@ -12,7 +15,7 @@
   <table class=" table table-bordered">
     <tr *ngFor="let obj of dailyIncome.drugIncome">
       <td>{{obj.name}}</td>
-      <td>{{obj.amount}}</td>
+      <td>{{obj.amount | number:'1.2-2'}}</td>
     </tr>
     <td>Drug Total</td>
     <td>{{dailyIncome.drugTotal}}</td>
@@ -22,7 +25,7 @@
   <table class=" table table-bordered">
     <tr *ngFor="let obj of dailyIncome.servicesIncome">
       <td>{{obj.name}}</td>
-      <td>{{obj.amount}}</td>
+      <td>{{obj.amount | number:'1.2-2'}}</td>
     </tr>
     <td>Services Total</td>
     <td>{{dailyIncome.servicesTotal}}</td>

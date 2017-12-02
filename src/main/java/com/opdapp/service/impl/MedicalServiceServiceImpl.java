@@ -35,11 +35,11 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
     }
 
     @Override
-    public DailyIncomeReport getDailyIncome(Date date) {
+    public DailyIncomeReport getDailyIncome(DailyIncomeReport report) {
         final Map<Long, DailyIncome> dailyIncomes = new HashMap<>();
         final Map<Long, DailyIncome> servicesIncome = new HashMap<>();
-        final DailyIncomeReport report = new DailyIncomeReport();
-        final List<IssueNote> notes = issueNoteRepository.findByIssueDate(date);
+        final List<IssueNote> notes = issueNoteRepository.findByIssueDateBetween(report.getFromDate(),
+                report.getToDate());
         double serviceTotal = 0;
         double total = 0;
         for (final IssueNote obj : notes) {
@@ -59,9 +59,10 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
             }
         }
 
-        final List<ServiceIssueItem> serviceIssueItems = serviceIssueItemRepository.findByDate(
-                new java.sql.Date(date.getTime()));
-
+        final java.sql.Date fromDate = new java.sql.Date(report.getFromDate().getTime());
+        final java.sql.Date toDate = new java.sql.Date(report.getToDate().getTime());
+        final List<ServiceIssueItem> serviceIssueItems = serviceIssueItemRepository
+                .findServiceIssueItemByDateBetween(fromDate,toDate);
             for (final ServiceIssueItem service : serviceIssueItems){
                 double value = service.getFee();
                 final long id = service.getMedicalServItem().getItemId();
@@ -76,7 +77,6 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
                 serviceTotal = serviceTotal + value;
             }
 
-        report.setDate(date);
         report.setDrugTotal(total);
         report.setServicesTotal(serviceTotal);
         report.setDrugIncome(dailyIncomes.values());

@@ -21,6 +21,10 @@ public class IssueNote {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issueNote", cascade = CascadeType.ALL)
     private Set<IssueNoteServiceItem> issueNoteServiceItems;
 
+
+    private long prescriptionId;
+
+
     @ManyToOne
     @JoinColumn(name = "patientId")
     private Patient patient;
@@ -31,6 +35,14 @@ public class IssueNote {
 
     /* May be the ID of the purchase order in this case */
     private long externalId;
+
+    public long getPrescriptionId() {
+        return prescriptionId;
+    }
+
+    public void setPrescriptionId(long prescriptionId) {
+        this.prescriptionId = prescriptionId;
+    }
 
     public long getIssueNote() {
         return issueNote;

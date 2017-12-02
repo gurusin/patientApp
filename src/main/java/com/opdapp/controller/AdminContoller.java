@@ -7,10 +7,8 @@ import com.opdapp.model.*;
 import com.opdapp.model.admin.MedSysUser;
 import com.opdapp.model.admin.StockAdjustmentItem;
 import com.opdapp.repository.ProductTypeRepository;
-import com.opdapp.repository.StockAdjustmentItemRepository;
 import com.opdapp.service.*;
 import com.opdapp.service.admin.StockAdjustmentService;
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -146,7 +144,7 @@ public class AdminContoller {
     public @ResponseBody
     DailyIncomeReport getDailyIncome(@RequestBody DailyIncomeReport report)
     {
-        return medicalServiceService.getDailyIncome(report.getDate());
+        return medicalServiceService.getDailyIncome(report);
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
