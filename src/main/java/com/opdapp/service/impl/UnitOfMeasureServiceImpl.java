@@ -43,8 +43,8 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
 
     @Override
     public void saveStrength(Strength strength) {
-        StrengthUnit unit = strengthUnitRepository.findOne
-                (strength.getStrengthUnit().getUnitId());
+        StrengthUnit unit = strengthUnitRepository.findById
+                (strength.getStrengthUnit().getUnitId()).get();
         strength.setStrengthUnit(unit);
         strengthRepository.save(strength);
     }

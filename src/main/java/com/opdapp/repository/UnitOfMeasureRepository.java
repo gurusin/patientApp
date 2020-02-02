@@ -8,8 +8,6 @@ import java.util.List;
 
 @Repository
 public interface UnitOfMeasureRepository extends CrudRepository<UnitOfMeasure, Integer> {
-    @Override
-    UnitOfMeasure findOne(Integer aLong);
 
     UnitOfMeasure getUnitOfMeasuresByUnitOfMeasureLike(String unitOfMeasure);
 }

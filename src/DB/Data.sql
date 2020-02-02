@@ -135,3 +135,7 @@ Insert into medsys.item (item_description,min_order_level,quantity,item_type_id,
 Insert into medsys.item (item_description,min_order_level,quantity,item_type_id,unit_of_measure_id, unit_price) values('Sunlight',30,75,1,5, 35);
 Insert into medsys.item (item_description,min_order_level,quantity,item_type_id,unit_of_measure_id, unit_price) values('Soya',40,120,1,5, 55);
 Insert into medsys.item (item_description,min_order_level,quantity,item_type_id,unit_of_measure_id, unit_price) values('Panadol',50,200,1,4, 2);
+
+
+66001302/02/20
+GGUJHRX7NQ

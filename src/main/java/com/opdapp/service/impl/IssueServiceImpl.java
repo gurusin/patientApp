@@ -36,7 +36,7 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public IssueNote findIssue(long issueNo) {
-        return issueNoteRepository.findOne(issueNo);
+        return issueNoteRepository.findById(issueNo).get();
     }
 
     @Override
@@ -52,13 +52,13 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public Iterable<IssueNote> findIssueForPatient(long patientId) {
-        final Patient patient = patientRepository.findOne(patientId);
+        final Patient patient = patientRepository.findById(patientId).get();
         return issueNoteRepository.findByPatient(patient);
     }
 
     @Override
     public MakeIssue createIssueForPrescription(String prescriptionId) {
-        final Prescription prescription = prescriptionRepository.findOne(Long.parseLong(prescriptionId));
+        final Prescription prescription = prescriptionRepository.findById(Long.parseLong(prescriptionId)).get();
         final Map<Long, PrescriptionDetail> detailIds = new HashMap<>();
         for (final PrescriptionDetail detail : prescription.getPrescriptionDetails()) {
             detailIds.put(detail.getId(), detail);
@@ -196,7 +196,7 @@ public class IssueServiceImpl implements IssueService {
             }
 
             // Update stock in DrugPackage
-            final DrugPackage drugPackage = drugPackageRepository.findOne(dto.getDrugPackage().getDrugPackageId());
+            final DrugPackage drugPackage = drugPackageRepository.findById(dto.getDrugPackage().getDrugPackageId()).get();
             drugPackage.setQuantity(drugPackage.getQuantity() - dto.getCurrentIssuedQty());
             drugPackageRepository.save(drugPackage);
 
@@ -210,7 +210,7 @@ public class IssueServiceImpl implements IssueService {
         }
         note.setIssueNoteDetails(detailsSet);
         // Update the prescription
-        final Prescription prescription = prescriptionRepository.findOne(issue.getPrescriptionId());
+        final Prescription prescription = prescriptionRepository.findById(issue.getPrescriptionId()).get();
         if (completedPrescription) {
             prescription.setPrescriptionStatus(PrescriptionStatus.COMPLETED);
         } else {

@@ -34,7 +34,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public List<PrescriptionDTO> loadPrescriptionsForPatient(long l) {
-        final Patient p = patientRepository.findOne(l);
+        final Patient p = patientRepository.findById(l).get();
         final List<PrescriptionDTO> dtoList = new ArrayList<>();
         for (final Prescription obj : prescriptionRepository.findPrescriptionByPatient(p)) {
             final PrescriptionDTO dto = new PrescriptionDTO();
@@ -65,7 +65,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public Prescription get(String id) {
-        return prescriptionRepository.findOne(Long.parseLong(id));
+        return prescriptionRepository.findById(Long.parseLong(id)).get();
     }
 
     @Override
@@ -79,7 +79,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
         if (dto.getPrescriptionId() >0)
         {
-            final Prescription oldPrescription = prescriptionRepository.findOne(dto.getPrescriptionId());
+            final Prescription oldPrescription = prescriptionRepository.findById(dto.getPrescriptionId()).get();
             if (oldPrescription.getPrescriptionStatus() != PrescriptionStatus.INITIAL)
             {
                  throw new RuntimeException("Can't change a prescription after issued");
@@ -103,7 +103,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
            final PrescriptionServiceItem obj = new PrescriptionServiceItem();
            obj.setFee(item.getUnitPrice());
            obj.setPrescription(prescription);
-           obj.setMedicalServItem(medicalServiceRepository.findOne(item.getItemId()));
+           obj.setMedicalServItem(medicalServiceRepository.findById(item.getItemId()).get());
            obj.setExternalRef(item.getExternalRef());
            returnSet.add(obj);
        }
@@ -143,7 +143,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private double getBuyingQty(final PrescriptionDetail prescDet) {
         double returnQty = 0;
         // Like 2 pills, 3 pills  etc.
-        final DoseFrequency freq = frequencyRepository.findOne(prescDet.getFrequency().getDoseFrequencyId());
+        final DoseFrequency freq = frequencyRepository.findById(prescDet.getFrequency().getDoseFrequencyId()).get();
         final double noOfTimes = freq.getNoofDoses();
         final double noOfItemsPerOneTake = prescDet.getAmount();
         final double duration = prescDet.getDuration();
@@ -173,8 +173,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         for (final PrescriptionDetailDTO obj : dto.getPrescriptionDetailDTOS()) {
             final PrescriptionDetail detail = new PrescriptionDetail();
             detail.setPrescription(p);
-            detail.setDrugPackage(drugPackageRepository.findOne(obj.getDrugPackageId()));
-            detail.setFrequency(frequencyRepository.findOne(obj.getDoseFrequencyId()));
+            detail.setDrugPackage(drugPackageRepository.findById(obj.getDrugPackageId()).get());
+            detail.setFrequency(frequencyRepository.findById(obj.getDoseFrequencyId()).get());
             detail.setMeal(obj.getMeal());
             detail.setDuration(obj.getDuration());
             detail.setAmount(obj.getAmount());
@@ -188,7 +188,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     private Prescription createPrescription(final PrescriptionDTO dto) {
         final Prescription prescription = new Prescription();
-        prescription.setPatient(patientRepository.findOne(dto.getPatientId()));
+        prescription.setPatient(patientRepository.findById(dto.getPatientId()).get());
         prescription.setDiagnosis(dto.getDiagnosis());
         prescription.setNotes(dto.getNotes());
         prescription.setSymptoms(dto.getSymptoms());

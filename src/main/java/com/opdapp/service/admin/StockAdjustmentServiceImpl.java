@@ -22,7 +22,7 @@ public class StockAdjustmentServiceImpl implements StockAdjustmentService
     @Override
     public Object adjustStock(final StockAdjustmentItem item)
     {
-        final DrugPackage drugPackage = drugPackageRepository.findOne(item.getDrugPackage().getDrugPackageId());
+        final DrugPackage drugPackage = drugPackageRepository.findById(item.getDrugPackage().getDrugPackageId()).get();
         drugPackage.setQuantity(drugPackage.getQuantity() + item.getAdjustedQty());
         stockAdjustmentItemRepository.save(item);
         drugPackageRepository.save(drugPackage);

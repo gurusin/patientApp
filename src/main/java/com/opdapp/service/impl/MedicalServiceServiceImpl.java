@@ -87,7 +87,7 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
     @Override
     public MedicalServItem save(MedicalServItem medicalServiceItem) {
         medicalServiceItem.setProductType(
-                productTypeRepository.findOne(medicalServiceItem.getProductType().getItemTypeId()));
+                productTypeRepository.findById(medicalServiceItem.getProductType().getItemTypeId()).get());
         return medicalServiceRepository.save(medicalServiceItem);
     }
 

@@ -43,9 +43,9 @@ public class PoServiceImpl implements POService {
 
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         if (purchaseOrderDTO.getPurchaseOrderNo() > 0) {
-            purchaseOrder = poRepository.findOne(purchaseOrderDTO.getPurchaseOrderNo());
+            purchaseOrder = poRepository.findById(purchaseOrderDTO.getPurchaseOrderNo()).get();
         }
-        purchaseOrder.setItemSupplier(itemSupplierRepository.findOne(purchaseOrderDTO.getSupplierId()));
+        purchaseOrder.setItemSupplier(itemSupplierRepository.findById(purchaseOrderDTO.getSupplierId()).get());
         purchaseOrder.setPurchaseOrderDetails(getDetails(purchaseOrderDTO, purchaseOrder));
         final java.util.Date dt = purchaseOrderDTO.getOrderDate().toDateTimeAtStartOfDay().toDate();
         purchaseOrder.setOrderedDate(new Date(dt.getTime()));
@@ -59,7 +59,7 @@ public class PoServiceImpl implements POService {
         final Set<PurchaseOrderDetail> childSet = new HashSet<>();
         for (final PODetail detail : dto.getPoDetails()) {
             final PurchaseOrderDetail pod = new PurchaseOrderDetail();
-            pod.setDrugPackage(drugPackageRepository.findOne(detail.getDrugPackageId()));
+            pod.setDrugPackage(drugPackageRepository.findById(detail.getDrugPackageId()).get());
             pod.setOrderQty(detail.getQty());
             pod.setPurchaseOrder(purchaseOrder);
             childSet.add(pod);
@@ -104,7 +104,7 @@ public class PoServiceImpl implements POService {
 
     @Override
     public POForGrnDTO loadForGrn(final long podId) {
-        final PurchaseOrder purchaseOrder = poRepository.findOne(podId);
+        final PurchaseOrder purchaseOrder = poRepository.findById(podId).get();
         final POForGrnDTO dto = new POForGrnDTO();
         dto.setPoNumber(purchaseOrder.getPurchaseOrderNo());
         dto.setSupplier(purchaseOrder.getItemSupplier().getSupplierName() + ", " + purchaseOrder.getItemSupplier().getSupplierAddress());
@@ -126,7 +126,7 @@ public class PoServiceImpl implements POService {
     @Override
     public PurchaseOrder registerGRN(POForGrnDTO grn) {
         grn.setGrnStatus(GRNStatus.CREATED);
-        final PurchaseOrder purchaseOrder = poRepository.findOne(grn.getPoNumber());
+        final PurchaseOrder purchaseOrder = poRepository.findById(grn.getPoNumber()).get();
         final GoodReceivingNote grnObj = new GoodReceivingNote();
         grnObj.setPurchaseOrder(purchaseOrder);
         grnObj.setSupplierInvoice(grn.getSupplierInvoice());
@@ -160,7 +160,7 @@ public class PoServiceImpl implements POService {
     private GRNDetails createGRNDetail(PurchaseOrderDetail detail, PoForGrnDetailDTO dto) {
         final GRNDetails obj = new GRNDetails();
         obj.setReceivingQty(dto.getReceivedQty());
-        DrugPackage drugPacakge = drugPackageRepository.findOne(dto.getDrugPacakgeId());
+        DrugPackage drugPacakge = drugPackageRepository.findById(dto.getDrugPacakgeId()).get();
         obj.setDrugPackage(drugPacakge);
         obj.setItemBoughtPrice(dto.getItemBoughtPrice());
         return obj;
@@ -174,7 +174,7 @@ public class PoServiceImpl implements POService {
         note.setIssueStatus(issueDTO.getIssueStatus());
         final Set<IssueNoteDetails> children = new HashSet<>();
         for (final IssueDetailDTO detail : issueDTO.getDetails()) {
-            final DrugPackage item = drugPackageRepository.findOne(detail.getItemId());
+            final DrugPackage item = drugPackageRepository.findById(detail.getItemId()).get();
             updateItemStock(item, detail.getQuantity() * -1);
             final IssueNoteDetails detEntity = new IssueNoteDetails();
             // TODO : Item should be mapped to Drug Package
@@ -239,7 +239,7 @@ public class PoServiceImpl implements POService {
 
     @Override
     public List<GRNDTOForPay> makePayment(final GRNDTOForPay gRNDTOForPay) {
-        GoodReceivingNote grn = goodReceivingNoteRepository.findOne(gRNDTOForPay.getDrnid());
+        GoodReceivingNote grn = goodReceivingNoteRepository.findById(gRNDTOForPay.getDrnid()).get();
         if (gRNDTOForPay.getTotalAmount() <= gRNDTOForPay.getPaymentDetails().getAmount()) {
             grn.setGrnStatus(GRNStatus.PAID);
         } else {
@@ -290,7 +290,7 @@ public class PoServiceImpl implements POService {
         for (ReturnOutDetailDTO returnOutDetailDTO : gRNDTOForReturn.getReturnOutDetailDTOList()) {
             if (returnOutDetailDTO.getReturnQty() > 0) {
                 ReturnOutDetail returnOutDetail = new ReturnOutDetail();
-                DrugPackage drugPackage = drugPackageRepository.findOne(returnOutDetailDTO.getDrugPackageId());
+                DrugPackage drugPackage = drugPackageRepository.findById(returnOutDetailDTO.getDrugPackageId()).get();
                 drugPackage.setQuantity(drugPackage.getQuantity() - returnOutDetailDTO.getReturnQty());
                 drugPackageRepository.save(drugPackage);
                 returnOutDetail.setDrugPackage(drugPackage);

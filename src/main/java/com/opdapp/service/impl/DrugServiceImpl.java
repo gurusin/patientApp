@@ -58,7 +58,7 @@ public class DrugServiceImpl implements DrugService {
         PrescribableDrug prescribableDrug = new PrescribableDrug();
         prescribableDrug.setDoseFrequency(doseFrequencies);
         prescribableDrug.setDurationUnit(durationunit);
-        Drug drug = drugRepository.findOne(drugId);
+        Drug drug = drugRepository.findById(drugId).get();
         prescribableDrug.setDrug(drug);
         List<DrugPackage> packages = drugPackageRepository.getDrugPackageByDrug(drug);
         prescribableDrug.setPackages(packages);
@@ -188,14 +188,14 @@ public class DrugServiceImpl implements DrugService {
 
     public DrugDTO saveDrug(final DrugDTO drugDTO) {
         Drug drug = createDrug(drugDTO);
-        drug.setBaseDrug(baseDrugRepository.findOne(drugDTO.getBaseDrug().getBaseDrugId()));
+        drug.setBaseDrug(baseDrugRepository.findById(drugDTO.getBaseDrug().getBaseDrugId()).get());
         Drug savedDrug = drugRepository.save(drug);
         return getDrugDTO(savedDrug);
     }
 
     private Drug createDrug(DrugDTO drugDTO) {
 
-        Drug drug = drugRepository.findOne(drugDTO.getDrugId());
+        Drug drug = drugRepository.findById(drugDTO.getDrugId()).get();
         if (drug == null)
         {
             drug = new Drug();
@@ -206,7 +206,7 @@ public class DrugServiceImpl implements DrugService {
     }
 
     private BaseDrug createBaseDrug(BaseDrugDTO baseDrugDTO) {
-        BaseDrug baseDrug =  baseDrugRepository.findOne(baseDrugDTO.getBaseDrugId());
+        BaseDrug baseDrug =  baseDrugRepository.findById(baseDrugDTO.getBaseDrugId()).get();
         if (baseDrug == null)
         {
             baseDrug = new BaseDrug();
@@ -238,13 +238,13 @@ public class DrugServiceImpl implements DrugService {
         DrugPackage drugPackage =  null;
         if (drugPackageDTO.getDrugPackageId() >0)
         {
-            drugPackage = drugPackageRepository.findOne(drugPackageDTO.getDrugPackageId());
+            drugPackage = drugPackageRepository.findById(drugPackageDTO.getDrugPackageId()).get();
         }
         else
         {
             drugPackage = new DrugPackage();
         }
-        drugPackage.setDrug(drugRepository.findOne(drugPackageDTO.getDrug().getDrugId()));
+        drugPackage.setDrug(drugRepository.findById(drugPackageDTO.getDrug().getDrugId()).get());
         drugPackage.setQuantity(drugPackageDTO.getQuantity());
         drugPackage.setStrength(getStrength(drugPackageDTO.getStrength()));
         drugPackage.setMinOrderLevel(drugPackageDTO.getMinOrderLevel());
@@ -254,7 +254,7 @@ public class DrugServiceImpl implements DrugService {
     }
 
     private Strength getStrength(StrengthDTO strengthDTO) {
-        return strengthRepository.findOne(strengthDTO.getStrengthId());
+        return strengthRepository.findById(strengthDTO.getStrengthId()).get();
     }
 
     private void saveItem(final DrugPackage drugPackage) {
@@ -279,14 +279,14 @@ public class DrugServiceImpl implements DrugService {
     }
 
     private String getItemDescription(DrugPackage drugPackage) {
-        Drug drug = drugRepository.findOne(drugPackage.getDrug().getDrugId());
-        BaseDrug basedrug = baseDrugRepository.findOne(drug.getBaseDrug().getBaseDrugId());
+        Drug drug = drugRepository.findById(drugPackage.getDrug().getDrugId()).get();
+        BaseDrug basedrug = baseDrugRepository.findById(drug.getBaseDrug().getBaseDrugId()).get();
         String itemDescription = drug.getBrandName() + "(" + basedrug.getBaseDrugName() + ")";
         return itemDescription;
     }
 
     private String getUOM(DrugPackage drugPackage) {
-        Strength strengtho = strengthRepository.findOne(drugPackage.getStrength().getStrengthId());
+        Strength strengtho = strengthRepository.findById(drugPackage.getStrength().getStrengthId()).get();
         String uom = strengtho.getStrengthUnit().getUnitName() + " " + strengtho.getStrengthAmount();
         return uom;
     }
