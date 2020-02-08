@@ -1,5 +1,6 @@
 package com.opdapp.service;
 
+import com.opdapp.dto.PatientSearchDTO;
 import com.opdapp.model.Patient;
 
 import java.util.List;
@@ -20,5 +21,5 @@ public interface PatientService
 
     List<Patient> loadPatients();
 
-    List<Patient> findByName(String name);
+    List<PatientSearchDTO> findByName(String name);
 }

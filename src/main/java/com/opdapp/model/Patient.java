@@ -1,6 +1,7 @@
 package com.opdapp.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.opdapp.dto.PatientSearchDTO;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
@@ -221,4 +222,11 @@ public class Patient implements Serializable {
     }
 
 
+    public PatientSearchDTO toSearchByNameDTO() {
+        final PatientSearchDTO dto = new PatientSearchDTO();
+        dto.setId(patientId);
+        dto.setFirstname(firstname);
+        dto.setLastname(lastname);
+        return dto;
+    }
 }

@@ -1,5 +1,6 @@
 package com.opdapp.controller;
 
+import com.opdapp.dto.PatientSearchDTO;
 import com.opdapp.model.Patient;
 import com.opdapp.model.PrescribableDrug;
 import com.opdapp.service.DrugService;
@@ -65,7 +66,7 @@ public class PatientController
     }
 
     @RequestMapping(path="/findByName", method = RequestMethod.POST)
-    public @ResponseBody List<Patient> findByName(@RequestBody final String name)
+    public @ResponseBody List<PatientSearchDTO> findByName(@RequestBody final String name)
     {
         return patientService.findByName(name+"%");
     }

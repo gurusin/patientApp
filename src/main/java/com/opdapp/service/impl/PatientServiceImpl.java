@@ -1,11 +1,13 @@
 package com.opdapp.service.impl;
 
+import com.opdapp.dto.PatientSearchDTO;
 import com.opdapp.model.Patient;
 import com.opdapp.repository.PatientRepository;
 import com.opdapp.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,7 +65,14 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<Patient> findByName(String name) {
-        return patientRepository.findByFirstnameLikeOrLastnameLike(name,name);
+    public List<PatientSearchDTO> findByName(String name) {
+
+        List<Patient> patList = patientRepository.findByFirstnameLikeOrLastnameLike(name, name);
+        List<PatientSearchDTO> dto = new ArrayList<>(patList.size());
+        patList.forEach(x ->{
+            dto.add(x.toSearchByNameDTO());
+        });
+        return dto;
     }
+
 }
