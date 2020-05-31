@@ -38,6 +38,8 @@ export class StockAdjustmentComponent implements OnInit {
   }
 
   saveAdjustment() {
+    console.log(this.adjustment);
+    console.log(this.selectedDrugPackage);
 
     this.adjustment.drugPackage.drugPackageId = this.selectedDrugPackage.drugPackageId;
     this.drugService.adjustStock(this.adjustment).subscribe(
@@ -58,7 +60,7 @@ export class StockAdjustmentComponent implements OnInit {
 
   searchDrugPackage(event: any, value: string) {
     this.saved = false;
-    if (event.keyCode == 13) {
+    if (event.keyCode == 13 || !event.keyCode) {
       this.selectedDrugPackage = this.drugPackageList[this.selectedIndex];
       return;
     }

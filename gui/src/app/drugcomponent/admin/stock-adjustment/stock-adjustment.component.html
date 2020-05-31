@@ -26,10 +26,10 @@
     </tbody>
   </table>
   <div style="background-color: #bfd2c8">
-    <table cellpadding="50px" cellspacing="50px">
+    <table>
       <tr>
         <td></td>
-        <td></td>
+        <td width="100px"></td>
         <td></td>
         <td></td>
       </tr>
@@ -43,18 +43,26 @@
       <tr>
         <td>Drug Package</td>
         <td></td>
-        <td width="80%">
-          <div *ngIf="selectedDrugPackage">
-            {{selectedDrugPackage.drug.brandName}},{{selectedDrugPackage.strength.strengthUnit.unitName}},{{selectedDrugPackage.strength.strengthAmount}}
-          </div>
+        <td>
           <input #search type="text" list='packageList' id="drug" name="drug" placeholder="Drug Package to search"
-                 (keyup)="searchDrugPackage($event,search.value)" size="10" [(ngModel)]="selectedIndex">
+                 (keyup)="searchDrugPackage($event,search.value)"  [(ngModel)]="selectedIndex">
           <datalist id="packageList">
             <option *ngFor="let row of drugPackageList;let i=index" value="{{i}}">
               {{row.drug.brandName}},{{row.strength.strengthUnit.unitName}},{{row.strength.strengthAmount}}
             </option>
           </datalist>
         </td>
+        <td> </td>
+      </tr>
+      <td></td>
+      <td></td>
+      <td>
+      <div *ngIf="selectedDrugPackage">
+        {{selectedDrugPackage.drug.brandName}},{{selectedDrugPackage.strength.strengthUnit.unitName}},{{selectedDrugPackage.strength.strengthAmount}}
+      </div>
+      </td>
+      <tr>
+
       </tr>
       <tr>
         <td>Adjusted Amount</td>

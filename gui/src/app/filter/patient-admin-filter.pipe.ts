@@ -10,10 +10,10 @@ export class PatientAdminFilterPipe implements PipeTransform {
     {
       return value;
     }
-    let filter = args;
+    let filter:string = args;
+    filter = filter.toUpperCase();
     return value.filter(data=>
-      data.firstname.indexOf(filter) !== -1 ||
-      data.lastname.indexOf(filter) !== -1 ||
+      data.name.toUpperCase().indexOf(filter) !== -1 ||
       filter.length ===0
     );
   }

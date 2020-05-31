@@ -29,12 +29,7 @@ export class DrugAdminComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.drugServiceService.loadDrugs(
-        ).subscribe(
-            data => {
-                this.drugList = data;
-            }
-        );
+
         this.drugServiceService.loadBaseDrugs(
         ).subscribe(
             data => {

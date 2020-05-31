@@ -6,6 +6,11 @@
     <label>To Date</label>
     <input type="date" id="toDate" [ngModel]="searchCriteria.toDate |date:'yyyy-MM-dd'"
            (ngModelChange)="searchCriteria.toDate = $event">
+
+    <select name="baseDrug" [(ngModel)]="searchCriteria.drugId">
+      <option *ngFor="let bd of drugList" [value]="bd.id">{{bd.brandName}}</option>
+    </select>
+
     <button type="button" class="btn btn-primary" (click)="doSearch()">Search</button>
   </div>
   <hr/>

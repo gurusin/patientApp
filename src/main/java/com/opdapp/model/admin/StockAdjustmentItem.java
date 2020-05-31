@@ -10,7 +10,7 @@ import java.util.Date;
 public class StockAdjustmentItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     private Date dateOfAdjustment;

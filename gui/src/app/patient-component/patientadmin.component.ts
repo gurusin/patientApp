@@ -32,6 +32,9 @@ export class PatientadminComponent implements OnInit {
     ).subscribe(
       data => {
         this.patientList = data;
+        this.patientList.forEach(pat =>{
+           pat.name = pat.firstname+ " "+pat.lastname;
+        })
       }
     );
   }
