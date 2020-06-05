@@ -67,6 +67,8 @@ import { IssueHistoryComponent } from './issue/issue-history.component';
 import { BillReprintComponent } from './issue/bill-reprint.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {DrugServiceService} from "./services/drug-service.service";
+import {MatDialogModule} from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -126,8 +128,9 @@ import {DrugServiceService} from "./services/drug-service.service";
     imports: [
         BrowserModule, //BrowserAnimationsModule,
         FormsModule,
+        MatDialogModule,
         //DropdownModule, //NoopAnimationsModule,
-        HttpClientModule, routing //, MdDialogModule//PopupModule.forRoot(),
+        HttpClientModule, routing, BrowserAnimationsModule //, MdDialogModule//PopupModule.forRoot(),
     ],
     entryComponents: [PrintpopComponent],
     providers: [PatientServiceService, DrugServiceService, AdminService, ItemSupplierService,

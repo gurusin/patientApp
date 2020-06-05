@@ -11,26 +11,12 @@ import {ItemSupplier} from "./ItemSupplier";
 export class SupplierComponent implements OnInit {
 
   itemSupplier: ItemSupplier = null;
-  supplierList = [];
-  selectedRow: number;
-  setClickedRow: Function;
-  selectedSupplierName: string;
+  supplierList:ItemSupplier[] = [];
+  selectedRow:number;
 
-  newSupplier=true;
-  @Input() selectedSupplier: ItemSupplier;
 
   constructor(private adminService: AdminService, private router: Router) {
     this.itemSupplier = new ItemSupplier();
-
-    this.setClickedRow = function (index) {
-      this.selectedRow = index;
-      if (index >= 0 && index < this.supplierList.length) {
-        this.adminService.supplierObject = this.supplierList[index];
-        this.selectedSupplier = this.supplierList[index];
-        this.itemSupplier = this.selectedSupplier;
-      }
-    }
-
   }
 
   ngOnInit() {
@@ -38,26 +24,45 @@ export class SupplierComponent implements OnInit {
     ).subscribe(
       data => {
         this.supplierList = data;
-
       }
     );
-    this.selectedSupplier = this.supplierList[0];
   }
 
   onSubmit() {
-    this.adminService.saveSupplier(this.itemSupplier)
-    this.adminService.supplierObject = new ItemSupplier();
-    this.adminService.loadSuppliers(
-    ).subscribe(
-      data => {
-        this.supplierList = data;
+    this.adminService.saveSupplier(this.itemSupplier).subscribe(
+         data =>{
+              this.refreshList(data);
+              this.itemSupplier = new ItemSupplier();
+         }
+    )
+  }
+
+  private refreshList(item:ItemSupplier){
+    var idx = -1;
+    var currIndex =-1;
+
+    for(var x of this.supplierList){
+      currIndex++;
+      if(x.supplierId == item.supplierId){
+        idx = currIndex;
+        break;
       }
-    );
+    }
+    if(idx == -1){
+      this.supplierList.push(item);
+    }else{
+      this.supplierList[idx] = item;
+    }
   }
 
   cancelEdit(){
-    this.selectedRow = -1;
-      this.selectedSupplier = new ItemSupplier();
-      this.itemSupplier = this.selectedSupplier;
+
+  }
+
+  setClickedRow(index: number) {
+    this.selectedRow = index;
+    if (index >= 0 && index < this.supplierList.length) {
+      Object.assign(this.itemSupplier,this.supplierList[index]);
+    }
   }
 }

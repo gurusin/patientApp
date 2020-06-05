@@ -26,16 +26,17 @@ export class InOutComponent implements OnInit {
       ).subscribe(
         data => {
           this.drugList = data;
-          console.log(data);
+
+          // -- Adding all
+          var d = {
+            drugId:-1,
+            brandName: "All"
+          };
+          this.drugList.unshift(d);
         }
       );
-
-
     }
 
-  searchDrug(event: any) {
-
-  }
 
     ngOnInit() {
     }

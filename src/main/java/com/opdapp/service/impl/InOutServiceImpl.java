@@ -7,6 +7,7 @@ import com.opdapp.model.*;
 import com.opdapp.repository.GoodReceivingNoteRepository;
 import com.opdapp.repository.IssueNoteRepository;
 import com.opdapp.repository.ServiceIssueItemRepository;
+import com.opdapp.service.DrugService;
 import com.opdapp.service.InOutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,17 @@ public class InOutServiceImpl implements InOutService
     @Autowired
     private IssueNoteRepository issueNoteRepository;
 
+    @Autowired
+    private DrugService drugService;
+
 
     @Override
     public  List<InOutReport> getInOut(final InOutSearchCriteria criteria)
     {
         final Date fromDate = criteria.getFromDate();
         final Date toDate = criteria.getToDate();
+
+
         // Get all GRNS
        final List<GoodReceivingNote> receivingNotes = goodReceivingNoteRepository
                .findGoodReceivingNoteByGrnDateBetween(new java.sql.Date(fromDate.getTime()),
@@ -36,16 +42,21 @@ public class InOutServiceImpl implements InOutService
        final List<IssueNote> issueNotes = issueNoteRepository.findByIssueDateBetween(fromDate,toDate);
        final  Map<DrugPackage,List<InOutDetails>> map = getIncome(receivingNotes);
        getOutput(issueNotes,map);
-       return composeInOutReport(map);
+       return composeInOutReport(map,criteria.getDrugId());
     }
 
-    private List<InOutReport> composeInOutReport(final  Map<DrugPackage,List<InOutDetails>> map)
+    private List<InOutReport> composeInOutReport(final  Map<DrugPackage,List<InOutDetails>> map, long drugId)
     {
         final List<InOutReport> out = new ArrayList<>();
         for (final Map.Entry<DrugPackage,List<InOutDetails>> entry : map.entrySet())
         {
             final InOutReport report = new InOutReport();
-            report.setDrugPackage(entry.getKey());
+            DrugPackage pkg = entry.getKey();
+            if(drugId >0 && pkg.getDrug().getDrugId() != drugId){
+                //  If a drug is specified then ingore all others
+                continue;
+            }
+            report.setDrugPackage(pkg);
             report.setInOutDetailsList(entry.getValue());
             out.add(report);
         }

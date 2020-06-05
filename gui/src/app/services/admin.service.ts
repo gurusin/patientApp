@@ -31,14 +31,10 @@ export class AdminService {
     return this.http.sendGet(url);
   }
 
-  saveSupplier(itemSupplier : any)
+  saveSupplier(itemSupplier : any):Observable<any>
   {
     var url = "saveItemSupplier";
-    return this.http.sendPost(url, itemSupplier).subscribe(
-      data => {
-        this.supplierObject = data;
-      }
-    );
+    return this.http.sendPost(url, itemSupplier);
   }
 
   loadItemTypes():Observable<any[]>

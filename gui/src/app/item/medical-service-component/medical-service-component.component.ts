@@ -11,6 +11,7 @@ export class MedicalServiceComponentComponent implements OnInit {
     medicalServices = [];
     item: any;
     productTypes =[];
+    selectedRow:number = -1;
 
     constructor(private prodTypeService:ItemProductService) {
        this.onNew();
@@ -28,6 +29,7 @@ export class MedicalServiceComponentComponent implements OnInit {
 
     setClickedRow(i)
     {
+        this.selectedRow = i;
         this.item = Object.assign({},this.medicalServices[i]);
     }
 

@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DrugServiceImpl implements DrugService {
@@ -97,7 +99,20 @@ public class DrugServiceImpl implements DrugService {
 
     public List<DrugDTO> findAllDrugs() {
         List<Drug> drugList = drugRepository.findAll();
-        return getDrugDTOList(drugList);
+        List<DrugDTO> drugDTOList = getDrugDTOList(drugList);
+        drugDTOList.sort(new Comparator<DrugDTO>() {
+            @Override
+            public int compare(DrugDTO o1, DrugDTO o2) {
+                int val =0;
+                try {
+                    val= o1.getBrandName().compareTo(o2.getBrandName());
+                } catch (Exception e) {
+                   // Safety trap to handle null values in any error.
+                }
+                return val;
+            }
+        });
+        return drugDTOList;
     }
 
     public List<StrengthDTO> findAllStrengths() {
@@ -195,11 +210,8 @@ public class DrugServiceImpl implements DrugService {
 
     private Drug createDrug(DrugDTO drugDTO) {
 
-        Drug drug = drugRepository.findById(drugDTO.getDrugId()).get();
-        if (drug == null)
-        {
-            drug = new Drug();
-        }
+        Optional<Drug> optDrug = drugRepository.findById(drugDTO.getDrugId());
+        Drug drug = optDrug.isPresent() ? optDrug.get() :  new Drug();
         drug.setBrandName(drugDTO.getBrandName().trim());
         drug.setLocation(drugDTO.getLocation());
         return drug;

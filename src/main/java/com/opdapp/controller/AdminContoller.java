@@ -71,7 +71,8 @@ public class AdminContoller {
     @RequestMapping(path = "/saveItemSupplier", method = RequestMethod.POST)
     public @ResponseBody
     ItemSupplier saveItemSupplier(@RequestBody final ItemSupplier itemSupplier) {
-        return itemSupplierService.save(itemSupplier);
+        ItemSupplier save = itemSupplierService.save(itemSupplier);
+        return save;
     }
 
     @RequestMapping(path = "/loadItemTypes", method = RequestMethod.GET)

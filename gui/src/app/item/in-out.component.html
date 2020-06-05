@@ -8,7 +8,7 @@
            (ngModelChange)="searchCriteria.toDate = $event">
 
     <select name="baseDrug" [(ngModel)]="searchCriteria.drugId">
-      <option *ngFor="let bd of drugList" [value]="bd.id">{{bd.brandName}}</option>
+      <option *ngFor="let bd of drugList" [value]="bd.drugId">{{bd.brandName}}</option>
     </select>
 
     <button type="button" class="btn btn-primary" (click)="doSearch()">Search</button>

@@ -3,7 +3,7 @@
     <h2>Medical Services</h2>
   </header>
   <nav>
-    <table border="2" width="100%" class="table table-hover" [class.active]="i == selectedRow">
+    <table border="2" width="100%"  class="table table-hover">
       <tr>
         <th width="10%">Id</th>
         <th width="20%">Product Type</th>
@@ -11,7 +11,8 @@
         <th width="10%">Unit Price</th>
       </tr>
 
-      <tr *ngFor="let obj of medicalServices; let i = index" (click)="setClickedRow(i)">
+      <tr *ngFor="let obj of medicalServices; let i = index" (click)="setClickedRow(i)"
+          [class.active]="i == selectedRow">
         <td>{{obj.itemId}}</td>
         <td>
           {{obj.productType.itemtype}}
