@@ -13,11 +13,14 @@ export class IssueHistoryComponent implements OnInit {
   issueNotes = [];
   selectedIssueNote = {
     patient :{},
-    issueNoteDetails :[]
+    issueNoteDetails :[],
+    issueNoteServiceItems:[],
+    issueDate:'',
+
   }
 
-  constructor(private patientService: PatientServiceService,
-              private issueService: IssueServiceService,
+  constructor(public patientService: PatientServiceService,
+              public issueService: IssueServiceService,
               private router: Router) {
 
   }

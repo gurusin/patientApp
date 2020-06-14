@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IssueServiceService} from "../services/issue-service.service";
 import {Router} from "@angular/router";
+import {PrescriptionSearchCriteria} from "../pharmacy/pharmacy.component";
 
 @Component({
   selector: 'app-issue-finder',
@@ -14,6 +15,7 @@ export class IssueFinderComponent implements OnInit {
   paidAmount = 0;
   printDisabled = true;
   saveDisabled = false;
+  prescriptionSearchCriteria:PrescriptionSearchCriteria = new PrescriptionSearchCriteria();
 
   constructor(private issueService: IssueServiceService, private router: Router,) {
 

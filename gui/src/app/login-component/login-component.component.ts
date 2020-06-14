@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponentComponent{
 
-  private model:any
+   model:any
 
   constructor(private loginService:LoginService,private router:Router) {
         this.model = new Object();

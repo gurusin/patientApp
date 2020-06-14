@@ -77,4 +77,7 @@ export class PrescriptionSearchCriteria
   initial = true;
   fromDate:Date;
   toDate:Date;
+  completed:boolean;
+  partCompleted:boolean;
+  all:boolean;
 }

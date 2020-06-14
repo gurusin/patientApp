@@ -11,12 +11,17 @@ export class DailyIncomeComponent implements OnInit {
   dailyIncome : {
     fromDate : any;
     toDate: any;
+    drugTotal:number,
+    servicesTotal:number,
+    servicesIncome:number,
+    drugIncome:number,
   }
 
   constructor(private adminService:AdminService) { }
 
   ngOnInit() {
-    this.dailyIncome = {fromDate : new Date(),toDate:new Date()};
+    this.dailyIncome = {fromDate : new Date(),toDate:new Date(),drugTotal:0,
+      servicesTotal :0, servicesIncome:0,drugIncome:0};
   }
 
     doReport()

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {POServiceService} from "../services/poservice.service";
 import {Router} from "@angular/router";
+import {PODetail} from "../purchseorder/purchseorder.component";
 
 @Component({
   selector: 'app-grn',
@@ -10,7 +11,11 @@ import {Router} from "@angular/router";
 export class GrnComponent implements OnInit {
 
   po:any;
-  poDetail ={};
+  poDetail ={
+    supplierInvoice: "1",
+    expectedRecieveDate:'',
+    details:[]
+  };
   constructor(private poService:POServiceService, private  router:Router) {
       this.po = this.poService.selectedPO;
   }
@@ -26,7 +31,7 @@ export class GrnComponent implements OnInit {
   {
     this.poService.saveGRN(this.poDetail).subscribe(
       data =>{
-        this.poDetail = [];
+        //this.poDetail =[];
         this.router.navigate(['po']);
       }
     );

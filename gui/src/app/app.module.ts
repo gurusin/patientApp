@@ -69,6 +69,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {DrugServiceService} from "./services/drug-service.service";
 import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DrugEditComponent } from './drugcomponent/drug-admin/drug-edit/drug-edit.component';
 
 @NgModule({
     declarations: [
@@ -124,6 +125,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         PatientAdminFilterPipe,
         IssueHistoryComponent,
         BillReprintComponent,
+        DrugEditComponent,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

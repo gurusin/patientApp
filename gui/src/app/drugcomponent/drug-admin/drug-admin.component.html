@@ -1,22 +1,23 @@
 <div class="container">
-  <h2>Drug administration</h2>
+  <h2>Drug Administration</h2>
   <div class="row">
     <div class="col-lg-7">
-      <h3>Admin Drug</h3>
-      <label>Filte Text for Brand name :</label>
+      <label>Filter Text for Brand name :</label>
       <input type="text" #listFilter (keyup)="0" />
+      <button class="mat-radio-button btn-primary" (click)="newDrug()">New..</button>
       <table border="2" width="100%" class="table table-hover">
         <tr>
           <td>
             <table border="2" width="100%" class="table table-hover">
               <tr>
                 <th width="10">Drug Id</th>
-                <th width="40%">Base Drug  Name</th>
-                <th width="40%">Drug  Name</th>
+                <th width="30%">Base Drug  Name</th>
+                <th width="30%">Drug  Name</th>
                 <th width="10%">Location</th>
+                <th width="20%">Edit</th>
               </tr>
 
-              <tr *ngFor="let obj of drugList | drugPipe:listFilter.value; let i = index" (click)="setClickedDrugRow(obj)"
+              <tr *ngFor="let obj of drugList | drugPipe:listFilter.value; let i = index"
                   [class.active]="i == selectedDrugRow">
                 <td>{{obj.drugId}}</td>
                 <td>
@@ -26,8 +27,8 @@
                   {{obj.brandName}}
                 </td>
                 <td>{{obj.location}}</td>
+                <td><button (click)='onEditDrug(obj)'>Edit</button></td>
               </tr>
-
             </table>
           </td>
         </tr>
@@ -35,56 +36,6 @@
 
     </div>
     <div class="col-lg-4">
-
-      <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="drug">
-        <h3> Edit Drug details </h3>
-        <table width="100%">
-          <tr>
-            <th width="40%"></th>
-            <th width="40%"> </th>
-          </tr>
-          <tr>
-            <td>
-              <label>Base Drug : </label>
-            </td>
-            <td>
-              <select name="baseDrug" [(ngModel)]="drug.baseDrug.baseDrugId">
-                <option *ngFor="let bd of baseDrugList" [value]="bd.baseDrugId">{{bd.baseDrugName}}</option>
-              </select>
-            </td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>
-              <label for="drugName"> Drug Name : </label>
-            </td>
-            <td><input type="text" id="drugName" name="drugName" required [(ngModel)]="drug.brandName"/>
-            </td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>
-              <label for="location"> Location : </label>
-            </td>
-            <td><input type="text" id="location" name="location" required [(ngModel)]="drug.location"/>
-            </td>
-            <td></td>
-          </tr>
-
-        </table>
-
-
-        <table width="20%">
-          <tr><td>
-            <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
-          </td>
-            <td><button class="btn btn-primary" (click)="cancelEdit()">Cancel</button>
-            </td>
-          </tr>
-        </table>
-      </form>
     </div>
   </div>
 </div>

@@ -1,0 +1,53 @@
+<mat-dialog-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="drug">
+    <h3> Edit Drug details </h3>
+    <table width="100%">
+      <tr>
+        <th width="40%"></th>
+        <th width="40%"></th>
+      </tr>
+      <tr>
+        <td>
+          <label>Base Drug : </label>
+        </td>
+        <td>
+          <select name="baseDrug" [(ngModel)]="drug.baseDrug.baseDrugId">
+            <option *ngFor="let bd of baseDrugList" [value]="bd.baseDrugId">{{bd.baseDrugName}}</option>
+          </select>
+        </td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="drugName"> Drug Name : </label>
+        </td>
+        <td><input type="text" id="drugName" name="drugName" required [(ngModel)]="drug.brandName"/>
+        </td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="location"> Location : </label>
+        </td>
+        <td><input type="text" id="location" name="location" required [(ngModel)]="drug.location"/>
+        </td>
+        <td></td>
+      </tr>
+
+    </table>
+
+
+    <table width="20%">
+      <tr>
+        <td>
+          <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="cancelEdit()">Cancel</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</mat-dialog-content>

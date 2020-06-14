@@ -12,8 +12,9 @@ export class BillReprintComponent implements OnInit {
 
   selectedIssueNote:any;
   total=0;
-  constructor(private patientService:PatientServiceService,private route: ActivatedRoute,
-              private issueService:IssueServiceService) { }
+  obj={}
+  constructor(public patientService:PatientServiceService,private route: ActivatedRoute,
+              public issueService:IssueServiceService) { }
 
   ngOnInit() {
     this.selectedIssueNote = this.route.params.subscribe(
