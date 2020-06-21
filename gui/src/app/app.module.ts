@@ -70,6 +70,7 @@ import {DrugServiceService} from "./services/drug-service.service";
 import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DrugEditComponent } from './drugcomponent/drug-admin/drug-edit/drug-edit.component';
+import { BaseDrugEditComponent } from './drugcomponent/drug-admin/base-drug-edit/base-drug-edit.component';
 
 @NgModule({
     declarations: [
@@ -126,6 +127,7 @@ import { DrugEditComponent } from './drugcomponent/drug-admin/drug-edit/drug-edi
         IssueHistoryComponent,
         BillReprintComponent,
         DrugEditComponent,
+        BaseDrugEditComponent,
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

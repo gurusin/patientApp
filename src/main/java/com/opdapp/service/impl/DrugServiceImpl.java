@@ -218,13 +218,17 @@ public class DrugServiceImpl implements DrugService {
     }
 
     private BaseDrug createBaseDrug(BaseDrugDTO baseDrugDTO) {
-        BaseDrug baseDrug =  baseDrugRepository.findById(baseDrugDTO.getBaseDrugId()).get();
-        if (baseDrug == null)
+        Optional<BaseDrug> baseDrug =  baseDrugRepository.findById(baseDrugDTO.getBaseDrugId());
+        BaseDrug baseDrug1 = null;
+        if (!baseDrug.isPresent())
         {
-            baseDrug = new BaseDrug();
-            baseDrug.setBaseDrugName(baseDrugDTO.getBaseDrugName());
+            baseDrug1 = new BaseDrug();
+            baseDrug1.setBaseDrugName(baseDrugDTO.getBaseDrugName());
+        }else {
+            baseDrug1 = baseDrug.get();
+            baseDrug1.setBaseDrugName(baseDrugDTO.getBaseDrugName());
         }
-        return baseDrug;
+        return baseDrug1;
     }
 
     public BaseDrugDTO saveBaseDrug(final BaseDrugDTO baseDrugDTO) {

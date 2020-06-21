@@ -12,6 +12,6 @@ export class FilterPipePipe implements PipeTransform {
     }
       let filter = args;
       return value.filter(data=>
-      data.baseDrugName.indexOf(filter) !== -1);
+      data.baseDrugName && data.baseDrugName.indexOf(filter) !== -1);
   }
 }

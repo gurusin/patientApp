@@ -1,6 +1,7 @@
 <div class="container">
   <h2>Admin Base Drug</h2>
   <input type="text" #listFilter (keyup)="0" />
+  <button class="btn-primary" (click)="onNew()">New ...</button>
   <div class="row">
     <div class="col-lg-7">
       <table border="2" width="100%" class="table table-hover">
@@ -10,16 +11,18 @@
               <tr>
                 <th width="10">Base Drug Id</th>
                 <th width="50%">Base Drug Name</th>
+                <th>Edit</th>
               </tr>
 
               <!-- let i = index" (click)="setClickedBaseDrugRow(i)"
                   [class.active]="i == selectedBaseDrugRow"> -->
               <tr *ngFor="let obj of baseDrugList | drugFilter :listFilter.value; let i= index"
-                  [class.active]="i == selectedBaseDrugRow" (click)="setClickedBaseDrugRow(obj)" >
+                  [class.active]="i == selectedBaseDrugRow" >
                 <td>{{obj.baseDrugId}}</td>
                 <td>
                   {{obj.baseDrugName}}
                 </td>
+                <td><button class="btn-primary" (click)="setClickedBaseDrugRow(obj)">Edit</button></td>
               </tr>
 
             </table>
@@ -28,35 +31,7 @@
       </table>
     </div>
     <div class="col-lg-5">
-      <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="baseDrug">
-        <h3> Edit Base Drug details </h3>
-        <table width="100%">
-          <tr>
-            <th width="30%"></th>
-            <th width="100%"></th>
-            <th width="1%"></th>
-          </tr>
-          <tr>
-            <td>
-              <label for="baseDrugName">Base Drug Name : </label>
-            </td>
-            <td><input type="text" id="baseDrugName" name="baseDrugName" required [(ngModel)]="baseDrug.baseDrugName"/>
-            </td>
-            <td></td>
-          </tr>
-        </table>
 
-        <br/>
-        <table width="30%" cellpadding="15">
-          <tr><td>
-            <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
-          </td>
-            <td><button class=" btn btn-primary" (click)="cancelEdit()">Cancel</button>
-            </td>
-          </tr>
-        </table>
-
-      </form>
     </div>
   </div>
 </div>
