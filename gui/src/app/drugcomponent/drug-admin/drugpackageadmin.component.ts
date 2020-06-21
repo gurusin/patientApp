@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DrugPackage} from "../drug-package";
 import {DrugServiceService} from "../../services/drug-service.service";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {DrugEditComponent} from "./drug-edit/drug-edit.component";
+import {DrugPackageDetailComponent} from "../admin/drug-package-detail/drug-package-detail.component";
 
 @Component({
   selector: 'app-drugpackageadmin',
@@ -17,7 +20,7 @@ export class DrugpackageadminComponent implements OnInit {
   strengthList = [];
   drugList = [];
 
-  constructor(private drugServiceService: DrugServiceService) {
+  constructor(private drugServiceService: DrugServiceService, private dialog:MatDialog) {
 
     this.drugPackage = new DrugPackage();
 
@@ -51,19 +54,39 @@ export class DrugpackageadminComponent implements OnInit {
     );
   }
 
-  onSubmit() {
-    this.drugServiceService.saveDrugPackage(this.drugPackage).subscribe(
-        data =>{
-            this.drugPackageList = data;
-            this.cancelEdit();
-        }
+  findIndex(id: number): number {
+    var idx = -1;
+    var currIndex = 0
+    for (let d of this.drugPackageList) {
+      if (d.id == id) {
+        idx = currIndex;
+        break;
+      } else {
+        currIndex++;
+      }
+    }
+    return idx;
+  }
+
+  onEdit(obj: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = new Object();
+    dialogConfig.data.drugPackage = obj;
+    dialogConfig.data.drugList = this.drugList;
+    dialogConfig.data.strengthList = this.strengthList;
+
+    let dialogRef = this.dialog.open(DrugPackageDetailComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      result => {
+          if(result != null){
+             this.drugPackageList = result;
+          }
+      }
     );
   }
 
-  cancelEdit() {
-    this.selectedDrugPackageRow = -1;
-    this.selectedDrugPackage = new DrugPackage();
-    this.drugPackage = this.selectedDrugPackage;
+  onNew() {
+     this.onEdit(new DrugPackage());
   }
 
 }

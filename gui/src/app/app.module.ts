@@ -71,6 +71,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DrugEditComponent } from './drugcomponent/drug-admin/drug-edit/drug-edit.component';
 import { BaseDrugEditComponent } from './drugcomponent/drug-admin/base-drug-edit/base-drug-edit.component';
+import {DrugPackageDetailComponent} from "./drugcomponent/admin/drug-package-detail/drug-package-detail.component";
 
 @NgModule({
     declarations: [
@@ -128,6 +129,7 @@ import { BaseDrugEditComponent } from './drugcomponent/drug-admin/base-drug-edit
         BillReprintComponent,
         DrugEditComponent,
         BaseDrugEditComponent,
+        DrugPackageDetailComponent
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

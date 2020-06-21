@@ -4,7 +4,7 @@
     <div class="col-md-8">
        <label>Filte Text for Brand name :</label>
       <input type="text" #listFilter (keyup)="0" />
-      <button class="btn-primary">New..</button>
+      <button class="btn-primary" (click)="onNew()">New..</button>
       <table border="2" width="100%" class="table table-hover">
         <tr>
           <th width="10">Drug package Id</th>
@@ -15,6 +15,7 @@
           <th width="5%"> Min Order Level</th>
           <th width="5%"> Unit Price</th>
           <th width="5%"> Content Type</th>
+          <th>Edit</th>
         </tr>
 
         <tr *ngFor="let obj of drugPackageList | drugPackagePipe:listFilter.value ; let i = index" (click)="setClickedDrugPackageRow(obj)"
@@ -41,99 +42,11 @@
           <td>
             {{obj.drugPackageContentType}}
           </td>
+          <td><button class="btn-primary" (click)="onEdit(obj)">Edit</button></td>
         </tr>
-
       </table>
-
     </div>
     <div class="col-md-3">
-    <form #f="ngForm" (ngSubmit)="onSubmit()" ngClass="drugPackage">
-      <h3> Edit Drug Package details </h3>
-      <table width="100%">
-        <tr>
-          <th width="40%"></th>
-          <th width="40%"></th>
-        </tr>
-        <tr>
-          <td>
-            <label> Drug : </label>
-          </td>
-          <td>
-            <select name="drug" [(ngModel)]="drugPackage.drug.drugId" required>
-              <option *ngFor="let drug of drugList" [value]="drug.drugId">{{drug.brandName}}</option>
-            </select>
-          </td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>
-            <label> Strength : </label>
-          </td>
-          <td>
-            <select name="strength" [(ngModel)]="drugPackage.strength.strengthId" required>
-              <option *ngFor="let strength of strengthList" [value]="strength.strengthId">
-                {{strength.strengthAmount}} {{strength.unitName}}
-              </option>
-            </select>
-          </td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>
-            <label> Quantity : </label>
-          </td>
-          <td>
-            <input type="text" id="quanitity" name="quanitity" required [(ngModel)]="drugPackage.quantity" disabled/>
-          </td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>
-            <label> Min Order Level : </label>
-          </td>
-          <td>
-            <input type="text" id="minOrderLevel" name="minOrderLevel" required [(ngModel)]="drugPackage.minOrderLevel"/>
-          </td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>
-            <label> Unit Price : </label>
-          </td>
-          <td>
-            <input type="text" id="unitPrice" name="unitPrice" required [(ngModel)]="drugPackage.unitPrice"/>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>
-            <label for="contentForm">Form of Content : </label>
-          </td>
-          <td><select id="contentForm" name="contentForm" [(ngModel)]="drugPackage.drugPackageContentType" required>
-            <option value="TABLET">TABLET</option>
-            <option value="LIQUID">LIQUID</option>
-            <option value="CREAM">CREAM</option>
-          </select>
-          </td>
-          <td></td>
-        </tr>
-
-
-      </table>
-
-      <table width="30%">
-        <tr><td>
-          <input type='submit' class="btn btn-primary" [disabled]="!f.valid"/>
-          </td>
-          <td><button class=" btn btn-primary" (click)="cancelEdit()">Cancel</button>
-          </td>
-        </tr>
-      </table>
-    </form>
 </div>
   </div>
 </div>
