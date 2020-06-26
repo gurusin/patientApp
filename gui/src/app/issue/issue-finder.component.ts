@@ -15,6 +15,8 @@ export class IssueFinderComponent implements OnInit {
   paidAmount = 0;
   printDisabled = true;
   saveDisabled = false;
+  imageUrl = 'assets/images/Sign.gif';
+
   prescriptionSearchCriteria:PrescriptionSearchCriteria = new PrescriptionSearchCriteria();
 
   constructor(private issueService: IssueServiceService, private router: Router,) {
@@ -51,12 +53,14 @@ export class IssueFinderComponent implements OnInit {
 
   ngOnInit() {
     this.makeIssue = this.issueService.makeIssue;
-    this.makeIssue.dateOfIssue = new Date();
-    this.calculateTotal();
+    if(this.makeIssue){
+      this.makeIssue.dateOfIssue = new Date();
+      this.calculateTotal();
+    }
   }
 
   print() {
-    var printContents = document.getElementById('printContent').innerHTML;
+    var printContents = document.getElementById('print-section').innerHTML;
     let popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
     popupWin.document.open();
     popupWin.document.write(`
@@ -76,6 +80,10 @@ export class IssueFinderComponent implements OnInit {
     this.total = event;
   }
 
+  getPatientName() {
+     return this.makeIssue.patient.firstname +" " + this.makeIssue.patient.lastname + "("
+     + this.makeIssue.patient.calculatedAge +")";
+  }
 }
 
 
