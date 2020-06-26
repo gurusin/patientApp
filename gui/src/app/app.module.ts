@@ -72,6 +72,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DrugEditComponent } from './drugcomponent/drug-admin/drug-edit/drug-edit.component';
 import { BaseDrugEditComponent } from './drugcomponent/drug-admin/base-drug-edit/base-drug-edit.component';
 import {DrugPackageDetailComponent} from "./drugcomponent/admin/drug-package-detail/drug-package-detail.component";
+import { StrengthDetailComponent } from './strength/strength-detail/strength-detail.component';
 
 @NgModule({
     declarations: [
@@ -129,7 +130,8 @@ import {DrugPackageDetailComponent} from "./drugcomponent/admin/drug-package-det
         BillReprintComponent,
         DrugEditComponent,
         BaseDrugEditComponent,
-        DrugPackageDetailComponent
+        DrugPackageDetailComponent,
+        StrengthDetailComponent
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

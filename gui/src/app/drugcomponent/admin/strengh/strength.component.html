@@ -1,31 +1,22 @@
 <p align="center" style="color: #794522"> In this screen you can only add frequently used strength unit and amount combination. <br/>
   You can't edit or delete any existing combinations !
 </p>
+
+<td><button class="btn-primary" (click)="onNew()">New..</button></td>
+<br/>
+
 <div class="row">
   <div class="col-md-6">
     <table class="table table-bordered">
       <thead>
         <td>Strength Unit</td>
         <td>Strength Amount</td>
+
       </thead>
       <tr *ngFor="let row of strengthList">
         <td>{{row.unitName}}</td>
         <td>{{row.strengthAmount}}</td>
       </tr>
     </table>
-  </div>
-  <div class="col-md-6">
-    <form #f="ngForm" (submit)='doSave()'>
-      <label>Unit</label>
-      <select id='unit' name='unit' required [(ngModel)]="strength.strengthUnit.unitId" >
-        <option *ngFor="let row of units" value="{{row.unitId}}">{{row.unitName}}</option>
-      </select>
-      <br/>
-      <label>Amount</label>
-      <input  id='amount' name='amount' type="number" required [(ngModel)]="strength.strengthAmount">
-      <br/>
-      <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Save</button>
-      <button type="button" class="btn btn-primary" >Cancel</button>
-    </form>
   </div>
 </div>
