@@ -46,7 +46,7 @@
     <!---->
     <tr *ngFor="let obj of prescriptionList | patient:listFilter.value; let i = index">
       <td>{{obj.patient.firstname}},{{obj.patient.lastname}}</td>
-      <td><a (click)='issueDrugs(obj.id)'>{{obj.id}}</a></td>
+      <td><button class="btn-primary" (click)='issueDrugs(obj.id)'>{{obj.id}}</button></td>
       <td>
         <ul>
           <li *ngFor="let row of obj.prescriptionDetails">

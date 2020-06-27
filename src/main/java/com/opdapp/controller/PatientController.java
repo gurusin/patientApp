@@ -7,10 +7,7 @@ import com.opdapp.service.DrugService;
 import com.opdapp.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -73,8 +70,8 @@ public class PatientController
 
     @RequestMapping(path="/loadPatients", method = RequestMethod.GET)
     public @ResponseBody
-    List<Patient> loadPatients() {
-        return patientService.loadPatients();
+    List<Patient> loadPatients(@RequestParam("name") String name) {
+        return patientService.loadPatients(name);
     }
 
 }

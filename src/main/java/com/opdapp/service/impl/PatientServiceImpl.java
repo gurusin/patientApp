@@ -60,8 +60,11 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<Patient> loadPatients() {
-        return patientRepository.findAll();
+    public List<Patient> loadPatients(String name)
+    {
+        name = name+"%";
+        List<Patient> byFirstnameLikeOrLastnameLike = patientRepository.findByFirstnameLikeOrLastnameLike(name, name);
+        return byFirstnameLikeOrLastnameLike;
     }
 
     @Override

@@ -64,8 +64,8 @@ export class PatientServiceService {
     this.patientObject.patientId = 0;
   }
 
-  loadPatients(): Observable<any[]> {
-    var url = "loadPatients";
+  loadPatients(name:string): Observable<any[]> {
+    var url = "loadPatients?name="+name;
     return this.http.sendGet(url);
   }
 

@@ -19,7 +19,7 @@ public interface PatientService
 
     Patient getByPhoneNo(String phoneNo);
 
-    List<Patient> loadPatients();
+    List<Patient> loadPatients(String name);
 
     List<PatientSearchDTO> findByName(String name);
 }

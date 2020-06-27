@@ -11,6 +11,7 @@ export class PatientadminComponent implements OnInit {
 
   selectedRow: Number;
   setClickedRow: Function;
+  searchText:string ="";
 
   patientList = [];
 
@@ -28,15 +29,7 @@ export class PatientadminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.patientService.loadPatients(
-    ).subscribe(
-      data => {
-        this.patientList = data;
-        this.patientList.forEach(pat =>{
-           pat.name = pat.firstname+ " "+pat.lastname;
-        })
-      }
-    );
+
   }
 
   onEditPatient() {
@@ -51,4 +44,15 @@ export class PatientadminComponent implements OnInit {
 
   }
 
+  onSearch() {
+    this.patientService.loadPatients(this.searchText
+    ).subscribe(
+      data => {
+        this.patientList = data;
+        this.patientList.forEach(pat =>{
+          pat.name = pat.firstname+ " "+pat.lastname;
+        });
+      }
+    );
+  }
 }
