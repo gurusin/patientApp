@@ -23,7 +23,7 @@ export class ServiceComponentComponent implements OnInit {
          this.prodTypeService.getAllMedicalServices().subscribe(
            data => {
              this.medicalServices = data;
-             if (this.patientVisit.prescriptionId <= 0)
+             if (this.patientVisit.prescriptionId <= 0 || this.patientVisit.medicalServices.length==0)
              {
                var x = Object.assign({}, this.medicalServices[0]);
                this.patientVisit.medicalServices.push(x);
