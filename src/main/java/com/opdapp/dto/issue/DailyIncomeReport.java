@@ -1,5 +1,6 @@
 package com.opdapp.dto.issue;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.opdapp.dto.DailyIncome;
 
 import java.util.Collection;
@@ -10,6 +11,7 @@ public class DailyIncomeReport {
     private Date fromDate;
     private Collection<DailyIncome> drugIncome;
     private Collection<DailyIncome> servicesIncome;
+
     private double drugTotal;
     private double servicesTotal;
     private Date toDate;

@@ -197,5 +197,17 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         return prescription;
     }
 
-
+    @Override
+    public List<Prescription> getFullByPatientId(long id) {
+        Patient patient = patientRepository.findById(id).get();
+        List<Prescription> prescriptionByPatient = prescriptionRepository.findPrescriptionByPatient(patient);
+        prescriptionByPatient.sort(new Comparator<Prescription>() {
+            @Override
+            public int compare(Prescription o1, Prescription o2) {
+                return o2.getDate().compareTo(o1.getDate()) ;
+            }
+        });
+        return prescriptionByPatient;
+    }
 }
+

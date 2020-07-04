@@ -20,12 +20,12 @@
 
         <tr *ngFor="let obj of drugPackageList | drugPackagePipe:listFilter.value ; let i = index" (click)="setClickedDrugPackageRow(obj)"
             [class.active]="i == selectedDrugPackageRow">
-          <td>{{obj.drugPackageId}}</td>
+          <td><a (click)="onEdit(obj)">{{obj.drugPackageId}}</a></td>
           <td>
-            {{obj.drug.baseDrug.baseDrugName}}
+            <a (click)="onEdit(obj)">{{obj.drug.baseDrug.baseDrugName}}</a>
           </td>
           <td>
-            {{obj.drug.brandName}}
+            <a (click)="onEdit(obj)">{{obj.drug.brandName}}</a>
           </td>
           <td>
             {{obj.strength.strengthAmount}} {{obj.strength.unitName}}

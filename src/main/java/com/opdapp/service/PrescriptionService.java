@@ -49,4 +49,11 @@ public interface PrescriptionService
      * @return
      */
     List<Prescription> findPrescriptions(PrescriptionSearchDTO prescriptionSearchDTO);
+
+    /**
+     * Returns the complete set of prescriptions for the patient
+     * @param id
+     * @return
+     */
+    public List<Prescription> getFullByPatientId(long id);
 }

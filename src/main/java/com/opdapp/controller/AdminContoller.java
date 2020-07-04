@@ -143,7 +143,7 @@ public class AdminContoller {
 
     @RequestMapping(path = "/dailyIncome", method = RequestMethod.POST)
     public @ResponseBody
-    DailyIncomeReport getDailyIncome(@RequestBody DailyIncomeReport report)
+    DailyIncomeReport getDailyIncome(@RequestBody DatePeriod report)
     {
         return medicalServiceService.getDailyIncome(report);
     }

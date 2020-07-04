@@ -1,6 +1,7 @@
 package com.opdapp.service.impl;
 
 import com.opdapp.dto.DailyIncome;
+import com.opdapp.dto.common.DatePeriod;
 import com.opdapp.dto.issue.DailyIncomeReport;
 import com.opdapp.model.*;
 import com.opdapp.repository.IssueNoteRepository;
@@ -35,11 +36,16 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
     }
 
     @Override
-    public DailyIncomeReport getDailyIncome(DailyIncomeReport report) {
+    public DailyIncomeReport getDailyIncome(DatePeriod data) {
         final Map<Long, DailyIncome> dailyIncomes = new HashMap<>();
         final Map<Long, DailyIncome> servicesIncome = new HashMap<>();
-        final List<IssueNote> notes = issueNoteRepository.findByIssueDateBetween(report.getFromDate(),
-                report.getToDate());
+        final List<IssueNote> notes = issueNoteRepository.findByIssueDateBetween(data.getFromDate(),
+                data.getToDate());
+
+        DailyIncomeReport report = new DailyIncomeReport();
+        report.setFromDate(data.getFromDate());
+        report.setToDate(data.getToDate());
+
         double serviceTotal = 0;
         double total = 0;
         for (final IssueNote obj : notes) {

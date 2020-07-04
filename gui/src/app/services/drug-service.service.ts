@@ -96,6 +96,13 @@ export class DrugServiceService {
       return this.http.sendPost(url, id);
   }
 
+  getPrescriptionForPatient(id):Observable<any>{
+    var url = "getPrescriptionsForPatient?patId="+id;
+    return this.http.sendGet(url);
+  }
+
+
+
     loadPrescriptionLight(patientId: number):Observable<any> {
         var url = "loadPrescriptionLite";
         return this.http.sendPost(url,patientId);

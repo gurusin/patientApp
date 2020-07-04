@@ -1,9 +1,9 @@
 package com.opdapp.service;
 
+import com.opdapp.dto.common.DatePeriod;
 import com.opdapp.dto.issue.DailyIncomeReport;
 import com.opdapp.model.MedicalServItem;
 
-import java.util.Date;
 import java.util.List;
 
 public interface MedicalServiceService
@@ -12,5 +12,5 @@ public interface MedicalServiceService
 
     MedicalServItem save(MedicalServItem medicalServiceItem);
 
-    DailyIncomeReport getDailyIncome(DailyIncomeReport report);
+    DailyIncomeReport getDailyIncome(DatePeriod report);
 }

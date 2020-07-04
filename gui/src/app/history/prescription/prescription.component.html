@@ -1,0 +1,28 @@
+<mat-dialog-content>
+  <div style="background:azure;color: #123456">
+  <div>{{prescription.id}}</div>
+  <br/>
+  <div>{{prescription.date}}</div>
+  <br/>
+  <br/>
+  <div>Notes : {{prescription.notes}}</div>
+  <br/>
+
+  <table class="table-bordered" border="1">
+    <tr *ngFor="let obj of prescription.prescriptionDetails">
+      <td>{{obj.drugPackage.drug.brandName}}
+        ,{{obj.drugPackage.strength.strengthAmount + obj.drugPackage.strength.strengthUnit.unitName}}</td>
+      <td>&nbsp;</td>
+      <td>{{obj.amount}},{{obj.frequency.noofDoses}},{{obj.frequency.timeUnit}}</td>
+      <td>&nbsp;</td>
+      <td>{{obj.duration}},{{obj.intervalUnit}}</td>
+    </tr>
+  </table>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="btn-primary" (click)="close()">Close</button>
+  <button class="btn-primary" (click)="previous()" >Previous</button>
+  <button class="btn-primary" (click)="next()">Next</button>
+</mat-dialog-actions>
+
