@@ -47,7 +47,7 @@ export class BillReprintComponent implements OnInit {
   }
 
   print(issueNote) {
-    var printContents = document.getElementById('printContent').innerHTML;
+    var printContents = document.getElementById('print-section').innerHTML;
     let popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
     popupWin.document.open();
     popupWin.document.write(`

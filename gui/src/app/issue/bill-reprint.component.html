@@ -33,4 +33,74 @@ text-align: left;">
       </tr>
     </table>
   </div>
+
+
+  <div id="print-section"  style="display: none">
+    <div style="margin-left: 25px;">
+      <table>
+        <tr>
+          <td colspan="3">
+            <div style="font-family: 'Times New Roman', Times, Serif;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 22px;
+          text-align: center;">SUWAPIYASA MEDICAL CENTER
+            </div>
+          </td>
+        </tr>
+        <tr style="font-family: 'Times New Roman', Times, Serif;
+      font-style: normal;
+      font-size: 17px;
+      text-align: left;">
+          <td>Dr. Janaka Abeysinghe MBBS(SL)</td>
+          <td></td>
+          <td width="40%" align="right">Reg. No. 17261</td>
+        </tr>
+        <tr>
+          <td>Ambagashandiya, Kiriwattuduwa</td>
+          <td></td>
+          <td align="right">Tel : 0773-425881</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td align="right">0778-608100</td>
+        </tr>
+      </table>
+      <hr/>
+    </div>
+    <div style="font-family: 'Courier New',Courier,Courier;font-style: normal;font-weight: bold;
+    font-size: 17px;margin-left: 10px;">
+      <label>Prescription No : {{selectedIssueNote.prescriptionId}}</label><br/>
+      <label>Date :{{selectedIssueNote.issueDate | date}}</label><br/>
+      <label>[{{patientService.patientObject.patientId}}]-{{patientService.patientObject.firstname}}
+        ,{{patientService.patientObject.lastname}} -
+        {{patientService.patientObject.calculatedAge}} </label>
+      <br/>
+      <br/>
+      <h4>Duplicate</h4>
+      <br/>
+      <table class="table table-bordered">
+        <tbody>
+        <tr *ngFor="let row of selectedIssueNote.issueNoteDetails">
+          <td>{{row.drugPackage.drug.brandName}} ({{row.buyingQuantity}} @{{row.drugPackage.unitPrice}})</td>
+          <td></td>
+          <td align="right">{{row.buyingQuantity * row.drugPackage.unitPrice|number:'1.2-2'}}</td>
+        </tr>
+        <br/>
+        <tr *ngFor="let row of selectedIssueNote.issueNoteServiceItems">
+          <td>{{row.medicalServItem.itemDescription}}</td>
+          <td></td>
+          <td align="right">{{row.medicalServItem.unitPrice|number:'1.2-2'}}</td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td></td>
+          <td align="right">{{total|number:'1.2-2'}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <br/>
+    </div>
+  </div>
 </div>
