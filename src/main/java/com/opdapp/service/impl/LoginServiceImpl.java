@@ -6,6 +6,8 @@ import com.opdapp.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LoginServiceImpl implements LoginService
 {
@@ -15,12 +17,13 @@ public class LoginServiceImpl implements LoginService
     @Override
     public MedSysUser login(final MedSysUser user)
     {
-        MedSysUser dbUser = medSysUserRepository.findByUsername(user.getUsername()).get(0);
-        if (dbUser.getPassword().equals(user.getPassword()))
+        List<MedSysUser> byUsername = medSysUserRepository.findByUsername(user.getUsername());
+
+        if (!byUsername.isEmpty() && byUsername.get(0).getPassword().equals(user.getPassword()))
         {
-            return dbUser;
+            return byUsername.get(0);
         }
-        dbUser = new MedSysUser();
+        MedSysUser dbUser = new MedSysUser();
         dbUser.setId(-1);
         return dbUser;
     }

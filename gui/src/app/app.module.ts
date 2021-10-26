@@ -74,6 +74,8 @@ import { BaseDrugEditComponent } from './drugcomponent/drug-admin/base-drug-edit
 import {DrugPackageDetailComponent} from "./drugcomponent/admin/drug-package-detail/drug-package-detail.component";
 import { StrengthDetailComponent } from './strength/strength-detail/strength-detail.component';
 import { PrescriptionComponent } from './history/prescription/prescription.component';
+import { TreatmentItemComponent } from './dental/treatment-item/treatment-item.component';
+import { TreatmentHistoryComponent } from './dental/treatment-history/treatment-history.component';
 
 @NgModule({
     declarations: [
@@ -133,7 +135,9 @@ import { PrescriptionComponent } from './history/prescription/prescription.compo
         BaseDrugEditComponent,
         DrugPackageDetailComponent,
         StrengthDetailComponent,
-        PrescriptionComponent
+        PrescriptionComponent,
+        TreatmentItemComponent,
+        TreatmentHistoryComponent
     ],
     imports: [
         BrowserModule, //BrowserAnimationsModule,

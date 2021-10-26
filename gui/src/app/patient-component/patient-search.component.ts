@@ -29,11 +29,22 @@ export class PatientSearchComponent {
     if (event.keyCode == 13) {
       this.patientService.getByPatNo(this.patNo).subscribe(
           data =>{
-            this.loadPrescription(data);
+            //this.loadPrescription(data);
+            this.loadPlans(data);
           }
       );
 
     }
+  }
+
+  private loadPlans(data){
+    if(data != null){
+      this.patientService.patientObject = data;
+      this.router.navigate(["dentalPatList"]);
+    } else{
+      alert(" No patient found");
+    }
+
   }
 
   private loadPrescription(data) {
@@ -58,29 +69,20 @@ export class PatientSearchComponent {
   {
     let value  = event.target.value;
 
-    if (!event.key) {
+    if (event.keyCode == 13) {
       this.patientService.getByPhoneNo(this.phone).subscribe(
           data =>{
-            this.prepareForPrescription();
-              this.patientService.patientObject = data;
-              this.router.navigate(["patientvisit/treatment"]);
+             this.loadPlans(data);
           }
       );
-
-    }
-    else if (this.phone.length == 4) {
-      this.searchByPhone();
-    } else if (this.phone.length < 4) {
-      this.patientList = [];
     }
   }
+
   onKey(event: any) {
     if (event.keyCode == 13) {
       this.patientService.getByNIC(this.nic).subscribe(
           data =>{
-            this.prepareForPrescription();
-            this.patientService.patientObject = data;
-              this.router.navigate(["patientvisit/treatment"]);
+             this.loadPlans(data);
           }
       );
 
@@ -104,7 +106,6 @@ export class PatientSearchComponent {
         this.patientService.searchByPhone(this.phone).subscribe(
             data => {
                 this.patientList = data;
-                console.log(data);
             }
         );
     }
@@ -123,9 +124,7 @@ export class PatientSearchComponent {
         if (!event.key) {
             this.patientService.getByPatNo(this.patIndex).subscribe(
                 data =>{
-                    this.prepareForPrescription();
-                    this.patientService.patientObject = data;
-                    this.router.navigate(["patientvisit/treatment"]);
+                    this.loadPlans(data);
                 }
             );
         }

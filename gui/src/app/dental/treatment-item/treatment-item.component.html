@@ -1,0 +1,58 @@
+
+<div class="container">
+ <h2> Treatment Items</h2>
+  <button type="button" (click)="onShowModel()" class="btn-primary">New..</button>
+  <!-- Table -->
+  <table class="table table-striped">
+    <tr>
+      <td>Id</td>
+      <td>Name</td>
+      <td>Rate</td>
+      <td>Remarks</td>
+    </tr>
+    <tr *ngFor="let obj of objectList">
+      <td (click)="doEdit(obj)">{{obj.id}}</td>
+      <td>{{obj.name}}</td>
+      <td>{{obj.rate}}</td>
+      <td>{{obj.remarks}}</td>
+      <td><button type="button"  class='btn btn-danger'(click)="delete(obj.id)">Delete</button></td>
+    </tr>
+  </table>
+
+  <div id="myModal" #myModal Class="modal">
+    <br/>
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-sm-2">
+          <label>Name:</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" id="name" name="patNo" [(ngModel)]="currItem.name" size="50"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <label>Rate </label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" id="rate" name="rate" [(ngModel)]="currItem.rate"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <label>Remarks </label>
+        </div>
+        <div class="col-sm-8">
+          <textarea id="rem" name="rem" [(ngModel)]="currItem.remarks"  rows="5"  cols="50"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-7"></div>
+        <div class="col-sm-3">
+        <button type="button" (click)="onSave()" class="btn-primary">Save</button>
+        <button type="button" (click)="onCancel()" class="btn-primary">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

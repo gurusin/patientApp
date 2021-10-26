@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by sudarshana on 07/08/2017.
@@ -40,7 +41,11 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient getByPatientId(long patId) {
-        return patientRepository.findById(patId).get();
+        Optional<Patient> byId = patientRepository.findById(patId);
+        if(byId.isPresent()){
+            return byId.get();
+        }
+        return null;
     }
 
     @Override

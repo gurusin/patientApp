@@ -2,13 +2,13 @@
   width: 100%;
   border: 1px solid gray;
   color: white;
-  background-color: lightseagreen;
+  background-color: #eccce3;
 }
 
 header, footer {
   padding: .5em;
   color: white;
-  background-color: lightseagreen;
+  background-color: #d7c06d;
   clear: left;
   text-align: left;
 }

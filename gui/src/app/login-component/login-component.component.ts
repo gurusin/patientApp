@@ -19,6 +19,10 @@ export class LoginComponentComponent{
   onSubmit() {
     this.loginService.login(this.model).subscribe(
       data =>{
+        if(data.id < 0){
+          alert('Incorrect Login');
+          return;
+        }
         this.loginService.loggedInUser = data;
         this.loginService.loggedIn = true;
         if (data.userType ===1)
