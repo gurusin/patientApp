@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class DrugPackage {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long drugPackageId;
 
     @Override

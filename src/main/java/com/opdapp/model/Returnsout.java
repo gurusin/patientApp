@@ -7,7 +7,7 @@ import java.util.Set;
 @Entity
 public class Returnsout {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long returnOutId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "returnsout", cascade = CascadeType.ALL)

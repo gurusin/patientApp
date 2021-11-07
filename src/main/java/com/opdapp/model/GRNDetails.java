@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class GRNDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long grnDetailNo;
 
     private double receivingQty;

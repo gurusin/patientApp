@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Strength {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int strengthId;
 
     @ManyToOne

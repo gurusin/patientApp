@@ -1,51 +1,52 @@
 <div class="menu-bar">
-<!--  <div>-->
-<!--    <button>Admin</button>-->
-<!--    <div class="sub-menu-item">-->
-<!--      <a routerLink="supplier">Suppliers</a>-->
-<!--      <a routerLink="patientAdmin">Customers</a>-->
-<!--      <a routerLink="medServiceItem">Medical services</a>-->
-<!--      <a routerLink="strength">Strength</a>-->
-<!--      <a [routerLink]='["drugAdmin"]'>Drug Admin</a>-->
-<!--      <a [routerLink]='["baseDrugAdmin"]'>Base Drug Admin</a>-->
-<!--      <a [routerLink]='["drugPackageAdmin"]'>Drug Package Admin</a>-->
-<!--      &lt;!&ndash;<a routerLink="itemtype">Item type</a>&ndash;&gt;-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div>-->
-<!--    <button>Pharmacy</button>-->
-<!--    <div class="sub-menu-item">-->
-<!--      <a routerLink="pharmacyList" class="test">Prescription List</a>-->
-<!--      <a routerLink="serviceIssue">Create Service Issue</a>-->
-<!--      <a routerLink="grn">Goods Receiving</a>-->
-<!--      <a routerLink="issue">Issues</a>-->
-<!--      <a routerLink="payment">Make payment</a>-->
-<!--      <a routerLink="returnout">Return out</a>-->
-<!--      <a routerLink="po">Pending PO</a>-->
-
-<!--    </div>-->
-<!--  </div>-->
-
-
-
-
   <div>
-    <button>Patient</button>
+    <button>Admin</button>
     <div class="sub-menu-item">
-      <a routerLink="start">Patient Search</a>
-      <a [routerLink]='["patientAdmin"]'>Patient Administration</a>
-      <a (click)="newPatient()">New Patient</a>
-
+      <a routerLink="supplier">Suppliers</a>
+      <a routerLink="patientAdmin">Customers</a>
+      <a routerLink="medServiceItem">Medical services</a>
+      <a routerLink="strength">Strength</a>
+      <a [routerLink]='["drugAdmin"]'>Drug Admin</a>
+      <a [routerLink]='["baseDrugAdmin"]'>Base Drug Admin</a>
+      <a [routerLink]='["drugPackageAdmin"]'>Drug Package Admin</a>
+      <a routerLink="itemtype">Item type</a>
+      <a routerLink="adjustStock">Stock Adjustment</a>
     </div>
   </div>
 
+    <div>
+      <button>Patient</button>
+      <div class="sub-menu-item">
+        <a routerLink="start">Patient Search</a>
+        <a [routerLink]='["patientAdmin"]'>Patient Administration</a>
+        <a (click)="newPatient()">New Patient</a>
+      </div>
+    </div>
+
   <div>
-    <button>Treatment</button>
+    <button>Pharmacy</button>
     <div class="sub-menu-item">
-      <a routerLink="dentalTrt">Treatment Items</a>
-      <a routerLink="dentalPatList">Patient Treatments</a>
+      <a routerLink="pharmacyList" class="test">Prescription List</a>
+      <a routerLink="serviceIssue">Create Service Issue</a>
+      <a routerLink="grn">Goods Receiving</a>
+      <a routerLink="issue">Issues</a>
+      <a routerLink="payment">Make payment</a>
+      <a routerLink="returnout">Return out</a>
+      <a routerLink="po">Pending PO</a>
     </div>
   </div>
+
+
+
+
+
+
+<!--  <div>-->
+<!--    <button>Treatment</button>-->
+<!--    <div class="sub-menu-item">-->
+<!--      <a routerLink="dentalTrt">Treatment Items</a>-->
+<!--      <a routerLink="dentalPatList">Patient Treatments</a>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>
 

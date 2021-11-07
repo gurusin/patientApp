@@ -1,4 +1,4 @@
-<script src="prescription-component.component.ts"></script>
+
 <table class="table table-striped">
   <tr>
     <th>Drug</th>
@@ -12,7 +12,6 @@
     <th>Application</th>
     <th>Needed Qty</th>
     <th>Price</th>
-    <th>Add</th>
   </tr>
   <tr>
     <td>
@@ -64,8 +63,9 @@
     </td>
     <td>{{prescribableDrug.price | number:'1.2-2'}}</td>
     <td>
-      <button type='button' class="btn btn-primary" (click)="addDrug(drugName)" [disabled]="!prescribableDrug.valid">Add</button>
     </td>
+  </tr>
+  <button type='button' class="btn btn-primary" (click)="addDrug(drugName)">Confirm</button>
     <hr/>
   <tr *ngFor="let row of patientVisit.prescribableDrug;let k = index">
     <td>{{row.drug.brandName}}</td>

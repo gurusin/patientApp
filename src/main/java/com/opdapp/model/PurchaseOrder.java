@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 public class PurchaseOrder {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long purchaseOrderNo;
 
     @ManyToOne

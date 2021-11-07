@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class IssueNoteServiceItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne

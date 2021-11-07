@@ -78,8 +78,9 @@ public class Dose {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int doseId;
+
     @ManyToOne
     @JoinColumn(name = "drugId")
     private Drug drug;

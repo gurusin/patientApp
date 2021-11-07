@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 public class IssueNote {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long issueNote;
 
     private Date issueDate;

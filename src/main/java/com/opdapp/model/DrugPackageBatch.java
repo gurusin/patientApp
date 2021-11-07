@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class DrugPackageBatch {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int batchId;
 
 

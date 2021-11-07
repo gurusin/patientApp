@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class IssueNoteDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long issueNoteId;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)

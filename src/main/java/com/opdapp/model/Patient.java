@@ -22,7 +22,7 @@ public class Patient implements Serializable {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long patientId;
 
     @Column

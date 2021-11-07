@@ -11,7 +11,7 @@ import java.sql.Date;
 public class ServiceIssueItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne()

@@ -29,8 +29,8 @@ export class PatientSearchComponent {
     if (event.keyCode == 13) {
       this.patientService.getByPatNo(this.patNo).subscribe(
           data =>{
-            //this.loadPrescription(data);
-            this.loadPlans(data);
+            this.loadPrescription(data);
+            //this.loadPlans(data);
           }
       );
 
@@ -48,6 +48,10 @@ export class PatientSearchComponent {
   }
 
   private loadPrescription(data) {
+    if(data == null){
+      alert("No Patient Found");
+      return;
+    }
     this.patientService.patientObject = data;
     if (this.loginService.loggedInUser.userType ===1)
     {

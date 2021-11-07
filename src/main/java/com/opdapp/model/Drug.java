@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Drug {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long drugId;
 
     @ManyToOne

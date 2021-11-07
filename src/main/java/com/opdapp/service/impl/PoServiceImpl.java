@@ -58,11 +58,13 @@ public class PoServiceImpl implements POService {
     private Set<PurchaseOrderDetail> getDetails(final PurchaseOrderDTO dto, final PurchaseOrder purchaseOrder) {
         final Set<PurchaseOrderDetail> childSet = new HashSet<>();
         for (final PODetail detail : dto.getPoDetails()) {
-            final PurchaseOrderDetail pod = new PurchaseOrderDetail();
-            pod.setDrugPackage(drugPackageRepository.findById(detail.getDrugPackageId()).get());
-            pod.setOrderQty(detail.getQty());
-            pod.setPurchaseOrder(purchaseOrder);
-            childSet.add(pod);
+            if(detail.getDrugPackageId() > 0){
+                final PurchaseOrderDetail pod = new PurchaseOrderDetail();
+                pod.setDrugPackage(drugPackageRepository.findById(detail.getDrugPackageId()).get());
+                pod.setOrderQty(detail.getQty());
+                pod.setPurchaseOrder(purchaseOrder);
+                childSet.add(pod);
+            }
         }
         return childSet;
     }

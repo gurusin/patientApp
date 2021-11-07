@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 public class ReturnOutDetail {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long retOutDetailNo;
 
     private double returnQty;

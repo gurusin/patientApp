@@ -13689,11 +13689,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.patientService.savePatient(this.patient).subscribe(function (data) {
             _this55.patientService.patientObject = data;
 
-            if (_this55.loginService.loggedInUser.userType === 1) {
-              _this55.router.navigate(["patientvisit/treatment"]);
-            } else {
-              _this55.router.navigate(["serviceIssue"]);
-            }
+            _this55.router.navigate(['dentalPatList']);
           });
         }
       }]);

@@ -41,6 +41,7 @@ export class PrescriptionComponentComponent implements OnInit {
   }
 
   addDrug(comp:any) {
+    alert("Adding drug" + comp);
     var x = new PrescribableDrug();
     this.prescribableDrug.frequency = this.prescribableDrug.doseFrequency[this.prescribableDrug.selectedFrequency];
     Object.assign(x,this.prescribableDrug);
@@ -194,6 +195,10 @@ export class PrescriptionComponentComponent implements OnInit {
         break;
       }
     }
+  }
+
+  test(drugName: HTMLInputElement) {
+    alert('Hello there');
   }
 }
 

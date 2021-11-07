@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class PrescriptionDetail {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
 
     @ManyToOne()

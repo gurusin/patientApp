@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class PrescriptionServiceItem{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne

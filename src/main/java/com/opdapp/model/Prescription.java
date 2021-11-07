@@ -12,7 +12,7 @@ import java.util.Set;
 public class Prescription {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String symptoms;

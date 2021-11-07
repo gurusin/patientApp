@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 public class Item {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long itemId;
 
     @ManyToOne

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class PatTreatmentItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private LocalDateTime timeOfAction;

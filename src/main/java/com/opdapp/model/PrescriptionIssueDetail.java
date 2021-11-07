@@ -10,7 +10,7 @@ import java.sql.Date;
 public class PrescriptionIssueDetail {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private long prescriptionDetailId;

@@ -8,7 +8,6 @@ import com.opdapp.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.*;
 
 @Service
@@ -54,13 +53,28 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         if(prescriptionSearchDTO.isCompleted()){statSet.add(PrescriptionStatus.COMPLETED);}
         if(prescriptionSearchDTO.isPartCompleted()){statSet.add(PrescriptionStatus.PARTIALLY_ISSED);}
         if(prescriptionSearchDTO.isInitial()){statSet.add(PrescriptionStatus.INITIAL);}
+        Date fromDate = prescriptionSearchDTO.getFromDate();
+        Date toDate = prescriptionSearchDTO.getToDate();
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(toDate);
+        cal.add(Calendar.DATE, 1);
+        toDate = cal.getTime();
+
+        cal.setTime(fromDate);
+        cal.add(Calendar.DATE, -1);
+        fromDate = cal.getTime();
+
+        java.sql.Date fromDateSQL = new java.sql.Date(fromDate.getTime());
+        java.sql.Date toDateSQL = new java.sql.Date(toDate.getTime());
+
         if (prescriptionSearchDTO.isAll())
         {
             return prescriptionRepository.findPrescriptionByDateBetween(
-                    prescriptionSearchDTO.getFromDate(), prescriptionSearchDTO.getToDate());
+                    fromDateSQL, toDateSQL);
         }
         return prescriptionRepository.findPrescriptionByDateBetweenAndPrescriptionStatusIn(
-                prescriptionSearchDTO.getFromDate(), prescriptionSearchDTO.getToDate(),statSet);
+                fromDateSQL, toDateSQL,statSet);
     }
 
     @Override
@@ -100,12 +114,14 @@ public class PrescriptionServiceImpl implements PrescriptionService {
        final Set<PrescriptionServiceItem> returnSet = new HashSet<>();
        for (final MedicalServItem item : dto.getMedicalServices())
        {
-           final PrescriptionServiceItem obj = new PrescriptionServiceItem();
-           obj.setFee(item.getUnitPrice());
-           obj.setPrescription(prescription);
-           obj.setMedicalServItem(medicalServiceRepository.findById(item.getItemId()).get());
-           obj.setExternalRef(item.getExternalRef());
-           returnSet.add(obj);
+           if(item.getItemId() > 0){
+               final PrescriptionServiceItem obj = new PrescriptionServiceItem();
+               obj.setFee(item.getUnitPrice());
+               obj.setPrescription(prescription);
+               obj.setMedicalServItem(medicalServiceRepository.findById(item.getItemId()).get());
+               obj.setExternalRef(item.getExternalRef());
+               returnSet.add(obj);
+           }
        }
        return returnSet;
     }
@@ -192,7 +208,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         prescription.setDiagnosis(dto.getDiagnosis());
         prescription.setNotes(dto.getNotes());
         prescription.setSymptoms(dto.getSymptoms());
-        prescription.setDate(new Date(System.currentTimeMillis()));
+        prescription.setDate(new java.sql.Date(System.currentTimeMillis()));
         prescription.setExternalNote(dto.getExternalNote());
         return prescription;
     }

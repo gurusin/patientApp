@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class PurchaseOrderDetail {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long purchaseOrderDetailId;
 
     @ManyToOne

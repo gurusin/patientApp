@@ -34,13 +34,7 @@ export class PatientsaveComponent implements OnInit{
     this.patientService.savePatient(this.patient).subscribe(
         data =>{
             this.patientService.patientObject = data;
-          if (this.loginService.loggedInUser.userType ===1)
-          {
-            this.router.navigate(["patientvisit/treatment"]);
-          } else
-          {
-            this.router.navigate(["serviceIssue"]);
-          }
+            this.router.navigate(['dentalPatList']);
         }
     );
 
