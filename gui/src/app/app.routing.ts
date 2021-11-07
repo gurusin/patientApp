@@ -31,6 +31,8 @@ import {StockAdjustmentComponent} from "./drugcomponent/admin/stock-adjustment/s
 import {StrengthComponent} from "./drugcomponent/admin/strengh/strength.component";
 import {IssueHistoryComponent} from "./issue/issue-history.component";
 import {BillReprintComponent} from "./issue/bill-reprint.component";
+import {TreatmentItemComponent} from "./dental/treatment-item/treatment-item.component";
+import {TreatmentHistoryComponent} from "./dental/treatment-history/treatment-history.component";
 
 const APP_ROUTES: Routes = [
   {path: 'printIssue/:issue', component: BillReprintComponent},
@@ -71,7 +73,10 @@ const APP_ROUTES: Routes = [
   {path: 'medServiceItem', component: MedicalServiceComponentComponent},
   {path: 'returnout', component: ReturnoutComponent},
   {path: 'dailyIncome', component: DailyIncomeComponent},
-  {path: 'inOut', component: InOutComponent}
+  {path: 'inOut', component: InOutComponent},
+  {path: 'dentalTrt',component:TreatmentItemComponent},
+  {path: 'dentalPatList',component:TreatmentHistoryComponent},
+
 ]
 
 export const routing = RouterModule.forRoot(APP_ROUTES)

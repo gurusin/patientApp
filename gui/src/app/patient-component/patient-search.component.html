@@ -26,10 +26,7 @@
       <label>Phone No :</label>
     </div>
     <div class="col-md-3">
-      <input list='phoneNumber' [(ngModel)]="phone" (keyup)="onKeyPhoneNumber($event)">
-      <datalist id='phoneNumber'>
-        <option *ngFor="let pat of patientList" value="{{pat.phone}}">{{pat.nic}},{{pat.firstname}}</option>
-      </datalist>
+      <input type='text' [(ngModel)]="phone" (keyup)="onKeyPhoneNumber($event)">
     </div>
   </div>
   <br/>

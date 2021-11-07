@@ -18,4 +18,9 @@ export class HttpServiceService {
     url = localStorage.getItem("rootURL") + url;
     return this.http.get(url);
   }
+
+  public sendDelete(url:string) :Observable<any>{
+    url = localStorage.getItem("rootURL") + url;
+    return this.http.delete(url);
+  }
 }
